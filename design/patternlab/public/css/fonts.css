@@ -1,0 +1,27 @@
+/*------------------------------------*\
+    $FONTS
+\*------------------------------------*/
+
+@font-face {
+    font-family: 'butlerextrabold';
+    src: url('../fonts/butler_extrabold-webfont.woff2') format('woff2'),
+         url('../fonts/butler_extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'butlerregular';
+    src: url('../fonts/butler_regular-webfont.woff2') format('woff2'),
+         url('../fonts/butler_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'butlerultralight';
+    src: url('../fonts/butler_ultra_light-webfont.woff2') format('woff2'),
+         url('../fonts/butler_ultra_light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

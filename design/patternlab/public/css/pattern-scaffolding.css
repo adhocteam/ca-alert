@@ -1,0 +1,290 @@
+/**
+ * This stylesheet is for styles you want to include only when displaying demo
+ * styles for grids, animations, color swatches, etc.
+ * These styles will not be your production CSS.
+ */
+
+ body {
+   font-family: 'Helvetica Neue', sans-serif;
+ }
+
+  .sans {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+
+
+  .serif {
+    font-family: 'Bitter', serif;
+  }
+
+
+
+#sg-patterns {
+  -webkit-box-sizing: border-box !important;
+          box-sizing: border-box !important;
+  max-width: 100%;
+  padding: 0 0.5em;
+}
+
+.demo-animate {
+  background: #ddd;
+  padding: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sg-colors {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.sg-colors li {
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  padding: 0.3em;
+  margin: 0 0.5em 0.5em 0;
+  min-width: 5em;
+  max-width: 14em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.sg-swatch {
+  display: block;
+  height: 4em;
+  margin-bottom: 0.3em;
+  border-radius: 5px;
+}
+
+.sg-label {
+  font-size: 90%;
+  line-height: 1;
+}
+
+legend {
+  font-size: 21px;
+  font-family: 'Bitter';
+}
+
+input[type="text"].big, input[type="textarea"].big {
+    height: 4.7rem;
+}
+
+input[type="text"], input[type="textarea"], textarea {
+    padding: .35em;
+    font-size: 18px;
+    height: auto;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin: 0 0 1em 0;
+}
+
+
+/ Buttons
+
+.actions {
+  margin: 2em 0;
+  &.slim {
+    margin: 1em 0;
+  }
+}
+
+button {
+  border-radius: 0 !important;
+  -webkit-appearance: none;
+
+}
+
+.btn {
+  -webkit-transition: all .1s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+  border-radius: 0;
+  border: none;
+  padding: 1.05em;
+  margin: .5em 0;
+  opacity: 1;
+  font-weight: bold !important;
+  text-decoration: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn.btn-full {
+    width: 100% !important;
+    text-align: center;
+    display: block;
+}
+
+
+.btn.btn-menu {
+    background: none !important;
+    color: #fff;
+}
+
+.btn.btn-menu:hover {
+  color: #fff;
+}
+
+.btn.btn-full {
+    width: 100%;
+    display: block;
+}
+
+.btn.btn-primary-action {
+    padding-top: 1.05em;
+    padding-bottom: 1.05em;
+    border-radius: 0;
+    background: #12890e !important;
+    color: #fff;
+    opacity: 1;
+}
+
+.btn:hover {background: #12890e;}
+
+.btn.btn-secondary-action {
+    border-radius: 0;
+    background: #1F425E;
+    color: #fff;
+    opacity: 1;
+}
+
+.btn.btn-secondary-action:hover {background: #1F425E;}
+
+.btn.btn-tertiary-action {
+    border-radius: 0;
+    background: #006693;
+    color: #fff;
+    opacity: 1;
+}
+
+.btn:hover {background: #12890e;}
+
+.btn.btn-clear {
+    text-decoration: underline;
+    color: #006693;
+}
+
+label.input-group {
+    padding: 1em;
+    display: block;
+    border-radius: .25em;
+    margin: 0 0 .5em 0;
+    background: rgba(0, 0, 0, 0.05);
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    clear: both;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+    min-width: 0;
+    clear: both;
+}
+
+fieldset legend {
+  padding: .5em 0 .5em 0;
+}
+
+fieldset ul {
+    list-style-type: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+fieldset ul li {
+    list-style-type: none;
+    list-style: none;
+}
+
+fieldset label.input-group {
+    padding: 1em;
+    display: block;
+    border-radius: .25em;
+    background: rgba(0, 0, 0, 0.05);
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+
+
+label {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+blockquote {
+  border-left: 3px solid #1F425E;
+  margin-left: 0;
+  padding-left: 1em;
+}
+
+.band {
+    padding: .5em 0 .5em 0;
+}
+
+.band.top {
+    background: #fff;
+}
+
+.band h2, .band h3, .band h4, .band h5, .band h6 {
+    color: #1F425E;
+    line-height: 1.4em;
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.actions {
+    clear: both;
+    margin: 2em 0;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
