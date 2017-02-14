@@ -4,7 +4,7 @@
 
 ### Ruby version
 
-The app was built against Ruby 2.4.
+The app was built against Ruby 2.3.3.
 
 ### Installing gems
 
