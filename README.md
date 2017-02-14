@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Configuring the app locally
 
-Things you may want to cover:
+### Ruby version
 
-* Ruby version
+The app was built against Ruby 2.4.
 
-* System dependencies
+### Installing gems
 
-* Configuration
+Run `bundle install` to download and install the appropriate gems.
 
-* Database creation
+### Database information
 
-* Database initialization
+The app was built against PostgreSQL 9.6 but should also run with earlier versions. Create the databases locally with:
 
-* How to run the test suite
+```ruby
+createdb ca-alert_development
+createdb ca-alert_test
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Then run migrations to initialize the schema with `rake db:migrate`.
 
-* Deployment instructions
+### Running the test suite
 
-* ...
+`rake` will run the test suite along with checking for Rubocop offenses. The app uses rspec for testing.
