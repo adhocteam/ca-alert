@@ -7,11 +7,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
-gem 'rails'
+gem 'activerecord-postgis-adapter'
+gem 'jbuilder'
 gem 'pg'
 gem 'puma'
-gem 'jbuilder'
+gem 'rails'
+gem 'rgeo'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
