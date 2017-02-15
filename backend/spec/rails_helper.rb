@@ -10,9 +10,6 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-# Factory Girl
-require 'support/factory_girl'
-
 # Webmock
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
