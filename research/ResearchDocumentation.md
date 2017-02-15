@@ -34,10 +34,14 @@ Speak to 3-5 Californians who might be affected by emergencies in their areas to
 - Have you heard about emergency situations in your area in the past six months?
  - What were they?
  - How did you hear about them?
-- Have you signed up for any ways to get information about emergencies in your area?
- - Are there any ways you automatically get information about emergencies in your area?
  - What did you do when you heard?
  - Are there ways you tried to get more information? How?
+- Have you signed up for any ways to get information about emergencies in your area?
+ - Are there any ways you automatically get information about emergencies in your area?
+ - (If not mentioned) What about Amber Alerts?
+ - Do you use any services or tools you use to get emergency alerts? Which ones? How do they work for you?
+ - (If no) Have you looked for services or tools to to get emergency alerts?
+ - Have you talked about emergency alerts with friends or family in the last few months?
 - Are there any ways that finding out about emergencies hasn’t quite worked for you?
  - How could those go better?
  - If you could wave a magic wand and change it, what would your ideal way to get this kind of information be?
