@@ -10,8 +10,13 @@ Development
 
 Development requires Node and yarn.
 
-* Install [Node.js](https://nodejs.org/en/). v6.9.5 LTS or later is recommended.
-* Install [yarn](https://yarnpkg.com/).
+Install [Node.js](https://nodejs.org/en/). v6.9.5 LTS or later is recommended.
+
+Install [yarn](https://yarnpkg.com/):
+
+``` shell
+$ npm install -g yarn
+```
 
 Now install the dependencies:
 
