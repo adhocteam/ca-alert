@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class DeviseSwaggerBlocks
   include Swagger::Blocks
 
@@ -302,3 +303,4 @@ class DeviseSwaggerBlocks
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
