@@ -1,5 +1,11 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  SimpleCov.minimum_coverage 95
+  add_filter 'routes.rb'
+  add_filter do |source_file|
+    source_file.lines.count < 10
+  end
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
