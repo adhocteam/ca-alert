@@ -1,0 +1,20 @@
+{
+  "name": "adhoc_ca_alerts",
+  "version": "1.0.0",
+  "description": "Ad Hoc California Alerts prototype",
+  "main": "app.js",
+  "repository": "https://github.com/adhocteam/ca-alert/",
+  "author": "Ad Hoc LLC",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "uswds": "^0.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "webpack": "^2.2.1"
+  }
+}
