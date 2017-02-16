@@ -1,5 +1,11 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  SimpleCov.minimum_coverage 95
+  add_filter 'routes.rb'
+  add_filter do |source_file|
+    source_file.lines.count < 10
+  end
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
@@ -9,9 +15,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-
-# Factory Girl
-require 'support/factory_girl'
 
 # Webmock
 require 'webmock/rspec'
