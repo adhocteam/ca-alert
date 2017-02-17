@@ -37,6 +37,11 @@ RSpec.describe 'authentication', type: :request do
           expect(User.first.confirmed_at).not_to eq(nil)
         end
 
+        it 'is unhappy about bogus credentials for login' do
+          post '/auth/sign_in', params: { email: email, password: password + '!!!' }
+          expect(response.status).to eq(401)
+        end
+
         context 'with the user logged in' do
           before do
             post '/auth/sign_in', params: { email: email, password: password }
@@ -58,6 +63,40 @@ RSpec.describe 'authentication', type: :request do
               'access-token' => response.headers['access-token']
             }
             expect(response).to be_success
+          end
+
+          it 'updates my account' do
+            put(
+              '/auth',
+              headers: {
+                uid: email,
+                client: response.headers['client'],
+                'access-token' => response.headers['access-token']
+              },
+              params: {
+                password: password + '!!',
+                password_confirmation: password + '!!'
+              }
+            )
+            expect(response).to be_success
+          end
+
+          it 'can delete the user' do
+            delete '/auth', headers: {
+              uid: email,
+              client: response.headers['client'],
+              'access-token' => response.headers['access-token']
+            }
+            expect(response).to be_success
+          end
+
+          it 'complains on deletion with invalid credentials' do
+            delete '/auth', headers: {
+              uid: email + '123',
+              client: response.headers['client'] + '123',
+              'access-token' => response.headers['access-token'] + '123'
+            }
+            expect(response).not_to be_success
           end
         end
       end
