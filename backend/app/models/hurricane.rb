@@ -1,0 +1,2 @@
+class Hurricane < ApplicationRecord
+end
