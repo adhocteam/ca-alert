@@ -1,4 +1,6 @@
+require 'base_swagger_blocks'
 require 'devise_swagger_blocks'
+require 'places_controller_swagger_blocks'
 
 class ApidocsController < ActionController::Base
   include Swagger::Blocks
@@ -29,8 +31,11 @@ class ApidocsController < ActionController::Base
 
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
+    BaseSwaggerBlocks,
     DeviseSwaggerBlocks,
     PingController,
+    Place,
+    PlacesControllerSwaggerBlocks,
     User,
     self
   ].freeze
