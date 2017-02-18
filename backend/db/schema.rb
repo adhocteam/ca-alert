@@ -16,9 +16,6 @@ ActiveRecord::Schema.define(version: 20170216201747) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-# Could not dump table "hazards" because of following StandardError
-#   Unknown type 'geometry' for column 'shape'
-
   create_table "places", force: :cascade do |t|
     t.integer  "user_id"
     t.float    "latitude"
