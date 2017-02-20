@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./node_modules/uswds/dist/css/uswds.min.css">
-<title>TKTK · 🌴 California Alerts</title>
+<title>Dashboard · 🌴 California Alerts</title>
 
 <a class="usa-skipnav" href="#main-content">Skip to main content</a>
 <header class="usa-header usa-header-extended" role="banner">
@@ -63,7 +63,17 @@
                         </button>
                     </div>
                 </form>
-                <div id="app-nav"></div>
+                <ul class="usa-unstyled-list usa-nav-secondary-links">
+                    <li class="js-search-button-container">
+                        <button class="usa-header-search-button js-search-button">Search</button>
+                    </li>
+                    <li>
+                        <a href="#">Sign up for new account</a>
+                    </li>
+                    <li>
+                        <a href="#">Sign in to your account</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -126,7 +136,7 @@
     </div>
 </footer>
 <script src="./node_modules/uswds/dist/js/uswds.min.js"></script>
-<script>
-  CA_API_URL = "http://localhost:3000";
-</script>
-<script src="./dist/bundle.js"></script>
+<script src="./node_modules/react/dist/react.min.js"></script>
+<script src="./node_modules/react-dom/dist/react-dom.min.js"></script>
+<script src="./node_modules/whatwg-fetch/fetch.js"></script>
+<script src="./dist/dashboard.js"></script>
