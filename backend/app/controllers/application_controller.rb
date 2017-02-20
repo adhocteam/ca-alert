@@ -3,6 +3,18 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  def require_admin
+    if !current_user&.has_role?(:admin)
+      render(
+        json: {
+          status: 'error',
+          errors: ['Unauthorized']
+        },
+        status: 401
+      )
+    end
+  end
+
   private
 
   def not_found

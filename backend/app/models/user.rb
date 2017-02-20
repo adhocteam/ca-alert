@@ -52,6 +52,12 @@ class User < ActiveRecord::Base
   has_many :places
   has_many :phone_numbers
 
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+
+  def self.search(query:)
+    confirmed.where('email LIKE ?', "%#{query}%")
+  end
+
   def as_json(options = {})
     h = super(options)
     h['is_admin'] = has_role?(:admin)

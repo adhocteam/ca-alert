@@ -10,4 +10,8 @@ Rails.application.routes.draw do
     end
   end
   resources :places, only: [:index, :create, :update, :destroy]
+
+  namespace :admin do
+    get '/users/search', to: 'users#search', as: :user_search
+  end
 end
