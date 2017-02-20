@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Swagger::Blocks
 
+  rolify
+
   swagger_schema :User, required: [:id, :provider, :uid, :name, :nickname, :image, :email, :created_at, :updated_at] do
     property :id do
       key :type, :integer
