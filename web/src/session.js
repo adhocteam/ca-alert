@@ -1,33 +1,27 @@
 // TODO(paulsmith): this is just temporary
 
-let loginState = {
-  user: null,
-  creds: null
-};
-
 export function newLoginSession(user, accessToken, client) {
-  loginState.user = user;
-  loginState.creds = {
-    accessToken: accessToken,
-    client: client
-  };
+  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem(
+    "apiCreds",
+    JSON.stringify({ accessToken: accessToken, client: client })
+  );
 }
 
 export function isLoggedIn() {
-  return loginState.user !== null && loginState.creds !== null;
+  return localStorage.getItem("user") !== null &&
+    localStorage.getItem("apiCreds") !== null;
 }
 
 export function loggedInUser() {
-  return loginState.user;
+  return JSON.parse(localStorage.getItem("user") || "null");
 }
 
 export function apiCreds() {
-  return loginState.creds;
+  return JSON.parse(localStorage.getItem("apiCreds") || "null");
 }
 
 export function logout() {
-  loginState = {
-    user: null,
-    creds: null
-  };
+  localStorage.removeItem("user");
+  localStorage.removeItem("apiCreds");
 }
