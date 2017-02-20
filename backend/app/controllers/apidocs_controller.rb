@@ -1,5 +1,6 @@
 require 'base_swagger_blocks'
 require 'devise_swagger_blocks'
+require 'phone_numbers_controller_swagger_blocks'
 require 'places_controller_swagger_blocks'
 
 class ApidocsController < ActionController::Base
@@ -35,6 +36,7 @@ class ApidocsController < ActionController::Base
     DeviseSwaggerBlocks,
     PingController,
     Place,
+    PhoneNumbersControllerSwaggerBlocks,
     PlacesControllerSwaggerBlocks,
     User,
     self

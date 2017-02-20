@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217205922) do
+ActiveRecord::Schema.define(version: 20170220103738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "phone_number"
+    t.string   "pin"
+    t.datetime "pin_created_at"
+    t.integer  "pin_attempts"
+    t.boolean  "verified",       default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
+  end
 
   create_table "places", force: :cascade do |t|
     t.integer  "user_id"
