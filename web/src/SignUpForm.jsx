@@ -3,7 +3,7 @@ import "whatwg-fetch";
 import { MIN_PASSWORD_LEN, encodeQueryString, errClassName } from "./lib";
 import { hashHistory, Link } from "react-router";
 
-export default class SignUpForm extends React.Component {
+export class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ export default class SignUpForm extends React.Component {
           this.setState(this.state);
         } else {
           // TODO(paulsmith): show "please verify" message
-          hashHistory.push("/");
+          hashHistory.push("/account/signup/verify");
         }
       })
       .catch(error => {
@@ -231,3 +231,16 @@ export default class SignUpForm extends React.Component {
     );
   }
 }
+
+export const VerifySignUp = React.createClass({
+  render() {
+    return (
+      <section className="usa-grid usa-section">
+        <h3>Please verify your email address</h3>
+        <p>
+          We sent you an email with a verification link in it. Please check your inbox and click on that link to finish verifying your email address.
+        </p>
+      </section>
+    );
+  }
+});

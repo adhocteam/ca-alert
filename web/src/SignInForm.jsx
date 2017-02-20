@@ -14,7 +14,8 @@ export default class SignInForm extends React.Component {
       password: {
         value: "",
         isValid: null
-      }
+      },
+      serverError: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -49,6 +50,8 @@ export default class SignInForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.state.serverError = null;
+    this.setState(this.state);
     let qs = encodeQueryString([
       ["email", this.state.email.value],
       ["password", this.state.password.value]
@@ -62,14 +65,24 @@ export default class SignInForm extends React.Component {
       body: qs
     })
       .then(response => {
-        let headers = response.headers;
-        accessToken = headers.get("access-token");
-        client = headers.get("client");
-        return response.json();
+        if (response.status === 401) {
+          this.state.serverError = "Incorrect email/password. Please try again";
+          this.setState(this.state);
+          throw new Error("HTTP 401 Unauthorized");
+        } else if (response.status !== 200) {
+          this.state.serverError = "There was an error! Please try again";
+          this.setState(this.state);
+          throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        } else {
+          let headers = response.headers;
+          accessToken = headers.get("access-token");
+          client = headers.get("client");
+          return response.json();
+        }
       })
       .then(data => {
         newLoginSession(data.data, accessToken, client);
-        hashHistory.push("/");
+        hashHistory.push("/dashboard");
       })
       .catch(error => {
         console.error("error with request: %o", error);
@@ -82,6 +95,18 @@ export default class SignInForm extends React.Component {
 
   render() {
     let serverError;
+    if (this.state.serverError !== null) {
+      serverError = (
+        <div className="usa-alert usa-alert-error" role="alert">
+          <div className="usa-alert-body">
+            <h3 className="usa-alert-heading">There was an error</h3>
+            <p className="usa-alert-text">
+              {this.state.serverError}
+            </p>
+          </div>
+        </div>
+      );
+    }
     let emailErrMsg;
     let passwordErrMsg;
     if (

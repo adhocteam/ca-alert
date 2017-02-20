@@ -1,9 +1,11 @@
 export function newLoginSession(user, accessToken, client) {
-  localStorage.setItem("user", JSON.stringify(user));
-  localStorage.setItem(
-    "apiCreds",
-    JSON.stringify({ accessToken: accessToken, client: client })
-  );
+  if (user && accessToken && client) {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem(
+      "apiCreds",
+      JSON.stringify({ accessToken: accessToken, client: client })
+    );
+  }
 }
 
 export function isLoggedIn() {
