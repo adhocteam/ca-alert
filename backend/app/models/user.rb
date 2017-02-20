@@ -51,4 +51,10 @@ class User < ActiveRecord::Base
 
   has_many :places
   has_many :phone_numbers
+
+  def as_json(options = {})
+    h = super(options)
+    h['is_admin'] = has_role?(:admin)
+    h
+  end
 end

@@ -90,7 +90,7 @@ RSpec.describe PhoneNumbersController, type: :request do
 
       it 'gives a 404 for a phone number that doesn\'t belong to the user' do
         patch(
-          "/phone_numbers/1342343/verify",
+          '/phone_numbers/1342343/verify',
           headers: {
             uid: email,
             client: @client,
