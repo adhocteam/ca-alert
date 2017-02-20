@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.twilio.com/2010-04-01/Accounts/AC522b7554b6745b01dfe2dd8099842b4b/Messages.json
+    body:
+      encoding: US-ASCII
+      string: From=%2B18282028536&To=6172908159&Body=Your+mobile+pin+for+the+California+alerts+system+is+22227
+    headers:
+      Accept:
+      - application/json
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - twilio-ruby/4.13.0 (ruby/x86_64-darwin16 2.3.3-p222)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Authorization:
+      - Basic QUM1MjJiNzU1NGI2NzQ1YjAxZGZlMmRkODA5OTg0MmI0Yjo5ZTIxZDAzMTM5NmFjZGNmMjdlZmQyZTMyM2ZkNDVlMA==
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
+        If-Unmodified-Since
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Feb 2017 18:45:14 GMT
+      Strict-Transport-Security:
+      - max-age=15768000
+      Twilio-Request-Duration:
+      - '0.271'
+      Twilio-Request-Id:
+      - RQ79937d3fc6c44b70a6e0b6fb8c4de850
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+      Content-Length:
+      - '821'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"sid": "SM321f9ba938b248538d6f1e691d3b6b6b", "date_created": "Mon,
+        20 Feb 2017 18:45:14 +0000", "date_updated": "Mon, 20 Feb 2017 18:45:14 +0000",
+        "date_sent": null, "account_sid": "AC522b7554b6745b01dfe2dd8099842b4b", "to":
+        "+16172908159", "from": "+18282028536", "messaging_service_sid": null, "body":
+        "Your mobile pin for the California alerts system is 22227", "status": "queued",
+        "num_segments": "1", "num_media": "0", "direction": "outbound-api", "api_version":
+        "2010-04-01", "price": null, "price_unit": "USD", "error_code": null, "error_message":
+        null, "uri": "/2010-04-01/Accounts/AC522b7554b6745b01dfe2dd8099842b4b/Messages/SM321f9ba938b248538d6f1e691d3b6b6b.json",
+        "subresource_uris": {"media": "/2010-04-01/Accounts/AC522b7554b6745b01dfe2dd8099842b4b/Messages/SM321f9ba938b248538d6f1e691d3b6b6b/Media.json"}}'
+    http_version: 
+  recorded_at: Mon, 20 Feb 2017 18:45:14 GMT
+recorded_with: VCR 3.0.3
