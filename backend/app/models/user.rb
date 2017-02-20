@@ -57,4 +57,10 @@ class User < ActiveRecord::Base
   def self.search(query:)
     confirmed.where('email LIKE ?', "%#{query}%")
   end
+
+  def as_json(options = {})
+    h = super(options)
+    h['is_admin'] = has_role?(:admin)
+    h
+  end
 end
