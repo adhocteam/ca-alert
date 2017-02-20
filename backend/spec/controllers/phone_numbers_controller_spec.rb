@@ -13,7 +13,7 @@ RSpec.describe PhoneNumbersController, type: :request do
       @access_token = response.headers['access-token']
     end
 
-    describe 'creating a phone number', vcr: true do
+    describe 'creating a phone number' do
       it 'creates the number' do
         post(
           '/phone_numbers',
@@ -67,7 +67,7 @@ RSpec.describe PhoneNumbersController, type: :request do
       end
     end
 
-    describe 'verifying the phone number', vcr: true do
+    describe 'verifying the phone number' do
       let(:phone_number) { create(:phone_number, user: user) }
 
       it 'verifies it when I send the correct code' do
@@ -135,7 +135,7 @@ RSpec.describe PhoneNumbersController, type: :request do
       end
     end
 
-    describe 'deleting a phone number', vcr: true do
+    describe 'deleting a phone number' do
       let(:phone_number) { create(:phone_number, user: user) }
 
       it 'deletes it' do

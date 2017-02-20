@@ -20,11 +20,7 @@ require 'rspec/rails'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/vcr_cassettes'
-  config.hook_into :webmock
-  config.configure_rspec_metadata!
-end
+require_relative 'support/fake_twilio'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -75,4 +71,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.before :each do
+    stub_const('Twilio::REST::Client', FakeTwilio)
+    FakeTwilio.messages = []
+  end
 end

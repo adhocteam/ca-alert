@@ -12,7 +12,7 @@ RSpec.describe PhoneNumber do
     Timecop.return
   end
 
-  describe 'creating a phone number', vcr: true do
+  describe 'creating a phone number' do
     it 'lets me create one' do
       pn = user.phone_numbers.create(
         phone_number: '555-555-5555'
