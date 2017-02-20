@@ -50,4 +50,10 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :places
+
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+
+  def self.search(query:)
+    confirmed.where('email LIKE ?', "%#{query}%")
+  end
 end
