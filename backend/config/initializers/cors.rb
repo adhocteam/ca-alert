@@ -12,7 +12,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource(
       '*',
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      # We need to explicitly expose non-standard CORS response headers via
+      # Access-Control-Expose-Headers in order for client code to get access to
+      # them
+      expose: ['access-token', 'client']
     )
   end
 end

@@ -1,10 +1,7 @@
 import React from "react";
 import "whatwg-fetch";
-import { encodeQueryString } from "./lib";
-import { Link } from "react-router";
-
-const MIN_PASSWORD_LEN = 8;
-const AUTH_RESOURCE = "http://localhost:3000/auth"; // TODO(paulsmith): parameterize for production
+import { MIN_PASSWORD_LEN, encodeQueryString, errClassName } from "./lib";
+import { hashHistory, Link } from "react-router";
 
 export default class SignUpForm extends React.Component {
   constructor(props) {
@@ -64,7 +61,7 @@ export default class SignUpForm extends React.Component {
       ["password", this.state.password.value],
       ["password_confirmation", this.state.passwordConfirm.value]
     ]);
-    fetch(AUTH_RESOURCE, {
+    fetch(CA_API_URL + "/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -77,7 +74,8 @@ export default class SignUpForm extends React.Component {
           this.state.serverError = data.errors.full_messages.join("; ");
           this.setState(this.state);
         } else {
-          window.location = "/dashboard.html";
+          // TODO(paulsmith): show "please verify" message
+          hashHistory.push("/");
         }
       })
       .catch(error => {
@@ -91,26 +89,6 @@ export default class SignUpForm extends React.Component {
     return this.state.email.isValid &&
       this.state.password.isValid &&
       this.state.passwordConfirm.isValid;
-  }
-
-  errClassName(isValid, which) {
-    let success = "";
-    let error = "";
-    switch (which) {
-      case "div":
-        success = "";
-        error = "usa-input-error";
-        break;
-      case "label":
-        success = "usa-input-success-label";
-        error = "usa-input-error-label";
-        break;
-      case "input":
-        success = "usa-input-success";
-        error = "";
-        break;
-    }
-    return isValid === null ? "" : isValid === true ? success : error;
   }
 
   render() {
@@ -172,17 +150,16 @@ export default class SignUpForm extends React.Component {
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">Sign up</legend>
-              <span>Have an account? <Link to="/account/signin">Sign in instead</Link>.</span>
+              <span>
+                Have an account?{" "}
+                <Link to="/account/signin">Sign in instead</Link>
+                .
+              </span>
               {serverError}
-              <div
-                className={this.errClassName(this.state.email.isValid, "div")}
-              >
+              <div className={errClassName(this.state.email.isValid, "div")}>
                 {emailErrMsg}
                 <label
-                  className={this.errClassName(
-                    this.state.email.isValid,
-                    "label"
-                  )}
+                  className={errClassName(this.state.email.isValid, "label")}
                   htmlFor="signup-email"
                 >
                   Email address
@@ -191,28 +168,17 @@ export default class SignUpForm extends React.Component {
                   type="email"
                   id="signup-email"
                   name="signup-email"
-                  className={this.errClassName(
-                    this.state.email.isValid,
-                    "input"
-                  )}
+                  className={errClassName(this.state.email.isValid, "input")}
                   placeholder="name@example.com"
                   value={this.state.email.value}
                   onChange={this.handleChange}
                   onBlur={this.handleBlur}
                 />
               </div>
-              <div
-                className={this.errClassName(
-                  this.state.password.isValid,
-                  "div"
-                )}
-              >
+              <div className={errClassName(this.state.password.isValid, "div")}>
                 {passwordErrMsg}
                 <label
-                  className={this.errClassName(
-                    this.state.password.isValid,
-                    "label"
-                  )}
+                  className={errClassName(this.state.password.isValid, "label")}
                   htmlFor="signup-password"
                 >
                   Password
@@ -222,24 +188,21 @@ export default class SignUpForm extends React.Component {
                   id="signup-password"
                   name="signup-password"
                   placeholder="minimum 8 characters"
-                  className={this.errClassName(
-                    this.state.password.isValid,
-                    "input"
-                  )}
+                  className={errClassName(this.state.password.isValid, "input")}
                   value={this.state.password.value}
                   onChange={this.handleChange}
                   onBlur={this.handleBlur}
                 />
               </div>
               <div
-                className={this.errClassName(
+                className={errClassName(
                   this.state.passwordConfirm.isValid,
                   "div"
                 )}
               >
                 {passwordConfirmErrMsg}
                 <label
-                  className={this.errClassName(
+                  className={errClassName(
                     this.state.passwordConfirm.isValid,
                     "label"
                   )}
@@ -251,7 +214,7 @@ export default class SignUpForm extends React.Component {
                   type="password"
                   id="signup-password-confirm"
                   name="signup-password-confirm"
-                  className={this.errClassName(
+                  className={errClassName(
                     this.state.passwordConfirm.isValid,
                     "input"
                   )}
