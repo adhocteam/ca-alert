@@ -147,6 +147,7 @@ GEM
     rgeo-activerecord (5.0.1)
       activerecord (~> 5.0.0)
       rgeo (~> 0.3)
+    rolify (5.1.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   rack-cors
   rails
   rgeo
+  rolify
   rspec-rails
   rubocop
   simplecov
