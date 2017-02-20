@@ -8,14 +8,17 @@ export default React.createClass({
       let user = loggedInUser();
       return (
         <div className="usa-grid usa-section">
-          <h1>Hello, {user.name ? user.name : user.email}</h1>
-          <Link to="/account/signout">Sign out</Link>
+          <h1>Your alerts dashboard</h1>
+          <p>Manage your alerts</p>
+          <p><b>Hello, {user.name ? user.name : user.email}</b></p>
+          <p><Link to="/account/signout">Sign out</Link></p>
         </div>
       );
     } else {
         return (
         <div className="usa-grid usa-section">
-          <h1>App home/dashboard goes here</h1>
+          <h1>Alerts dashboard</h1>
+          <p>Please <Link to="/accounts/signin">sign in</Link>.</p>
         </div>
       );
     }
