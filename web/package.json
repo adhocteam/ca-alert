@@ -13,7 +13,8 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "uswds": "^0.14.0"
+    "uswds": "^0.14.0",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "babel": "^6.23.0",
