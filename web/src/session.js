@@ -1,5 +1,3 @@
-// TODO(paulsmith): this is just temporary
-
 export function newLoginSession(user, accessToken, client) {
   localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem(
