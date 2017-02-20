@@ -48,4 +48,10 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :places
+
+  def as_json(options = {})
+    h = super(options)
+    h[:is_admin] = has_role?(:admin)
+    h
+  end
 end
