@@ -1,3 +1,3 @@
 class Tsunami < ApplicationRecord
-  self.table_name = "tsunami"
+  self.table_name = 'tsunami'
 end

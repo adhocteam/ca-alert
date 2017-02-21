@@ -1,3 +1,3 @@
 class Wind < ApplicationRecord
-  self.table_name = "wind"
+  self.table_name = 'wind'
 end

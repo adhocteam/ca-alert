@@ -1,3 +1,3 @@
 class Precipitation < ApplicationRecord
-  self.table_name = "precipitation"
+  self.table_name = 'precipitation'
 end
