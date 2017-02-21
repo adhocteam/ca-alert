@@ -8,6 +8,10 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
 
+require("../node_modules/uswds/dist/css/uswds.min.css");
+require("../node_modules/uswds/dist/js/uswds.min.js");
+require("../index.html");
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Home} />
