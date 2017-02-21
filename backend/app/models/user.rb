@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Swagger::Blocks
 
+  rolify
+
   swagger_schema :User, required: [:id, :provider, :uid, :name, :nickname, :image, :email, :created_at, :updated_at] do
     property :id do
       key :type, :integer
@@ -46,4 +48,21 @@ class User < ActiveRecord::Base
     # :omniauthable
   )
   include DeviseTokenAuth::Concerns::User
+
+  has_many :places
+  has_many :phone_numbers
+
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+
+  def self.search(query:)
+    confirmed
+      .joins('INNER JOIN phone_numbers ON phone_numbers.user_id = users.id')
+      .where('email LIKE ? OR phone_numbers.phone_number LIKE ?', "%#{query}%", "%#{query}%")
+  end
+
+  def as_json(options = {})
+    h = super(options)
+    h['is_admin'] = has_role?(:admin)
+    h
+  end
 end

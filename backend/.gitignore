@@ -7,8 +7,7 @@
 # Ignore bundler config.
 /.bundle
 /coverage
-
-/coverage
+.env
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -18,3 +17,5 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+.env

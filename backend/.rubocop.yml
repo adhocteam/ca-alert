@@ -11,9 +11,8 @@ AllCops:
 Metrics/LineLength:
   Max: 140
 
-# Removes the requirement for using double quotes only for string interpolation.
 Style/StringLiterals:
-  Enabled: false
+  Enabled: true
 
 # These complexity and length metrics tend to require a bunch of high-touch refactoring
 # in existing projects. Leaving them high for now, and we can slowly lower them to standard
