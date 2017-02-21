@@ -7,6 +7,9 @@ RSpec.describe Admin::UsersController, type: :request do
   let!(:user3) { create(:confirmed_user, password: password) }
   let!(:unconfirmed_user) { create(:user, password: password) }
   let!(:admin) { create(:admin_user, password: password) }
+  let!(:user1_number) { create(:phone_number, user: user1, verified: true) }
+  let!(:user2_number) { create(:phone_number, user: user2, verified: true) }
+  let!(:user3_number) { create(:phone_number, user: user3, verified: false) }
 
   describe 'user search' do
     context 'with a logged-in regular user' do
@@ -58,7 +61,23 @@ RSpec.describe Admin::UsersController, type: :request do
         expect(json['data'][0]['id']).to eq(user2.id)
       end
 
-      it 'returns users on full phone number matches'
+      it 'returns users on full phone number matches' do
+        get(
+          '/admin/users/search',
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          },
+          params: {
+            q: user1_number.phone_number
+          }
+        )
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body)
+        expect(json['data'].count).to eq(1)
+        expect(json['data'][0]['id']).to eq(user1.id)
+      end
 
       it 'returns users on partial email matches' do
         get(
@@ -78,7 +97,23 @@ RSpec.describe Admin::UsersController, type: :request do
         expect(json['data'][0]['id']).to eq(user3.id)
       end
 
-      it 'returns users on partial phone number matches'
+      it 'returns users on partial phone number matches' do
+        get(
+          '/admin/users/search',
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          },
+          params: {
+            q: user2_number.phone_number[0..6]
+          }
+        )
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body)
+        expect(json['data'].count).to eq(1)
+        expect(json['data'][0]['id']).to eq(user2.id)
+      end
 
       it 'does not return unconfirmed users' do
         get(
