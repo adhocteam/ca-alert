@@ -57,7 +57,7 @@ export default class SignInForm extends React.Component {
       ["password", this.state.password.value]
     ]);
     let accessToken, client;
-    fetch(CA_API_URL + "/auth/sign_in", {
+    fetch(API_HOST + "/auth/sign_in", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
