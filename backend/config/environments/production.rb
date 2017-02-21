@@ -75,7 +75,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'ca-alert-prototype.s3.amazonaws.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'ca-alert.herokuapp.com', protocol: 'https' }
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: '587',
