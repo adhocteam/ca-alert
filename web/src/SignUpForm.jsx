@@ -61,7 +61,7 @@ export class SignUpForm extends React.Component {
       ["password", this.state.password.value],
       ["password_confirmation", this.state.passwordConfirm.value]
     ]);
-    fetch(CA_API_URL + "/auth", {
+    fetch(API_HOST + "/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
