@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
   )
   include DeviseTokenAuth::Concerns::User
 
-  has_many :places
-  has_many :phone_numbers
+  has_many :places, dependent: :destroy
+  has_many :phone_numbers, dependent: :destroy
 
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
