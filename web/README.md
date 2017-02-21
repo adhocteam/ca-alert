@@ -41,3 +41,13 @@ called `dist/bundle.js`.
 ``` shell
 $ make build
 ```
+
+### Building the app for a production release
+
+The build is parameterized for different environments. For example, the API host
+is configured based on which environment the frontend is executing in. To build
+for a production environment:
+
+``` shell
+$ make release
+```
