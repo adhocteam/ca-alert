@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220103738) do
+ActiveRecord::Schema.define(version: 20170220214814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "hazards", force: :cascade do |t|
+    t.string  "title"
+    t.text    "message"
+    t.float   "latitude"
+    t.float   "longitude"
+    t.float   "radius_in_meters"
+    t.string  "address"
+    t.string  "link"
+    t.string  "phone_number"
+    t.integer "creator_id"
+    t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
+  end
 
   create_table "phone_numbers", force: :cascade do |t|
     t.integer  "user_id"
