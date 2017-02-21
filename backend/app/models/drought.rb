@@ -1,0 +1,2 @@
+class Drought < ApplicationRecord
+end
