@@ -43,7 +43,7 @@ export default React.createClass({
             <div className="usa-width-one-half usa-media_block">
               <img
                 className="usa-media_block-img"
-                src="./node_modules/uswds/dist/img/circle-124.png"
+                src="../node_modules/uswds/dist/img/circle-124.png"
                 alt="Alt text"
               />
               <div className="usa-media_block-body">
@@ -56,7 +56,7 @@ export default React.createClass({
             <div className="usa-width-one-half usa-media_block">
               <img
                 className="usa-media_block-img"
-                src="./node_modules/uswds/dist/img/circle-124.png"
+                src="../node_modules/uswds/dist/img/circle-124.png"
                 alt="Alt text"
               />
               <div className="usa-media_block-body">
@@ -71,7 +71,7 @@ export default React.createClass({
             <div className="usa-width-one-half usa-media_block">
               <img
                 className="usa-media_block-img"
-                src="./node_modules/uswds/dist/img/circle-124.png"
+                src="../node_modules/uswds/dist/img/circle-124.png"
                 alt="Alt text"
               />
               <div className="usa-media_block-body">
@@ -84,7 +84,7 @@ export default React.createClass({
             <div className="usa-width-one-half usa-media_block">
               <img
                 className="usa-media_block-img"
-                src="./node_modules/uswds/dist/img/circle-124.png"
+                src="../node_modules/uswds/dist/img/circle-124.png"
                 alt="Alt text"
               />
               <div className="usa-media_block-body">
