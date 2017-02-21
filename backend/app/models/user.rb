@@ -55,7 +55,9 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   def self.search(query:)
-    confirmed.where('email LIKE ?', "%#{query}%")
+    confirmed
+      .joins('INNER JOIN phone_numbers ON phone_numbers.user_id = users.id')
+      .where('email LIKE ? OR phone_numbers.phone_number LIKE ?', "%#{query}%", "%#{query}%")
   end
 
   def as_json(options = {})

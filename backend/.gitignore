@@ -6,9 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
-
-.env
-
+/coverage
 .env
 
 # Ignore all logfiles and tempfiles.
