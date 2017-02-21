@@ -13,5 +13,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/users/search', to: 'users#search', as: :user_search
+    resources :hazards, only: [:create]
   end
 end
