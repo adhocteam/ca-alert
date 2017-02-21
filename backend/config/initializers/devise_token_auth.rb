@@ -1,5 +1,10 @@
 DeviseTokenAuth.setup do |config|
-  config.default_confirm_success_url = '/'
+  url_options = Rails.application.config.action_mailer.default_url_options
+  if Rails.env.production?
+    config.default_confirm_success_url = "#{url_options[:protocol]}://#{url_options[:host]}"
+  else
+    config.default_confirm_success_url = "http://#{url_options[:host]}:#{url_options[:port]}"
+  end
 
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
