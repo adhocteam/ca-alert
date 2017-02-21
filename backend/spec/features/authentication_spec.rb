@@ -20,11 +20,18 @@ RSpec.describe 'authentication', type: :request do
         expect(User.first.confirmed_at).to eq(nil)
       end
 
-      it 'should email the user' do
+      it 'emails the user' do
         expect(ActionMailer::Base.deliveries.count).to eq(1)
         mail = ActionMailer::Base.deliveries.first
         expect(mail.subject).to eq('Confirmation instructions')
-        expect(mail.to).to eq([email])
+        expect(mail.from).to eq(['support@ca-alert-prototype.com'])
+      end
+
+      it 'has the correct link in the email' do
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+        mail = ActionMailer::Base.deliveries.first
+        mail.body.raw_source =~ /redirect_url=([^"]*)/
+        expect(URI.unescape($1)).to eq('http://localhost:3000')
       end
 
       describe 'with the account confirmed' do
