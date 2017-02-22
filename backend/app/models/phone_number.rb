@@ -10,7 +10,9 @@ class PhoneNumber < ApplicationRecord
   before_create :setup_pin
 
   def as_json(options = {})
-    super(except: [:pin])
+    options[:except] ||= []
+    options[:except] << :pin
+    super(options)
   end
 
   def alert_user(alert)
