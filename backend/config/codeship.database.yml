@@ -1,5 +1,5 @@
 development:
-  adapter: postgresql
+  adapter: postgis
   host: localhost
   encoding: unicode
   pool: 10
@@ -10,7 +10,7 @@ development:
   port: 5435
   sslmode: disable
 test:
-  adapter: postgresql
+  adapter: postgis
   host: localhost
   encoding: unicode
   pool: 10

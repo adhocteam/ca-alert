@@ -1,0 +1,2 @@
+class Flood < ApplicationRecord
+end

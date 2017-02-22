@@ -1,0 +1,2 @@
+class Fire < ApplicationRecord
+end
