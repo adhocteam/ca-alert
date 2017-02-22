@@ -10,84 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220214814) do
+ActiveRecord::Schema.define(version: 20170222142555) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "hazards", force: :cascade do |t|
-    t.string  "title"
-    t.text    "message"
-    t.float   "latitude"
-    t.float   "longitude"
-    t.float   "radius_in_meters"
-    t.string  "address"
-    t.string  "link"
-    t.string  "phone_number"
-    t.integer "creator_id"
-    t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
-  end
-
-  create_table "phone_numbers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "phone_number"
-    t.string   "pin"
-    t.datetime "pin_created_at"
-    t.integer  "pin_attempts"
-    t.boolean  "verified",       default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
-  end
-
-  create_table "places", force: :cascade do |t|
-    t.integer  "user_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "name"
-    t.text     "address"
+  create_table "alerts", force: :cascade do |t|
+    t.integer  "place_id"
+    t.integer  "hazard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_places_on_user_id", using: :btree
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.string   "resource_type"
-    t.integer  "resource_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-    t.index ["name"], name: "index_roles_on_name", using: :btree
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "provider",               default: "email", null: false
-    t.string   "uid",                    default: "",      null: false
-    t.string   "encrypted_password",     default: "",      null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,       null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.string   "name"
-    t.string   "nickname"
-    t.string   "image"
-    t.string   "email"
-    t.json     "tokens"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
+    t.index ["hazard_id"], name: "index_alerts_on_hazard_id", using: :btree
+    t.index ["place_id"], name: "index_alerts_on_place_id", using: :btree
   end
 
   create_table "droughts", primary_key: "ogc_fid", force: :cascade do |t|
@@ -154,10 +89,48 @@ ActiveRecord::Schema.define(version: 20170220214814) do
     t.index ["wkb_geometry"], name: "floods_wkb_geometry_geom_idx", using: :gist
   end
 
+  create_table "hazards", force: :cascade do |t|
+    t.string    "title"
+    t.text      "message"
+    t.float     "latitude"
+    t.float     "longitude"
+    t.float     "radius_in_meters"
+    t.string    "address"
+    t.string    "link"
+    t.string    "phone_number"
+    t.integer   "creator_id"
+    t.geography "lonlat",           limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
+  end
+
   create_table "hurricanes", primary_key: "ogc_fid", force: :cascade do |t|
     t.geometry "wkb_geometry", limit: {:srid=>4326, :type=>"point"}
     t.integer  "objectid"
     t.index ["wkb_geometry"], name: "hurricanes_wkb_geometry_geom_idx", using: :gist
+  end
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "phone_number"
+    t.string   "pin"
+    t.datetime "pin_created_at"
+    t.integer  "pin_attempts"
+    t.boolean  "verified",       default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.integer   "user_id"
+    t.float     "latitude"
+    t.float     "longitude"
+    t.string    "name"
+    t.text      "address"
+    t.datetime  "created_at",                                                          null: false
+    t.datetime  "updated_at",                                                          null: false
+    t.geography "lonlat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
   create_table "precipitation", primary_key: "ogc_fid", force: :cascade do |t|
@@ -171,6 +144,16 @@ ActiveRecord::Schema.define(version: 20170220214814) do
     t.float    "st_area(shape)"
     t.float    "st_length(shape)"
     t.index ["wkb_geometry"], name: "precipitation_wkb_geometry_geom_idx", using: :gist
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
   create_table "temperature", primary_key: "ogc_fid", force: :cascade do |t|
@@ -263,6 +246,41 @@ ActiveRecord::Schema.define(version: 20170220214814) do
     t.index ["wkb_geometry"], name: "tsunami_wkb_geometry_geom_idx", using: :gist
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "provider",               default: "email", null: false
+    t.string   "uid",                    default: "",      null: false
+    t.string   "encrypted_password",     default: "",      null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,       null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "image"
+    t.string   "email"
+    t.json     "tokens"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+  end
+
   create_table "volcanic_eruptions", primary_key: "ogc_fid", force: :cascade do |t|
     t.geometry "wkb_geometry",                  limit: {:srid=>4326, :type=>"point"}
     t.integer  "year"
@@ -351,9 +369,4 @@ ActiveRecord::Schema.define(version: 20170220214814) do
     t.index ["wkb_geometry"], name: "wind_wkb_geometry_geom_idx", using: :gist
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-  end
 end

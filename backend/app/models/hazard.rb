@@ -1,13 +1,15 @@
 class Hazard < ApplicationRecord
   include Swagger::Blocks
+  include HasLonLat
 
   belongs_to :creator, class_name: 'User'
+  has_many :alerts, dependent: :destroy
 
   validates :title, presence: true
   validates :message, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
   validates :radius_in_meters, presence: true
+
+  after_create :create_alerts
 
   swagger_schema :Hazard, required: [:id, :title, :message, :latitude, :longitude, :radius_in_meters] do
     property :id do
@@ -52,6 +54,14 @@ class Hazard < ApplicationRecord
     property :updated_at do
       key :type, :string
       key :format, 'date-time'
+    end
+  end
+
+  private
+
+  def create_alerts
+    Place.within_radius_of(lonlat.x, lonlat.y, radius_in_meters).each do |place|
+      Alert.create(place: place, hazard: self)
     end
   end
 end

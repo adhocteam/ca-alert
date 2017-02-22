@@ -1,12 +1,16 @@
 class Place < ApplicationRecord
   include Swagger::Blocks
+  include HasLonLat
 
   belongs_to :user
+  has_many :alerts, dependent: :destroy
 
   validates :address, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
   validates :name, presence: true
+
+  scope :within_radius_of, lambda { |lon, lat, radius_in_meters|
+    where("ST_DWithin(lonlat, ST_MakePoint(#{lon}, #{lat})::geography, #{radius_in_meters})")
+  }
 
   swagger_schema :Place, required: [:id, :user_id, :latitude, :longitude, :name, :address, :created_at, :updated_at] do
     property :id do

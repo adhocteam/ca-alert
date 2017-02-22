@@ -51,8 +51,8 @@ RSpec.describe Admin::HazardsController, type: :request do
       it 'sets the various fields' do
         expect(Hazard.first.title).to eq(title)
         expect(Hazard.first.message).to eq(message)
-        expect(Hazard.first.latitude).to be_within(0.01).of(latitude.to_f)
-        expect(Hazard.first.longitude).to be_within(0.01).of(longitude.to_f)
+        expect(Hazard.first.lonlat.y).to be_within(0.01).of(latitude.to_f)
+        expect(Hazard.first.lonlat.x).to be_within(0.01).of(longitude.to_f)
         expect(Hazard.first.radius_in_meters).to eq(radius.to_f)
         expect(Hazard.first.address).to eq(address)
         expect(Hazard.first.link).to eq(url)

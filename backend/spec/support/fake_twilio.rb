@@ -11,6 +11,6 @@ class FakeTwilio
   end
 
   def create(from:, to:, body:)
-    self.class.messages << Message.new(from: from, to: to, body: body)
+    self.class.messages << Message.new(from, to, body)
   end
 end
