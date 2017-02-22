@@ -100,8 +100,8 @@ RSpec.describe PlacesController, type: :request do
           expect(response.status).to eq(200)
           place.reload
           expect(place.name).to eq(new_name)
-          expect(place.lonlat.y).to be_within(0.01).of(new_latitude)
-          expect(place.lonlat.x).to be_within(0.01).of(new_longitude)
+          expect(place.coord.lat).to be_within(0.01).of(new_latitude)
+          expect(place.coord.lon).to be_within(0.01).of(new_longitude)
           expect(place.address).to eq(new_address)
         end
 
@@ -123,8 +123,8 @@ RSpec.describe PlacesController, type: :request do
           expect(response.status).to eq(400)
           place.reload
           expect(place.name).to eq(place_name)
-          expect(place.lonlat.y).to be_within(0.01).of(latitude)
-          expect(place.lonlat.x).to be_within(0.01).of(longitude)
+          expect(place.coord.lat).to be_within(0.01).of(latitude)
+          expect(place.coord.lon).to be_within(0.01).of(longitude)
           expect(place.address).to eq(address)
         end
       end

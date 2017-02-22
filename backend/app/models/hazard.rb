@@ -1,6 +1,6 @@
 class Hazard < ApplicationRecord
   include Swagger::Blocks
-  include HasLonLat
+  include HasCoordinates
 
   belongs_to :creator, class_name: 'User'
   has_many :alerts, dependent: :destroy
@@ -60,7 +60,7 @@ class Hazard < ApplicationRecord
   private
 
   def create_alerts
-    Place.within_radius_of(lonlat.x, lonlat.y, radius_in_meters).each do |place|
+    Place.within_radius_of(coord.lon, coord.lat, radius_in_meters).each do |place|
       Alert.create(place: place, hazard: self)
     end
   end

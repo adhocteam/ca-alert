@@ -9,15 +9,15 @@ RSpec.describe Hazard do
   describe 'saving with latitude and longitude' do
     it 'turns the lat/lon into a POINT' do
       h = create(:hazard, longitude: 21.345, latitude: 84.234)
-      expect(h.lonlat.x).to eq(21.345)
-      expect(h.lonlat.y).to eq(84.234)
+      expect(h.coord.lon).to eq(21.345)
+      expect(h.coord.lat).to eq(84.234)
     end
   end
 
   describe 'serializing to json' do
-    it 'does not include the lonlat' do
+    it 'does not include the coord' do
       json = gas_leak.as_json
-      expect(json['lonlat']).to be nil
+      expect(json['coord']).to be nil
     end
 
     it 'includes the raw lat and lon' do

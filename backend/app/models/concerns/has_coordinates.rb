@@ -1,4 +1,4 @@
-module HasLonLat
+module HasCoordinates
   extend ActiveSupport::Concern
 
   included do
@@ -10,24 +10,26 @@ module HasLonLat
   end
 
   def as_json(options = {})
-    h = super(except: [:lonlat])
-    h['longitude'] = lonlat.x
-    h['latitude'] = lonlat.y
+    h = super(except: [:coord])
+    h['longitude'] = coord.lon
+    h['latitude'] = coord.lat
     h
   end
 
   private
 
   def ensure_coordinates_present
-    if @latitude.blank?
+    if @latitude.blank? && coord&.lat.blank?
       errors.add(:latitude, 'can\'t be blank')
     end
-    if @longitude.blank?
+    if @longitude.blank? && coord&.lon.blank?
       errors.add(:longitude, 'can\'t be blank')
     end
   end
 
   def convert_coordinates_to_geo
-    self.lonlat = "POINT (#{@longitude} #{@latitude})"
+    if @latitude && @longitude
+      self.coord = "POINT (#{@longitude} #{@latitude})"
+    end
   end
 end

@@ -22,15 +22,15 @@ RSpec.describe Place do
   describe 'saving with latitude and longitude' do
     it 'turns the lat/lon into a POINT' do
       p = create(:place, longitude: 21.345, latitude: 84.234)
-      expect(p.lonlat.x).to eq(21.345)
-      expect(p.lonlat.y).to eq(84.234)
+      expect(p.coord.lon).to eq(21.345)
+      expect(p.coord.lat).to eq(84.234)
     end
   end
 
   describe 'serializing to json' do
-    it 'does not include the lonlat' do
+    it 'does not include the coord' do
       json = burritos.as_json
-      expect(json['lonlat']).to be nil
+      expect(json['coord']).to be nil
     end
 
     it 'includes the raw lat and lon' do

@@ -92,14 +92,12 @@ ActiveRecord::Schema.define(version: 20170222142555) do
   create_table "hazards", force: :cascade do |t|
     t.string    "title"
     t.text      "message"
-    t.float     "latitude"
-    t.float     "longitude"
     t.float     "radius_in_meters"
     t.string    "address"
     t.string    "link"
     t.string    "phone_number"
     t.integer   "creator_id"
-    t.geography "lonlat",           limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "coord",            limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 
@@ -123,13 +121,11 @@ ActiveRecord::Schema.define(version: 20170222142555) do
 
   create_table "places", force: :cascade do |t|
     t.integer   "user_id"
-    t.float     "latitude"
-    t.float     "longitude"
     t.string    "name"
     t.text      "address"
     t.datetime  "created_at",                                                          null: false
     t.datetime  "updated_at",                                                          null: false
-    t.geography "lonlat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "coord",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
