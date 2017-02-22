@@ -133,4 +133,48 @@ RSpec.describe Admin::UsersController, type: :request do
       end
     end
   end
+
+  describe 'makin a user an admin' do
+    context 'with a logged-in regular user' do
+      before do
+        post '/auth/sign_in', params: { email: user1.email, password: password }
+        @client = response.headers['client']
+        @access_token = response.headers['access-token']
+      end
+
+      it 'requires me to be an admin' do
+        patch(
+          "/admin/users/#{user2.id}/make_admin",
+          headers: {
+            uid: user1.email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(response.status).to eq(401)
+        expect(JSON.parse(response.body)['errors']).to eq(['Unauthorized'])
+      end
+    end
+
+    context 'with a logged-in admin' do
+      before do
+        post '/auth/sign_in', params: { email: admin.email, password: password }
+        @client = response.headers['client']
+        @access_token = response.headers['access-token']
+      end
+
+      it 'makes the user an admin' do
+        patch(
+          "/admin/users/#{user2.id}/make_admin",
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(response.status).to eq(200)
+        expect(user2).to have_role(:admin)
+      end
+    end
+  end
 end
