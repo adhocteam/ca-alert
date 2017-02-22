@@ -36,9 +36,20 @@ class Point {
   }
 }
 
+function checkResponse(response) {
+  if (response.status === 200) {
+    return response;
+  } else {
+    let err = new Error(response.statusText);
+    err.response = response;
+    throw err;
+  }
+}
+
 module.exports = {
   MIN_PASSWORD_LEN: MIN_PASSWORD_LEN,
   encodeQueryString: encodeQueryString,
   errClassName: errClassName,
-  Point: Point
+  Point: Point,
+  checkResponse: checkResponse
 };
