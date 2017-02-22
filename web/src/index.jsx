@@ -7,6 +7,7 @@ import SignOut from "./SignOut";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import AddPlaceForm from "./AddPlaceForm";
+import EditPlaceForm from "./EditPlaceForm";
 import PlaceList from "./PlaceList";
 import Nav from "./Nav";
 
@@ -20,6 +21,7 @@ ReactDOM.render(
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/places" component={PlaceList} />
     <Route path="/dashboard/places/new" component={AddPlaceForm} />
+    <Route path="/dashboard/places/:id/edit" component={EditPlaceForm} />
     <Route path="/account/signup" component={SignUpForm} />
     <Route path="/account/signup/verify" component={VerifySignUp} />
     <Route path="/account/signin" component={SignInForm} />
