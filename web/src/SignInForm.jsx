@@ -56,7 +56,7 @@ export default class SignInForm extends React.Component {
       ["email", this.state.email.value],
       ["password", this.state.password.value]
     ]);
-    let accessToken, client;
+    let accessToken, client, expiry, uid;
     fetch(API_HOST + "/auth/sign_in", {
       method: "POST",
       headers: {
@@ -77,11 +77,13 @@ export default class SignInForm extends React.Component {
           let headers = response.headers;
           accessToken = headers.get("access-token");
           client = headers.get("client");
+          expiry = headers.get("expiry");
+          uid = headers.get("uid");
           return response.json();
         }
       })
       .then(data => {
-        newLoginSession(data.data, accessToken, client);
+        newLoginSession(data.data, accessToken, client, expiry, uid);
         hashHistory.push("/dashboard");
       })
       .catch(error => {
@@ -136,7 +138,7 @@ export default class SignInForm extends React.Component {
     }
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third" id="app-test">
+        <div className="usa-width-one-third">
           <h2>Sign in with an existing account and manage your alerts.</h2>
         </div>
         <div className="usa-width-two-thirds">

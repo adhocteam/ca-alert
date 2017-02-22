@@ -1,9 +1,14 @@
-export function newLoginSession(user, accessToken, client) {
+export function newLoginSession(user, accessToken, client, expiry, uid) {
   if (user && accessToken && client) {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem(
       "apiCreds",
-      JSON.stringify({ accessToken: accessToken, client: client })
+      JSON.stringify({
+        accessToken: accessToken,
+        client: client,
+        expiry: expiry,
+        uid: uid
+      })
     );
   }
 }
