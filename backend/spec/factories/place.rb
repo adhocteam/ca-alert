@@ -4,5 +4,6 @@ FactoryGirl.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
     address { Faker::Address.street_address }
+    user
   end
 end

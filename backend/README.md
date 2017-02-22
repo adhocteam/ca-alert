@@ -24,7 +24,12 @@ createdb ca-alert_development
 createdb ca-alert_test
 ```
 
-Then run migrations to initialize the schema with `rake db:migrate`.
+Then initialize the schema with:
+
+```
+rake db:schema:load
+rake db:migrate
+```
 
 ### Running the test suite
 

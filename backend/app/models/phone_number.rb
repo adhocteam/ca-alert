@@ -1,6 +1,8 @@
 class PhoneNumber < ApplicationRecord
   include Swagger::Blocks
 
+  SMS_FROM_NUMBER = '+18282028536'.freeze
+
   belongs_to :user
 
   validates :phone_number, presence: true
@@ -9,6 +11,14 @@ class PhoneNumber < ApplicationRecord
 
   def as_json(options = {})
     super(except: [:pin])
+  end
+
+  def alert_user(alert)
+    Twilio::REST::Client.new.messages.create(
+      from: SMS_FROM_NUMBER,
+      to: phone_number,
+      body: "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+    )
   end
 
   swagger_schema :Place, required: [:id, :user_id, :phone_number, :pin_created_at, :pin_attempts, :verified, :created_at, :updated_at] do
@@ -51,8 +61,8 @@ class PhoneNumber < ApplicationRecord
     self.pin_created_at = Time.now.utc
 
     Twilio::REST::Client.new.messages.create(
-      from: '+18282028536',
-      to: '6172908159',
+      from: SMS_FROM_NUMBER,
+      to: phone_number,
       body: "Your mobile pin for the California alerts system is #{pin}"
     )
   end
