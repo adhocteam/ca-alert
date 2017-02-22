@@ -1,7 +1,7 @@
 DeviseTokenAuth.setup do |config|
   url_options = Rails.application.config.action_mailer.default_url_options
   if Rails.env.production?
-    config.default_confirm_success_url = "#{url_options[:protocol]}://#{url_options[:host]}"
+    config.default_confirm_success_url = 'https://ca-alert-prototype.s3.amazonaws.com/index.html'
   else
     config.default_confirm_success_url = "http://#{url_options[:host]}:#{url_options[:port]}"
   end
