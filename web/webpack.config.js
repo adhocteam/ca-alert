@@ -8,7 +8,7 @@ const DEV_API_HOST = "http://localhost:3000";
 const PROD_API_HOST = "https://ca-alert.herokuapp.com";
 
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: ["whatwg-fetch", "./src/index.jsx"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")

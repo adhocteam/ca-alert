@@ -143,7 +143,7 @@ export class SignUpForm extends React.Component {
     }
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third" id="app-test">
+        <div className="usa-width-one-third">
           <h2>Sign up with a new account and get notified of alerts.</h2>
         </div>
         <div className="usa-width-two-thirds">
