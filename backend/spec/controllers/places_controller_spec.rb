@@ -76,6 +76,21 @@ RSpec.describe PlacesController, type: :request do
         end
       end
 
+      describe 'showing a specific place' do
+        it 'shows the place' do
+          get(
+            "/places/#{place.id}",
+            headers: {
+              uid: email,
+              client: @client,
+              'access-token' => @access_token
+            }
+          )
+          expect(response.status).to eq(200)
+          expect(JSON.parse(response.body)['data']['id']).to eq(place.id)
+        end
+      end
+
       describe 'updating the place' do
         let(:new_name) { Faker::Friends.location }
         let(:new_latitude) { Faker::Address.latitude.to_f }
