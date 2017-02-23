@@ -87,7 +87,7 @@ export default class PlaceList extends React.Component {
             {place.name}
           </div>
           <div className="ca-place-list-item-link">
-            <a href="#" title="Edit this place">Edit</a>
+            <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
           </div>
           <div className="ca-place-list-item-link">
             <a
