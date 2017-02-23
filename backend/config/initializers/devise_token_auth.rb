@@ -1,7 +1,7 @@
 DeviseTokenAuth.setup do |config|
   url_options = Rails.application.config.action_mailer.default_url_options
   if Rails.env.production?
-    config.default_confirm_success_url = "#{url_options[:protocol]}://#{url_options[:host]}"
+    config.default_confirm_success_url = 'https://ca-alert-prototype.s3.amazonaws.com/index.html'
   else
     config.default_confirm_success_url = "http://#{url_options[:host]}:#{url_options[:port]}"
   end
@@ -10,7 +10,7 @@ DeviseTokenAuth.setup do |config|
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
   # each request.
-  # config.change_headers_on_each_request = true
+  config.change_headers_on_each_request = false
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.

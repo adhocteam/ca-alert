@@ -29,7 +29,7 @@ export default class Nav extends React.Component {
             </button>
           </li>
           <li>
-            Hello, {user.name ? user.name : user.email}
+            <a href="#/dashboard">{user.name ? user.name : user.email}</a>
           </li>
           <li>
             <a href="#/account/signout">Sign out</a>

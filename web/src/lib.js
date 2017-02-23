@@ -29,8 +29,27 @@ function errClassName(isValid, which) {
   return isValid === null ? "" : isValid === true ? success : error;
 }
 
+class Point {
+  constructor(lng, lat) {
+    this.lng = lng;
+    this.lat = lat;
+  }
+}
+
+function checkResponse(response) {
+  if (response.status === 200) {
+    return response;
+  } else {
+    let err = new Error(response.statusText);
+    err.response = response;
+    throw err;
+  }
+}
+
 module.exports = {
   MIN_PASSWORD_LEN: MIN_PASSWORD_LEN,
   encodeQueryString: encodeQueryString,
-  errClassName: errClassName
+  errClassName: errClassName,
+  Point: Point,
+  checkResponse: checkResponse
 };
