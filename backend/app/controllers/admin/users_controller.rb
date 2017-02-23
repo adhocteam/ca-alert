@@ -11,4 +11,15 @@ class Admin::UsersController < ApplicationController
       status: 200
     )
   end
+
+  def make_admin
+    user = User.find(params[:id])
+    user.add_role(:admin)
+    render(
+      json: {
+        status: 'success'
+      },
+      status: 200
+    )
+  end
 end
