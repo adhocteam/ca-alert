@@ -2,6 +2,16 @@ class Admin::HazardsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin
 
+  def index
+    render(
+      json: {
+        status: 'success',
+        data: Hazard.all.order(created_at: 'asc')
+      },
+      status: 200
+    )
+  end
+
   def create
     hazard = Hazard.new(hazard_params)
     hazard.creator_id = current_user.id
