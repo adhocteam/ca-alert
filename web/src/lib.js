@@ -1,5 +1,5 @@
-import "whatwg-fetch";
-import { apiCreds } from "./session";
+let fetch = require("whatwg-fetch");
+let apiCreds = require("./session").apiCreds;
 
 const MIN_PASSWORD_LEN = 8;
 
@@ -74,8 +74,8 @@ function geocode(address, callback) {
 
 // make an auth'd request
 function fetchAuthd(url, options) {
-  options = options || {};
   let creds = apiCreds();
+  options = options || {};
   options.headers = Object.assign(options.headers || {}, {
     uid: creds.uid,
     "access-token": creds.accessToken,

@@ -1,4 +1,5 @@
 import React from "react";
+import "whatwg-fetch";
 import { MIN_PASSWORD_LEN, encodeQueryString, errClassName } from "./lib";
 import { hashHistory, Link } from "react-router";
 import { newLoginSession } from "./session";
