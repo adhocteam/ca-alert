@@ -21,10 +21,9 @@ export default class EditPlaceForm extends React.Component {
   }
 
   componentDidMount() {
-    // TODO(paulsmith): need a get place by ID API endpoint
-    let id = parseInt(this.props.params.id, 10);
+    let id = this.props.params.id;
     let creds = apiCreds();
-    fetch(API_HOST + "/places", {
+    fetch(API_HOST + `/places/${id}`, {
       method: "GET",
       headers: {
         uid: creds.uid,
@@ -37,20 +36,16 @@ export default class EditPlaceForm extends React.Component {
       .then(checkResponse)
       .then(response => response.json())
       .then(data => {
-        let places = data.data;
-        let place = places.filter(p => p.id === id);
-        if (place.length !== 1) {
-          throw new Error(`couldn't find place by ID ${id}`);
-        }
-        this.state.place = place[0];
-        this.state.name = place[0].name;
-        this.setState(this.state);
+        let place = data.data;
+        this.setState({
+          place: place,
+          name: place.name
+        });
       });
   }
 
   handleChange(e) {
-    this.state.name = e.target.value;
-    this.setState(this.state);
+    this.setState({ name: e.target.value });
   }
 
   handleSubmit(e) {
@@ -222,7 +217,6 @@ class LocationChooser extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault();
     this.setState({ address: e.target.value });
   }
 
