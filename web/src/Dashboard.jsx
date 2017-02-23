@@ -16,6 +16,10 @@ export default React.createClass({
             <li>Account settings</li>
             <li><Link to="/account/signout">Sign out</Link></li>
           </ul>
+          <h2>Admin</h2>
+          <ul>
+            <li><Link to="/admin/hazards">Alerts</Link></li>
+          </ul>
         </div>
       );
     } else {

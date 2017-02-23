@@ -22,6 +22,6 @@ Rails.application.routes.draw do
         patch :resend_admin_email, as: :resend_admin_email
       end
     end
-    resources :hazards, only: [:create]
+    resources :hazards, only: [:index, :create]
   end
 end
