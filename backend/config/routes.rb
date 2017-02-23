@@ -21,6 +21,6 @@ Rails.application.routes.draw do
         patch :make_admin, as: :make_admin
       end
     end
-    resources :hazards, only: [:create]
+    resources :hazards, only: [:index, :create]
   end
 end
