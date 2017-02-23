@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
 
   has_many :places, dependent: :destroy
   has_many :phone_numbers, dependent: :destroy
+  has_many :alerts, through: :places
 
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 

@@ -10,7 +10,9 @@ module HasCoordinates
   end
 
   def as_json(options = {})
-    h = super(except: [:coord])
+    options[:except] ||= []
+    options[:except] << :coord
+    h = super(options)
     h['longitude'] = coord.lon
     h['latitude'] = coord.lat
     h
