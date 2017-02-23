@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Swagger::Blocks
 
-  rolify
+  rolify after_add: :notify_when_becoming_an_admin
 
   swagger_schema :User, required: [:id, :provider, :uid, :name, :nickname, :image, :email, :created_at, :updated_at] do
     property :id do
@@ -65,5 +65,13 @@ class User < ActiveRecord::Base
     h = super(options)
     h['is_admin'] = has_role?(:admin)
     h
+  end
+
+  private
+
+  def notify_when_becoming_an_admin(role)
+    if role.name == 'admin'
+      AdminMailer.announce_new_admin_role(self).deliver_now
+    end
   end
 end
