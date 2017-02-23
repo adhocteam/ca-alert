@@ -6,17 +6,17 @@ import GeoLocationBtn from "./GeoLocationBtn";
 import { Point } from "./lib";
 import Map from "./Map";
 import { apiCreds } from "./session";
+import "./App.css";
 
 export default class EditPlaceForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       place: null,
-      address: { value: "" },
-      name: { value: "" },
-      searchBtnEnabled: false,
-      geocodeResult: null,
-      error: null
+      name: "",
+      show: {
+        locationChooser: false
+      }
     };
   }
 
@@ -43,60 +43,29 @@ export default class EditPlaceForm extends React.Component {
           throw new Error(`couldn't find place by ID ${id}`);
         }
         this.state.place = place[0];
-        this.state.name.value = place[0].name;
+        this.state.name = place[0].name;
         this.setState(this.state);
       });
   }
 
   handleChange(e) {
-    this.state[e.target.name].value = e.target.value;
-    this.state.searchBtnEnabled = this.state.address.value.length > 0;
+    this.state.name = e.target.value;
     this.setState(this.state);
-  }
-
-  handleSearchBtnClick(e) {
-    e.preventDefault();
-    // TODO(paulsmith): disable btn
-    this.state.geocodeResult = null;
-    this.setState(this.state);
-    let req = {
-      address: this.state.address.value,
-      componentRestrictions: {
-        country: "US",
-        administrativeArea: "California"
-      }
-    };
-    let geocoder = new google.maps.Geocoder();
-    geocoder.geocode(req, (results, status) => {
-      if (status === "OK") {
-        let loc = results[0].geometry.location;
-        let pt = new Point(loc.lng(), loc.lat());
-        this.state.geocodeResult = {
-          address: results[0].formatted_address,
-          pt: pt
-        };
-        this.setState(this.state);
-      } else {
-        this.state.error = "Couldn't find that location, please try again.";
-        this.setState(this.state);
-      }
-    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     // TODO(paulsmith): disable Save button
-    const geocode = this.state.geocodeResult;
-    const pt = geocode.pt;
+    const place = this.state.place;
     const creds = apiCreds();
     let qs = encodeQueryString([
-      ["name", this.state.name.value],
-      ["address", geocode.address],
-      ["latitude", pt.lat],
-      ["longitude", pt.lng]
+      ["name", this.state.name],
+      ["address", place.address],
+      ["latitude", place.latitude],
+      ["longitude", place.longitude]
     ]);
-    fetch(API_HOST + "/places", {
-      method: "POST",
+    fetch(API_HOST + `/places/${place.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         uid: creds.uid,
@@ -114,86 +83,59 @@ export default class EditPlaceForm extends React.Component {
       });
   }
 
-  handleContinueClick(e) {
+  handleLocationEditCancelClick(e) {
     e.preventDefault();
-    this.state.showNamePlace = true;
-    this.setState(this.state);
+    let show = Object.assign({}, this.state.show);
+    show.locationChooser = !this.state.show.locationChooser;
+    this.setState({
+      show: show
+    });
+  }
+
+  handleNewLocation(loc) {
+    let place = this.state.place;
+    place.address = loc.address;
+    place.latitude = loc.pt.lat;
+    place.longitude = loc.pt.lng;
+    let show = Object.assign({}, this.state.show);
+    show.locationChooser = false;
+    this.setState({
+      place: place,
+      show: show
+    });
   }
 
   render() {
-    let searchBtn = null;
-    if (this.state.searchBtnEnabled) {
-      searchBtn = <button onClick={this.handleSearchBtnClick}>Search</button>;
-    } else {
-      searchBtn = (
-        <button
-          onClick={this.handleSearchBtnClick}
-          disabled="disabled"
-          className="usa-button-disabled"
-        >
-          Search
-        </button>
-      );
-    }
-
-    let geocodeResult = null, map = null, continueBtn;
-    let result = this.state.geocodeResult;
-    if (result !== null) {
-      geocodeResult = (
-        <div>
-          {result.address}
-        </div>
-      );
-      let pt = result.pt;
-      map = <Map lat={pt.lat} lng={pt.lng} />;
-    }
-
-    if (result !== null && !this.state.showNamePlace) {
-      continueBtn = (
-        <a href="#" className="usa-button" onClick={this.handleContinueClick}>
-          Continue
-        </a>
-      );
-    }
-
-    let locationForm = null;
-    if (!this.state.showNamePlace) {
-      locationForm = (
-        <div>
-          <div>
-            <GeoLocationBtn />
-          </div>
-          <p>OR</p>
-          <div>
-            <label>
-              Street address or ZIP Code
-            </label>
-            <input
-              name="address"
-              value={this.state.address.value}
-              onChange={this.handleChange}
-            />
-            {searchBtn}
-          </div>
-        </div>
-      );
-    }
-
     let form = <div>Loading …</div>;
     if (this.state.place !== null) {
       let place = this.state.place;
       form = (
-        <form className="usa-form" onSubmit={this.handleSubmit}>
+        <form className="usa-form" onSubmit={e => this.handleSubmit(e)}>
           <fieldset>
             <div>
               <label>Name</label>
               <input
                 name="name"
-                value={this.state.name.value}
-                onChange={this.handleChange}
+                value={this.state.name}
+                onChange={e => this.handleChange(e)}
               />
             </div>
-            <Location place={place} />
+            <div className="auto-clear">
+              <div style={{ float: "right" }}>
+                <a
+                  href="#"
+                  onClick={e => this.handleLocationEditCancelClick(e)}
+                >
+                  {this.state.show.locationChooser ? "Cancel" : "Edit"}
+                </a>
+              </div>
+              <p><b>Location</b></p>
+            </div>
+            {this.state.show.locationChooser
+              ? <LocationChooser
+                  onChoose={loc => this.handleNewLocation(loc)}
+                />
+              : <Location place={place} />}
             <div>
               <button>Save</button>
               <Link to="/dashboard/places">Cancel</Link>
@@ -219,21 +161,96 @@ export default class EditPlaceForm extends React.Component {
 function Location(props) {
   let place = props.place;
 
-  let handleClick = e => {
-    e.preventDefault();
-    props.onClick();
-  };
-
   return (
-    <div style={{ paddingTop: "20px" }}>
-      <div>
-        <h4 style={{ float: "left", marginTop: 0 }}>Location</h4>
-        <div style={{ float: "right" }}>
-          <a href="#" onClick={e => handleClick(e)}>Edit</a>
-        </div>
-      </div>
-      <p style={{ clear: "both" }}>{place.address}</p>
+    <div>
+      <p>{place.address}</p>
       <Map lat={place.latitude} lng={place.longitude} />
     </div>
   );
+}
+
+function Button(props) {
+  let opts = {
+    type: props.type
+  };
+  let classes = "usa-button";
+  if (props.disabled) {
+    opts.disabled = "disabled";
+    classes += " usa-button-disabled";
+  }
+  if (typeof opts.type === "undefined") {
+    opts.type = "submit";
+  }
+  if (typeof props.onClick !== "undefined") {
+    opts.onClick = props.onClick;
+  }
+
+  return <button className={classes} {...opts}>{props.children}</button>;
+}
+
+class LocationChooser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: ""
+    };
+  }
+
+  handleSearch(e) {
+    e.preventDefault();
+    // TODO(paulsmith): disable btn
+    let req = {
+      address: this.state.address,
+      componentRestrictions: {
+        country: "US",
+        administrativeArea: "California"
+      }
+    };
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode(req, (results, status) => {
+      if (status === "OK") {
+        let loc = results[0].geometry.location;
+        let pt = new Point(loc.lng(), loc.lat());
+        this.props.onChoose({
+          address: results[0].formatted_address,
+          pt: pt
+        });
+      } else {
+        console.error("Couldn't find that location, please try again.");
+      }
+    });
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({ address: e.target.value });
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <GeoLocationBtn />
+        </div>
+        <p>OR</p>
+        <div>
+          <label>
+            Street address, ZIP Code, or city
+          </label>
+          <input
+            name="address"
+            value={this.state.address.value}
+            onChange={e => this.handleChange(e)}
+          />
+          <Button
+            type="button"
+            disabled={!this.state.address.length}
+            onClick={e => this.handleSearch(e)}
+          >
+            Search
+          </Button>
+        </div>
+      </div>
+    );
+  }
 }
