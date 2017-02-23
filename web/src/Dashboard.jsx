@@ -18,7 +18,7 @@ export default React.createClass({
           </ul>
           <h2>Admin</h2>
           <ul>
-            <li><Link to="/admin/alerts">Alerts</Link></li>
+            <li><Link to="/admin/hazards">Alerts</Link></li>
           </ul>
         </div>
       );
