@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       patch :verify, as: :verify
     end
   end
-  resources :places, only: [:index, :create, :update, :destroy]
+  resources :places, only: [:index, :show, :create, :update, :destroy]
 
   namespace :admin do
     resources :users, only: [] do

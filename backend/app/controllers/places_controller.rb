@@ -1,12 +1,22 @@
 class PlacesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_place, only: [:update, :destroy]
+  before_action :load_place, only: [:show, :update, :destroy]
 
   def index
     render(
       json: {
         status: 'success',
         data: current_user.places
+      },
+      status: 200
+    )
+  end
+
+  def show
+    render(
+      json: {
+        status: 'success',
+        data: @place
       },
       status: 200
     )
