@@ -34,8 +34,8 @@ export default class HazardList extends React.Component {
     let hazardList = this.state.hazards.map((hazard, i) => {
       return (
         <tr key={`hazard-${i}`}>
-          <td>{hazard.name}</td>
-          <td>{hazard.pubDate}</td>
+          <td>{hazard.title}</td>
+          <td>{hazard.created_at}</td>
         </tr>
       );
     });
