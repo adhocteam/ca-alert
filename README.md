@@ -1,8 +1,8 @@
 # CAlerts
 
-[Technical Approach](#Technical Approach)
-[US Digital Services Playbook Checklist](#US Digital Services Playbook Checklist)
-[Responses to the prompts in Section 2 of the RFI](##Responses to the prompts in Section 2 of the RFI)
+* [Technical Approach](#technical-approach)
+* [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
+* [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 
 ##Technical Approach
 
