@@ -1,5 +1,6 @@
 require 'admin_hazards_controller_swagger_blocks'
 require 'admin_users_controller_swagger_blocks'
+require 'alerts_controller_swagger_blocks'
 require 'base_swagger_blocks'
 require 'devise_swagger_blocks'
 require 'phone_numbers_controller_swagger_blocks'
@@ -36,8 +37,12 @@ class ApidocsController < ActionController::Base
   SWAGGERED_CLASSES = [
     AdminHazardsControllerSwaggerBlocks,
     AdminUsersControllerSwaggerBlocks,
+    Alert,
+    AlertsControllerSwaggerBlocks,
     BaseSwaggerBlocks,
     DeviseSwaggerBlocks,
+    Hazard,
+    PhoneNumber,
     PingController,
     Place,
     PhoneNumbersControllerSwaggerBlocks,
