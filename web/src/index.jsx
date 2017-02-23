@@ -10,6 +10,8 @@ import AddPlaceForm from "./AddPlaceForm";
 import EditPlaceForm from "./EditPlaceForm";
 import PlaceList from "./PlaceList";
 import Nav from "./Nav";
+import AlertList from "./AlertList";
+import CreateAlert from "./CreateAlert";
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -26,6 +28,8 @@ ReactDOM.render(
     <Route path="/account/signup/verify" component={VerifySignUp} />
     <Route path="/account/signin" component={SignInForm} />
     <Route path="/account/signout" component={SignOut} />
+    <Route path="/admin/alerts" component={AlertList} />
+    <Route path="/admin/alerts/new" component={CreateAlert} />
   </Router>,
   document.getElementById("app")
 );

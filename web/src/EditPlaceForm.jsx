@@ -3,10 +3,11 @@ import { hashHistory, Link } from "react-router";
 import "whatwg-fetch";
 import { encodeQueryString, checkResponse } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
-import { Point } from "./lib";
+import { Point, geocode } from "./lib";
 import Map from "./Map";
 import { apiCreds } from "./session";
 import "./App.css";
+import Button from "./Button";
 
 export default class EditPlaceForm extends React.Component {
   constructor(props) {
@@ -164,25 +165,6 @@ function Location(props) {
   );
 }
 
-function Button(props) {
-  let opts = {
-    type: props.type
-  };
-  let classes = "usa-button";
-  if (props.disabled) {
-    opts.disabled = "disabled";
-    classes += " usa-button-disabled";
-  }
-  if (typeof opts.type === "undefined") {
-    opts.type = "submit";
-  }
-  if (typeof props.onClick !== "undefined") {
-    opts.onClick = props.onClick;
-  }
-
-  return <button className={classes} {...opts}>{props.children}</button>;
-}
-
 class LocationChooser extends React.Component {
   constructor(props) {
     super(props);
@@ -194,26 +176,13 @@ class LocationChooser extends React.Component {
   handleSearch(e) {
     e.preventDefault();
     // TODO(paulsmith): disable btn
-    let req = {
-      address: this.state.address,
-      componentRestrictions: {
-        country: "US",
-        administrativeArea: "California"
-      }
-    };
-    let geocoder = new google.maps.Geocoder();
-    geocoder.geocode(req, (results, status) => {
-      if (status === "OK") {
-        let loc = results[0].geometry.location;
-        let pt = new Point(loc.lng(), loc.lat());
-        this.props.onChoose({
-          address: results[0].formatted_address,
-          pt: pt
-        });
-      } else {
-        console.error("Couldn't find that location, please try again.");
-      }
-    });
+      geocode(this.state.address, (err, res) => {
+          if (err !== null) {
+              console.error(err);
+              return;
+          }
+          this.props.onChoose(res);
+      });
   }
 
   handleChange(e) {
