@@ -116,4 +116,19 @@ class AdminUsersControllerSwaggerBlocks
       end
     end
   end
+
+  swagger_schema :UsersResponse do
+    property :status do
+      key :type, :string
+    end
+    property :data do
+      key :type, :array
+      items do
+        key :'$ref', :User
+      end
+    end
+    property :errors do
+      key :'$ref', :Errors
+    end
+  end
 end
