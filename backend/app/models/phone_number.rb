@@ -23,7 +23,8 @@ class PhoneNumber < ApplicationRecord
     )
   end
 
-  swagger_schema :Place, required: [:id, :user_id, :phone_number, :pin_created_at, :pin_attempts, :verified, :created_at, :updated_at] do
+  required_swagger = [:id, :user_id, :phone_number, :pin_created_at, :pin_attempts, :verified, :created_at, :updated_at]
+  swagger_schema :PhoneNumber, required: required_swagger do
     property :id do
       key :type, :integer
       key :format, :int64

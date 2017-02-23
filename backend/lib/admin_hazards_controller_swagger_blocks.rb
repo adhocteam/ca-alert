@@ -130,6 +130,53 @@ class AdminHazardsControllerSwaggerBlocks
         end
       end
     end
+
+    operation :get do
+      key :description, 'Get the list of hazards'
+      key :operationId, 'listHazards'
+      key :produces, ['application/json']
+      parameter do
+        key :name, :uid
+        key :in, :header
+        key :description, 'UID of the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :access_token
+        key :in, :header
+        key :description, 'Access token for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :client
+        key :in, :header
+        key :description, 'Client value for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+
+      response 200 do
+        key :description, 'hazard list response'
+        schema do
+          key :'$ref', :HazardsResponse
+        end
+      end
+
+      response 401 do
+        key :description, 'invalid authentication response'
+        schema do
+          key :'$ref', :Response
+        end
+      end
+    end
   end
 
   swagger_schema :HazardResponse do
@@ -138,6 +185,21 @@ class AdminHazardsControllerSwaggerBlocks
     end
     property :data do
       key :'$ref', :Hazard
+    end
+    property :errors do
+      key :'$ref', :Errors
+    end
+  end
+
+  swagger_schema :HazardsResponse do
+    property :status do
+      key :type, :string
+    end
+    property :data do
+      key :type, :array
+      items do
+        key :'$ref', :Hazard
+      end
     end
     property :errors do
       key :'$ref', :Errors
