@@ -175,6 +175,46 @@ RSpec.describe Admin::UsersController, type: :request do
         expect(response.status).to eq(200)
         expect(user2).to have_role(:admin)
       end
+
+      it 'emails the user to tell them the amazing news' do
+        ActionMailer::Base.deliveries = []
+        patch(
+          "/admin/users/#{user2.id}/make_admin",
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+        mail = ActionMailer::Base.deliveries.first
+        expect(mail.to).to eq([user2.email])
+        expect(mail.subject).to eq('You are now an admin on CAlerts!')
+      end
+
+      it 'resends the email upon request' do
+        patch(
+          "/admin/users/#{user2.id}/make_admin",
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        ActionMailer::Base.deliveries = []
+        patch(
+          "/admin/users/#{user2.id}/resend_admin_email",
+          headers: {
+            uid: admin.email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+        mail = ActionMailer::Base.deliveries.first
+        expect(mail.to).to eq([user2.email])
+        expect(mail.subject).to eq('You are now an admin on CAlerts!')
+      end
     end
   end
 end

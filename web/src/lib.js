@@ -46,10 +46,34 @@ function checkResponse(response) {
   }
 }
 
+function geocode(address, callback) {
+  let req = {
+    address: address,
+    componentRestrictions: {
+      country: "US",
+      administrativeArea: "California"
+    }
+  };
+  let geocoder = new google.maps.Geocoder();
+  geocoder.geocode(req, (results, status) => {
+    if (status === "OK") {
+      let loc = results[0].geometry.location;
+      let pt = new Point(loc.lng(), loc.lat());
+      callback(null, {
+        address: results[0].formatted_address,
+        pt: pt
+      });
+    } else {
+      callback("Couldn't find that location", null);
+    }
+  });
+}
+
 module.exports = {
   MIN_PASSWORD_LEN: MIN_PASSWORD_LEN,
   encodeQueryString: encodeQueryString,
   errClassName: errClassName,
   Point: Point,
-  checkResponse: checkResponse
+  checkResponse: checkResponse,
+  geocode: geocode
 };

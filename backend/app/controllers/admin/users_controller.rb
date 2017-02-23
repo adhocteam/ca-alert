@@ -22,4 +22,15 @@ class Admin::UsersController < ApplicationController
       status: 200
     )
   end
+
+  def resend_admin_email
+    user = User.find(params[:id])
+    AdminMailer.announce_new_admin_role(user).deliver_now
+    render(
+      json: {
+        status: 'success'
+      },
+      status: 200
+    )
+  end
 end

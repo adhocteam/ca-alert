@@ -10,6 +10,8 @@ import AddPlaceForm from "./AddPlaceForm";
 import EditPlaceForm from "./EditPlaceForm";
 import PlaceList from "./PlaceList";
 import Nav from "./Nav";
+import HazardList from "./HazardList";
+import CreateHazard from "./CreateHazard";
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -26,6 +28,8 @@ ReactDOM.render(
     <Route path="/account/signup/verify" component={VerifySignUp} />
     <Route path="/account/signin" component={SignInForm} />
     <Route path="/account/signout" component={SignOut} />
+    <Route path="/admin/hazards" component={HazardList} />
+    <Route path="/admin/hazards/new" component={CreateHazard} />
   </Router>,
   document.getElementById("app")
 );

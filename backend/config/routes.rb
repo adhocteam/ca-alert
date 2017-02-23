@@ -19,8 +19,9 @@ Rails.application.routes.draw do
       end
       member do
         patch :make_admin, as: :make_admin
+        patch :resend_admin_email, as: :resend_admin_email
       end
     end
-    resources :hazards, only: [:create]
+    resources :hazards, only: [:index, :create]
   end
 end
