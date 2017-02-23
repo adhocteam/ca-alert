@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/ping', to: 'ping#show', as: :ping
 
+  resources :alerts, only: [:index]
   resources :apidocs, only: [:index]
   resources :phone_numbers, only: [:create, :destroy] do
     member do
