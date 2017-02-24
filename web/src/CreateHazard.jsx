@@ -313,7 +313,7 @@ function Preview(props) {
         <Location place={hazard.place} />
         <div>
           <Button type="button" onClick={props.onSendClick}>
-            Send for approval
+            Send alert
           </Button>
           <a href="#" onClick={props.onEditClick}>Edit</a>
         </div>
