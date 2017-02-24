@@ -6,6 +6,7 @@ class PingController < ApplicationController
       key :description, 'Returns a trivial response so clients can check that the service is alive'
       key :operationId, 'ping'
       key :produces, ['application/json']
+      key :tags, ['ping']
       response 200 do
         key :description, 'ping response'
         schema do

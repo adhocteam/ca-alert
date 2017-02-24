@@ -6,6 +6,7 @@ class AdminHazardsControllerSwaggerBlocks
       key :description, 'Create a hazard'
       key :operationId, 'createHazard'
       key :produces, ['application/json']
+      key :tags, ['admin/hazards']
       parameter do
         key :name, :title
         key :in, :body
@@ -135,6 +136,7 @@ class AdminHazardsControllerSwaggerBlocks
       key :description, 'Get the list of hazards'
       key :operationId, 'listHazards'
       key :produces, ['application/json']
+      key :tags, ['admin/hazards']
       parameter do
         key :name, :uid
         key :in, :header
