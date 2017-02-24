@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class AdminHazardsControllerSwaggerBlocks
   include Swagger::Blocks
 
@@ -64,6 +65,15 @@ class AdminHazardsControllerSwaggerBlocks
         end
       end
       parameter do
+        key :name, :link_title
+        key :in, :body
+        key :description, 'Title of the URL to include with the hazard'
+        key :required, false
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
         key :name, :link
         key :in, :body
         key :description, 'A URL to include with the hazard'
@@ -76,6 +86,15 @@ class AdminHazardsControllerSwaggerBlocks
         key :name, :phone_number
         key :in, :body
         key :description, 'A phone number to include with the hazard'
+        key :required, false
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :category
+        key :in, :body
+        key :description, 'The category for the hazard'
         key :required, false
         schema do
           key :type, :string
@@ -206,3 +225,4 @@ class AdminHazardsControllerSwaggerBlocks
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
