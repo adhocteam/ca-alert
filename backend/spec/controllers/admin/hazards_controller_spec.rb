@@ -79,6 +79,27 @@ RSpec.describe Admin::HazardsController, type: :request do
         expect(JSON.parse(response.body)['errors']['title']).to eq(['can\'t be blank'])
       end
     end
+
+    describe 'listing the hazards' do
+      context 'with a couple of existing hazards' do
+        let!(:killer_clowns) { create(:hazard) }
+        let!(:coffee_shortage) { create(:hazard) }
+
+        it 'lists the hazards' do
+          get(
+            '/admin/hazards',
+            headers: {
+              uid: admin_email,
+              client: @client,
+              'access-token' => @access_token
+            }
+          )
+          expect(response.status).to eq(200)
+          json = JSON.parse(response.body)
+          expect(json['data'].map { |i| i['id'] }).to eq([killer_clowns.id, coffee_shortage.id])
+        end
+      end
+    end
   end
 
   context 'with a logged-in regular user' do

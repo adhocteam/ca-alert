@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Swagger::Blocks
 
-  rolify
+  rolify after_add: :notify_when_becoming_an_admin
 
   swagger_schema :User, required: [:id, :provider, :uid, :name, :nickname, :image, :email, :created_at, :updated_at] do
     property :id do
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
   def self.search(query:)
     confirmed
-      .joins('INNER JOIN phone_numbers ON phone_numbers.user_id = users.id')
+      .joins('LEFT OUTER JOIN phone_numbers ON phone_numbers.user_id = users.id')
       .where('email LIKE ? OR phone_numbers.phone_number LIKE ?', "%#{query}%", "%#{query}%")
   end
 
@@ -68,5 +68,13 @@ class User < ActiveRecord::Base
     h = super(options)
     h['is_admin'] = has_role?(:admin)
     h
+  end
+
+  private
+
+  def notify_when_becoming_an_admin(role)
+    if role.name == 'admin'
+      AdminMailer.announce_new_admin_role(self).deliver_now
+    end
   end
 end
