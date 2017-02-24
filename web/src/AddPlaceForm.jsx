@@ -1,11 +1,9 @@
 import React from "react";
 import { hashHistory, Link } from "react-router";
-import "whatwg-fetch";
-import { encodeQueryString } from "./lib";
+import { encodeQueryString, fetchAuthd } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
 import { Point } from "./lib";
 import Map from "./Map";
-import { loggedInUser, apiCreds } from "./session";
 
 export default class AddPlaceForm extends React.Component {
   constructor(props) {
@@ -36,7 +34,6 @@ export default class AddPlaceForm extends React.Component {
     // TODO(paulsmith): disable btn
     this.state.geocodeResult = null;
     this.setState(this.state);
-    console.log("search");
     let req = {
       address: this.state.address.value,
       componentRestrictions: {
@@ -66,20 +63,13 @@ export default class AddPlaceForm extends React.Component {
     // TODO(paulsmith): disable Save button
     const geocode = this.state.geocodeResult;
     const pt = geocode.pt;
-    const user = loggedInUser();
-    const creds = apiCreds();
     let qs = encodeQueryString([
       ["name", this.state.name.value],
       ["address", geocode.address],
       ["latitude", pt.lat],
-      ["longitude", pt.lng],
-      ["uid", creds.uid],
-      ["access-token", creds.accessToken],
-      ["client", creds.client],
-      ["token-type", "Bearer"],
-      ["expiry", creds.expiry]
+      ["longitude", pt.lng]
     ]);
-    fetch(API_HOST + "/places", {
+    fetchAuthd(API_HOST + "/places", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -88,7 +78,6 @@ export default class AddPlaceForm extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.debug("data: %o", data);
         hashHistory.push("/dashboard/places");
       })
       .catch(error => {
@@ -98,8 +87,7 @@ export default class AddPlaceForm extends React.Component {
 
   handleContinueClick(e) {
     e.preventDefault();
-    this.state.showNamePlace = true;
-    this.setState(this.state);
+    this.setState({ showNamePlace: true });
   }
 
   render() {
@@ -108,7 +96,11 @@ export default class AddPlaceForm extends React.Component {
       searchBtn = <button onClick={this.handleSearchBtnClick}>Search</button>;
     } else {
       searchBtn = (
-        <button onClick={this.handleSearchBtnClick} disabled="disabled" className="usa-button-disabled">
+        <button
+          onClick={this.handleSearchBtnClick}
+          disabled="disabled"
+          className="usa-button-disabled"
+        >
           Search
         </button>
       );
