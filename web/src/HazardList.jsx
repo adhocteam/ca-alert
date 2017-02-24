@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import { apiCreds } from "./session";
-import "whatwg-fetch";
-import { checkResponse } from "./lib";
+import { checkResponse, fetchAuthd } from "./lib";
 
 export default class HazardList extends React.Component {
   constructor(props) {
@@ -13,17 +11,7 @@ export default class HazardList extends React.Component {
   }
 
   componentDidMount() {
-    const creds = apiCreds();
-    fetch(API_HOST + "/admin/hazards", {
-      method: "GET",
-      headers: {
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
-      }
-    })
+    fetchAuthd(API_HOST + "/admin/hazards")
       .then(checkResponse)
       .then(response => response.json())
       .then(data => this.setState({ hazards: data.data }))

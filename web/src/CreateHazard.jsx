@@ -2,11 +2,9 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeoLocationBtn from "./GeoLocationBtn";
 import Button from "./Button";
-import { geocode, encodeQueryString, checkResponse } from "./lib";
+import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import "./App.css";
 import Map from "./Map";
-import "whatwg-fetch";
-import { apiCreds } from "./session";
 import { hashHistory } from "react-router";
 
 export default class CreateHazard extends React.Component {
@@ -87,15 +85,10 @@ export default class CreateHazard extends React.Component {
       ["phone_number", h.phoneNumber]
     ]);
     let creds = apiCreds();
-    fetch(API_HOST + "/admin/hazards", {
+    fetchAuthd(API_HOST + "/admin/hazards", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
       },
       body: qs
     })
@@ -313,7 +306,7 @@ function Preview(props) {
         <Location place={hazard.place} />
         <div>
           <Button type="button" onClick={props.onSendClick}>
-            Send for approval
+            Send alert
           </Button>
           <a href="#" onClick={props.onEditClick}>Edit</a>
         </div>
