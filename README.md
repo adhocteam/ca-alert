@@ -183,7 +183,7 @@ All of the code we've written has been stored in a [GitHub repo](https://github.
 
 #### f. Used Swagger to document the RESTful API, and provided a link to the Swagger API
 
-Swagger documentation has been included in all commits affecting the API endpoints since the beginning of our work. An example commit containing Swagger documentation can be found [here](https://github.com/adhocteam/ca-alert/commit/fccc9b6dda5385c9027fdad2de2ff70c4c27e347). The Swagger JSON documentation is served by the API [here](https://ca-alert.herokuapp.com/apidocs). To view the documentation, open Swagger UI or visit their demo site [here](http://petstore.swagger.io/) and enter the URL for the documentation (https://ca-alert.herokuapp.com/apidocs).
+Swagger documentation has been included in all commits affecting the API endpoints since the beginning of our work. An example commit containing Swagger documentation can be found [here](https://github.com/adhocteam/ca-alert/commit/fccc9b6dda5385c9027fdad2de2ff70c4c27e347). The Swagger JSON documentation is served [by the API](https://ca-alert.herokuapp.com/apidocs). To view the documentation, open Swagger UI or visit [their demo site](http://petstore.swagger.io/) and enter the URL for the documentation (https://ca-alert.herokuapp.com/apidocs).
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
@@ -210,7 +210,7 @@ The app has been built with entirely open-source technologies, and the versions 
 The app is deployed in two places:
 
 * The API is deployed on [Heroku](https://heroku.com), a PaaS service that makes it easy to deploy, configure, and provision web applications. The root of the deployed API can be found [here](ca-alert.herokuapp.com).
-* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the root URL for our application [here](https://ca-alert-prototype.s3.amazonaws.com/index.html).
+* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the [root URL for our application](https://ca-alert-prototype.s3.amazonaws.com/index.html).
 
 #### n. Developed automated unit tests for their code
 
@@ -221,7 +221,7 @@ Automated tests exist for both the API and the client-side app:
 
 #### o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider
 
-We used [CodeShip](https://codeship.com/) as our continuous integration provider. It was configured to run checks against each push to any branch of the repository, and pull requests were not allowed to be merged unless those checks passed. Pushes to master included a deployment step that automatically deployed to Heroku and pushed to the S3 bucket. More information on the CI and deployment process we used can be found [here](https://github.com/adhocteam/ca-alert/wiki/Code-review,-continuous-integration,-and-deployment-processes).
+We used [CodeShip](https://codeship.com/) as our continuous integration provider. It was configured to run checks against each push to any branch of the repository, and pull requests were not allowed to be merged unless those checks passed. Pushes to master included a deployment step that automatically deployed to Heroku and pushed to the S3 bucket. The GitHub wiki for the project [includes a document](https://github.com/adhocteam/ca-alert/wiki/Code-review,-continuous-integration,-and-deployment-processes) that describes our testing and deployment process in more depth.
 
 #### p. Setup or used configuration management
 
@@ -229,10 +229,17 @@ Because we used Heroku for deployment, there was no need for a system like Ansib
 
 #### q. Setup or used continuous monitoring
 
-Pingdom was used for continuous monitoring, with a simple check against an API endpoint to verify that the app is still running. More information on our setup for that can be found [here](https://github.com/adhocteam/ca-alert/wiki/Continuous-Monitoring).
+[Pingdom](https://www.pingdom.com/) was used for continuous monitoring, with a simple check against an API endpoint to verify that the app is still running. The GitHub wiki for the project [contains a document](https://github.com/adhocteam/ca-alert/wiki/Continuous-Monitoring) describing our continuous monitoring setup in more detail.
 
 #### r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization)
 
+By using Heroku, we weren't required to manage containers manually, but Heroku's dynos do [run within virtualized Unix containers](https://devcenter.heroku.com/articles/how-heroku-works#running-applications-on-dynos).
+
 #### s. Provided sufficient documentation to install and run their prototype on another machine
 
+Because we have a split between the server-side and client-side apps, a developer will need to run each of them in order to view the app locally. We have provided README files in both the [backend directory](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) and [web directory](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) that give instructions for running the apps. These instructions assume the user is a developer familiar with installing tools in Unix-like systems.
+
 #### t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge
+
+???????????????????????????????????????
+I'm not sure what to say here. All of our tools are open and free, but the app relies on Twilio to deliver SMS messages. I guess what I can do is make a fake Twilio client to use in development so that the app can be run locally without this requirement. I will write up a ticket to create that.
