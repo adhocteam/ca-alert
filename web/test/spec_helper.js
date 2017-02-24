@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+import { newLoginSession } from '../src/session.js';
 
 /**
  * Mock out localStorage
@@ -27,3 +28,11 @@ beforeEach((done) => {
   global.localStorage = new MockStorage();
   done();
 });
+
+function login() {
+  const user = {email: 'user@example.com', name: 'someone'};
+  const now = (new Date()).getTime();
+  newLoginSession(user, 'token', 'client', now, 1);
+};
+
+export { login };

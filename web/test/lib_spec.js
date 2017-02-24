@@ -1,5 +1,4 @@
-import './spec_helper';
-import { newLoginSession } from '../src/session';
+import { login } from './spec_helper';
 import { encodeQueryString, fetchAuthd } from '../src/lib';
 
 describe('lib', () => {
@@ -25,11 +24,7 @@ describe('lib', () => {
     afterEach(() => { global.fetch = oldFetch; });
 
     it('Should use the creds from localStorage', (done) => {
-      const user = {email: 'someone@example.com'};
-      const now = (new Date()).getTime();
-
-      newLoginSession(user, 'token', 'client', now, 1);
-
+      login();
       global.fetch = (url, opts) => {
         expect(opts.headers.uid).to.equal(1);
         done();
