@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 
   def self.search(query:)
     confirmed
-      .joins('INNER JOIN phone_numbers ON phone_numbers.user_id = users.id')
+      .joins('LEFT OUTER JOIN phone_numbers ON phone_numbers.user_id = users.id')
       .where('email LIKE ? OR phone_numbers.phone_number LIKE ?', "%#{query}%", "%#{query}%")
   end
 
