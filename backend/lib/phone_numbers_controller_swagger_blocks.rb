@@ -16,6 +16,15 @@ class PhoneNumbersControllerSwaggerBlocks
         end
       end
       parameter do
+        key :name, :notifications_enabled
+        key :in, :body
+        key :description, 'Are notifications enabled for this number'
+        key :required, false
+        schema do
+          key :type, :boolean
+        end
+      end
+      parameter do
         key :name, :uid
         key :in, :header
         key :description, 'UID of the user'

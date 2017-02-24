@@ -23,13 +23,15 @@ RSpec.describe PhoneNumbersController, type: :request do
             'access-token' => @access_token
           },
           params: {
-            phone_number: number
+            phone_number: number,
+            notifications_enabled: false
           }
         )
         expect(response.status).to eq(200)
         expect(PhoneNumber.count).to eq(1)
         expect(user.phone_numbers.count).to eq(1)
         expect(PhoneNumber.first.phone_number).to eq(number)
+        expect(PhoneNumber.first.notifications_enabled?).to eq(false)
       end
 
       it 'does not return the PIN' do

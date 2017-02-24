@@ -58,7 +58,7 @@ class PhoneNumbersController < ApplicationController
   private
 
   def phone_number_params
-    params.permit(:phone_number)
+    params.permit(:phone_number, :notifications_enabled)
   end
 
   def load_phone_number

@@ -16,11 +16,13 @@ class PhoneNumber < ApplicationRecord
   end
 
   def alert_user(alert)
-    Twilio::REST::Client.new.messages.create(
-      from: SMS_FROM_NUMBER,
-      to: phone_number,
-      body: "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
-    )
+    if notifications_enabled?
+      Twilio::REST::Client.new.messages.create(
+        from: SMS_FROM_NUMBER,
+        to: phone_number,
+        body: "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+      )
+    end
   end
 
   required_swagger = [:id, :user_id, :phone_number, :pin_created_at, :pin_attempts, :verified, :created_at, :updated_at]
@@ -44,6 +46,9 @@ class PhoneNumber < ApplicationRecord
       key :type, :integer
     end
     property :verified do
+      key :type, :boolean
+    end
+    property :notifications_enabled do
       key :type, :boolean
     end
     property :created_at do

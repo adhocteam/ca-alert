@@ -8,6 +8,7 @@ The app was built against Ruby 2.3.3.
 
 ### Installing gems
 
+Install bundler with `gem install bundler`.
 Run `bundle install` to download and install the appropriate gems.
 
 ### Setting up the environment
@@ -23,6 +24,9 @@ The app was built against PostgreSQL 9.6 but should also run with earlier versio
 createdb ca-alert_development
 createdb ca-alert_test
 ```
+
+To handle the geographic data you will also need to install PostGIS. On a Mac, this can be done with `brew install postgis`. Further
+instructions are provided [here](http://postgis.net/install/).
 
 Then initialize the schema with:
 
