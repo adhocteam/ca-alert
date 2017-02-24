@@ -200,10 +200,10 @@ Swagger documentation has been included in all commits affecting the API endpoin
 The app has been built with entirely open-source technologies, and the versions we're using have been released within the past five years. Some examples include:
 
 * [Ruby on Rails](http://rubyonrails.org/) 5.0.1, released 12/2016
-* [React](https://facebook.github.io/react/) ???????????????????????????????????????????
+* [React](https://facebook.github.io/react/) 15.4.2, released 1/2017
 * [PostgreSQL](https://www.postgresql.org/) 9.6, released 9/2016
-* [RSpec](http://rspec.info/) 3.5.4, release 10/2016
-* One more client-side thing ????????????????????????????????
+* [RSpec](http://rspec.info/) 3.5.4, released 10/2016
+* [WebPack](https://webpack.github.io/) 2.2.1, released 1/2017
 
 #### m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used
 
@@ -216,8 +216,8 @@ The app is deployed in two places:
 
 Automated tests exist for both the API and the client-side app:
 
-* The API uses [RSpec](http://rspec.info/) for testing and [rcov](https://github.com/relevance/rcov) for code coverage analysis. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/backend/spec). Rcov is configured to block any builds in which the code coverage falls below 95%, and in practice it has remained above 99% during development.
-* ???????????????????????????????????
+* The API uses [RSpec](http://rspec.info/) for testing and [rcov](https://github.com/relevance/rcov) for code coverage analysis. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/backend/spec). Rcov is configured to block any builds in which the code coverage falls below 95%, and in practice it has remained above 99% during development. The tests can be run using `rake` fron the root directory of the backend project.
+* The Front-end code uses [Mocha](https://mochajs.org/) for testing and [Enzyme](https://github.com/airbnb/enzyme) for individual component testing. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/web/test). The tests can be run using `make test` from the root directory of the front-end project.
 
 #### o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider
 
