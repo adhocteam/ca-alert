@@ -71,8 +71,7 @@ export class SignUpForm extends React.Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === "error") {
-          this.state.serverError = data.errors.full_messages.join("; ");
-          this.setState(this.state);
+          this.setState({ serverError: data.errors.full_messages.join("; ") });
         } else {
           // TODO(paulsmith): show "please verify" message
           hashHistory.push("/account/signup/verify");
@@ -80,8 +79,7 @@ export class SignUpForm extends React.Component {
       })
       .catch(error => {
         console.error("request failed", error);
-        this.state.serverError("Please try again later.");
-        this.setState(this.state);
+        this.setState({ serverError: "Please try again later." });
       });
   }
 

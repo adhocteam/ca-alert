@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
-import "whatwg-fetch";
-import { isLoggedIn, loggedInUser, apiCreds } from "./session";
-import { encodeQueryString, checkResponse } from "./lib";
+import { isLoggedIn } from "./session";
+import { encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import Modal from "./Modal";
 
 export default class PlaceList extends React.Component {
@@ -12,17 +11,7 @@ export default class PlaceList extends React.Component {
   }
 
   loadPlaces() {
-    const creds = apiCreds();
-    fetch(API_HOST + "/places", {
-      method: "GET",
-      headers: {
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
-      }
-    })
+    fetchAuthd(API_HOST + "/places")
       .then(checkResponse)
       .then(response => response.json())
       .then(data => {
@@ -54,17 +43,9 @@ export default class PlaceList extends React.Component {
 
   handleRemoveConfirm(e) {
     e.preventDefault();
-    const creds = apiCreds();
     const place = this.state.placeToRemove;
-    fetch(API_HOST + "/places/" + place.id, {
-      method: "DELETE",
-      headers: {
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
-      }
+    fetchAuthd(API_HOST + "/places/" + place.id, {
+      method: "DELETE"
     })
       .then(checkResponse)
       .then(() => this.handleOnClose())

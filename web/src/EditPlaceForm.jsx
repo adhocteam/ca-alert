@@ -1,11 +1,9 @@
 import React from "react";
 import { hashHistory, Link } from "react-router";
-import "whatwg-fetch";
-import { encodeQueryString, checkResponse } from "./lib";
+import { encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
 import { Point, geocode } from "./lib";
 import Map from "./Map";
-import { apiCreds } from "./session";
 import "./App.css";
 import Button from "./Button";
 
@@ -23,17 +21,7 @@ export default class EditPlaceForm extends React.Component {
 
   componentDidMount() {
     let id = this.props.params.id;
-    let creds = apiCreds();
-    fetch(API_HOST + `/places/${id}`, {
-      method: "GET",
-      headers: {
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
-      }
-    })
+    fetchAuthd(API_HOST + `/places/${id}`)
       .then(checkResponse)
       .then(response => response.json())
       .then(data => {
@@ -53,22 +41,16 @@ export default class EditPlaceForm extends React.Component {
     e.preventDefault();
     // TODO(paulsmith): disable Save button
     const place = this.state.place;
-    const creds = apiCreds();
     let qs = encodeQueryString([
       ["name", this.state.name],
       ["address", place.address],
       ["latitude", place.latitude],
       ["longitude", place.longitude]
     ]);
-    fetch(API_HOST + `/places/${place.id}`, {
+    fetchAuthd(API_HOST + `/places/${place.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        uid: creds.uid,
-        "access-token": creds.accessToken,
-        client: creds.client,
-        "token-type": "Bearer",
-        expiry: creds.expiry
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
       },
       body: qs
     })
@@ -176,13 +158,13 @@ class LocationChooser extends React.Component {
   handleSearch(e) {
     e.preventDefault();
     // TODO(paulsmith): disable btn
-      geocode(this.state.address, (err, res) => {
-          if (err !== null) {
-              console.error(err);
-              return;
-          }
-          this.props.onChoose(res);
-      });
+    geocode(this.state.address, (err, res) => {
+      if (err !== null) {
+        console.error(err);
+        return;
+      }
+      this.props.onChoose(res);
+    });
   }
 
   handleChange(e) {

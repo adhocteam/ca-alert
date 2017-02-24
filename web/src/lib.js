@@ -1,3 +1,6 @@
+import "whatwg-fetch";
+import { apiCreds } from "./session";
+
 const MIN_PASSWORD_LEN = 8;
 
 function encodeQueryString(params) {
@@ -69,11 +72,25 @@ function geocode(address, callback) {
   });
 }
 
+// make an auth'd request
+function fetchAuthd(url, options) {
+  options = options || {};
+  options.headers = Object.assign(options.headers || {}, {
+    uid: creds.uid,
+    "access-token": creds.accessToken,
+    client: creds.client,
+    "token-type": "Bearer",
+    expiry: creds.expiry
+  });
+  return fetch(url, options);
+}
+
 module.exports = {
   MIN_PASSWORD_LEN: MIN_PASSWORD_LEN,
   encodeQueryString: encodeQueryString,
   errClassName: errClassName,
   Point: Point,
   checkResponse: checkResponse,
-  geocode: geocode
+  geocode: geocode,
+  fetchAuthd: fetchAuthd
 };
