@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class PhoneNumbersControllerSwaggerBlocks
   include Swagger::Blocks
 
@@ -215,3 +216,4 @@ class PhoneNumbersControllerSwaggerBlocks
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
