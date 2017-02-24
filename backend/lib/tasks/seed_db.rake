@@ -3,6 +3,9 @@ require 'faker'
 namespace :seed_db do
   desc 'Load a bunch of data into the database'
   task load_data: :environment do
+    # Seed the database with some value so we get consistent results
+    srand(10)
+
     Faker::Config.locale = 'en-US'
     # rubocop:disable Metrics/LineLength, Style/SpaceAfterComma
     bboxes = {
