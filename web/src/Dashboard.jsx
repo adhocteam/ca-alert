@@ -16,14 +16,18 @@ export default React.createClass({
             <li>Account settings</li>
             <li><Link to="/account/signout">Sign out</Link></li>
           </ul>
-          <h2>Admin</h2>
-          <ul>
-            <li><Link to="/admin/hazards">Alerts</Link></li>
-          </ul>
+          {user.is_admin &&
+            <div>
+              <h2>Admin</h2>
+              <ul>
+                <li><Link to="/admin/users">Users</Link></li>
+                <li><Link to="/admin/hazards">Alerts</Link></li>
+              </ul>
+            </div>}
         </div>
       );
     } else {
-        return (
+      return (
         <div className="usa-grid usa-section">
           <p>Please <Link to="/accounts/signin">sign in</Link>.</p>
         </div>
