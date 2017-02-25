@@ -1,5 +1,22 @@
 const expect = require('chai').expect;
+const jsdom = require('jsdom').jsdom;
+
 import { newLoginSession } from '../src/session.js';
+
+/**
+ * Start the jsdom env so we can use mount
+ */
+global.document = jsdom('');
+global.window = document.defaultView;
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    global[property] = document.defaultView[property];
+  }
+});
+
+global.navigator = {
+  userAgent: 'node.js'
+};
 
 /**
  * Mock out localStorage
@@ -24,6 +41,8 @@ class MockStorage {
 
 // Test globals
 global.expect = expect;
+global.API_HOST = 'not in test';
+
 beforeEach((done) => {
   global.localStorage = new MockStorage();
   done();

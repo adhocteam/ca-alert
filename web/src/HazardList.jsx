@@ -22,7 +22,11 @@ export default class HazardList extends React.Component {
     let hazardList = this.state.hazards.map((hazard, i) => {
       return (
         <tr key={`hazard-${i}`}>
-          <td>{hazard.title}</td>
+          <td>
+            <Link to={`/admin/hazards/${i}`}>
+              {hazard.title}
+            </Link>
+          </td>
           <td>{hazard.created_at}</td>
         </tr>
       );
