@@ -75,6 +75,8 @@ function geocode(address, callback) {
 // make an auth'd request
 function fetchAuthd(url, options) {
   options = options || {};
+  const creds = apiCreds();
+
   options.headers = Object.assign(options.headers || {}, {
     uid: creds.uid,
     "access-token": creds.accessToken,

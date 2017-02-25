@@ -37,10 +37,16 @@ class Hazard < ApplicationRecord
     property :address do
       key :type, :string
     end
+    property :link_title do
+      key :type, :string
+    end
     property :link do
       key :type, :string
     end
     property :phone_number do
+      key :type, :string
+    end
+    property :category do
       key :type, :string
     end
     property :creator_id do
@@ -61,7 +67,10 @@ class Hazard < ApplicationRecord
 
   def create_alerts
     Place.within_radius_of(coord.lon, coord.lat, radius_in_meters).each do |place|
-      Alert.create(place: place, hazard: self)
+      # This is here to support seeding the database, where creation times are not right now
+      if place.created_at <= created_at
+        Alert.create(place: place, hazard: self)
+      end
     end
   end
 end
