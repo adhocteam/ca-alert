@@ -35,8 +35,8 @@ RSpec.describe Hazard do
     end
 
     it 'sends an email to the user about the alert' do
-      expect(ActionMailer::Base.deliveries.count).to eq(2)
-      mail = ActionMailer::Base.deliveries[1]
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      mail = ActionMailer::Base.deliveries[0]
       expect(mail.subject).to eq('New Alert From CAlerts!')
       expect(mail.to).to eq([user.email])
     end

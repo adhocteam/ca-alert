@@ -75,5 +75,6 @@ RSpec.configure do |config|
   config.before :each do
     stub_const('Twilio::REST::Client', FakeTwilio)
     FakeTwilio.messages = []
+    ActionMailer::Base.deliveries = []
   end
 end
