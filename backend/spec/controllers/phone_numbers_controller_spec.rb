@@ -88,6 +88,43 @@ RSpec.describe PhoneNumbersController, type: :request do
       end
     end
 
+    describe 'updating a phone number' do
+      let(:pn) { create(:phone_number, user: user, notifications_enabled: true) }
+
+      it 'makes the changes' do
+        patch(
+          "/phone_numbers/#{pn.id}",
+          headers: {
+            uid: email,
+            client: @client,
+            'access-token' => @access_token
+          },
+          params: {
+            notifications_enabled: false
+          }
+        )
+        expect(response.status).to eq(200)
+        expect(pn.reload.notifications_enabled).to eq(false)
+      end
+
+      it 'will not let me change the number' do
+        old_number = pn.phone_number
+        patch(
+          "/phone_numbers/#{pn.id}",
+          headers: {
+            uid: email,
+            client: @client,
+            'access-token' => @access_token
+          },
+          params: {
+            phone_number: '555-555-5555'
+          }
+        )
+        expect(response.status).to eq(400)
+        expect(pn.reload.phone_number).to eq(old_number)
+      end
+    end
+
     describe 'verifying the phone number' do
       let(:phone_number) { create(:phone_number, user: user) }
 
