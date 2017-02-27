@@ -35,7 +35,9 @@ class Alert < ApplicationRecord
   private
 
   def notify_user
-    HazardNotificationMailer.alert_user(self).deliver_now
+    if place.user.email_notifications_enabled?
+      HazardNotificationMailer.alert_user(self).deliver_now
+    end
     place.user.phone_numbers.each do |pn|
       pn.alert_user(self)
     end

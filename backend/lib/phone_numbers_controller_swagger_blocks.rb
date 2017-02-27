@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class PhoneNumbersControllerSwaggerBlocks
   include Swagger::Blocks
 
@@ -13,6 +14,15 @@ class PhoneNumbersControllerSwaggerBlocks
         key :required, true
         schema do
           key :type, :string
+        end
+      end
+      parameter do
+        key :name, :notifications_enabled
+        key :in, :body
+        key :description, 'Are notifications enabled for this number'
+        key :required, false
+        schema do
+          key :type, :boolean
         end
       end
       parameter do
@@ -206,3 +216,4 @@ class PhoneNumbersControllerSwaggerBlocks
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
