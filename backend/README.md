@@ -50,3 +50,30 @@ to view the documentation. To see the documentation running in production, add `
 In order for the app to send SMS messages, you will need to configure it with a Twilio API token and secret. You can do this by copying the `.env-sample` file to `.env` and then editing it with your token and secret values. If these values aren't provided, no SMS messages will be sent, but the Rails log will contain information about the messages that would have been delivered.
 
 To protect from spamming people, the app will not send SMS messages to any phone number beginning with 555, 1-555, or (555). These types of numbers are used when seeding the database with fake data.
+
+## Testing on the command line
+
+The API can be fully driven on the command like through curl. In the commands listed below, replace things in `{}` with the appropriate values for your setup.
+
+### Creating an account
+
+`curl -XPOST -v https://{DOMAIN}/auth --data "email={YOUR_EMAIL}&password={YOUR_PASSWORD}&password_confirmation={YOUR_PASSWORD}"`
+
+### Logging into your account
+
+Sign into the account with:
+
+`curl -XPOST -v https://{DOMAIN}/auth/sign_in --data "email={YOUR_EMAIL}&password={YOUR_PASSWORD}"`
+
+In the response to this request, take note of the Access-token and Client headers:
+
+```
+Access-Token: tVoCE_TW5t5RT9McO4WD-g
+Client: 75PZvDZdsfsdLOKq4HHAnUTw
+```
+
+### Making requests using your account
+
+Using the responses from the headers above, you can make authenticated requests like this:
+
+`curl -X{REQUST_METHOD} -v https://{DOMAIN}/{ENDPOINT} --header "uid: {YOUR_EMAIL}" --header "access-token: {YOUR_ACCESS_TOKEN_FROM_LOGIN_HEADERS}" --header "client: {YOUR_CLIENT_FROM_LOGIN_HEADERS}"`
