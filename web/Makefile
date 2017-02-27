@@ -10,7 +10,7 @@ release:
 
 .PHONY: test
 test:
-	./node_modules/.bin/mocha --require babel-core/register
+	./node_modules/.bin/mocha --require babel-core/register --compilers css:test/null-compilers.js
 
 .PHONY: coverage
 coverage:
