@@ -1,8 +1,8 @@
-import './spec_helper'
+import { login } from './spec_helper';
+
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { newLoginSession } from '../src/session';
 import Nav from '../src/Nav';
 
 describe('Nav Component', () => {
@@ -19,10 +19,7 @@ describe('Nav Component', () => {
   });
 
   it('Should show a logged in version w/ a valid session', () => {
-    const user = {email: 'user@example.com', name: 'someone'};
-    const now = (new Date()).getTime();
-    newLoginSession(user, 'token', 'client', now, 1);
-
+    login();
     const el = shallow(<Nav />);
 
     const dashlink = el.find({href: '#/dashboard'});
