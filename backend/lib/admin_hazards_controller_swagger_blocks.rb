@@ -198,6 +198,63 @@ class AdminHazardsControllerSwaggerBlocks
     end
   end
 
+  swagger_path '/admin/hazards/{id}' do
+    operation :get do
+      key :description, 'Get a specific hazard'
+      key :operationId, 'getHazards'
+      key :produces, ['application/json']
+      parameter do
+        key :name, :id
+        key :in, :path
+        key :description, 'Id of the hazard'
+        key :required, true
+        key :type, :integer
+        key :format, :int64
+      end
+      parameter do
+        key :name, :uid
+        key :in, :header
+        key :description, 'UID of the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :access_token
+        key :in, :header
+        key :description, 'Access token for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :client
+        key :in, :header
+        key :description, 'Client value for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+
+      response 200 do
+        key :description, 'hazard response'
+        schema do
+          key :'$ref', :HazardResponse
+        end
+      end
+
+      response 401 do
+        key :description, 'invalid authentication response'
+        schema do
+          key :'$ref', :Response
+        end
+      end
+    end
+  end
+
   swagger_schema :HazardResponse do
     property :status do
       key :type, :string
