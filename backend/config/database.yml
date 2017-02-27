@@ -79,7 +79,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: ca-alert_production
-  username: ca-alert
-  password: <%= ENV['CA-ALERT_DATABASE_PASSWORD'] %>
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, 'postgis') %>
+  # <<: *default
+  # database: ca-alert_production
+  # username: ca-alert
+  # password: <%= ENV['CA-ALERT_DATABASE_PASSWORD'] %>
