@@ -16,11 +16,13 @@ class PhoneNumber < ApplicationRecord
   end
 
   def alert_user(alert)
-    Twilio::REST::Client.new.messages.create(
-      from: SMS_FROM_NUMBER,
-      to: phone_number,
-      body: "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
-    )
+    if notifications_enabled? && !is_555?
+      Twilio::REST::Client.new.messages.create(
+        from: SMS_FROM_NUMBER,
+        to: phone_number,
+        body: "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+      )
+    end
   end
 
   required_swagger = [:id, :user_id, :phone_number, :pin_created_at, :pin_attempts, :verified, :created_at, :updated_at]
@@ -46,6 +48,9 @@ class PhoneNumber < ApplicationRecord
     property :verified do
       key :type, :boolean
     end
+    property :notifications_enabled do
+      key :type, :boolean
+    end
     property :created_at do
       key :type, :string
       key :format, 'date-time'
@@ -63,10 +68,16 @@ class PhoneNumber < ApplicationRecord
     self.pin_attempts = 0
     self.pin_created_at = Time.now.utc
 
-    Twilio::REST::Client.new.messages.create(
-      from: SMS_FROM_NUMBER,
-      to: phone_number,
-      body: "Your mobile pin for the California alerts system is #{pin}"
-    )
+    unless is_555?
+      Twilio::REST::Client.new.messages.create(
+        from: SMS_FROM_NUMBER,
+        to: phone_number,
+        body: "Your mobile pin for the California alerts system is #{pin}"
+      )
+    end
+  end
+
+  def is_555?
+    phone_number =~ /^555/ || phone_number =~ /^\(555\)/ || phone_number =~ /^1\-555/
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223202829) do
+ActiveRecord::Schema.define(version: 20170227152312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20170223202829) do
   create_table "alerts", force: :cascade do |t|
     t.integer  "place_id"
     t.integer  "hazard_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "sms_notifications_sent",   default: 0
+    t.integer  "email_notifications_sent", default: 0
     t.index ["hazard_id"], name: "index_alerts_on_hazard_id", using: :btree
     t.index ["place_id"], name: "index_alerts_on_place_id", using: :btree
   end
@@ -100,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170223202829) do
     t.geography "coord",            limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.datetime  "created_at"
     t.datetime  "updated_at"
+    t.string    "category"
+    t.string    "link_title"
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 
@@ -115,9 +119,10 @@ ActiveRecord::Schema.define(version: 20170223202829) do
     t.string   "pin"
     t.datetime "pin_created_at"
     t.integer  "pin_attempts"
-    t.boolean  "verified",       default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "verified",              default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "notifications_enabled", default: true
     t.index ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
   end
 
@@ -245,13 +250,13 @@ ActiveRecord::Schema.define(version: 20170223202829) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               default: "email", null: false
-    t.string   "uid",                    default: "",      null: false
-    t.string   "encrypted_password",     default: "",      null: false
+    t.string   "provider",                    default: "email", null: false
+    t.string   "uid",                         default: "",      null: false
+    t.string   "encrypted_password",          default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,       null: false
+    t.integer  "sign_in_count",               default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -265,8 +270,9 @@ ActiveRecord::Schema.define(version: 20170223202829) do
     t.string   "image"
     t.string   "email"
     t.json     "tokens"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "email_notifications_enabled", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

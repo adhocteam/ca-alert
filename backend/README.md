@@ -8,6 +8,7 @@ The app was built against Ruby 2.3.3.
 
 ### Installing gems
 
+Install bundler with `gem install bundler`.
 Run `bundle install` to download and install the appropriate gems.
 
 ### Setting up the environment
@@ -23,6 +24,9 @@ The app was built against PostgreSQL 9.6 but should also run with earlier versio
 createdb ca-alert_development
 createdb ca-alert_test
 ```
+
+To handle the geographic data you will also need to install PostGIS. On a Mac, this can be done with `brew install postgis`. Further
+instructions are provided [here](http://postgis.net/install/).
 
 Then initialize the schema with:
 
@@ -44,3 +48,9 @@ you to provide an account SID and an auth token.
 
 The API is documented with Swagger. When running the app locally, add `http://localhost:3000/apidocs` to Swagger UI
 to view the documentation. To see the documentation running in production, add `https://ca-alert.herokuapp.com/apidocs`.
+
+## Twilio configuration
+
+In order for the app to send SMS messages, you will need to configure it with a Twilio API token and secret. You can do this by copying the `.env-sample` file to `.env` and then editing it with your token and secret values. If these values aren't provided, no SMS messages will be sent, but the Rails log will contain information about the messages that would have been delivered.
+
+To protect from spamming people, the app will not send SMS messages to any phone number beginning with 555, 1-555, or (555). These types of numbers are used when seeding the database with fake data.

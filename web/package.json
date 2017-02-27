@@ -11,6 +11,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "moment": "^2.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
@@ -32,7 +33,9 @@
     "extract-text-webpack-plugin": "beta",
     "file-loader": "^0.10.0",
     "html-loader": "^0.4.4",
+    "jsdom": "^9.11.0",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "react-addons-test-utils": "^15.4.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1"
