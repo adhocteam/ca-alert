@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :alerts, only: [:index]
   resources :apidocs, only: [:index]
-  resources :phone_numbers, only: [:create, :destroy] do
+  resources :phone_numbers, only: [:index, :create, :destroy] do
     member do
       patch :verify, as: :verify
     end

@@ -2,6 +2,16 @@ class PhoneNumbersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_phone_number, only: [:destroy, :verify]
 
+  def index
+    render(
+      json: {
+        status: 'success',
+        data: current_user.phone_numbers
+      },
+      status: 200
+    )
+  end
+
   def create
     pn = current_user.phone_numbers.new(phone_number_params)
     if pn.save

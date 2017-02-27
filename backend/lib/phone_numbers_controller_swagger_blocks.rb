@@ -3,6 +3,54 @@ class PhoneNumbersControllerSwaggerBlocks
   include Swagger::Blocks
 
   swagger_path '/phone_numbers' do
+    operation :get do
+      key :description, 'Get the list of phone numbers for the user'
+      key :operationId, 'listPhoneNumbers'
+      key :produces, ['application/json']
+      key :tags, ['phone_numbers']
+      parameter do
+        key :name, :uid
+        key :in, :header
+        key :description, 'UID of the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :access_token
+        key :in, :header
+        key :description, 'Access token for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :client
+        key :in, :header
+        key :description, 'Client value for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+
+      response 200 do
+        key :description, 'phone number list response'
+        schema do
+          key :'$ref', :PhoneNumbersResponse
+        end
+      end
+
+      response 401 do
+        key :description, 'invalid authentication response'
+        schema do
+          key :'$ref', :Response
+        end
+      end
+    end
+
     operation :post do
       key :description, 'Create a phone number'
       key :operationId, 'createPhoneNumber'
@@ -213,6 +261,21 @@ class PhoneNumbersControllerSwaggerBlocks
     end
     property :data do
       key :'$ref', :PhoneNumber
+    end
+    property :errors do
+      key :'$ref', :Errors
+    end
+  end
+
+  swagger_schema :PhoneNumbersResponse do
+    property :status do
+      key :type, :string
+    end
+    property :data do
+      key :type, :array
+      items do
+        key :'$ref', :PhoneNumber
+      end
     end
     property :errors do
       key :'$ref', :Errors
