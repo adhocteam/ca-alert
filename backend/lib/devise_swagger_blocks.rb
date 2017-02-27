@@ -7,6 +7,7 @@ class DeviseSwaggerBlocks
       key :description, 'Create an account'
       key :operationId, 'createAccount'
       key :produces, ['application/json']
+      key :tags, ['auth']
       parameter do
         key :name, :email
         key :in, :query
@@ -56,6 +57,7 @@ class DeviseSwaggerBlocks
       key :description, 'Update your account'
       key :operationId, 'updateAccount'
       key :produces, ['application/json']
+      key :tags, ['auth']
       parameter do
         key :name, :password
         key :in, :query
@@ -123,6 +125,7 @@ class DeviseSwaggerBlocks
       key :description, 'Delete an account'
       key :operationId, 'deleteAccount'
       key :produces, ['application/json']
+      key :tags, ['auth']
       parameter do
         key :name, :uid
         key :in, :header
@@ -172,6 +175,7 @@ class DeviseSwaggerBlocks
       key :description, 'Authenticate your account'
       key :operationId, 'signIn'
       key :produces, ['application/json']
+      key :tags, ['auth']
       parameter do
         key :name, :email
         key :in, :query
@@ -221,6 +225,7 @@ class DeviseSwaggerBlocks
       key :description, 'Authenticate your account'
       key :operationId, 'signIn'
       key :produces, ['application/json']
+      key :tags, ['auth']
       parameter do
         key :name, :uid
         key :in, :header

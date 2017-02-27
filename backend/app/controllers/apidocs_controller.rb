@@ -28,7 +28,36 @@ class ApidocsController < ActionController::Base
     else
       key :host, 'localhost:3000'
     end
+    tag do
+      key :name, 'admin/hazards'
+      key :description, 'Administrative hazard actions'
+    end
+    tag do
+      key :name, 'admin/users'
+      key :description, 'Administrative user actions'
+    end
+    tag do
+      key :name, 'alerts'
+      key :description, 'Alerts-related actions'
+    end
+    tag do
+      key :name, 'auth'
+      key :description, 'Actions for authentication'
+    end
+    tag do
+      key :name, 'phone_numbers'
+      key :description, 'Actions for managing phone numbers'
+    end
+    tag do
+      key :name, 'places'
+      key :description, 'Actions for managing places'
+    end
+    tag do
+      key :name, 'ping'
+      key :description, 'An action for monitoring'
+    end
     key :basePath, '/'
+    key :schemes, ['http']
     key :consumes, ['application/json']
     key :produces, ['application/json']
   end

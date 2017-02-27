@@ -6,6 +6,7 @@ class AlertsControllerSwaggerBlocks
       key :description, 'Retrieve your list of alerts'
       key :operationId, 'listAlerts'
       key :produces, ['application/json']
+      key :tags, ['alerts']
       parameter do
         key :name, :uid
         key :in, :header

@@ -6,6 +6,7 @@ class AdminUsersControllerSwaggerBlocks
       key :description, 'Search for users by email or phone number'
       key :operationId, 'listUsers'
       key :produces, ['application/json']
+      key :tags, ['admin/users']
       parameter do
         key :name, :q
         key :in, :query
@@ -64,6 +65,7 @@ class AdminUsersControllerSwaggerBlocks
       key :description, 'Make another user an admin'
       key :operationId, 'makeUserAdmin'
       key :produces, ['application/json']
+      key :tags, ['admin/users']
       parameter do
         key :name, :id
         key :in, :path
@@ -129,6 +131,7 @@ class AdminUsersControllerSwaggerBlocks
       key :description, 'Resend the user\'s admin email'
       key :operationId, 'resendAdminEmail'
       key :produces, ['application/json']
+      key :tags, ['admin/users']
       parameter do
         key :name, :id
         key :in, :path

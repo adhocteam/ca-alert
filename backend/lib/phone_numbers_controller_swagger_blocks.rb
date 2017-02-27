@@ -7,6 +7,7 @@ class PhoneNumbersControllerSwaggerBlocks
       key :description, 'Create a phone number'
       key :operationId, 'createPhoneNumber'
       key :produces, ['application/json']
+      key :tags, ['phone_numbers']
       parameter do
         key :name, :phone_number
         key :in, :body
@@ -81,6 +82,7 @@ class PhoneNumbersControllerSwaggerBlocks
       key :description, 'Delete a phone number'
       key :operationId, 'deletePhoneNumber'
       key :produces, ['application/json']
+      key :tags, ['phone_numbers']
       parameter do
         key :name, :uid
         key :in, :header
@@ -145,6 +147,7 @@ class PhoneNumbersControllerSwaggerBlocks
       key :description, 'Verify a phone number'
       key :operationId, 'verifyPhoneNumber'
       key :produces, ['application/json']
+      key :tags, ['phone_numbers']
       parameter do
         key :name, :id
         key :in, :path
