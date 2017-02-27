@@ -7,6 +7,7 @@ class PlacesControllerSwaggerBlocks
       key :description, 'Retrieve your list of places'
       key :operationId, 'listPlaces'
       key :produces, ['application/json']
+      key :tags, ['places']
       parameter do
         key :name, :uid
         key :in, :header
@@ -54,6 +55,7 @@ class PlacesControllerSwaggerBlocks
       key :description, 'Create a place'
       key :operationId, 'createPlace'
       key :produces, ['application/json']
+      key :tags, ['places']
       parameter do
         key :name, :name
         key :in, :body
@@ -148,6 +150,7 @@ class PlacesControllerSwaggerBlocks
       key :description, 'Show a place'
       key :operationId, 'showPlace'
       key :produces, ['application/json']
+      key :tags, ['places']
       parameter do
         key :name, :uid
         key :in, :header
@@ -210,6 +213,7 @@ class PlacesControllerSwaggerBlocks
       key :description, 'Update a place'
       key :operationId, 'updatePlace'
       key :produces, ['application/json']
+      key :tags, ['places']
       parameter do
         key :name, :name
         key :in, :body
@@ -310,6 +314,7 @@ class PlacesControllerSwaggerBlocks
       key :description, 'Delete a place'
       key :operationId, 'deletePlace'
       key :produces, ['application/json']
+      key :tags, ['places']
       parameter do
         key :name, :uid
         key :in, :header

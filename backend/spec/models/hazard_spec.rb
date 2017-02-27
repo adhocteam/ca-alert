@@ -35,8 +35,8 @@ RSpec.describe Hazard do
     end
 
     it 'sends an email to the user about the alert' do
-      expect(ActionMailer::Base.deliveries.count).to eq(2)
-      mail = ActionMailer::Base.deliveries[1]
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      mail = ActionMailer::Base.deliveries[0]
       expect(mail.subject).to eq('New Alert From CAlerts!')
       expect(mail.to).to eq([user.email])
     end
@@ -47,6 +47,28 @@ RSpec.describe Hazard do
       expect(msg.to).to eq(phone_number.phone_number)
       expect(msg.from).to eq(PhoneNumber::SMS_FROM_NUMBER)
       expect(msg.body).to match(/New Alert from CAlerts/)
+    end
+  end
+
+  describe 'creating alerts with notifications disabled' do
+    before do
+      user.update_attribute(:email_notifications_enabled, false)
+      phone_number.update_attribute(:notifications_enabled, false)
+      ActionMailer::Base.deliveries = []
+      FakeTwilio.messages = []
+      create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140)
+    end
+
+    it 'creates alerts when the hazard covers a place' do
+      expect(Alert.count).to eq(1)
+    end
+
+    it 'does not send an email to the user about the alert' do
+      expect(ActionMailer::Base.deliveries.count).to eq(0)
+    end
+
+    it 'does not send an SMS to the user about the alert' do
+      expect(FakeTwilio.messages.count).to eq(0)
     end
   end
 end

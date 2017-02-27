@@ -7,6 +7,7 @@ class AdminHazardsControllerSwaggerBlocks
       key :description, 'Create a hazard'
       key :operationId, 'createHazard'
       key :produces, ['application/json']
+      key :tags, ['admin/hazards']
       parameter do
         key :name, :title
         key :in, :body
@@ -154,6 +155,7 @@ class AdminHazardsControllerSwaggerBlocks
       key :description, 'Get the list of hazards'
       key :operationId, 'listHazards'
       key :produces, ['application/json']
+      key :tags, ['admin/hazards']
       parameter do
         key :name, :uid
         key :in, :header
@@ -186,6 +188,63 @@ class AdminHazardsControllerSwaggerBlocks
         key :description, 'hazard list response'
         schema do
           key :'$ref', :HazardsResponse
+        end
+      end
+
+      response 401 do
+        key :description, 'invalid authentication response'
+        schema do
+          key :'$ref', :Response
+        end
+      end
+    end
+  end
+
+  swagger_path '/admin/hazards/{id}' do
+    operation :get do
+      key :description, 'Get a specific hazard'
+      key :operationId, 'getHazards'
+      key :produces, ['application/json']
+      parameter do
+        key :name, :id
+        key :in, :path
+        key :description, 'Id of the hazard'
+        key :required, true
+        key :type, :integer
+        key :format, :int64
+      end
+      parameter do
+        key :name, :uid
+        key :in, :header
+        key :description, 'UID of the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :access_token
+        key :in, :header
+        key :description, 'Access token for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+      parameter do
+        key :name, :client
+        key :in, :header
+        key :description, 'Client value for the user'
+        key :required, true
+        schema do
+          key :type, :string
+        end
+      end
+
+      response 200 do
+        key :description, 'hazard response'
+        schema do
+          key :'$ref', :HazardResponse
         end
       end
 

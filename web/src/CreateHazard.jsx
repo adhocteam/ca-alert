@@ -6,6 +6,7 @@ import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import "./App.css";
 import Map from "./Map";
 import { hashHistory } from "react-router";
+import { apiCreds } from './session';
 
 export default class CreateHazard extends React.Component {
   constructor(props) {

@@ -80,12 +80,29 @@ RSpec.describe Admin::HazardsController, type: :request do
       end
     end
 
+    describe 'showing a hazard' do
+      let!(:killer_clowns) { create(:hazard) }
+
+      it 'shows the hazard' do
+        get(
+          "/admin/hazards/#{killer_clowns.id}",
+          headers: {
+            uid: admin_email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(response.status).to eq(200)
+        expect(JSON.parse(response.body)['data']['id']).to eq(killer_clowns.id)
+      end
+    end
+
     describe 'listing the hazards' do
       context 'with a couple of existing hazards' do
         let!(:killer_clowns) { create(:hazard) }
         let!(:coffee_shortage) { create(:hazard) }
 
-        it 'lists the hazards' do
+        before do
           get(
             '/admin/hazards',
             headers: {
@@ -94,9 +111,19 @@ RSpec.describe Admin::HazardsController, type: :request do
               'access-token' => @access_token
             }
           )
+        end
+
+        it 'lists the hazards' do
           expect(response.status).to eq(200)
           json = JSON.parse(response.body)
           expect(json['data'].map { |i| i['id'] }).to eq([killer_clowns.id, coffee_shortage.id])
+        end
+
+        it 'includes the alert counts' do
+          json = JSON.parse(response.body)
+          clowns = json['data'].find { |i| i['id'] == killer_clowns.id }
+          expect(clowns['email_notifications_sent']).to eq(0)
+          expect(clowns['sms_notifications_sent']).to eq(0)
         end
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224163741) do
+ActiveRecord::Schema.define(version: 20170227152312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20170224163741) do
   create_table "alerts", force: :cascade do |t|
     t.integer  "place_id"
     t.integer  "hazard_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "sms_notifications_sent",   default: 0
+    t.integer  "email_notifications_sent", default: 0
     t.index ["hazard_id"], name: "index_alerts_on_hazard_id", using: :btree
     t.index ["place_id"], name: "index_alerts_on_place_id", using: :btree
   end

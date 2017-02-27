@@ -11,6 +11,13 @@ class Hazard < ApplicationRecord
 
   after_create :create_alerts
 
+  def as_json(options = {})
+    h = super(options)
+    h['email_notifications_sent'] = alerts.sum(&:email_notifications_sent)
+    h['sms_notifications_sent'] = alerts.sum(&:sms_notifications_sent)
+    h
+  end
+
   swagger_schema :Hazard, required: [:id, :title, :message, :latitude, :longitude, :radius_in_meters] do
     property :id do
       key :type, :integer
@@ -52,6 +59,12 @@ class Hazard < ApplicationRecord
     property :creator_id do
       key :type, :integer
       key :format, :int64
+    end
+    property :email_notification_count do
+      key :type, :integer
+    end
+    property :sms_notification_count do
+      key :type, :integer
     end
     property :created_at do
       key :type, :string

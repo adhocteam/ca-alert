@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
     property :email do
       key :type, :string
     end
+    property :email_notifications_enabled do
+      key :type, :string
+    end
     property :created_at do
       key :type, :string
       key :format, 'date-time'
