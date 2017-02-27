@@ -6,6 +6,7 @@ class PhoneNumber < ApplicationRecord
   belongs_to :user
 
   validates :phone_number, presence: true
+  validate :phone_number_not_changed
 
   before_create :setup_pin
 
@@ -79,5 +80,11 @@ class PhoneNumber < ApplicationRecord
 
   def is_555?
     phone_number =~ /^555/ || phone_number =~ /^\(555\)/ || phone_number =~ /^1\-555/
+  end
+
+  def phone_number_not_changed
+    if phone_number_changed? && persisted?
+      errors.add(:phone_number, 'can\'t be changed')
+    end
   end
 end

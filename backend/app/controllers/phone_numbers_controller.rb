@@ -1,6 +1,6 @@
 class PhoneNumbersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_phone_number, only: [:destroy, :verify]
+  before_action :load_phone_number, only: [:update, :destroy, :verify]
 
   def index
     render(
@@ -27,6 +27,26 @@ class PhoneNumbersController < ApplicationController
         json: {
           status: 'error',
           errors: pn.errors
+        },
+        status: 400
+      )
+    end
+  end
+
+  def update
+    if @phone_number.update_attributes(phone_number_params)
+      render(
+        json: {
+          status: 'success',
+          data: @phone_number
+        },
+        status: 200
+      )
+    else
+      render(
+        json: {
+          status: 'error',
+          errors: @phone_number.errors
         },
         status: 400
       )
