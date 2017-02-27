@@ -13,6 +13,25 @@ RSpec.describe PhoneNumbersController, type: :request do
       @access_token = response.headers['access-token']
     end
 
+    describe 'listing the phone numbers' do
+      let!(:phone1) { create(:phone_number, user: user) }
+      let!(:phone2) { create(:phone_number, user: user) }
+      let!(:phone3) { create(:phone_number) }
+
+      it 'shows me the numbers' do
+        get(
+          '/phone_numbers',
+          headers: {
+            uid: email,
+            client: @client,
+            'access-token' => @access_token
+          }
+        )
+        expect(response.status).to eq(200)
+        expect(JSON.parse(response.body)['data'].map { |i| i['id'] }.sort).to eq([phone1.id, phone2.id].sort)
+      end
+    end
+
     describe 'creating a phone number' do
       it 'creates the number' do
         post(
