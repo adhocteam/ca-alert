@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Hazard do
-  let!(:gas_leak) { create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 10) }
   let!(:burrito_shop) { create(:place, longitude: -82.555123, latitude: 35.620708, user: user) }
   let!(:user) { create(:user) }
   let!(:phone_number) { create(:phone_number, user: user) }
+  let!(:gas_leak) { create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 10) }
 
   describe 'saving with latitude and longitude' do
     it 'turns the lat/lon into a POINT' do
@@ -35,8 +35,8 @@ RSpec.describe Hazard do
     end
 
     it 'sends an email to the user about the alert' do
-      expect(ActionMailer::Base.deliveries.count).to eq(2)
-      mail = ActionMailer::Base.deliveries[1]
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      mail = ActionMailer::Base.deliveries[0]
       expect(mail.subject).to eq('New Alert From CAlerts!')
       expect(mail.to).to eq([user.email])
     end

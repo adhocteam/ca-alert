@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223210017) do
+ActiveRecord::Schema.define(version: 20170227152312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20170223210017) do
   create_table "alerts", force: :cascade do |t|
     t.integer  "place_id"
     t.integer  "hazard_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "sms_notifications_sent",   default: 0
+    t.integer  "email_notifications_sent", default: 0
     t.index ["hazard_id"], name: "index_alerts_on_hazard_id", using: :btree
     t.index ["place_id"], name: "index_alerts_on_place_id", using: :btree
   end
@@ -100,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170223210017) do
     t.geography "coord",            limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.datetime  "created_at"
     t.datetime  "updated_at"
+    t.string    "category"
+    t.string    "link_title"
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 

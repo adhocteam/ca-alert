@@ -16,7 +16,7 @@ class PhoneNumber < ApplicationRecord
   end
 
   def alert_user(alert)
-    if notifications_enabled?
+    if notifications_enabled? && !is_555?
       Twilio::REST::Client.new.messages.create(
         from: SMS_FROM_NUMBER,
         to: phone_number,
@@ -68,10 +68,16 @@ class PhoneNumber < ApplicationRecord
     self.pin_attempts = 0
     self.pin_created_at = Time.now.utc
 
-    Twilio::REST::Client.new.messages.create(
-      from: SMS_FROM_NUMBER,
-      to: phone_number,
-      body: "Your mobile pin for the California alerts system is #{pin}"
-    )
+    unless is_555?
+      Twilio::REST::Client.new.messages.create(
+        from: SMS_FROM_NUMBER,
+        to: phone_number,
+        body: "Your mobile pin for the California alerts system is #{pin}"
+      )
+    end
+  end
+
+  def is_555?
+    phone_number =~ /^555/ || phone_number =~ /^\(555\)/ || phone_number =~ /^1\-555/
   end
 end

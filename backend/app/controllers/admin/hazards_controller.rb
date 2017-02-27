@@ -12,6 +12,16 @@ class Admin::HazardsController < ApplicationController
     )
   end
 
+  def show
+    render(
+      json: {
+        status: 'success',
+        data: Hazard.find(params[:id])
+      },
+      status: 200
+    )
+  end
+
   def create
     hazard = Hazard.new(hazard_params)
     hazard.creator_id = current_user.id
@@ -37,6 +47,9 @@ class Admin::HazardsController < ApplicationController
   protected
 
   def hazard_params
-    params.permit(:title, :message, :longitude, :latitude, :radius_in_meters, :address, :link, :phone_number)
+    params.permit(
+      :title, :message, :longitude, :latitude, :radius_in_meters,
+      :address, :link, :phone_number, :category, :link_title
+    )
   end
 end
