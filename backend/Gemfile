@@ -9,6 +9,7 @@ end
 
 gem 'activerecord-postgis-adapter'
 gem 'devise_token_auth'
+gem 'faker'
 gem 'jbuilder'
 gem 'pg'
 gem 'puma'
@@ -28,7 +29,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop', require: false
 end
