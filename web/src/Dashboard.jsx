@@ -12,7 +12,7 @@ export default React.createClass({
           <p><b>Hello, {user.name ? user.name : user.email}</b></p>
           <ul className="ca-dashboard-nav">
             <li><Link to="/dashboard/places">Places</Link></li>
-            <li>Notifications</li>
+            <li><Link to="/account/communication">Communication preferences</Link></li>
             <li>Account settings</li>
             <li><Link to="/account/signout">Sign out</Link></li>
           </ul>

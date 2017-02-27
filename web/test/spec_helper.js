@@ -49,7 +49,12 @@ beforeEach((done) => {
 });
 
 function login() {
-  const user = {email: 'user@example.com', name: 'someone'};
+  const user = {
+    email: 'user@example.com',
+    name: 'someone',
+    email_notifications_enabled: true
+  };
+
   const now = (new Date()).getTime();
   newLoginSession(user, 'token', 'client', now, 1);
 };
