@@ -12,5 +12,6 @@ class FakeTwilio
 
   def create(from:, to:, body:)
     self.class.messages << Message.new(from, to, body)
+    Rails.logger.info("Sending Fake Twilio Message to: #{to}, from: #{from}, body: #{body}")
   end
 end
