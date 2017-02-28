@@ -60,7 +60,7 @@ class DeviseSwaggerBlocks
       key :tags, ['auth']
       parameter do
         key :name, :password
-        key :in, :query
+        key :in, :body
         key :description, 'New password for the user'
         key :required, false
         schema do
@@ -70,12 +70,21 @@ class DeviseSwaggerBlocks
       end
       parameter do
         key :name, :password_confirmation
-        key :in, :query
+        key :in, :body
         key :description, 'New password for the user again, must match password parameter'
         key :required, false
         schema do
           key :type, :string
           key :format, :password
+        end
+      end
+      parameter do
+        key :name, :email_notifications_enabled
+        key :in, :body
+        key :description, 'Should email notifications be sent to the user'
+        key :required, false
+        schema do
+          key :type, :boolean
         end
       end
       parameter do
