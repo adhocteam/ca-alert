@@ -16,9 +16,16 @@ class HazardView extends React.Component {
     fetchAuthd(API_HOST + `/admin/hazards`)
       .then(checkResponse)
       .then(response => response.json())
-      .then(data => {
+      .then((resp) => {
+        let hazard = null;
+        resp.data.forEach((h) => {
+          if (h.id == this.props.params.id) {
+            hazard = h;
+          }
+        });
+
         this.setState({
-          hazard: data.data[id]
+          hazard: hazard
         });
       });
   }
@@ -58,6 +65,13 @@ class HazardView extends React.Component {
             <Map lat={hazard.latitude} lng={hazard.longitude} />
           </div>
 
+          <div className="usa-width-one-whole">
+            <h3>Sent Notifications</h3>
+            <ul>
+              <li>SMS: {hazard.sms_notifications_sent}</li>
+              <li>Email: {hazard.email_notifications_sent}</li>
+            </ul>
+          </div>
         </section>
       );
     }
