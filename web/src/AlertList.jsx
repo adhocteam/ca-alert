@@ -53,7 +53,6 @@ class AlertList extends React.Component {
         </div>
       </section>
     );
-    return <span>Hello world</span>
   }
 }
 
