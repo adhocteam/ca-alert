@@ -6,16 +6,12 @@ export default class Nav extends React.Component {
     if (!isLoggedIn()) {
       return (
         <ul className="usa-unstyled-list usa-nav-secondary-links">
-          <li className="js-search-button-container">
-            <button className="usa-header-search-button js-search-button">
-              Search
-            </button>
+
+          <li>
+            <a href="#/account/signup">Sign up</a>
           </li>
           <li>
-            <a href="#/account/signup">Sign up for new account</a>
-          </li>
-          <li>
-            <a href="#/account/signin">Sign in to your account</a>
+            <a href="#/account/signin">Sign in</a>
           </li>
         </ul>
       );

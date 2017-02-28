@@ -1,0 +1,16 @@
+.auto-clear::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+ body {
+   border: 2px solid purple;
+ }
+
+.sr-only {
+  display: inline-block;
+  text-indent: -9999em;
+  height: 1px;
+  overflow: hidden;
+}

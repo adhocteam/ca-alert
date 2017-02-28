@@ -4,7 +4,7 @@ import { encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
 import { Point, geocode } from "./lib";
 import Map from "./Map";
-import "./App.css";
+import "./App.scss";
 import Button from "./Button";
 
 export default class EditPlaceForm extends React.Component {
