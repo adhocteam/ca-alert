@@ -18,16 +18,17 @@ describe('Hazard View', () => {
   };
 
   it('Should fetch on mount', (done) => {
-    global.fetch = function() { done(); };
+    global.fetch = function(url, opts) {
+      expect(url).to.contain('/admin/hazards/2');
+      done();
+    };
 
     login();
-    const params = { props: { id: 2 } };
-    const el = mount(<HazardView params={params} />);
+    const el = mount(<HazardView params={{ id: 2 }} />);
   });
 
   it('Should display the hazard title', () => {
-    const params = { props: { id: 2 } };
-    const el = shallow(<HazardView params={params} />);
+    const el = shallow(<HazardView params={{ id: 2 }} />);
     el.setState({hazard: hazard});
 
     expect(el.text()).to.contain('View Alert');

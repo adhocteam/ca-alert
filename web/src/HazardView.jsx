@@ -13,19 +13,12 @@ class HazardView extends React.Component {
 
   componentDidMount() {
     let id = this.props.params.id;
-    fetchAuthd(API_HOST + `/admin/hazards`)
+    fetchAuthd(`${API_HOST}/admin/hazards/${id}`)
       .then(checkResponse)
       .then(response => response.json())
       .then((resp) => {
-        let hazard = null;
-        resp.data.forEach((h) => {
-          if (h.id == this.props.params.id) {
-            hazard = h;
-          }
-        });
-
         this.setState({
-          hazard: hazard
+          hazard: resp.data
         });
       });
   }
