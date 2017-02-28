@@ -14,6 +14,9 @@ import HazardList from "./HazardList";
 import CreateHazard from "./CreateHazard";
 import UserList from "./UserList";
 import HazardView from "./HazardView";
+import CommunicationSettings from "./CommunicationSettings";
+import AddPhone from "./AddPhone";
+import ConfirmPhone from "./ConfirmPhone";
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -30,6 +33,9 @@ ReactDOM.render(
     <Route path="/account/signup/verify" component={VerifySignUp} />
     <Route path="/account/signin" component={SignInForm} />
     <Route path="/account/signout" component={SignOut} />
+    <Route path="/account/communication" component={CommunicationSettings} />
+    <Route path="/account/communication/add-phone" component={AddPhone} />
+    <Route path="/account/communication/phone/:id" component={ConfirmPhone} />
     <Route path="/admin/hazards" component={HazardList} />
     <Route path="/admin/hazards/new" component={CreateHazard} />
     <Route path="/admin/hazards/:id" component={HazardView} />
