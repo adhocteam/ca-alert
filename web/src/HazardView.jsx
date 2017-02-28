@@ -1,9 +1,8 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 
-import { fetchAuthd, checkResponse } from './lib';
-import Map from './Map';
-
+import { fetchAuthd, checkResponse } from "./lib";
+import Map from "./Map";
 
 class HazardView extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class HazardView extends React.Component {
     fetchAuthd(`${API_HOST}/admin/hazards/${id}`)
       .then(checkResponse)
       .then(response => response.json())
-      .then((resp) => {
+      .then(resp => {
         this.setState({
           hazard: resp.data
         });
@@ -25,7 +24,7 @@ class HazardView extends React.Component {
 
   render() {
     if (this.state.hazard === null) {
-      return <span>loading...</span>
+      return <span>loading...</span>;
     } else {
       const hazard = this.state.hazard;
       const start = moment(hazard.created_at);
@@ -42,7 +41,7 @@ class HazardView extends React.Component {
           </div>
 
           <div className="usa-width-two-thirds">
-            <span className="start-date">{start.format('lll')}</span>
+            <span className="start-date">{start.format("lll")}</span>
           </div>
 
           <div className="usa-width-one-whole">
