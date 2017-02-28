@@ -6,6 +6,7 @@ import { Point, geocode } from "./lib";
 import Map from "./Map";
 import "./App.css";
 import Button from "./Button";
+import ErrorAlert from "./Error";
 
 export default class EditPlaceForm extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ export default class EditPlaceForm extends React.Component {
       name: "",
       show: {
         locationChooser: false
-      }
+      },
+      error: null
     };
   }
 
@@ -112,6 +114,7 @@ export default class EditPlaceForm extends React.Component {
             {this.state.show.locationChooser
               ? <LocationChooser
                   onChoose={loc => this.handleNewLocation(loc)}
+                  onError={err => this.setState({ error: err })}
                 />
               : <Location place={place} />}
             <div>
@@ -129,6 +132,7 @@ export default class EditPlaceForm extends React.Component {
           <h2>Edit place</h2>
         </div>
         <div className="usa-width-two-thirds">
+          {this.state.error ? <ErrorAlert error={this.state.error} /> : null}
           {form}
         </div>
       </section>
@@ -171,11 +175,27 @@ class LocationChooser extends React.Component {
     this.setState({ address: e.target.value });
   }
 
+  handleGeoLocate(pt) {
+    this.props.onChoose({
+      address: `(${pt.lng}, ${pt.lat})`,
+      pt: pt
+    });
+  }
+
+  handleGeoLocateError(err) {
+    if (this.props.onError) {
+      this.props.onError(err);
+    }
+  }
+
   render() {
     return (
       <div>
         <div>
-          <GeoLocationBtn />
+          <GeoLocationBtn
+            onLocate={pt => this.handleGeoLocate(pt)}
+            onError={err => this.handleGeoLocateError(err)}
+          />
         </div>
         <p>OR</p>
         <div>
