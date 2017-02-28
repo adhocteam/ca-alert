@@ -1,3 +1,7 @@
+export function setUser(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
 export function newLoginSession(user, accessToken, client, expiry, uid) {
   if (user && accessToken && client) {
     localStorage.setItem("user", JSON.stringify(user));
