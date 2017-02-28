@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./styles.css">
 <title>CAlerts: Sign up for California emergency alerts</title>
+</head>
+<body>
 
 <a class="usa-skipnav" href="#main-content">Skip to main content</a>
 <header class="usa-header usa-header-extended" role="banner">
@@ -44,7 +48,7 @@
         <button class="usa-menu-btn">Menu</button>
         <div class="usa-logo" id="logo">
             <em class="usa-logo-text">
-                <a href="#" accesskey="1" title="Home" aria-label="Home">CAlerts
+                <a href="#" accesskey="1" title="Home" aria-label="Home"><b>CA</b>lerts
                   <span>Stay informed, stay safe.</span>
                 </a>
             </em>
@@ -56,7 +60,6 @@
                 <img src="./node_modules/uswds/dist/img/close.svg" alt="close">
             </button>
             <div class="usa-nav-secondary">
-
                 <div id="app-nav"></div>
             </div>
         </div>
@@ -71,36 +74,31 @@
 
     <div class="usa-footer-secondary_section">
       <div class="usa-grid usa-footer-return-to-top">
-          <a href="#" class="sr-only">Return to top</a>
+          <a href="#" class="usa-sr-only">Return to top</a>
       </div>
-      
+
         <div class="usa-grid">
-            <div class="usa-footer-logo usa-width-one-half">
-                <img class="usa-footer-circle-124" src="./node_modules/uswds/dist/img/logo-img.png" alt="Logo image">
-                <h3 class="usa-footer-logo-heading">Name of Agency</h3>
+            <div class="usa-footer-logo usa-width-one-fourth">
+              <img class="usa-footer-circle-124" src="/src/img/logo.png" alt="Logo image" style="width: 80%;">
+              <span class="usa-sr-only">California: Governor's office of Emergency Services</span>
             </div>
-            <div class="usa-footer-contact-links usa-width-one-half">
-                <a class="usa-link-facebook" href="javascript:void(0);">
-                    <span>Facebook</span>
-                </a>
-                <a class="usa-link-twitter" href="javascript:void(0);">
-                    <span>Twitter</span>
-                </a>
-                <a class="usa-link-youtube" href="javascript:void(0);">
-                    <span>YouTube</span>
-                </a>
-                <a class="usa-link-rss" href="javascript:void(0);">
-                    <span>RSS</span>
-                </a>
-                <address>
-                    <h3 class="usa-footer-contact-heading">Agency Contact Center</h3>
-                    <p>(800) CALL-GOVT</p>
-                    <a href="mailto:info@agency.gov">info@agency.ca.gov</a>
-                </address>
+
+            <div class="usa-footer-logo usa-width-one-third align-center">
+              <a class="usa-button" href="#">
+                Download the CAlerts App
+              </a>
+            </div>
+
+            <div class="usa-footer-contact-links usa-width-one-third">
+              <img class="usa-footer-circle-124" src="/src/img/ca.png" alt="California Logo image" style="width: 25%; float: right; text-align: right;">
             </div>
         </div>
     </div>
 </footer>
+
+
 <!-- API key connected to paul@adhocteam.us and the project=ca-alerts-prototype -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzW5TFivw3oTPDQb_Q0LNfgL2qlcphzqc"></script>
 <script src="./bundle.js"></script>
+</body>
+</html>

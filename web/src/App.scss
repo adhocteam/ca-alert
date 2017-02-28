@@ -1,16 +1,105 @@
+// Color variables
+
+$primary-color: #0071BC;
+$secondary-color: #F9C642;
+$tertiary-color: #112E51;
+$white: #fff;
+$alt-background: #D6D7D9;
+
+
 .auto-clear::after {
     content: "";
     display: block;
     clear: both;
 }
 
- body {
-   border: 2px solid purple;
- }
+html {
+  height: 100%;
+  background: $tertiary-color;
+}
+
+
+body {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', helvetica, sans-serif;
+  }
+}
+
+
+form.alt-signup {
+  background: $alt-background !important;
+  padding: 1em 1em;
+  label:first-of-type {
+    margin-top: 0;
+  }
+}
 
 .sr-only {
   display: inline-block;
   text-indent: -9999em;
   height: 1px;
   overflow: hidden;
+}
+
+.usa-hero {
+  &.calerts {
+    background: none;
+    background: url(/src/img/cabackground.jpg) center center no-repeat;
+    background-size: cover;
+    padding: 4em 0;
+  }
+}
+
+.usa-logo {
+  em.usa-logo-text {
+    font-size: 4rem;
+    font-weight: normal;
+    b {font-weight: 700;}
+  }
+  span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+}
+
+.usa-nav-secondary {
+  padding: 0;
+  margin: 0;
+  top: -5em !important;
+  .usa-button-outline {
+    border: 2px solid #fff !important;
+  }
+}
+
+
+.usa-button-outline {
+  background: transparent !important;
+  color: $primary-color !important;
+}
+
+.usa-hero-callout-alt {
+  color: $primary-color !important;
+}
+
+.usa-header {
+  background: $primary-color;
+  color: $white;
+  border-bottom: 2px solid $secondary-color !important;
+  h1, h2, h3, h4, h5, h6, a {
+    color: $white !important;
+  }
+}
+
+footer .usa-footer-secondary_section {
+
+  a.usa-link-facebook {
+    color: $white !important;
+  }
+
+  background: $tertiary-color !important;
+  h1, h2, h3, h4, h5, h6, a {
+    color: $white !important;
+  }
+  padding-top: 0!important;
 }

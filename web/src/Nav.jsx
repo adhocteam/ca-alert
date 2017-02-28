@@ -5,15 +5,9 @@ export default class Nav extends React.Component {
   render() {
     if (!isLoggedIn()) {
       return (
-        <ul className="usa-unstyled-list usa-nav-secondary-links">
 
-          <li>
-            <a href="#/account/signup">Sign up</a>
-          </li>
-          <li>
-            <a href="#/account/signin">Sign in</a>
-          </li>
-        </ul>
+            <a className="usa-button usa-button-outline" href="#/account/signin">Sign in</a>
+      
       );
     } else {
       let user = loggedInUser();
