@@ -17,6 +17,7 @@ import HazardView from "./HazardView";
 import CommunicationSettings from "./CommunicationSettings";
 import AddPhone from "./AddPhone";
 import ConfirmPhone from "./ConfirmPhone";
+import AlertList from './AlertList';
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -40,6 +41,7 @@ ReactDOM.render(
     <Route path="/admin/hazards/new" component={CreateHazard} />
     <Route path="/admin/hazards/:id" component={HazardView} />
     <Route path="/admin/users" component={UserList} />
+    <Route path="/alerts" component={AlertList} />
   </Router>,
   document.getElementById("app")
 );
