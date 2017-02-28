@@ -1,3 +1,28 @@
-/*
- * YOUR STYLES HERE
- */
+// Colors
+
+$color-primary-darkest: #1F425E;
+$color-primary: #0071bc;
+$cool-blue-lighter: #02BFE7;
+$color-secondary: #E31C3D;
+$color-gold: #FDB81E;
+$white: #FFFFFF;
+$color-green-light: #4AA564;
+$color-green-lighter: #94BFA2;
+$color-primary-alt: #02BFE7;
+
+// Headings
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-blue;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: normal;
+  &.sans {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+  }
+  &.small {
+    font-size: $small;
+    margin: 0;
+    padding: 0;
+  }
+}
