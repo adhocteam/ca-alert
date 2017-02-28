@@ -7,6 +7,8 @@ var path = require("path"),
 const DEV_API_HOST = "http://localhost:3000";
 const PROD_API_HOST = "https://ca-alert.herokuapp.com";
 
+const extractPlugin = new ExtractTextPlugin({ filename: "styles.css" });
+
 module.exports = {
   entry: ["whatwg-fetch", "./src/index.jsx"],
   output: {
@@ -24,8 +26,21 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        use: extractPlugin.extract({
           use: "css-loader"
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: extractPlugin.extract({
+          loader: [
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "sass-loader"
+            }
+          ]
         })
       },
       {
@@ -45,6 +60,6 @@ module.exports = {
         process.env.NODE_ENV === "production" ? PROD_API_HOST : DEV_API_HOST
       )
     }),
-    new ExtractTextPlugin({ filename: "styles.css" })
+    extractPlugin
   ]
 };
