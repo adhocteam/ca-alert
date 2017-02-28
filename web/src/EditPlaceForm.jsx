@@ -125,10 +125,8 @@ export default class EditPlaceForm extends React.Component {
 
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
+        <div className="usa-width-one-whole">
           <h2>Edit place</h2>
-        </div>
-        <div className="usa-width-two-thirds">
           {form}
         </div>
       </section>

@@ -7,17 +7,13 @@ export default class Nav extends React.Component {
       return (
 
             <a className="usa-button usa-button-outline" href="#/account/signin">Sign in</a>
-      
+
       );
     } else {
       let user = loggedInUser();
       return (
         <ul className="usa-unstyled-list usa-nav-secondary-links">
-          <li className="js-search-button-container">
-            <button className="usa-header-search-button js-search-button">
-              Search
-            </button>
-          </li>
+        
           <li>
             <a href="#/dashboard">{user.name ? user.name : user.email}</a>
           </li>

@@ -163,10 +163,8 @@ export default class AddPlaceForm extends React.Component {
 
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
+        <div className="usa-width-one-whole">
           <h2>Add a place</h2>
-        </div>
-        <div className="usa-width-two-thirds">
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">

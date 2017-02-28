@@ -26,12 +26,18 @@ body {
 }
 
 
+// Forms
+
 form.alt-signup {
   background: $alt-background !important;
   padding: 1em 1em;
   label:first-of-type {
     margin-top: 0;
   }
+}
+
+form.usa-form {
+  max-width: 100% !important;
 }
 
 .sr-only {
@@ -88,6 +94,12 @@ form.alt-signup {
   border-bottom: 2px solid $secondary-color !important;
   h1, h2, h3, h4, h5, h6, a {
     color: $white !important;
+  }
+}
+
+.usa-grid {
+  h2, h3 {
+    color: $primary-color !important;
   }
 }
 

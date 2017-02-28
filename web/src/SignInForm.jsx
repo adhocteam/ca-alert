@@ -139,10 +139,8 @@ export default class SignInForm extends React.Component {
     }
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
-          <h2>Sign in with an existing account and manage your alerts.</h2>
-        </div>
-        <div className="usa-width-two-thirds">
+
+        <div className="usa-width-one-whole">
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">Sign in</legend>
