@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import { checkResponse, fetchAuthd, encodeQueryString } from './lib';
-import { loggedInUser } from './session';
+import { loggedInUser, setUser } from './session';
 import Button from './Button';
 
 
@@ -86,7 +86,25 @@ class CommunicationSettings extends React.Component {
 
   toggleEmailNotifs(e) {
     e.preventDefault();
-    console.error('not implemented');
+
+    const payload = encodeQueryString([
+      ['email_notifications_enabled', !this.state.user.email_notifications_enabled]
+    ]);
+
+    fetchAuthd(`${API_HOST}/auth`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: payload
+    })
+      .then(checkResponse)
+      .then(response => response.json())
+      .then((resp) => {
+        const user = resp.data;
+        setUser(user);
+        this.setState({user: user});
+      });
   }
 
   removeNumber(id) {
