@@ -20,3 +20,5 @@ test:
   database: test<%= ENV['TEST_ENV_NUMBER'] %>
   port: 5435
   sslmode: disable
+production:
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, 'postgis') %>
