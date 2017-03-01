@@ -26,9 +26,13 @@ The client-side app includes the visual interface for the prototype, tools for c
 
 #### Visual interface design
 
-We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](!!!!!LINK_TO_GRID_USAGE_IN_CODE!!!!!) to set the basic page layout, as well as other components like [buttons](!!!!LINK_TO_BUTTON_IN_CODE!!!!) and [form controls](!!!!!LINK_TO_FORM_IN_CODE!!!!!).
+We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](!!!!!LINK_TO_GRID_USAGE_IN_CODE!!!!!) to set the basic page layout, as well as other components like [buttons](!!!!LINK_TO_BUTTON_IN_CODE!!!!) and [form controls](!!!!!LINK_TO_FORM_IN_CODE!!!!!). Most of the HTML for the app is defined in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) code included in React components like [this one](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx). The page is bootstrapped and assets are loaded in through a static [index.html](https://github.com/adhocteam/ca-alert/blob/master/web/index.html) page.
+
+!!!!DANNY, ANYTHING ELSE NEEDED ON THIS?!!!!!
 
 #### Collecting and displaying input
+
+Forms are implemented as React components, using JSX to describe the markup. The [form for adding places](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx) is an example of this pattern. Form components store
 
 #### Data visualizations
 
