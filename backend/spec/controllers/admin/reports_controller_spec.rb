@@ -76,7 +76,7 @@ RSpec.describe Admin::ReportsController, type: :request do
           it 'returns the correct data' do
             expect(response.status).to eq(200)
             json = JSON.parse(response.body)
-            expect(json['data']).to eq(Date.current.to_s => 6)
+            expect(json['data'][0]['count']).to eq(6)
           end
         end
       end
@@ -107,7 +107,7 @@ RSpec.describe Admin::ReportsController, type: :request do
           it 'returns the correct data' do
             expect(response.status).to eq(200)
             json = JSON.parse(response.body)
-            expect(json['data']).to eq(Date.current.to_s => 5) # because it includes the admin
+            expect(json['data'][0]['count']).to eq(5)
           end
         end
       end

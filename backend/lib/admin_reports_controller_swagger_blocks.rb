@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/ClassLength
 class AdminReportsControllerSwaggerBlocks
   include Swagger::Blocks
 
@@ -7,6 +6,7 @@ class AdminReportsControllerSwaggerBlocks
       key :description, 'Get a report on the number of alerts sent over the past N days'
       key :operationId, 'alertsReport'
       key :produces, ['application/json']
+      key :tags, ['admin/reports']
       parameter do
         key :name, :days_back
         key :in, :query
@@ -65,6 +65,7 @@ class AdminReportsControllerSwaggerBlocks
       key :description, 'Get a report on the number of enabled communication methods'
       key :operationId, 'communicationMethodsReport'
       key :produces, ['application/json']
+      key :tags, ['admin/reports']
       parameter do
         key :name, :uid
         key :in, :header
@@ -114,6 +115,7 @@ class AdminReportsControllerSwaggerBlocks
       key :description, 'Get a report on the number of alerts sent over the past N days'
       key :operationId, 'alertsReport'
       key :produces, ['application/json']
+      key :tags, ['admin/reports']
       parameter do
         key :name, :days_back
         key :in, :query
@@ -167,31 +169,37 @@ class AdminReportsControllerSwaggerBlocks
     end
   end
 
-  swagger_schema :HazardResponse do
-    property :status do
-      key :type, :string
+  swagger_schema :CommunicationMethodsReportResponse do
+    property :emails do
+      key :type, :integer
     end
-    property :data do
-      key :'$ref', :Hazard
-    end
-    property :errors do
-      key :'$ref', :Errors
+    property :phone_numbers do
+      key :type, :integer
     end
   end
 
-  swagger_schema :HazardsResponse do
+  swagger_schema :DatedResponse do
     property :status do
       key :type, :string
     end
     property :data do
       key :type, :array
       items do
-        key :'$ref', :Hazard
+        key :'$ref', :DateCount
       end
     end
     property :errors do
       key :'$ref', :Errors
     end
   end
+
+  swagger_schema :DateCount do
+    property :date do
+      key :type, :string
+      key :format, :date
+    end
+    property :count do
+      key :type, :integer
+    end
+  end
 end
-# rubocop:enable Metrics/ClassLength

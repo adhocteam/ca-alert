@@ -31,9 +31,12 @@ class Admin::ReportsController < ApplicationController
     days_back = params[:days_back]&.to_i || 30
     date = Date.current - days_back
     all_instances = klass.where('created_at >= ?', date).to_a
-    result = {}
+    result = []
     while date <= Date.current
-      result[date] = all_instances.select { |a| a.created_at >= date.to_time && a.created_at < (date + 1).to_time }.count
+      result << {
+        date: date,
+        count: all_instances.select { |a| a.created_at >= date.to_time && a.created_at < (date + 1).to_time }.count
+      }
       date += 1
     end
     render(
