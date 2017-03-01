@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227152312) do
+ActiveRecord::Schema.define(version: 20170301035507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,11 +99,12 @@ ActiveRecord::Schema.define(version: 20170227152312) do
     t.string    "link"
     t.string    "phone_number"
     t.integer   "creator_id"
-    t.geography "coord",            limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "coord",                  limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.datetime  "created_at"
     t.datetime  "updated_at"
     t.string    "category"
     t.string    "link_title"
+    t.integer   "user_count_at_creation",                                                          default: 0
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 
