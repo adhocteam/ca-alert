@@ -146,11 +146,10 @@ class CommunicationSettings extends React.Component {
     return (
       <section>
         <div className="usa-grid usa-section">
-          <div className="usa-width-one-third">
-            <h2>Communication settings</h2>
-          </div>
 
-          <div className="usa-width-two-thirds">
+
+          <div className="usa-width-one-whole">
+            <h2>Communication settings</h2>
             <h3>Email</h3>
             <table className="usa-table-borderless">
               <thead>

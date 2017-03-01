@@ -36,14 +36,21 @@ export default class SignInForm extends React.Component {
     this.setState(this.state);
   }
 
+  isEmailValid() {
+    return /^.+@.+\..+$/.test(this.state.email.value);
+  }
+
+  isPasswordValid() {
+    return this.state.password.value.length >= MIN_PASSWORD_LEN;
+  }
+
   handleBlur(e) {
     switch (e.target.name) {
       case "signin-email":
-        this.state.email.isValid = /^.+@.+\..+$/.test(this.state.email.value);
+        this.state.email.isValid = this.isEmailValid();
         break;
       case "signin-password":
-        this.state.password.isValid = this.state.password.value.length >=
-          MIN_PASSWORD_LEN;
+        this.state.password.isValid = this.isPasswordValid();
         break;
     }
     this.setState(this.state);
@@ -93,7 +100,7 @@ export default class SignInForm extends React.Component {
   }
 
   formIsValid() {
-    return this.state.email.isValid && this.state.password.isValid;
+    return this.isEmailValid() && this.isPasswordValid();
   }
 
   render() {
@@ -139,10 +146,8 @@ export default class SignInForm extends React.Component {
     }
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
-          <h2>Sign in with an existing account and manage your alerts.</h2>
-        </div>
-        <div className="usa-width-two-thirds">
+
+        <div className="usa-width-one-whole">
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">Sign in</legend>

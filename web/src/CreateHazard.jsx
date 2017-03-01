@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeoLocationBtn from "./GeoLocationBtn";
 import Button from "./Button";
 import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
-import "./App.css";
+import "./App.scss";
 import Map from "./Map";
 import { hashHistory } from "react-router";
 import { apiCreds } from './session';
@@ -21,10 +21,6 @@ export default class CreateHazard extends React.Component {
       linkTitle: "",
       linkURL: "",
       phoneNumber: "",
-      pubDate: "",
-      pubTime: "",
-      expiryDate: "",
-      expiryTime: "",
       radius: "1000", // TODO(paulsmith): XXX
       geocode: null,
       hazard: null
@@ -59,10 +55,6 @@ export default class CreateHazard extends React.Component {
       title: this.state.title,
       message: this.state.message,
       category: this.state.category,
-      pubDate: this.state.pubDate,
-      pubTime: this.state.pubTime,
-      expiryDate: this.state.expiryDate,
-      expiryTime: this.state.expiryTime,
       linkURL: this.state.linkURL,
       linkTitle: this.state.linkTitle,
       phoneNumber: this.state.phoneNumber,
@@ -77,11 +69,13 @@ export default class CreateHazard extends React.Component {
     let h = this.state.hazard;
     let qs = encodeQueryString([
       ["title", h.title],
+      ["category", h.category],
       ["message", h.message],
       ["latitude", h.place.pt.lat],
       ["longitude", h.place.pt.lng],
       ["radius_in_meters", h.radius],
       ["address", h.place.address],
+      ["link_title", h.linkTitle],
       ["link", h.linkURL],
       ["phone_number", h.phoneNumber]
     ]);
@@ -220,38 +214,6 @@ export default class CreateHazard extends React.Component {
                       onChange={e => this.handleChange(e)}
                     />
                   </div>
-                  <div>
-                    <p><b>Publish time</b></p>
-                    <label>Date</label>
-                    <input
-                      type="date"
-                      name="pubDate"
-                      value={this.state.pubDate}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <label>Time</label>
-                    <input
-                      name="pubTime"
-                      value={this.state.pubTime}
-                      onChange={e => this.handleChange(e)}
-                    />
-                  </div>
-                  <div>
-                    <p><b>Expiration (optional)</b></p>
-                    <label>Date</label>
-                    <input
-                      type="date"
-                      name="expiryDate"
-                      value={this.state.expiryDate}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <label>Time</label>
-                    <input
-                      name="expiryTime"
-                      value={this.state.expiryTime}
-                      onChange={e => this.handleChange(e)}
-                    />
-                  </div>
                   <Button>Save and preview</Button>
                 </form>
               </div>
@@ -290,10 +252,6 @@ function Preview(props) {
       <div className="usa-width-two-thirds">
         <h3>{hazard.title}</h3>
         <span className="usa-label">{hazard.category}</span>
-        <div>
-          <p><b>{hazard.pubDate} {hazard.pubTime}</b></p>
-          <p>until {hazard.expiryDate} {hazard.expiryTime}</p>
-        </div>
         <div style={{ whiteSpace: "pre-wrap" }}>
           {hazard.message}
         </div>

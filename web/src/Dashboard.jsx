@@ -13,6 +13,7 @@ export default React.createClass({
           <ul className="ca-dashboard-nav">
             <li><Link to="/dashboard/places">Places</Link></li>
             <li><Link to="/account/communication">Communication preferences</Link></li>
+            <li><Link to="/dashboard/alerts">Previous Alerts</Link></li>
             <li>Account settings</li>
             <li><Link to="/account/signout">Sign out</Link></li>
           </ul>

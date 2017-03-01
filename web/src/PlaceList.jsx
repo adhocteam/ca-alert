@@ -7,7 +7,10 @@ import Modal from "./Modal";
 export default class PlaceList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { places: [], showRemoveModal: false, placeToRemove: null };
+    this.state = { places: null, showRemoveModal: false, placeToRemove: null };
+    if (isLoggedIn()) {
+      this.loadPlaces();
+    }
   }
 
   loadPlaces() {
@@ -15,30 +18,26 @@ export default class PlaceList extends React.Component {
       .then(checkResponse)
       .then(response => response.json())
       .then(data => {
-        this.setState({ places: data.data });
+        this.setState({ places: data.data || [] });
       })
       .catch(error => {
         console.error("request failed", error);
       });
   }
 
-  componentDidMount() {
-    if (isLoggedIn()) {
-      this.loadPlaces();
-    }
-  }
-
   handleRemoveClick(e, i) {
     e.preventDefault();
-    this.state.placeToRemove = this.state.places[i];
-    this.state.showRemoveModal = true;
-    this.setState(this.state);
+    this.setState({
+      placeToRemove: this.state.places[i],
+      showRemoveModal: true
+    });
   }
 
   handleOnClose() {
-    this.state.placeToRemove = null;
-    this.state.showRemoveModal = false;
-    this.setState(this.state);
+    this.setState({
+      placeToRemove: null,
+      showRemoveModal: false
+    });
   }
 
   handleRemoveConfirm(e) {
@@ -61,27 +60,32 @@ export default class PlaceList extends React.Component {
   }
 
   render() {
-    const listItems = this.state.places.map((place, i) => {
-      return (
-        <li className="ca-place-list-item" key={"place-" + i}>
-          <div className="ca-place-list-item-name">
-            {place.name}
-          </div>
-          <div className="ca-place-list-item-link">
-            <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
-          </div>
-          <div className="ca-place-list-item-link">
-            <a
-              href="#"
-              onClick={e => this.handleRemoveClick(e, i)}
-              title="Remove this place"
-            >
-              Remove
-            </a>
-          </div>
-        </li>
-      );
-    });
+    let listItems = null;
+    if (this.state.places === null) {
+      listItems = <div>Loading …</div>;
+    } else {
+      listItems = this.state.places.map((place, i) => {
+        return (
+          <li className="ca-place-list-item" key={"place-" + i}>
+            <div className="ca-place-list-item-name">
+              {place.name}
+            </div>
+            <div className="ca-place-list-item-link">
+              <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
+            </div>
+            <div className="ca-place-list-item-link">
+              <a
+                href="#"
+                onClick={e => this.handleRemoveClick(e, i)}
+                title="Remove this place"
+              >
+                Remove
+              </a>
+            </div>
+          </li>
+        );
+      });
+    }
     const placeToRemove = this.state.placeToRemove !== null
       ? this.state.placeToRemove.name
       : "";
