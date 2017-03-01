@@ -39,6 +39,7 @@
     "nyc": "^10.1.2",
     "react-addons-test-utils": "^15.4.2",
     "sass-loader": "^6.0.2",
+    "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"

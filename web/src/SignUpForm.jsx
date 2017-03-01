@@ -32,21 +32,13 @@ export class SignUpForm extends React.Component {
     this.setState(state);
   }
 
-  handleBlur(e) {
+  validate() {
     let state = this.state;
-    switch (e.target.name) {
-      case "signup-email":
-        state.email.isValid = /^.+@.+\..+$/.test(e.target.value);
-        break;
-      case "signup-password":
-        state.password.isValid = e.target.value.length >= MIN_PASSWORD_LEN;
-        break;
-      case "signup-password-confirm":
-        state.passwordConfirm.isValid = e.target.value ===
-          state.password.value &&
-          state.password.isValid;
-        break;
-    }
+    state.email.isValid = /^.+@.+\..+$/.test(state.email.value);
+    state.password.isValid = state.password.value.length >= MIN_PASSWORD_LEN;
+    state.passwordConfirm.isValid = state.passwordConfirm.value ===
+      state.password.value &&
+      state.password.isValid;
     this.setState(state);
   }
 
@@ -166,7 +158,7 @@ export class SignUpForm extends React.Component {
                   placeholder="name@example.com"
                   value={this.state.email.value}
                   onChange={e => this.handleChange(e)}
-                  onBlur={e => this.handleBlur(e)}
+                  onBlur={() => this.validate()}
                 />
               </div>
               <div className={errClassName(this.state.password.isValid, "div")}>
@@ -185,7 +177,7 @@ export class SignUpForm extends React.Component {
                   className={errClassName(this.state.password.isValid, "input")}
                   value={this.state.password.value}
                   onChange={e => this.handleChange(e)}
-                  onBlur={e => this.handleBlur(e)}
+                  onBlur={() => this.validate()}
                 />
               </div>
               <div
@@ -214,7 +206,7 @@ export class SignUpForm extends React.Component {
                   )}
                   value={this.state.passwordConfirm.value}
                   onChange={e => this.handleChange(e)}
-                  onBlur={e => this.handleBlur(e)}
+                  onBlur={() => this.validate()}
                 />
               </div>
               {button}
