@@ -13,9 +13,9 @@ $color-primary-alt: #02BFE7;
 // Headings
 
 h1, h2, h3, h4, h5, h6 {
-  color: $primary-blue;
+  color: #112E51;
   font-family: 'Source Sans Pro', sans-serif;
-  font-weight: normal;
+  font-weight: bold;
   &.sans {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
