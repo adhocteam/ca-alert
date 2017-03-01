@@ -9,13 +9,11 @@ import { SignUpForm } from "../src/SignUpForm";
 
 describe("Sign-up form", () => {
   beforeEach(() => {
-    sinon.stub(window, "fetch");
-    sinon.stub(hashHistory, "push");
+    sinon.stub(global, "fetch");
   });
 
   afterEach(() => {
-    window.fetch.restore();
-    hashHistory.push.restore();
+    global.fetch.restore();
   });
 
   it("initially should be invalid", () => {
@@ -37,7 +35,7 @@ describe("Sign-up form", () => {
         .find(`input[name='${name}']`)
         .simulate("change", { target: { name, value } });
     });
-    wrapper.find(`input[name="signup-email"]`).simulate("blur");
+
     expect(
       wrapper.find('input[type="submit"]').props().disabled
     ).to.be.undefined;
@@ -60,24 +58,40 @@ describe("Sign-up form", () => {
     ).to.equal(true);
   });
 
+  it("Should display validation for specific elements on blur", () => {
+    // Password fields shouldn't get an error if they haven't typed anything
+    const el = shallow(<SignUpForm />);
+    el.find('input[name="signup-email"]').simulate('change', {
+      target: { name: 'signup-email', value: 'someone@example.com' }
+    }).simulate('blur');
+
+    expect(el.find('.usa-input-error-message')).to.have.length(0);
+
+    // blurring the password field should show a warning
+    el.find('input[name="signup-password"]').simulate('blur');
+    expect(el.find('.usa-input-error-message')).to.have.length(1);
+  });
+
   describe("submitting form to server", () => {
     beforeEach(() => {
-      const res = new window.Response(`{status: "success"}`);
-      window.fetch.returns(Promise.resolve(res));
+      const res = new window.Response(`{"status": "success"}`);
+      global.fetch.returns(Promise.resolve(res));
     });
 
-    it("should submit successfully", done => {
+    it("should submit successfully", (done) => {
+      hashHistory.push = (path) => {
+        expect(path).to.contain("/account/signup/verify");
+        done();
+      }
+
       const wrapper = shallow(<SignUpForm />);
       wrapper.setState({
         email: { value: "paulsmith@pobox.com" },
         password: { value: "asdf1234" },
         passwordConfirm: { value: "asdf1234" }
       });
-      wrapper.simulate("submit");
-      done();
-      expect(
-        hashHistory.push.withArgs("/account/signup/verify").calledOnce
-      ).to.equal(true);
+
+      wrapper.find("form").simulate("submit", { preventDefault: () => {} });
     });
   });
 });
