@@ -26,8 +26,6 @@ The client-side React app includes the visual interface for the prototype, tools
 
 We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/index.html#L13) to set the basic page layout, as well as other components like [buttons](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/Button.jsx#L7) and [form controls](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/EditPlaceForm.jsx#L93). Most of the HTML for the app is defined in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) code included in React components like [this one](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx). The page is bootstrapped and assets are loaded in through a static [index.html](https://github.com/adhocteam/ca-alert/blob/master/web/index.html) page.
 
-!!!!DANNY, ANYTHING ELSE NEEDED ON THIS?!!!!!
-
 #### Collecting and displaying input
 
 Forms are implemented as React components, using JSX to describe the markup. The [form for adding places](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx) is an example of this pattern. Form components [store their state](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L12) as Javascript Objects that are updated as the data in the form changes. The submission of the form [is bound to](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L184) a [handleSubmit function](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L62) which takes the current state of the form, encodes it into query parameters, and sends the appropriate request to the API for storing the data.
@@ -36,14 +34,9 @@ Displaying data is done in a similar way, with React components like the [PlaceL
 
 For both collecting and displaying data, React's virtual DOM allows us to seamlessly update the page without worrying about what individual parts of the markup have changed. We have also taken advantage of the reusability of React components by creating multi-use tools like [buttons](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx) and [error messages](https://github.com/adhocteam/ca-alert/blob/master/web/src/Error.jsx).
 
-#### Data visualizations
-
-!!!!RELEVANT IF WE'RE USING D3 OR SOMETHING TO DRAW GRAPHS FOR ANALYTICS THINGS!!!!
-
 #### Usage of Google Maps and Geocoder
 
-!!!!PAUL TO FILL IN!!!!
-!!!!Include information about how we're not supposed to store geocoder results but are doing so for the prototype!!!!
+We have used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
 #### Site navigation
 
@@ -57,7 +50,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-!!!!GONNA LET SOMEBODY ELSE WRITE THIS I THINK!!!!
+!!!!GRAHAM TO FILL THIS IN!!!!
 
 ### The server-side Rails API
 
@@ -112,12 +105,16 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [x] Create a prioritized list of tasks the user is trying to accomplish, also known as “user stories”
 - [ ] As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs
 
+#### Notes
+
 ### Address the whole experience, from start to finish
 
 - [ ] Understand the different points at which people will interact with the service – both online and in person
 - [ ] Identify pain points in the current way users interact with the service, and prioritize these according to user needs
 - [ ] Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service
 - [ ] Develop metrics that will measure how well the service is meeting user needs at each step of the service
+
+#### Notes
 
 ### Make it simple and intuitive
 - [x] Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards as a default
@@ -127,6 +124,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [x] Provide users with a way to exit and return later to complete the process
 - [ ] Use language that is familiar to the user and easy to understand
 - [ ] Use language and design consistently throughout the service, including online and offline touch points
+
+#### Notes
 
 ### Build the service using agile and iterative practices
 - [x] Ship a functioning “minimum viable product” (MVP) that solves a core user need as soon as possible, no longer than three months from the beginning of the project, using a “beta” or “test” period if needed
@@ -139,6 +138,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [x] Give the entire project team access to the issue tracker and version control system
 - [x] Use code reviews to ensure quality
 
+#### Notes
+
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities
 - [ ] Contract is structured to request frequent deliverables, not multi-month milestones
@@ -150,12 +151,16 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] Contract specifies a warranty period where defects uncovered by the public are addressed by the vendor at no additional cost to the government
 - [ ] Contract includes a transition of services period and transition-out plan
 
+#### Notes
+
 ### Assign one leader and hold that person accountable
 - [x] A product owner has been identified
 - [x] All stakeholders agree that the product owner has the authority to assign tasks and make decisions about features and technical implementation details
 - [x] The product owner has a product management background with technical experience to assess alternatives and weigh tradeoffs
 - [ ] The product owner has a work plan that includes budget estimates and identifies funding sources
 - [ ] The product owner has a strong relationship with the contracting officer
+
+#### Notes
 
 ### Bring in experienced teams
 - [x] Member(s) of the team have experience building popular, high-traffic digital services
@@ -167,11 +172,15 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] A Federal budget officer is on the internal team or is a partner
 - [ ] The appropriate privacy, civil liberties, and/or legal advisor for the department or agency is a partner
 
+#### Notes
+
 ### Choose a modern technology stack
 - [x] Choose software frameworks that are commonly used by private-sector companies creating similar services
 - [x] Whenever possible, ensure that software can be deployed on a variety of commodity hardware types
 - [x] Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects
 - [x] Consider open source software solutions at every layer of the stack
+
+#### Notes
 
 ### Deploy in a flexible hosting environment
 - [x] Resources are provisioned on demand
@@ -182,6 +191,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] Static assets are served through a content delivery network
 - [x] Application is hosted on commodity hardware
 
+#### Notes
+
 All of these are things that we would definitely do in a production environment, but some may not be applicable to a prototype. For example, we did not make an attempt at autoscaling or a multi-region deployment because the demands of the prototype do not warrant it.
 
 ### Automate testing and deployments
@@ -190,6 +201,8 @@ All of these are things that we would definitely do in a production environment,
 - [x] Run tests automatically as part of the build process
 - [x] Perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques
 - [ ] Conduct load and performance tests at regular intervals, including before public launch
+
+#### Notes
 
 Again here, load and performance testing don't seem applicable to a prototype but are definitely things we would undertake in production.
 
@@ -201,6 +214,8 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [ ] “Pre-certify” the hosting infrastructure used for the project using FedRAMP
 - [x] Use deployment scripts to ensure configuration of production environment remains consistent and controllable
 
+#### Notes
+
 ### Use data to drive decisions
 - [ ] Monitor system-level resource utilization in real time
 - [x] Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)
@@ -210,6 +225,8 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [ ] Publish metrics internally
 - [ ] Publish metrics externally
 - [ ] Use an experimentation tool that supports multivariate testing in production
+
+#### Notes
 
 ### Default to open
 - [ ] Offer users a mechanism to report bugs and issues, and be responsive to these reports
@@ -221,6 +238,8 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [x] When appropriate, create an API for third parties and internal users to interact with the service directly
 - [x] When appropriate, publish source code of projects or components online
 - [x] When appropriate, share your development process and progress publicly
+
+#### Notes
 
 ##Responses to the prompts in Section 2 of the RFI
 
