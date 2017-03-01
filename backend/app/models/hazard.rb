@@ -15,6 +15,7 @@ class Hazard < ApplicationRecord
     h = super(options)
     h['email_notifications_sent'] = alerts.sum(&:email_notifications_sent)
     h['sms_notifications_sent'] = alerts.sum(&:sms_notifications_sent)
+    h['users_notified'] = User.joins(:alerts).where(alerts: { hazard_id: id }).distinct.count
     h
   end
 
@@ -64,6 +65,9 @@ class Hazard < ApplicationRecord
       key :type, :integer
     end
     property :sms_notification_count do
+      key :type, :integer
+    end
+    property :users_notified do
       key :type, :integer
     end
     property :created_at do
