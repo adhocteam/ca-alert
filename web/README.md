@@ -42,6 +42,38 @@ called `dist/bundle.js`.
 $ make build
 ```
 
+You can also have Webpack watch for changes and automatically recompile when you
+save files during development. The following is equivalent to `make build` with
+auto-recompile:
+
+``` shell
+$ make watch
+```
+
+This runs a persistent process in the foreground, so you'll need to `Ctrl-C` out
+of it to shut it down when you're done.
+
+### Serving the app locally
+
+To run the app locally, any webserver will do. After the app is built, serve the
+files from `dist`. For example, you can use Python's built-in webserver:
+
+``` shell
+$ cd dist
+$ python -m SimpleHTTPServer
+```
+
+By default, this runs a server on port 8080, so point your browser
+at [http://localhost:8080](http://localhost:8080).
+
+Alternatively, you can use Webpack's development server, which does the same
+basic thing, but will also watch for changes, automatically recompile your
+source files when you save, and reload the page in your browser if it's open:
+
+``` shell
+$ make serve
+```
+
 ### Building the app for a production release
 
 The build is parameterized for different environments. For example, the API host
