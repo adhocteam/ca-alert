@@ -48,11 +48,12 @@ beforeEach((done) => {
   done();
 });
 
-function login() {
+function login(admin=false) {
   const user = {
     email: 'user@example.com',
     name: 'someone',
-    email_notifications_enabled: true
+    email_notifications_enabled: true,
+    is_admin: admin
   };
 
   const now = (new Date()).getTime();

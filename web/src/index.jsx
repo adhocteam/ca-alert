@@ -18,6 +18,7 @@ import CommunicationSettings from "./CommunicationSettings";
 import AddPhone from "./AddPhone";
 import ConfirmPhone from "./ConfirmPhone";
 import AlertList from './AlertList';
+import Analytics from './Analytics';
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -44,6 +45,7 @@ ReactDOM.render(
     <Route path="/admin/hazards/new" component={CreateHazard} />
     <Route path="/admin/hazards/:id" component={HazardView} />
     <Route path="/admin/users" component={UserList} />
+    <Route path="/admin/analytics" component={Analytics} />
   </Router>,
   document.getElementById("app")
 );
