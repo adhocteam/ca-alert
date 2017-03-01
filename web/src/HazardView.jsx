@@ -1,9 +1,8 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 
-import { fetchAuthd, checkResponse } from './lib';
-import Map from './Map';
-
+import { fetchAuthd, checkResponse } from "./lib";
+import Map from "./Map";
 
 class HazardView extends React.Component {
   constructor(props) {
@@ -13,19 +12,19 @@ class HazardView extends React.Component {
 
   componentDidMount() {
     let id = this.props.params.id;
-    fetchAuthd(API_HOST + `/admin/hazards`)
+    fetchAuthd(`${API_HOST}/admin/hazards/${id}`)
       .then(checkResponse)
       .then(response => response.json())
-      .then(data => {
+      .then(resp => {
         this.setState({
-          hazard: data.data[id]
+          hazard: resp.data
         });
       });
   }
 
   render() {
     if (this.state.hazard === null) {
-      return <span>loading...</span>
+      return <span>loading...</span>;
     } else {
       const hazard = this.state.hazard;
       const start = moment(hazard.created_at);
@@ -42,7 +41,7 @@ class HazardView extends React.Component {
           </div>
 
           <div className="usa-width-two-thirds">
-            <span className="start-date">{start.format('lll')}</span>
+            <span className="start-date">{start.format("lll")}</span>
           </div>
 
           <div className="usa-width-one-whole">
@@ -58,6 +57,13 @@ class HazardView extends React.Component {
             <Map lat={hazard.latitude} lng={hazard.longitude} />
           </div>
 
+          <div className="usa-width-one-whole">
+            <h3>Sent Notifications</h3>
+            <ul>
+              <li>SMS: {hazard.sms_notifications_sent}</li>
+              <li>Email: {hazard.email_notifications_sent}</li>
+            </ul>
+          </div>
         </section>
       );
     }
