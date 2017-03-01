@@ -6,11 +6,38 @@
 
 ##Technical Approach
 
-I initially thought this should be a narrative of how we chose to do development on the prototype and why we made the choices we did, but re-reading the requirement ("Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository") it seems like it needs to be more of a walkthrough of the major components of the code showing how the general flow works. Most of the questions about our choices can be answered in response to the prompts from Section 2.
+"Documentation must show code flow from client UI, to JavaScript library, to REST service to  database, pointing to code in the GitHub repository."
 
-* How the UI collects data from the user
+### Introduction
+
+CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of locations for notifications as well as a number of phone numbers on which they would like to be notified. Hazards are generated manually by administrators as well as automatically based on various live data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
+
+### Technical overview
+
+Our standard set of tools for building web applications includes [Ruby on Rails](http://rubyonrails.org/) for server-side development and [React](https://facebook.github.io/react/) for creating single-Page client-side applications. For this small prototype, we considered creating a monolithic Rails application with no Javascript framework for expediency, but the requirements indicated that the backend should be an API and a framework should be used. Therefore, the prototype consists of two separate apps: the [backend](https://github.com/adhocteam/ca-alert/tree/master/backend) Rails application and the client-side [React app](https://github.com/adhocteam/ca-alert/tree/master/web). The directories for these apps contain instructions for configuring and running them locally.
+
+The two apps also require separate deployment strategies. The React app is built using [WebPack](https://webpack.github.io/), which compiles the Javascript, CSS, and HTML into static assets which are then deployed via remote sync to a bucket on [AWS S3](https://aws.amazon.com/s3/). The Rails app has been deployed via a push to [Heroku](https://heroku.com), a PaaS tool that makes deployment, provisioning, and configuration easy to do. Both apps are deployed via [CodeShip](https://codeship.com/), a continuous integration service that can perform automated deployments.
+
+!!!!!!!!ADD LINKS TO DEPLOYMENT CODE!!!!!!!!
+
+### The React app
+
+The client-side app includes the visual interface for the prototype, tools for collecting and displaying input, data visualizations, and site navigation.
+
+#### Visual interface design
+
+We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](!!!!!LINK_TO_GRID_USAGE_IN_CODE!!!!!) to set the basic page layout, as well as other components like [buttons](!!!!LINK_TO_BUTTON_IN_CODE!!!!) and [form controls](!!!!!LINK_TO_FORM_IN_CODE!!!!!).
+
+#### Collecting and displaying input
+
+#### Data visualizations
+
+#### Site navigation
+
+* How the UI works
   * Form implementation
   * Visual design considerations
+  * Navigation
 * How React components collect that data
   * How state is stored
   * Implementation of reusable components
