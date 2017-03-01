@@ -178,7 +178,7 @@ class AdminReportsControllerSwaggerBlocks
     end
   end
 
-  swagger_schema :DatedResponse do
+  swagger_schema :DatedReportResponse do
     property :status do
       key :type, :string
     end
