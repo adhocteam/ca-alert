@@ -107,6 +107,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### Notes
 
+LAURA
+
 ### Address the whole experience, from start to finish
 
 - [ ] Understand the different points at which people will interact with the service – both online and in person
@@ -115,6 +117,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] Develop metrics that will measure how well the service is meeting user needs at each step of the service
 
 #### Notes
+
+DANNY
 
 ### Make it simple and intuitive
 - [x] Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards as a default
@@ -126,6 +130,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] Use language and design consistently throughout the service, including online and offline touch points
 
 #### Notes
+
+DANNY
 
 ### Build the service using agile and iterative practices
 - [x] Ship a functioning “minimum viable product” (MVP) that solves a core user need as soon as possible, no longer than three months from the beginning of the project, using a “beta” or “test” period if needed
@@ -140,6 +146,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### Notes
 
+WRYEN
+
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities
 - [ ] Contract is structured to request frequent deliverables, not multi-month milestones
@@ -153,6 +161,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### Notes
 
+LEANNA
+
 ### Assign one leader and hold that person accountable
 - [x] A product owner has been identified
 - [x] All stakeholders agree that the product owner has the authority to assign tasks and make decisions about features and technical implementation details
@@ -161,6 +171,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [ ] The product owner has a strong relationship with the contracting officer
 
 #### Notes
+
+LEANNA
 
 ### Bring in experienced teams
 - [x] Member(s) of the team have experience building popular, high-traffic digital services
@@ -174,6 +186,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### Notes
 
+AUBREY
+
 ### Choose a modern technology stack
 - [x] Choose software frameworks that are commonly used by private-sector companies creating similar services
 - [x] Whenever possible, ensure that software can be deployed on a variety of commodity hardware types
@@ -181,6 +195,8 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 - [x] Consider open source software solutions at every layer of the stack
 
 #### Notes
+
+Modern, open source tools have been used throughout our development of the prototype. We have avoided using exotic tools that are difficult to deploy, favoring software and processes that we use every day on existing projects. Documentation on [running](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) the [apps](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) locally has been provided and updated throughout the development process.
 
 ### Deploy in a flexible hosting environment
 - [x] Resources are provisioned on demand
@@ -193,10 +209,10 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### Notes
 
-All of these are things that we would definitely do in a production environment, but some may not be applicable to a prototype. For example, we did not make an attempt at autoscaling or a multi-region deployment because the demands of the prototype do not warrant it.
+Most of these requirements are met through the use of Heroku as a PaaS provider. It enables API-based provisioning of resources and allows us to scale those resources up and down easily and with no downtime. In a production system, we would seek to increase the reliability of the application by using a multi-region approach with demand-based autoscaling, and the static assets would be served up behind a CDN.
 
 ### Automate testing and deployments
-- [ ] Create automated tests that verify all user-facing functionality
+- [x] Create automated tests that verify all user-facing functionality
 - [x] Create unit and integration tests to verify modules and components
 - [x] Run tests automatically as part of the build process
 - [x] Perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques
@@ -204,7 +220,7 @@ All of these are things that we would definitely do in a production environment,
 
 #### Notes
 
-Again here, load and performance testing don't seem applicable to a prototype but are definitely things we would undertake in production.
+Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
 
 ### Manage security and privacy through reusable processes
 - [ ] Contact the appropriate privacy or legal officer of the department or agency to determine whether a System of Records Notice (SORN), Privacy Impact Assessment, or other review should be conducted
@@ -215,6 +231,8 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [x] Use deployment scripts to ensure configuration of production environment remains consistent and controllable
 
 #### Notes
+
+LEANNA
 
 ### Use data to drive decisions
 - [ ] Monitor system-level resource utilization in real time
@@ -228,9 +246,11 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 
 #### Notes
 
+Heroku provides a number of these tools to us automatically, but we chose not to expand upon them because they were not required for the prototype. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
+
 ### Default to open
 - [ ] Offer users a mechanism to report bugs and issues, and be responsive to these reports
-- [ ] Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)
+- [x] Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)
 - [ ] Ensure that data from the service is explicitly in the public domain, and that rights are waived globally via an international public domain dedication, such as the “Creative Commons Zero” waiver
 - [ ] Catalog data in the agency’s enterprise data inventory and add any public datasets to the agency’s public data listing
 - [ ] Ensure that we maintain the rights to all data developed by third parties in a manner that is releasable and reusable at no cost to the public
@@ -241,11 +261,13 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 
 #### Notes
 
+Many of the concepts here do not apply to the development of a prototype, but we have done our development under a public GitHub repository that includes all of the code commits, issues filed, and documents created. Also, the API has been developed in such a way that access is publicly available.
+
 ##Responses to the prompts in Section 2 of the RFI
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-We assigned Leanna Miller Sharkey to be the Product Owner. More about that role and the activities she performed.
+LEANNA
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
@@ -339,5 +361,4 @@ Because we have a split between the server-side and client-side apps, a develope
 
 #### t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge
 
-???????????????????????????????????????
-I'm not sure what to say here. All of our tools are open and free, but the app relies on Twilio to deliver SMS messages. I guess what I can do is make a fake Twilio client to use in development so that the app can be run locally without this requirement. I will write up a ticket to create that.
+This is the case for all of the tools required to run the app except for the Twilio API integrations. To ensure that we can meet this requirement, we have made the app handle the case where no Twilio credentials are supplied by stubbing out the Twilio client and logging the SMS messages.
