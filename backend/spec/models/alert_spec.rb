@@ -12,6 +12,7 @@ RSpec.describe Alert do
       expect(h.alerts.count).to eq(1)
       expect(h.alerts.first.email_notifications_sent).to eq(1)
       expect(h.alerts.first.sms_notifications_sent).to eq(2)
+      expect(h.as_json['users_notified']).to eq(1)
     end
   end
 end
