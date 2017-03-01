@@ -17,6 +17,7 @@ import HazardView from "./HazardView";
 import CommunicationSettings from "./CommunicationSettings";
 import AddPhone from "./AddPhone";
 import ConfirmPhone from "./ConfirmPhone";
+import AlertList from './AlertList';
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -28,6 +29,7 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Home} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/dashboard/alerts" component={AlertList} />
     <Route path="/dashboard/places" component={PlaceList} />
     <Route path="/dashboard/places/new" component={AddPlaceForm} />
     <Route path="/dashboard/places/:id/edit" component={EditPlaceForm} />

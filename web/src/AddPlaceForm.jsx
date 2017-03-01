@@ -4,6 +4,7 @@ import { encodeQueryString, fetchAuthd } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
 import { Point } from "./lib";
 import Map from "./Map";
+import ErrorAlert from "./Error";
 
 export default class AddPlaceForm extends React.Component {
   constructor(props) {
@@ -90,6 +91,15 @@ export default class AddPlaceForm extends React.Component {
     this.setState({ showNamePlace: true });
   }
 
+  handleGeoLocate(pt) {
+    this.setState({
+      geocodeResult: {
+        address: `(${pt.lng}, ${pt.lat})`,
+        pt: pt
+      }
+    });
+  }
+
   render() {
     let searchBtn = null;
     if (this.state.searchBtnEnabled) {
@@ -131,7 +141,10 @@ export default class AddPlaceForm extends React.Component {
       locationForm = (
         <div>
           <div>
-            <GeoLocationBtn />
+            <GeoLocationBtn
+              onLocate={pt => this.handleGeoLocate(pt)}
+              onError={err => this.setState({ error: err })}
+            />
           </div>
           <p>OR</p>
           <div>
@@ -165,6 +178,7 @@ export default class AddPlaceForm extends React.Component {
       <section className="usa-grid usa-section">
         <div className="usa-width-one-whole">
           <h2>Add a place</h2>
+          {this.state.error ? <ErrorAlert error={this.state.error} /> : null}
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">

@@ -19,11 +19,11 @@ export default class HazardList extends React.Component {
   }
 
   render() {
-    let hazardList = this.state.hazards.map((hazard, i) => {
+    let hazardList = this.state.hazards.map((hazard) => {
       return (
-        <tr key={`hazard-${i}`}>
+        <tr key={`hazard-${hazard.id}`}>
           <td>
-            <Link to={`/admin/hazards/${i}`}>
+            <Link to={`/admin/hazards/${hazard.id}`}>
               {hazard.title}
             </Link>
           </td>

@@ -36,14 +36,21 @@ export default class SignInForm extends React.Component {
     this.setState(this.state);
   }
 
+  isEmailValid() {
+    return /^.+@.+\..+$/.test(this.state.email.value);
+  }
+
+  isPasswordValid() {
+    return this.state.password.value.length >= MIN_PASSWORD_LEN;
+  }
+
   handleBlur(e) {
     switch (e.target.name) {
       case "signin-email":
-        this.state.email.isValid = /^.+@.+\..+$/.test(this.state.email.value);
+        this.state.email.isValid = this.isEmailValid();
         break;
       case "signin-password":
-        this.state.password.isValid = this.state.password.value.length >=
-          MIN_PASSWORD_LEN;
+        this.state.password.isValid = this.isPasswordValid();
         break;
     }
     this.setState(this.state);
@@ -93,7 +100,7 @@ export default class SignInForm extends React.Component {
   }
 
   formIsValid() {
-    return this.state.email.isValid && this.state.password.isValid;
+    return this.isEmailValid() && this.isPasswordValid();
   }
 
   render() {
