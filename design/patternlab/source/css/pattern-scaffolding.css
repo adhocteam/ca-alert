@@ -72,21 +72,28 @@
 
 legend {
   font-size: 21px;
-  font-family: 'Bitter';
+  font-family: 'Source Sans Pro';
 }
+
 
 input[type="text"].big, input[type="textarea"].big {
     height: 4.7rem;
 }
 
 input[type="text"], input[type="textarea"], textarea {
-    padding: .35em;
-    font-size: 18px;
+    padding: 10px 12px;
+    font-size: 17px;
+    font-family: 'Source Sans Pro', 'Helvetica', 'Arial', sans-serif;
     height: auto;
-    border: 1px solid #ccc;
+    border: 1px solid #5b616b;
     width: 100%;
     margin: 0 0 1em 0;
+    max-width: 30em;
 }
+
+input:focus {
+  box-shadow: 0 0 3px #3e94cf, 0 0 7px #3e94cf;
+  }
 
 
 / Buttons
@@ -180,11 +187,9 @@ button {
 }
 
 label.input-group {
-    padding: 1em;
+    padding: 0;
     display: block;
-    border-radius: .25em;
     margin: 0 0 .5em 0;
-    background: rgba(0, 0, 0, 0.05);
     -webkit-transition: all .1s ease-in-out;
     -moz-transition: all .15s ease-in-out;
     -o-transition: all .15s ease-in-out;
@@ -238,8 +243,8 @@ label {
     display: block;
     max-width: 100%;
     margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: normal;
+    font-size: 17px;
 }
 
 blockquote {
