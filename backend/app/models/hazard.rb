@@ -9,6 +9,7 @@ class Hazard < ApplicationRecord
   validates :message, presence: true
   validates :radius_in_meters, presence: true
 
+  after_create :store_current_user_count
   after_create :create_alerts
 
   def as_json(options = {})
@@ -66,6 +67,9 @@ class Hazard < ApplicationRecord
     property :sms_notification_count do
       key :type, :integer
     end
+    property :user_count_at_creation do
+      key :type, :integer
+    end
     property :created_at do
       key :type, :string
       key :format, 'date-time'
@@ -77,6 +81,12 @@ class Hazard < ApplicationRecord
   end
 
   private
+
+  def store_current_user_count
+    # Not using User.count because for seeding the database there may technically be users
+    # created in the future from when the hazard was created.
+    update_attribute(:user_count_at_creation, User.where('created_at < ?', created_at).count)
+  end
 
   def create_alerts
     Place.within_radius_of(coord.lon, coord.lat, radius_in_meters).each do |place|
