@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "timestamp": 1488329615575,
+  "timestamp": 1488394114721,
   "graph": {
     "options": {
       "directed": true,
@@ -24,8 +24,8 @@
         "v": "00-atoms/buttons/button-primary.mustache",
         "value": {
           "compileState": "clean",
-          "lineagePath": "../../patterns/01-molecules-forms-fieldset/01-molecules-forms-fieldset.rendered.html",
-          "lineagePattern": "molecules-fieldset"
+          "lineagePath": "../../patterns/01-molecules-forms-sign-up-form/01-molecules-forms-sign-up-form.rendered.html",
+          "lineagePattern": "molecules-sign-up-form"
         }
       },
       {
@@ -107,19 +107,7 @@
         }
       },
       {
-        "v": "00-atoms/text/05-preformatted-text.mustache",
-        "value": {
-          "compileState": "clean"
-        }
-      },
-      {
         "v": "00-atoms/text/06-hr.mustache",
-        "value": {
-          "compileState": "clean"
-        }
-      },
-      {
-        "v": "00-atoms/text/07-page-header.mustache",
         "value": {
           "compileState": "clean"
         }
@@ -132,6 +120,12 @@
       },
       {
         "v": "01-molecules/forms/fieldset.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "01-molecules/forms/sign-up-form.mustache",
         "value": {
           "compileState": "clean"
         }
@@ -152,6 +146,11 @@
     "edges": [
       {
         "v": "01-molecules/forms/fieldset.mustache",
+        "w": "00-atoms/buttons/button-primary.mustache",
+        "value": {}
+      },
+      {
+        "v": "01-molecules/forms/sign-up-form.mustache",
         "w": "00-atoms/buttons/button-primary.mustache",
         "value": {}
       }
