@@ -34,6 +34,7 @@
     "extract-text-webpack-plugin": "beta",
     "file-loader": "^0.10.0",
     "html-loader": "^0.4.4",
+    "ignore-styles": "^5.0.1",
     "jsdom": "^9.11.0",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
