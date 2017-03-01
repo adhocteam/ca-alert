@@ -3,17 +3,16 @@
     <h2>Sign up</h2>
   </legend>
 
-  <div id="text-field">
-    <label for="label-id">Email address</label>
-    <input type="text" class="form-control" aria-describedby="label-id">
+  <div>
+    {{> atoms-label }} {{> atoms-input }}
   </div>
 
-  <div id="text-field">
+  <div>
     <label for="label-id">Password</label>
     <input type="password" class="form-control" aria-describedby="label-id">
   </div>
 
-  <div id="text-field">
+  <div>
     <label for="label-id">Confirm password</label>
     <input type="password" class="form-control" aria-describedby="label-id">
   </div>

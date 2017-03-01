@@ -27,38 +27,43 @@
 
 <body class="">
 
-  <a role="button" class="btn btn-primary-action" href="#">Primary Button</a>
+  <div>
+    <label for="label-id">Form field label</label>
+
+    <input type="text" class="form-control" aria-describedby="label-id">
+
+  </div>
   <!--DO NOT REMOVE-->
   <script type="text/json" id="sg-pattern-data-footer" class="sg-pattern-data">
     {
       "cssEnabled": false,
-      "patternLineageExists": false,
-      "patternLineages": [],
-      "lineage": [],
-      "patternLineageRExists": true,
-      "patternLineagesR": [{
-        "lineagePattern": "molecules-fieldset",
-        "lineagePath": "../../patterns/01-molecules-forms-fieldset/01-molecules-forms-fieldset.rendered.html"
+      "patternLineageExists": true,
+      "patternLineages": [{
+        "lineagePattern": "atoms-label",
+        "lineagePath": "../../patterns/00-atoms-forms-01-label/00-atoms-forms-01-label.rendered.html"
       }, {
-        "lineagePattern": "organisms-sign-up-form",
-        "lineagePath": "../../patterns/02-organisms-forms-sign-up-form/02-organisms-forms-sign-up-form.rendered.html"
+        "lineagePattern": "atoms-input",
+        "lineagePath": "../../patterns/00-atoms-forms-02-input/00-atoms-forms-02-input.rendered.html"
       }],
-      "lineageR": [{
-        "lineagePattern": "molecules-fieldset",
-        "lineagePath": "../../patterns/01-molecules-forms-fieldset/01-molecules-forms-fieldset.rendered.html"
+      "lineage": [{
+        "lineagePattern": "atoms-label",
+        "lineagePath": "../../patterns/00-atoms-forms-01-label/00-atoms-forms-01-label.rendered.html"
       }, {
-        "lineagePattern": "organisms-sign-up-form",
-        "lineagePath": "../../patterns/02-organisms-forms-sign-up-form/02-organisms-forms-sign-up-form.rendered.html"
+        "lineagePattern": "atoms-input",
+        "lineagePath": "../../patterns/00-atoms-forms-02-input/00-atoms-forms-02-input.rendered.html"
       }],
+      "patternLineageRExists": false,
+      "patternLineagesR": [],
+      "lineageR": [],
       "patternLineageEExists": true,
       "patternDesc": "",
       "patternBreadcrumb": {
-        "patternType": "atoms",
-        "patternSubtype": "buttons"
+        "patternType": "molecules",
+        "patternSubtype": "forms"
       },
       "patternExtension": "mustache",
-      "patternName": "Button Primary",
-      "patternPartial": "atoms-button-primary",
+      "patternName": "Field",
+      "patternPartial": "molecules-field",
       "patternState": "",
       "patternEngineName": "mustache",
       "extraOutput": {}

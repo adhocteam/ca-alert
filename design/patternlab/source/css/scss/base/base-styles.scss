@@ -184,8 +184,8 @@ header {
   margin: 0;
   padding: 0.75em 0;
   overflow: hidden;
-  background: $primary-blue;
-  border-bottom: 3px solid $secondary-blue;
+  background: #0071BC;
+  border-bottom: 3px solid #FDB81E;
   color: $white;
   border-radius: 0;
   margin-bottom: 0;
@@ -196,7 +196,7 @@ header {
     line-height: 1em;
     margin: 0;
     padding: .75em 0;
-    font-family: 'Bitter', serif; font-size: $extra-small;
+    font-family: 'Source Sans Pro', serif; font-size: $extra-small;
     @media (min-width: $screen-sm-min) {
       font-size: $medium;
       padding: 1em 0;

@@ -28,6 +28,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sg-pattern-category-title a {
-	text-decoration: none;
-	color: #212121;
+  text-decoration: none;
+  color: #212121;
+}
+
+.usa-header {
+  background: #0071bc;
+  color: #fff;
+  border-bottom: 2px solid #f9c642!important;
+}
+
+.usa-navbar {
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 3rem;
+  padding-left: 3rem;
+  display: block;
+  height: auto;
+  max-width: 1040px;
+}
+
+.usa-logo {
+	padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  line-height: 7.5rem;
+  margin-left: 0;
+}
+
+.usa-logo-text {
+	line-height: 1;
+}
+
+.usa-logo-text > h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+.usa-nav-secondary {
+	float:right;
+	margin-top: -4em;
 }
