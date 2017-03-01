@@ -6,7 +6,7 @@
 
 ##Technical Approach
 
-"Documentation must show code flow from client UI, to JavaScript library, to REST service to  database, pointing to code in the GitHub repository."
+"Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository."
 
 ### Introduction
 
@@ -16,7 +16,7 @@ CAlerts is an implementation of Prototype B for the State of California's RFI #C
 
 Our standard set of tools for building web applications includes [Ruby on Rails](http://rubyonrails.org/) for server-side development and [React](https://facebook.github.io/react/) for creating single-page client-side applications. For this small prototype, we considered creating a monolithic Rails application with no Javascript framework for expediency, but the requirements indicated that the backend should be an API and a framework should be used. Therefore, the prototype consists of two separate apps: the [backend](https://github.com/adhocteam/ca-alert/tree/master/backend) Rails application and the client-side [React app](https://github.com/adhocteam/ca-alert/tree/master/web). The directories for these apps contain instructions for configuring and running them locally.
 
-The two apps also require separate deployment strategies. The React app is built using [WebPack](https://webpack.github.io/), which compiles the Javascript, CSS, and HTML into static assets which are then deployed via remote sync to a bucket on [AWS S3](https://aws.amazon.com/s3/). The Rails app has been deployed via a push to [Heroku](https://heroku.com), a PaaS tool that makes deployment, provisioning, and configuration easy to do. Both apps are deployed automatically after passing tests via [CodeShip](https://codeship.com/), a continuous integration service that can perform automated deployments.
+The two apps also require separate deployment strategies. The React app is [built](https://github.com/adhocteam/ca-alert/blob/master/web/webpack.config.js) using [WebPack](https://webpack.github.io/), which compiles the Javascript, CSS, and HTML into static assets which are then deployed via remote sync to a bucket on [AWS S3](https://aws.amazon.com/s3/). The Rails app has been deployed via a push to [Heroku](https://heroku.com), a PaaS tool that makes deployment, provisioning, and configuration easy to do. Both apps are deployed automatically after passing tests via [CodeShip](https://codeship.com/), a continuous integration service that can perform automated deployments.
 
 ### The client-side React app
 
@@ -40,6 +40,10 @@ For both collecting and displaying data, React's virtual DOM allows us to seamle
 
 !!!!RELEVANT IF WE'RE USING D3 OR SOMETHING TO DRAW GRAPHS FOR ANALYTICS THINGS!!!!
 
+#### Usage of Google Maps and Geocoder
+
+!!!!Include information about how we're not supposed to store geocoder results but are doing so for the prototype!!!!
+
 #### Site navigation
 
 We have used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when they are visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
@@ -56,23 +60,45 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 ### The server-side Rails API
 
-* How the API is implemented
-  * Rails API-only project
-  * How routes are defined
-  * How controllers handle actions
-  * How models serialize themselves to JSON
-  * How messages are sent to users (Twilio/SendGrid/ActionMailer)
-* Data storage
-  * Sample Rails model
-  * Selection of PostgreSQL
-  * Pointer to the table schema
-* Special considerations for geo data
-  * How we pull in the data, and how it is stored
-  * Using PostGIS features for place intersections
-* How this fits together in the deployed app
-  * S3 for static asset storage/hosting
-  * Heroku for dynamic server deployment
-  * CORS settings for allowing these to work together
+The REST API for this project has been implemented as an [API-only](http://edgeguides.rubyonrails.org/api_app.html) Rails project that supports a JSON interface for accessing and updating data in the application. It is backed by a [PostgreSQL](https://www.postgresql.org/) database using the [PostGIS](http://www.postgis.net/) extensions for geographic data, uses [Twilio](https://www.twilio.com/) for SMS delivery, provides [Swagger](http://swagger.io/) documentation using the [swagger-blocks](https://github.com/fotinakis/swagger-blocks) gem, handles authentication using the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), and is fully tested using a suite of [Rspec](http://rspec.info/) tests.
+
+#### Request handling
+
+The [routes.rb configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/routes.rb) in the app defines the set of actions the API responds to. Each line in that file corresponds to one or more controller actions, and the controllers take the request parameters and transform them into a JSON response. The [places controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb) is an example that implements the full set of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) actions, allowing clients to manage the set of places for which users would like to receive alerts. The [create action](https://github.com/lynndylanhurley/devise_token_auth), for example, uses a set of allowable parameters to create a new place tied to the user account and returns a JSON document containing the new place on success. Error conditions [also return a JSON document](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L36) that includes information about the individual errors that occurred.
+
+#### Authentication and authorization
+
+User authentication is handled through the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), which adds endpoints under the `/auth` namespace for handling account creation, login, and updating. It also contains an `authenticate_user!` helper method that [controllers can use](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) to ensure there is a valid user before processing a request. If authentication headers do not validate correctly for a user, the controller [will automatically render a 401 status code](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) with a message indicating that authentication has failed.
+
+Authorization is implemented using the [rolify](https://github.com/RolifyCommunity/rolify) gem, which makes it easy to add, remove, and verify roles for users. We [have an action](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/users_controller.rb#L15) for making a user an admin by id that adds the role. Then, actions requiring admin permissions for access can use the [require_admin](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/application_controller.rb#L8) helper to [ensure the user](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/hazards_controller.rb#L3) is allowed access.
+
+#### Data storage and serialization
+
+Data is stored in a PostgreSQL database using the PostGIS extensions for geographic data. PostGIS allows us to [store geometry](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb#L136) in the database and also to [perform intersections](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/place.rb#L11) directly via a SQL query. [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) handles the connection to the database with [a simple configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/database.yml) and allows us to express queries using Ruby in most cases. The schema for the database is defined in the [schema.rb](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb) file.
+
+ActiveRecord has a set of tools for serializing models into JSON that are applied automatically, but there are [some cases](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L15) where we need to customize the fields in order to add data that isn't represented by a column in the database.
+
+#### Twilio integration
+
+To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
+
+#### Swagger documentation
+
+Swagger was used for API documentation via the [swagger-blocks](https://github.com/fotinakis/swagger-blocks) gem, which allowed us to build out the documentation in Ruby rather than maintaining a JSON file. The resulting JSON file is publicly available [here](https://ca-alert.herokuapp.com/apidocs) and can be viewed using [Swagger UI](http://swagger.io/swagger-ui/).
+
+The documentation is served up from the [apidocs controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/apidocs_controller.rb), and rendered by swagger_blocks. Models [define their swagger representations](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L23) in their own files, but for controllers the blocks became so verbose that I [factored them out into the lib directory](https://github.com/adhocteam/ca-alert/tree/master/backend/lib), where they [use plain Ruby objects](https://github.com/adhocteam/ca-alert/blob/master/backend/lib/phone_numbers_controller_swagger_blocks.rb) to define the blocks.
+
+#### Handling geographic data
+
+!!!!PAUL TO FILL THIS IN!!!!
+
+#### Testing
+
+Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. Unit tests have also bee written [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
+
+### Conclusion?
+
+!!!! NOT SURE IF WE NEED A CONCLUSION HERE OR IF THERE IS MORE TO COVER !!!!
 
 ##US Digital Services Playbook Checklist
 
