@@ -88,6 +88,24 @@ RSpec.describe 'authentication', type: :request do
             expect(response).to be_success
           end
 
+          it 'lets me update email_notifications_enabled' do
+            user = User.first
+            expect(user.reload.email_notifications_enabled).to be true
+            put(
+              '/auth',
+              headers: {
+                uid: email,
+                client: response.headers['client'],
+                'access-token' => response.headers['access-token']
+              },
+              params: {
+                email_notifications_enabled: false
+              }
+            )
+            expect(response).to be_success
+            expect(user.reload.email_notifications_enabled).to be false
+          end
+
           it 'can delete the user' do
             delete '/auth', headers: {
               uid: email,
