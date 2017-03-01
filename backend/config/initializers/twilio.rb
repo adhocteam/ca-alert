@@ -1,4 +1,4 @@
-if ENV['TWILIO_ACCOUNT_ID'].present? && ENV['TWILIO_AUTH_TOKEN'].present?
+if ENV['TWILIO_ACCOUNT_SID'].present? && ENV['TWILIO_AUTH_TOKEN'].present?
   Twilio.configure do |config|
     config.account_sid = ENV['TWILIO_ACCOUNT_SID']
     config.auth_token = ENV['TWILIO_AUTH_TOKEN']
