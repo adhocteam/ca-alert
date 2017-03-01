@@ -13,7 +13,7 @@ class AdminReportsControllerSwaggerBlocks
         key :description, 'The number of days data to return'
         key :required, false
         schema do
-          key :type, :string
+          key :type, :integer
         end
       end
       parameter do
@@ -122,7 +122,7 @@ class AdminReportsControllerSwaggerBlocks
         key :description, 'The number of days data to return'
         key :required, false
         schema do
-          key :type, :string
+          key :type, :integer
         end
       end
       parameter do
