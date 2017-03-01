@@ -23,6 +23,8 @@ require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
 require("../index.html");
 
+import "./App.scss";
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Home} />

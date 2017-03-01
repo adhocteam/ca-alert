@@ -1,4 +1,5 @@
 require 'admin_hazards_controller_swagger_blocks'
+require 'admin_reports_controller_swagger_blocks'
 require 'admin_users_controller_swagger_blocks'
 require 'alerts_controller_swagger_blocks'
 require 'base_swagger_blocks'
@@ -33,6 +34,10 @@ class ApidocsController < ActionController::Base
       key :description, 'Administrative hazard actions'
     end
     tag do
+      key :name, 'admin/reports'
+      key :description, 'Administrative reporting actions'
+    end
+    tag do
       key :name, 'admin/users'
       key :description, 'Administrative user actions'
     end
@@ -65,6 +70,7 @@ class ApidocsController < ActionController::Base
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
     AdminHazardsControllerSwaggerBlocks,
+    AdminReportsControllerSwaggerBlocks,
     AdminUsersControllerSwaggerBlocks,
     Alert,
     AlertsControllerSwaggerBlocks,
