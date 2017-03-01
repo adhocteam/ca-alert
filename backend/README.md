@@ -39,6 +39,10 @@ rake db:migrate
 
 `rake` will run the test suite along with checking for Rubocop offenses. The app uses rspec for testing.
 
+### Receiving email when running locally
+
+In development, the app uses [Mailcatcher](https://mailcatcher.me/) to allow reading and interacting with emails. In order to get this running you'll need to install the gem with `gem install mailcatcher` and then run the daemon with `mailcatcher`. After doing so, you can open your browser to [http://localhost:1080](http://localhost:1080) to use the mail client for reading emails. You'll want to have this up and running before creating your account in order to receive the verification email.
+
 ### Twilio access for SMS delivery
 
 If you'd like to deliver SMS messages locally, you'll need to configure the Twilio values in the .env file. It requires
