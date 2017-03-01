@@ -1,7 +1,7 @@
 import "./spec_helper";
 import React from "react";
 import { hashHistory } from "react-router";
-import { mount, shallow } from "enzyme";
+import { shallow } from "enzyme";
 import sinon from "sinon";
 import "whatwg-fetch";
 
