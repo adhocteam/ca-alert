@@ -164,18 +164,21 @@ We assigned Leanna Miller Sharkey to be the Product Owner. More about that role 
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
-* Greg Gershman: final approver of all, reviewer for Technical Approach— how we manage the process deliverables
-* Daniel X. O’Neil: Proposal manager, research, help out with documentation
-* Leanna Miller Sharkey: Administrative Requirements, help out with research
-* Danny Chapman: Do the design and front-end on Working Prototype
-* Aubrey Holland: Do coding of Working Prototype
-* Juliana Neelbauer: Reviewer on Administrative Requirements
-* Mel Woodward: Review design
-* Wryen: product manager for the Working Prototype
+1. Product Owner: Leanna Miller
+2. Technical Architect: Aubrey Holland
+3. User Researcher/Usability Tester: Laura Ellena
+4. Visual Designer: Danny Chapman
+5. Front End Web Developer: Paul Smith
+6. Backend Web Developer: Aubrey Holland
+7. Delivery Manager: Wryen Meek
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
+Link to research and Moqups?
+
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
+
+LAURA AND DANNY
 
 #### e. Used GitHub to document code commits
 
@@ -187,13 +190,23 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
+DANNY
+
 #### h. Created or used a design style guide and/or a pattern library
+
+DANNY
 
 #### i. Performed usability tests with people
 
+LAURA
+
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
+LEANNA
+
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
+
+DANNY
 
 #### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
 

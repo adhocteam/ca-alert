@@ -9,7 +9,8 @@ class ConfirmPhone extends React.Component {
     super(props);
     this.state = {
       phone: null,
-      pin: ''
+      pin: '',
+      error: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,7 @@ class ConfirmPhone extends React.Component {
 
   handleChange(e) {
     e.preventDefault();
-    this.setState({pin: e.target.value});
+    this.setState({pin: e.target.value, error: null});
   }
 
   handleSubmit(e) {
@@ -54,8 +55,9 @@ class ConfirmPhone extends React.Component {
     })
       .then(checkResponse)
       .then(response => response.json())
-      .then((resp) => hashHistory.push('/account/communication'))
+      .then(resp => hashHistory.push('/account/communication'))
       .catch(error => {
+        this.setState({error: "Invalid confirmation code"});
         console.error("request failed: %o", error);
       });
   }
@@ -64,6 +66,14 @@ class ConfirmPhone extends React.Component {
     if (!this.state.phone) {
       return <span>loading...</span>
     } else {
+      let errmsg = null;
+      let errcls = null;
+
+      if (this.state.error != null) {
+        errcls = "usa-input-error";
+        errmsg = <span className="usa-input-error-message" role="alert">{this.state.error}</span>;
+      }
+
       return (
         <section>
           <div className="usa-grid usa-section">
@@ -79,12 +89,15 @@ class ConfirmPhone extends React.Component {
               </p>
 
               <form className="usa-form" onSubmit={this.handleSubmit}>
-                <label htmlFor="pin">Confirmation code</label>
-                <input type="text"
-                       name="pin"
-                       value={this.state.pin}
-                       onChange={this.handleChange}
-                       placeholder="Confirmation code" />
+                <div className={errcls}>
+                  <label htmlFor="pin">Confirmation code</label>
+                  {errmsg}
+                  <input type="text"
+                         name="pin"
+                         value={this.state.pin}
+                         onChange={this.handleChange}
+                         placeholder="Confirmation code" />
+                </div>
 
                 <Button type="submit">Confirm</Button>
               </form>
