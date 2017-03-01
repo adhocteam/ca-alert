@@ -125,6 +125,12 @@ RSpec.describe Admin::HazardsController, type: :request do
           expect(clowns['email_notifications_sent']).to eq(0)
           expect(clowns['sms_notifications_sent']).to eq(0)
         end
+
+        it 'includes the number of users at creation' do
+          json = JSON.parse(response.body)
+          clowns = json['data'].find { |i| i['id'] == killer_clowns.id }
+          expect(clowns['user_count_at_creation']).to eq(1)
+        end
       end
     end
   end
