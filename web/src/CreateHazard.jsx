@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeoLocationBtn from "./GeoLocationBtn";
 import Button from "./Button";
 import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
-import "./App.css";
+import "./App.scss";
 import Map from "./Map";
 import { hashHistory } from "react-router";
 import { apiCreds } from './session';
