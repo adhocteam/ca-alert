@@ -64,16 +64,20 @@ export default class PlaceList extends React.Component {
     if (this.state.places === null) {
       listItems = <div>Loading …</div>;
     } else {
+
+    table = (
+      <table className="usa-table-borderless">
+
       listItems = this.state.places.map((place, i) => {
         return (
-          <li className="ca-place-list-item" key={"place-" + i}>
-            <div className="ca-place-list-item-name">
+          <tr className="ca-place-list-item" key={"place-" + i}>
+            <td className="ca-place-list-item-name">
               {place.name}
-            </div>
-            <div className="ca-place-list-item-link">
+            </td>
+            <td className="ca-place-list-item-link">
               <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
-            </div>
-            <div className="ca-place-list-item-link">
+            </td>
+            <td className="ca-place-list-item-link">
               <a
                 href="#"
                 onClick={e => this.handleRemoveClick(e, i)}
@@ -81,10 +85,13 @@ export default class PlaceList extends React.Component {
               >
                 Remove
               </a>
-            </div>
-          </li>
+            </td>
+          </tr>
+
         );
       });
+      }
+
     }
     const placeToRemove = this.state.placeToRemove !== null
       ? this.state.placeToRemove.name
