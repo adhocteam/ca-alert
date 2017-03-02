@@ -19,7 +19,7 @@ export default class Modal extends React.Component {
       <div className="modal" style={styles}>
         <div className="modal-content">
           <span className="modal-close" onClick={e => this.handleClick(e)}>
-            ×
+            × <span className="usa-sr-only">Close this message</span>
           </span>
           {this.props.children}
         </div>
