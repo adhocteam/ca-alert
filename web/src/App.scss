@@ -5,6 +5,8 @@ $secondary-color: #F9C642;
 $tertiary-color: #112E51;
 $white: #fff;
 $alt-background: #D6D7D9;
+$color-gray-lightest: #f1f1f1;
+$color-gray-dark: #323a45;
 
 
 .auto-clear::after {
@@ -126,4 +128,26 @@ footer .usa-footer-secondary_section {
     color: $white !important;
   }
   padding-top: 0!important;
+}
+
+// Dashboard
+
+.ca-dashboard-nav {
+  padding: 0;
+  .dashboard-card {
+    background: $color-gray-lightest;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-height:12rem;
+    a {
+      text-decoration: none;
+    }
+    h3 {
+      margin: 0;
+    }
+    p {
+      color: $color-gray-dark;
+      margin: 0;
+    }
+  }
 }

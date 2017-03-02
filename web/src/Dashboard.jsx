@@ -8,15 +8,31 @@ export default React.createClass({
       let user = loggedInUser();
       return (
         <div className="usa-grid usa-section">
-          <h1>Your account</h1>
-          <p><b>Hello, {user.name ? user.name : user.email}</b></p>
-          <ul className="ca-dashboard-nav">
-            <li><Link to="/dashboard/places">Places</Link></li>
-            <li><Link to="/account/communication">Communication preferences</Link></li>
-            <li><Link to="/dashboard/alerts">Previous Alerts</Link></li>
-            <li>Account settings</li>
-            <li><Link to="/account/signout">Sign out</Link></li>
-          </ul>
+          <h1>Your Dashboard</h1>
+          <div className="usa-grid-full  ca-dashboard-nav">
+            <div className="usa-width-one-half dashboard-card">
+              <Link to="/dashboard/places">
+                <h3>Places</h3>
+                <p>Add locations you want to receive alerts about</p>
+              </Link>
+            </div>
+          </div>
+          <div className="usa-grid-full  ca-dashboard-nav">
+            <div className="usa-width-one-half dashboard-card">
+              <Link to="/account/communication">
+                <h3>Communication preferences</h3>
+                <p>Choose how you want to receive alerts</p>
+              </Link>
+            </div>
+          </div>
+          <div className="usa-grid-full  ca-dashboard-nav">
+            <div className="usa-width-one-half dashboard-card">
+              <Link to="/dashboard/alerts">
+                <h3>Previous Alerts</h3>
+                <p>See previous alerts in your places</p>
+              </Link>
+            </div>
+          </div>
           {user.is_admin &&
             <div>
               <h2>Admin</h2>
