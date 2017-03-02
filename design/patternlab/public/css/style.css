@@ -1,3 +1,72 @@
-/*
- * YOUR STYLES HERE
- */
+// Colors
+
+$color-primary-darkest: #1F425E;
+$color-primary: #0071bc;
+$cool-blue-lighter: #02BFE7;
+$color-secondary: #E31C3D;
+$color-gold: #FDB81E;
+$white: #FFFFFF;
+$color-green-light: #4AA564;
+$color-green-lighter: #94BFA2;
+$color-primary-alt: #02BFE7;
+
+// Headings
+
+h1, h2, h3, h4, h5, h6 {
+  color: #112E51;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  &.sans {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+  }
+  &.small {
+    font-size: $small;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.sg-pattern-category-title a {
+  text-decoration: none;
+  color: #212121;
+}
+
+.usa-header {
+  background: #0071bc;
+  color: #fff;
+  border-bottom: 2px solid #f9c642!important;
+}
+
+.usa-navbar {
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 3rem;
+  padding-left: 3rem;
+  display: block;
+  height: auto;
+  max-width: 1040px;
+}
+
+.usa-logo {
+	padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  line-height: 7.5rem;
+  margin-left: 0;
+}
+
+.usa-logo-text {
+	line-height: 1;
+}
+
+.usa-logo-text > h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+.usa-nav-secondary {
+	float:right;
+	margin-top: -4em;
+}

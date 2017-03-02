@@ -62,6 +62,7 @@ class HazardView extends React.Component {
             <ul>
               <li>SMS: {hazard.sms_notifications_sent}</li>
               <li>Email: {hazard.email_notifications_sent}</li>
+              <li>Active users: {hazard.user_count_at_creation}</li>
             </ul>
           </div>
         </section>

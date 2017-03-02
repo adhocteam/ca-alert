@@ -34,11 +34,13 @@
     "extract-text-webpack-plugin": "beta",
     "file-loader": "^0.10.0",
     "html-loader": "^0.4.4",
+    "ignore-styles": "^5.0.1",
     "jsdom": "^9.11.0",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
     "react-addons-test-utils": "^15.4.2",
     "sass-loader": "^6.0.2",
+    "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"

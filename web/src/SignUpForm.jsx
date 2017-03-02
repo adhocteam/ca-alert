@@ -12,23 +12,19 @@ export class SignUpForm extends React.Component {
       passwordConfirm: { value: "", isValid: null },
       serverError: null
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     let state = this.state;
     switch (e.target.name) {
       case "signup-email":
-        state.email.value = e.target.value;
+        state.email = { value: e.target.value, isValid: null }
         break;
       case "signup-password":
-        state.password.value = e.target.value;
+        state.password = { value: e.target.value, isValid: null }
         break;
       case "signup-password-confirm":
-        state.passwordConfirm.value = e.target.value;
+        state.passwordConfirm = { value: e.target.value, isValid: null }
         break;
       default:
         throw new Error(`unknown element name ${e.target.name}`);
@@ -36,22 +32,38 @@ export class SignUpForm extends React.Component {
     this.setState(state);
   }
 
-  handleBlur(e) {
-    let state = this.state;
-    switch (e.target.name) {
-      case "signup-email":
-        state.email.isValid = /^.+@.+\..+$/.test(e.target.value);
-        break;
-      case "signup-password":
-        state.password.isValid = e.target.value.length >= MIN_PASSWORD_LEN;
-        break;
-      case "signup-password-confirm":
-        state.passwordConfirm.isValid = e.target.value ===
-          state.password.value &&
-          state.password.isValid;
-        break;
-    }
-    this.setState(state);
+  validEmail() {
+    return /^.+@.+\..+$/.test(this.state.email.value);
+  }
+
+  validPassword() {
+    return this.state.password.value.length >= MIN_PASSWORD_LEN;
+  }
+
+  validPasswordConfirm() {
+    return this.validPassword() &&
+      this.state.password.value === this.state.passwordConfirm.value;
+  }
+
+  validateEmail() {
+    this.setState({ email: {
+      value: this.state.email.value,
+      isValid: this.validEmail()
+    } });
+  }
+
+  validatePassword() {
+    this.setState({ password: {
+      value: this.state.password.value,
+      isValid: this.validPassword()
+    } });
+  }
+
+  validatePasswordConfirm() {
+    this.setState({ passwordConfirm: {
+      value: this.state.passwordConfirm.value,
+      isValid: this.validPasswordConfirm()
+    } });
   }
 
   handleSubmit(e) {
@@ -91,7 +103,7 @@ export class SignUpForm extends React.Component {
 
   render() {
     let button = null;
-    if (this.formIsValid()) {
+    if (this.validEmail() && this.validPassword() && this.validPasswordConfirm()) {
       button = <input type="submit" value="Sign up" />;
     } else {
       button = <input type="submit" disabled="disabled" value="Sign up" />;
@@ -145,7 +157,7 @@ export class SignUpForm extends React.Component {
           <h2>Sign up with a new account and get notified of alerts.</h2>
         </div>
         <div className="usa-width-two-thirds">
-          <form className="usa-form" onSubmit={this.handleSubmit}>
+          <form className="usa-form" onSubmit={e => this.handleSubmit(e)}>
             <fieldset>
               <legend className="usa-drop_text">Sign up</legend>
               <span>
@@ -169,8 +181,8 @@ export class SignUpForm extends React.Component {
                   className={errClassName(this.state.email.isValid, "input")}
                   placeholder="name@example.com"
                   value={this.state.email.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
+                  onChange={e => this.handleChange(e)}
+                  onBlur={() => this.validateEmail()}
                 />
               </div>
               <div className={errClassName(this.state.password.isValid, "div")}>
@@ -188,8 +200,8 @@ export class SignUpForm extends React.Component {
                   placeholder="minimum 8 characters"
                   className={errClassName(this.state.password.isValid, "input")}
                   value={this.state.password.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
+                  onChange={e => this.handleChange(e)}
+                  onBlur={() => this.validatePassword()}
                 />
               </div>
               <div
@@ -217,8 +229,8 @@ export class SignUpForm extends React.Component {
                     "input"
                   )}
                   value={this.state.passwordConfirm.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
+                  onChange={e => this.handleChange(e)}
+                  onBlur={() => this.validatePasswordConfirm()}
                 />
               </div>
               {button}

@@ -4,7 +4,7 @@ import { encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import GeoLocationBtn from "./GeoLocationBtn";
 import { Point, geocode } from "./lib";
 import Map from "./Map";
-import "./App.css";
+import "./App.scss";
 import Button from "./Button";
 import ErrorAlert from "./Error";
 
@@ -128,10 +128,8 @@ export default class EditPlaceForm extends React.Component {
 
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
+        <div className="usa-width-one-whole">
           <h2>Edit place</h2>
-        </div>
-        <div className="usa-width-two-thirds">
           {this.state.error ? <ErrorAlert error={this.state.error} /> : null}
           {form}
         </div>

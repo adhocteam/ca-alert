@@ -1,33 +1,37 @@
 import React from "react";
 import { isLoggedIn, loggedInUser } from "./session";
+import SessionStore from "./session";
 
 export default class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: loggedInUser() };
+  }
+
+  componentDidMount() {
+    SessionStore.addListener('nav', this.update.bind(this));
+  }
+
+  componentWillUnmount() {
+    SessionStore.removeListener('nav');
+  }
+
+  update() {
+    this.setState({ user: loggedInUser() });
+  }
+
   render() {
-    if (!isLoggedIn()) {
+    if (this.state.user === null) {
       return (
-        <ul className="usa-unstyled-list usa-nav-secondary-links">
-          <li className="js-search-button-container">
-            <button className="usa-header-search-button js-search-button">
-              Search
-            </button>
-          </li>
-          <li>
-            <a href="#/account/signup">Sign up for new account</a>
-          </li>
-          <li>
-            <a href="#/account/signin">Sign in to your account</a>
-          </li>
-        </ul>
+        <a className="usa-button usa-button-outline" href="#/account/signin">
+          Sign in
+        </a>
       );
     } else {
-      let user = loggedInUser();
+      let user = this.state.user;
       return (
         <ul className="usa-unstyled-list usa-nav-secondary-links">
-          <li className="js-search-button-container">
-            <button className="usa-header-search-button js-search-button">
-              Search
-            </button>
-          </li>
+
           <li>
             <a href="#/dashboard">{user.name ? user.name : user.email}</a>
           </li>

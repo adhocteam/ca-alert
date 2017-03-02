@@ -1,3 +1,25 @@
+class SessionStore {
+  constructor() {
+    this.listeners = {};
+  }
+
+  addListener(name, fn) {
+    this.listeners[name] = fn;
+  }
+
+  removeListener(name) {
+    delete this.listeners[name];
+  }
+
+  change() {
+    Object.keys(this.listeners).forEach((k) => {
+      this.listeners[k]();
+    });
+  }
+}
+
+const sessionStore = new SessionStore();
+
 export function setUser(user) {
   localStorage.setItem("user", JSON.stringify(user));
 }
@@ -14,6 +36,8 @@ export function newLoginSession(user, accessToken, client, expiry, uid) {
         uid: uid
       })
     );
+
+    sessionStore.change();
   }
 }
 
@@ -33,4 +57,7 @@ export function apiCreds() {
 export function logout() {
   localStorage.removeItem("user");
   localStorage.removeItem("apiCreds");
+  sessionStore.change();
 }
+
+export default sessionStore;
