@@ -1,9 +1,5 @@
 DeviseTokenAuth.setup do |config|
-  if Rails.env.production?
-    config.default_confirm_success_url = 'https://ca-alert-prototype.s3.amazonaws.com/index.html#/account/signin'
-  else
-    config.default_confirm_success_url = 'http://localhost:8080/index.html#/account/signin'
-  end
+  config.default_confirm_success_url = "#{ENV['CLIENT_APP_URL'] || 'http://localhost:8080'}/index.html#/account/signin"
 
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
