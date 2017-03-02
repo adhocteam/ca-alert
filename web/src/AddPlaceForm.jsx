@@ -185,7 +185,6 @@ export default class AddPlaceForm extends React.Component {
                 Choose a location you want to receive alerts about
               </legend>
               {locationForm}
-              {geocodeResult}
               {map}
               {continueBtn}
               {namePlace}
