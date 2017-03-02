@@ -1,20 +1,23 @@
 # CAlerts
 
+* [Overview 
 * [Technical Approach](#technical-approach)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 
-##Technical Approach
 
-"Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository."
+##Overview
+
+add non-technical narrative here
+
+##Technical Approach (WORD COUNT)
 
 ### Introduction
 
 CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards are generated manually as well as automatically generated based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
 
-Can we add narrative here? If not, we can put it further down. 
 
-### Overview
+### Technical Overview
 
 Our standard set of tools for building web applications includes [Ruby on Rails](http://rubyonrails.org/) for server-side development and [React](https://facebook.github.io/react/) for creating single-page client-side applications. For this small prototype, we considered creating a monolithic Rails application with no Javascript framework for expediency, but the requirements indicated that the backend should be an API and a framework should be used. Therefore, the prototype consists of two separate apps: the [backend](https://github.com/adhocteam/ca-alert/tree/master/backend) Rails application and the client-side [React app](https://github.com/adhocteam/ca-alert/tree/master/web). The directories for these apps contain instructions for configuring and running them locally.
 
@@ -40,6 +43,8 @@ For collecting and displaying data, React's virtual DOM allows us to seamlessly 
 
 We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
+*DANX LEANNA - We chose a commercially available one, better product experience, lower technical lift*
+
 #### Site navigation
 
 We used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when they each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
@@ -53,6 +58,9 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 #### Testing
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components.
+
+*AUBREY - sentences missing* 
+*Automated 508 testing*
 
 ### The server-side Rails API
 
@@ -76,13 +84,14 @@ ActiveRecord has a set of tools for serializing models into JSON that are applie
 
 #### Twilio integration
 
-To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
+To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log. 
+
 
 #### Swagger documentation
 
 Swagger was used for API documentation via the [swagger-blocks](https://github.com/fotinakis/swagger-blocks) gem, which allowed us to build out the documentation in Ruby rather than maintaining a JSON file. The resulting JSON file is publicly available [here](https://ca-alert.herokuapp.com/apidocs) and can be viewed using [Swagger UI](http://swagger.io/swagger-ui/).
 
-The documentation is served up from the [apidocs controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/apidocs_controller.rb), and rendered by swagger_blocks. Models [define their swagger representations](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L23) in their own files, but for controllers the blocks became so verbose that I [factored them out into the lib directory](https://github.com/adhocteam/ca-alert/tree/master/backend/lib), where they [use plain Ruby objects](https://github.com/adhocteam/ca-alert/blob/master/backend/lib/phone_numbers_controller_swagger_blocks.rb) to define the blocks.
+The documentation is served up from the [apidocs controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/apidocs_controller.rb), and rendered by swagger_blocks. Models [define their swagger representations](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L23) in their own files, but for controllers the blocks became so verbose that we [factored them out into the lib directory](https://github.com/adhocteam/ca-alert/tree/master/backend/lib), where they [use plain Ruby objects](https://github.com/adhocteam/ca-alert/blob/master/backend/lib/phone_numbers_controller_swagger_blocks.rb) to define the blocks.
 
 #### Handling geographic data
 
@@ -90,15 +99,22 @@ The documentation is served up from the [apidocs controller](https://github.com/
 
 #### Testing
 
-Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. Unit tests have also been written [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
+We wrote [tests](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. We also wrote unit tests [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
 
 ### Conclusion?
 
-!!!! NOT SURE IF WE NEED A CONCLUSION HERE OR IF THERE IS MORE TO COVER !!!!
--NATIVE APP
--DIVERSITY OF AUDIENCE
--USER TYPES
--FITTING WITH EXISTING SYSTEMS - TWITTER, NATIVE APPS
+FLAT TECHNICAL CONCLUSION RE REQUIREMENTS FROM AUBREY
+
+END TECHNICAL APPROACH
+
+----------------
+
+
+### NOTE: PRODUCT CONSIDERATIONS LEANNA THINK ABOUT THIS:
+- NATIVE APP
+- DIVERSITY OF AUDIENCE
+- USER TYPES
+- FITTING WITH EXISTING SYSTEMS - TWITTER, OTHER NATIVE APPS
 
 
 
@@ -106,17 +122,23 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-LEANNA
+Leanna Miller SHarkey
+Role in company
+Role in project 
+Shtraight up 
+Leanna will be fired 
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
-1. Product Owner: Leanna Miller
-2. Technical Architect: Aubrey Holland
+1. Product Owner/Manager: Leanna Miller
+2. Technical Architect/Backend Developer: Aubrey Holland
 3. User Researcher/Usability Tester: Laura Ellena
 4. Visual Designer: Danny Chapman
-5. Front End Web Developer: Paul Smith
-6. Backend Web Developer: Aubrey Holland
+5. Frontend Web Developer/Backend Web Developer: Paul Smith
+6. Frontend Web Developer: Graham Smith
 7. Delivery Manager: Wryen Meek
+
+List by category not by human 
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
