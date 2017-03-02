@@ -102,33 +102,32 @@ export default class EditPlaceForm extends React.Component {
             </div>
             <div className="auto-clear">
               <div>
-
               </div>
-              <p><b>Location</b></p>
-
             </div>
-            {this.state.show.locationChooser
-              ? <LocationChooser
-                  onChoose={loc => this.handleNewLocation(loc)}
-                  onError={err => this.setState({ error: err })}
-                />
-              : <Location place={place} />}
+            <div className="form-section">
+              <h3>Location</h3>
+              {this.state.show.locationChooser
+                ? <LocationChooser
+                    onChoose={loc => this.handleNewLocation(loc)}
+                    onError={err => this.setState({ error: err })}
+                  />
+                : <Location place={place} />}
 
-              <a className="usa-button usa-button-outline"
-                href="#"
-                onClick={e => this.handleLocationEditCancelClick(e)}
-              >
-                {this.state.show.locationChooser ? "Cancel" : "Edit map location"}
-              </a>
-              <hr />
-            <div>
-              <button>Save</button>
-              <Link to="/dashboard/places" role="button" className="usa-button usa-button-gray">Cancel</Link>
-            </div>
-          </fieldset>
-        </form>
-      );
-    }
+                <a className="usa-button usa-button-outline usa-button-small"
+                  href="#"
+                  onClick={e => this.handleLocationEditCancelClick(e)}
+                >
+                  {this.state.show.locationChooser ? "Cancel" : "Edit map location"}
+                </a>
+               </div>
+              <div>
+                <button>Save</button>
+                <Link to="/dashboard/places" role="button" className="usa-button usa-button-gray">Cancel</Link>
+              </div>
+            </fieldset>
+          </form>
+        );
+      }
 
     return (
       <section className="usa-grid usa-section">

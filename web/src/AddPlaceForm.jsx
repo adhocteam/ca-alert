@@ -147,11 +147,11 @@ export default class AddPlaceForm extends React.Component {
             />
           </div>
           <p>OR</p>
-          <div>
+          <div className="search-form">
             <label>
               Street address or ZIP Code
             </label>
-            <input
+            <input className="usa-width-two-thirds "
               name="address"
               value={this.state.address.value}
               onChange={this.handleChange}
@@ -185,12 +185,14 @@ export default class AddPlaceForm extends React.Component {
               </legend>
               <div className="form-section">
                 {locationForm}
+                <div className="clearfix">
                 {map}
+                </div>
                 {continueBtn}
                 {namePlace}
               </div>
             </fieldset>
-            <Link to="/dashboard/places" className="usa-button usa-button-outline">Cancel</Link>
+            <Link to="/dashboard/places" className="usa-button usa-button-outline usa-button-gray">Cancel</Link>
           </form>
         </div>
       </section>

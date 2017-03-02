@@ -115,7 +115,7 @@ export default class PlaceList extends React.Component {
         </Modal>
         <h2>Your places</h2>
         <table className="usa-table-borderless">
-          <thead>
+          <thead className="usa-sr-only">
             <tr>
               <th scope="col">Place</th>
               <th scope="col">Edit</th>
@@ -128,7 +128,7 @@ export default class PlaceList extends React.Component {
         </table>
         <div>
           <Link to="/dashboard/places/new" role="button" className="usa-button">
-            <span aria-hidden="true">+ </span>Add another place
+            <span aria-hidden="true">+ </span>Add a place
           </Link>
         </div>
       </section>

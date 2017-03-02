@@ -53,11 +53,40 @@ fieldset {
     color: $primary-color;
     padding: 0 0 1em 0;
   }
-  .form-section {
-    padding: 1em;
-    background: rgba($alt-background, .4);
-    margin: 0 0 1em 0;
+}
+
+.form-section {
+  padding: 1em;
+  background: rgba($alt-background, .4);
+  margin: 1em 0 1em 0;
+  h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
   }
+}
+
+.search-form {
+  button {
+    line-height: 1em;
+    margin: 0 !important;
+    padding: .88em !important;
+  }
+  input {
+    margin-bottom: 1em;
+  }
+  &:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  }
+}
+
+.clearfox {
+  clear: both;
+  border: 2px solid green;
 }
 
 .usa-hero {
