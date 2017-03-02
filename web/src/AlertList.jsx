@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import moment from 'moment';
 
 import { fetchAuthd, checkResponse } from './lib';
@@ -11,7 +12,11 @@ function AlertRow(props) {
   return (
     <section>
       <div className="usa-width-two-thirds">
-        <h3>{hazard.title}</h3>
+        <h3>
+          <Link to={`/dashboard/alerts/${hazard.id}`}>
+            {hazard.title}
+          </Link>
+        </h3>
         <span className="usa-label">{place.name}</span>
       </div>
 
