@@ -5,7 +5,7 @@ import { shallow } from "enzyme";
 import sinon from "sinon";
 import "whatwg-fetch";
 
-import { SignUpForm } from "../src/SignUpForm";
+import SignUpForm from "../src/SignUpForm";
 
 describe("Sign-up form", () => {
   beforeEach(() => {
@@ -14,13 +14,6 @@ describe("Sign-up form", () => {
 
   afterEach(() => {
     global.fetch.restore();
-  });
-
-  it("initially should be invalid", () => {
-    const wrapper = shallow(<SignUpForm />);
-    expect(wrapper.find('input[type="submit"]').props().disabled).to.equal(
-      "disabled"
-    );
   });
 
   it("should be valid with valid input", () => {

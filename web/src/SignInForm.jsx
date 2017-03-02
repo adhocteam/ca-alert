@@ -153,7 +153,7 @@ export default class SignInForm extends React.Component {
               <legend className="usa-drop_text">Sign in</legend>
               <span>
                 Need an account?{" "}
-                <Link to="/account/signup">Sign up instead</Link>
+                <Link to="/">Sign up instead</Link>
                 .
               </span>
               {serverError}
