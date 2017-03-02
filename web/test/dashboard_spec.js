@@ -13,7 +13,6 @@ describe('Dashboard view', () => {
     ];
 
     const admin = [
-      '/admin/users',
       '/admin/hazards',
       '/admin/analytics'
     ];
