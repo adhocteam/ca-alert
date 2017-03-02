@@ -20,6 +20,18 @@ class SessionStore {
 
 const sessionStore = new SessionStore();
 
+export function getCurrentLocation() {
+  return new Promise((res, rej) => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((loc) => {
+        res(loc.coords);
+      });
+    } else {
+      rej('Geolocation unavailable');
+    }
+  });
+}
+
 export function setUser(user) {
   localStorage.setItem("user", JSON.stringify(user));
 }
