@@ -75,10 +75,16 @@ form.usa-form {
   }
 }
 
+.usa-menu-btn {
+  margin-top: 2rem !important;
+}
+
 .usa-nav-secondary {
   padding: 0;
   margin: 0;
   top: -5em !important;
+  height: 5rem;
+  line-height: 5rem;
   .usa-button-outline {
     border: 2px solid #fff !important;
   }
