@@ -6,34 +6,93 @@
 
 ##Technical Approach
 
-I initially thought this should be a narrative of how we chose to do development on the prototype and why we made the choices we did, but re-reading the requirement ("Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository") it seems like it needs to be more of a walkthrough of the major components of the code showing how the general flow works. Most of the questions about our choices can be answered in response to the prompts from Section 2.
+"Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository."
 
-* How the UI collects data from the user
-  * Form implementation
-  * Visual design considerations
-* How React components collect that data
-  * How state is stored
-  * Implementation of reusable components
-* How React communicates with the API
-  * Use of fetch
-  * Collecting and passing the authentication headers
-* How the API is implemented
-  * Rails API-only project
-  * How routes are defined
-  * How controllers handle actions
-  * How models serialize themselves to JSON
-  * How messages are sent to users (Twilio/SendGrid/ActionMailer)
-* Data storage
-  * Sample Rails model
-  * Selection of PostgreSQL
-  * Pointer to the table schema
-* Special considerations for geo data
-  * How we pull in the data, and how it is stored
-  * Using PostGIS features for place intersections
-* How this fits together in the deployed app
-  * S3 for static asset storage/hosting
-  * Heroku for dynamic server deployment
-  * CORS settings for allowing these to work together
+### Introduction
+
+CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels on which they would like to be notified. Hazards are generated manually by administrators as well as automatically based on various real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
+
+### Overview
+
+Our standard set of tools for building web applications includes [Ruby on Rails](http://rubyonrails.org/) for server-side development and [React](https://facebook.github.io/react/) for creating single-page client-side applications. For this small prototype, we considered creating a monolithic Rails application with no Javascript framework for expediency, but the requirements indicated that the backend should be an API and a framework should be used. Therefore, the prototype consists of two separate apps: the [backend](https://github.com/adhocteam/ca-alert/tree/master/backend) Rails application and the client-side [React app](https://github.com/adhocteam/ca-alert/tree/master/web). The directories for these apps contain instructions for configuring and running them locally.
+
+The two apps also require separate deployment strategies. The React app is [built](https://github.com/adhocteam/ca-alert/blob/master/web/webpack.config.js) using [WebPack](https://webpack.github.io/), which compiles the Javascript, CSS, and HTML into static assets which are then deployed via remote sync to a bucket on [AWS S3](https://aws.amazon.com/s3/). The Rails app has been deployed via a push to [Heroku](https://heroku.com), a PaaS tool that makes deployment, provisioning, and configuration easy to do. Both apps are deployed automatically after passing tests via [CodeShip](https://codeship.com/), a continuous integration service that can perform automated deployments.
+
+### The client-side React app
+
+The client-side React app includes the visual interface for the prototype, tools for collecting and displaying input, data visualizations, and site navigation.
+
+#### Visual interface design
+
+We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/index.html#L13) to set the basic page layout, as well as other components like [buttons](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/Button.jsx#L7) and [form controls](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/EditPlaceForm.jsx#L93). Most of the HTML for the app is defined in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) code included in React components like [this one](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx). The page is bootstrapped and assets are loaded in through a static [index.html](https://github.com/adhocteam/ca-alert/blob/master/web/index.html) page.
+
+#### Collecting and displaying input
+
+Forms are implemented as React components, using JSX to describe the markup. The [form for adding places](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx) is an example of this pattern. Form components [store their state](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L12) as Javascript Objects that are updated as the data in the form changes. The submission of the form [is bound to](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L184) a [handleSubmit function](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L62) which takes the current state of the form, encodes it into query parameters, and sends the appropriate request to the API for storing the data.
+
+Displaying data is done in a similar way, with React components like the [PlaceList](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx) using the API to [fetch the appropriate data](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L16), storing that data [in the state](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L21), and using JSX to [render the appropriate markup](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L62).
+
+For both collecting and displaying data, React's virtual DOM allows us to seamlessly update the page without worrying about what individual parts of the markup have changed. We have also taken advantage of the reusability of React components by creating multi-use tools like [buttons](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx) and [error messages](https://github.com/adhocteam/ca-alert/blob/master/web/src/Error.jsx).
+
+#### Usage of Google Maps and Geocoder
+
+We have used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
+
+#### Site navigation
+
+We have used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when they each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
+
+#### Communication with the API
+
+Calls to the API are made through the use of the Javascript [fetch function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Because this is [not available on all browsers](http://caniuse.com/#feat=fetch), we have [included a polyfill](https://www.npmjs.com/package/whatwg-fetch) to make it universally available. [Calls to fetch](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L87) return a [promise](https://developers.google.com/web/fundamentals/getting-started/primers/promises), which allows us to handle the API responses [asynchronously](https://github.com/adhocteam/ca-alert/blob/master/web/src/HazardList.jsx#L14).
+
+Authentication with the API is handled by passing `uid`, `access-token`, and `client` [headers with each request](https://github.com/adhocteam/ca-alert/blob/master/web/src/HazardList.jsx#L14). Because this is universally required, we have a [library function](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L76) that adds the headers automatically. The authentication headers are [collected when the user logs in](https://github.com/adhocteam/ca-alert/blob/cc9fbda8eadda1fb51853776f0b60b12f86d4761/web/src/SignInForm.jsx#L94) and [stored in local storage](https://github.com/adhocteam/ca-alert/blob/master/web/src/session.js#L5) to make them available across browser windows.
+
+#### Testing
+
+Tests for the front-end are run via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components.
+
+### The server-side Rails API
+
+The REST API for this project has been implemented as an [API-only](http://edgeguides.rubyonrails.org/api_app.html) Rails project that supports a JSON interface for accessing and updating data in the application. It is backed by a [PostgreSQL](https://www.postgresql.org/) database using the [PostGIS](http://www.postgis.net/) extensions for geographic data, uses [Twilio](https://www.twilio.com/) for SMS delivery, provides [Swagger](http://swagger.io/) documentation using the [swagger-blocks](https://github.com/fotinakis/swagger-blocks) gem, handles authentication using the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), and is fully tested using a suite of [Rspec](http://rspec.info/) tests.
+
+#### Request handling
+
+The [routes.rb configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/routes.rb) in the app defines the set of actions the API responds to. Each line in that file corresponds to one or more controller actions, and the controllers take the request parameters and transform them into a JSON response. The [places controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb) is an example that implements the full set of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) actions, allowing clients to manage the set of places for which users would like to receive alerts. The [create action](https://github.com/lynndylanhurley/devise_token_auth), for example, uses a set of allowable parameters to create a new place tied to the user account and returns a JSON document containing the new place on success. Error conditions [also return a JSON document](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L36) that includes information about the individual errors that occurred.
+
+#### Authentication and authorization
+
+User authentication is handled through the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), which adds endpoints under the `/auth` namespace for handling account creation, login, and updating. It also contains an `authenticate_user!` helper method that [controllers can use](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) to ensure there is a valid user before processing a request. If authentication headers do not validate correctly for a user, the controller [will automatically render a 401 status code](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) with a message indicating that authentication has failed.
+
+Authorization is implemented using the [rolify](https://github.com/RolifyCommunity/rolify) gem, which makes it easy to add, remove, and verify roles for users. We [have an action](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/users_controller.rb#L15) for making a user an admin by id that adds the role. Then, actions requiring admin permissions for access can use the [require_admin](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/application_controller.rb#L8) helper to [ensure the user](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/hazards_controller.rb#L3) is allowed access.
+
+#### Data storage and serialization
+
+Data is stored in a PostgreSQL database using the PostGIS extensions for geographic data. PostGIS allows us to [store geometry](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb#L136) in the database and also to [perform intersections](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/place.rb#L11) directly via a SQL query. [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) handles the connection to the database with [a simple configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/database.yml) and allows us to express queries using Ruby in most cases. The schema for the database is defined in the [schema.rb](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb) file.
+
+ActiveRecord has a set of tools for serializing models into JSON that are applied automatically, but there are [some cases](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L15) where we need to customize the fields in order to add data that isn't represented by a column in the database.
+
+#### Twilio integration
+
+To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
+
+#### Swagger documentation
+
+Swagger was used for API documentation via the [swagger-blocks](https://github.com/fotinakis/swagger-blocks) gem, which allowed us to build out the documentation in Ruby rather than maintaining a JSON file. The resulting JSON file is publicly available [here](https://ca-alert.herokuapp.com/apidocs) and can be viewed using [Swagger UI](http://swagger.io/swagger-ui/).
+
+The documentation is served up from the [apidocs controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/apidocs_controller.rb), and rendered by swagger_blocks. Models [define their swagger representations](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L23) in their own files, but for controllers the blocks became so verbose that I [factored them out into the lib directory](https://github.com/adhocteam/ca-alert/tree/master/backend/lib), where they [use plain Ruby objects](https://github.com/adhocteam/ca-alert/blob/master/backend/lib/phone_numbers_controller_swagger_blocks.rb) to define the blocks.
+
+#### Handling geographic data
+
+!!!!PAUL TO FILL THIS IN!!!!
+
+#### Testing
+
+Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. Unit tests have also been written [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
+
+### Conclusion?
+
+!!!! NOT SURE IF WE NEED A CONCLUSION HERE OR IF THERE IS MORE TO COVER !!!!
 
 ##US Digital Services Playbook Checklist
 
@@ -46,12 +105,20 @@ I initially thought this should be a narrative of how we chose to do development
 - [x] Create a prioritized list of tasks the user is trying to accomplish, also known as “user stories”
 - [ ] As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs
 
+#### Notes
+
+LAURA
+
 ### Address the whole experience, from start to finish
 
 - [ ] Understand the different points at which people will interact with the service – both online and in person
 - [ ] Identify pain points in the current way users interact with the service, and prioritize these according to user needs
 - [ ] Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service
 - [ ] Develop metrics that will measure how well the service is meeting user needs at each step of the service
+
+#### Notes
+
+DANNY
 
 ### Make it simple and intuitive
 - [x] Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards as a default
@@ -61,6 +128,10 @@ I initially thought this should be a narrative of how we chose to do development
 - [x] Provide users with a way to exit and return later to complete the process
 - [ ] Use language that is familiar to the user and easy to understand
 - [ ] Use language and design consistently throughout the service, including online and offline touch points
+
+#### Notes
+
+DANNY
 
 ### Build the service using agile and iterative practices
 - [x] Ship a functioning “minimum viable product” (MVP) that solves a core user need as soon as possible, no longer than three months from the beginning of the project, using a “beta” or “test” period if needed
@@ -73,6 +144,10 @@ I initially thought this should be a narrative of how we chose to do development
 - [x] Give the entire project team access to the issue tracker and version control system
 - [x] Use code reviews to ensure quality
 
+#### Notes
+
+WRYEN
+
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities
 - [ ] Contract is structured to request frequent deliverables, not multi-month milestones
@@ -84,12 +159,20 @@ I initially thought this should be a narrative of how we chose to do development
 - [ ] Contract specifies a warranty period where defects uncovered by the public are addressed by the vendor at no additional cost to the government
 - [ ] Contract includes a transition of services period and transition-out plan
 
+#### Notes
+
+LEANNA
+
 ### Assign one leader and hold that person accountable
 - [x] A product owner has been identified
 - [x] All stakeholders agree that the product owner has the authority to assign tasks and make decisions about features and technical implementation details
 - [x] The product owner has a product management background with technical experience to assess alternatives and weigh tradeoffs
 - [ ] The product owner has a work plan that includes budget estimates and identifies funding sources
 - [ ] The product owner has a strong relationship with the contracting officer
+
+#### Notes
+
+LEANNA
 
 ### Bring in experienced teams
 - [x] Member(s) of the team have experience building popular, high-traffic digital services
@@ -101,11 +184,19 @@ I initially thought this should be a narrative of how we chose to do development
 - [ ] A Federal budget officer is on the internal team or is a partner
 - [ ] The appropriate privacy, civil liberties, and/or legal advisor for the department or agency is a partner
 
+#### Notes
+
+AUBREY
+
 ### Choose a modern technology stack
 - [x] Choose software frameworks that are commonly used by private-sector companies creating similar services
 - [x] Whenever possible, ensure that software can be deployed on a variety of commodity hardware types
 - [x] Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects
 - [x] Consider open source software solutions at every layer of the stack
+
+#### Notes
+
+Modern, open source tools have been used throughout our development of the prototype. We have avoided using exotic tools that are difficult to deploy, favoring software and processes that we use every day on existing projects. Documentation on [running](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) the [apps](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) locally has been provided and updated throughout the development process.
 
 ### Deploy in a flexible hosting environment
 - [x] Resources are provisioned on demand
@@ -116,16 +207,20 @@ I initially thought this should be a narrative of how we chose to do development
 - [ ] Static assets are served through a content delivery network
 - [x] Application is hosted on commodity hardware
 
-All of these are things that we would definitely do in a production environment, but some may not be applicable to a prototype. For example, we did not make an attempt at autoscaling or a multi-region deployment because the demands of the prototype do not warrant it.
+#### Notes
+
+Most of these requirements are met through the use of Heroku as a PaaS provider. It enables API-based provisioning of resources and allows us to scale those resources up and down easily and with no downtime. In a production system, we would seek to increase the reliability of the application by using a multi-region approach with demand-based autoscaling, and the static assets would be served up behind a CDN.
 
 ### Automate testing and deployments
-- [ ] Create automated tests that verify all user-facing functionality
+- [x] Create automated tests that verify all user-facing functionality
 - [x] Create unit and integration tests to verify modules and components
 - [x] Run tests automatically as part of the build process
 - [x] Perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques
 - [ ] Conduct load and performance tests at regular intervals, including before public launch
 
-Again here, load and performance testing don't seem applicable to a prototype but are definitely things we would undertake in production.
+#### Notes
+
+Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
 
 ### Manage security and privacy through reusable processes
 - [ ] Contact the appropriate privacy or legal officer of the department or agency to determine whether a System of Records Notice (SORN), Privacy Impact Assessment, or other review should be conducted
@@ -134,6 +229,10 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [ ] Consider whether the user should be able to access, delete, or remove their information from the service
 - [ ] “Pre-certify” the hosting infrastructure used for the project using FedRAMP
 - [x] Use deployment scripts to ensure configuration of production environment remains consistent and controllable
+
+#### Notes
+
+LEANNA
 
 ### Use data to drive decisions
 - [ ] Monitor system-level resource utilization in real time
@@ -145,9 +244,13 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [ ] Publish metrics externally
 - [ ] Use an experimentation tool that supports multivariate testing in production
 
+#### Notes
+
+Heroku provides a number of these tools to us automatically, but we chose not to expand upon them because they were not required for the prototype. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
+
 ### Default to open
 - [ ] Offer users a mechanism to report bugs and issues, and be responsive to these reports
-- [ ] Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)
+- [x] Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)
 - [ ] Ensure that data from the service is explicitly in the public domain, and that rights are waived globally via an international public domain dedication, such as the “Creative Commons Zero” waiver
 - [ ] Catalog data in the agency’s enterprise data inventory and add any public datasets to the agency’s public data listing
 - [ ] Ensure that we maintain the rights to all data developed by third parties in a manner that is releasable and reusable at no cost to the public
@@ -156,11 +259,15 @@ Again here, load and performance testing don't seem applicable to a prototype bu
 - [x] When appropriate, publish source code of projects or components online
 - [x] When appropriate, share your development process and progress publicly
 
+#### Notes
+
+Many of the concepts here do not apply to the development of a prototype, but we have done our development under a public GitHub repository that includes all of the code commits, issues filed, and documents created. Also, the API has been developed in such a way that access is publicly available.
+
 ##Responses to the prompts in Section 2 of the RFI
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-We assigned Leanna Miller Sharkey to be the Product Owner. More about that role and the activities she performed.
+LEANNA
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
@@ -254,5 +361,4 @@ Because we have a split between the server-side and client-side apps, a develope
 
 #### t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge
 
-???????????????????????????????????????
-I'm not sure what to say here. All of our tools are open and free, but the app relies on Twilio to deliver SMS messages. I guess what I can do is make a fake Twilio client to use in development so that the app can be run locally without this requirement. I will write up a ticket to create that.
+This is the case for all of the tools required to run the app except for the Twilio API integrations. To ensure that we can meet this requirement, we have made the app handle the case where no Twilio credentials are supplied by stubbing out the Twilio client and logging the SMS messages.
