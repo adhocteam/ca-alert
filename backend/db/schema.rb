@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301035507) do
+ActiveRecord::Schema.define(version: 20170302164810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170301035507) do
     t.string    "category"
     t.string    "link_title"
     t.integer   "user_count_at_creation",                                                          default: 0
+    t.boolean   "is_emergency",                                                                    default: true
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 
