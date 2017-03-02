@@ -36,11 +36,7 @@ export default class AddPlaceForm extends React.Component {
     this.state.geocodeResult = null;
     this.setState(this.state);
     let req = {
-      address: this.state.address.value,
-      componentRestrictions: {
-        country: "US",
-        administrativeArea: "California"
-      }
+      address: this.state.address.value
     };
     let geocoder = new google.maps.Geocoder();
     geocoder.geocode(req, (results, status) => {

@@ -42,4 +42,29 @@ RSpec.describe PhoneNumber do
       expect(pn.pin_created_at).to eq(now)
     end
   end
+
+  describe 'sending an alert' do
+    let!(:alert) { create(:alert) }
+    let!(:phone_number) { create(:phone_number) }
+
+    it 'sends it to twilio' do
+      alert.hazard.update_attributes(is_emergency: false)
+      FakeTwilio.messages = []
+      phone_number.alert_user(alert)
+      expect(FakeTwilio.messages.count).to eq(1)
+      expect(FakeTwilio.messages.first.body).to eq(
+        "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+      )
+    end
+
+    it 'has a different message for emergencies' do
+      alert.hazard.update_attributes(is_emergency: true)
+      FakeTwilio.messages = []
+      phone_number.alert_user(alert)
+      expect(FakeTwilio.messages.count).to eq(1)
+      expect(FakeTwilio.messages.first.body).to eq(
+        "New EMERGENCY Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+      )
+    end
+  end
 end
