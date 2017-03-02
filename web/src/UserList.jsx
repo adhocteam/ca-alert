@@ -55,16 +55,15 @@ export default class UserList extends React.Component {
 
     return (
       <section className="usa-section usa-grid">
-        <div className="usa-width-one-third">
-          <h2>Search for users</h2>
-        </div>
-        <div className="usa-width-two-thirds">
+
+        <div className="usa-width-one-whole">
+          <h2>Administrative users</h2>
           <form
             className="usa-search usa-search-small"
             onSubmit={e => this.handleSubmit(e)}
           >
             <div role="search">
-              <label className="usa-sr-only" htmlFor="search-field">
+              <label for="search-field" className="usa-sr-only" htmlFor="search-field">
                 Search
               </label>
               <input
@@ -73,7 +72,7 @@ export default class UserList extends React.Component {
                 name="search"
                 onChange={e => this.setState({ query: e.target.value })}
               />
-              <button>
+              <button className="search-button">
                 <span className="usa-search-submit-text">Search</span>
               </button>
             </div>

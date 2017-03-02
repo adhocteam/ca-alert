@@ -42,6 +42,15 @@ form.usa-form {
   max-width: 100% !important;
 }
 
+.search-button {
+  padding: .48em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0 0 0 0 !important;
+}
+
+// Screen reader only
+
 .sr-only {
   display: inline-block;
   text-indent: -9999em;

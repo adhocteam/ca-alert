@@ -30,11 +30,11 @@ class HazardView extends React.Component {
       const start = moment(hazard.created_at);
       return (
         <section className="usa-grid usa-section">
-          <h2>View Alert</h2>
-
-          <AlertView hazard={hazard} />
 
           <div className="usa-width-one-whole">
+            <AlertView hazard={hazard} />
+            <h2>View Alert</h2>
+
             <h3>Sent Notifications</h3>
             <ul>
               <li>SMS: {hazard.sms_notifications_sent}</li>

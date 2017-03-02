@@ -109,10 +109,8 @@ export default class CreateHazard extends React.Component {
       <div>
         {this.state.hazard === null
           ? <section className="usa-section usa-grid">
-              <div className="usa-width-one-third">
-                <h2>Add an alert</h2>
-              </div>
-              <div className="usa-width-two-thirds">
+              <div className="usa-width-one-whole">
+              <h2>Create an alert</h2>
                 <form className="usa-form" onSubmit={e => this.handleSubmit(e)}>
                   <div>
                     <label>Title</label>
