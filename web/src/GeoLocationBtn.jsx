@@ -49,7 +49,7 @@ export default class GeoLocationBtn extends React.Component {
   }
 
   render() {
-    let classes = ["usa-button-big"];
+    let classes = ["usa-button"];
     let props = {};
     if (!this.state.supported || this.state.getting) {
       classes.push("usa-button-disabled");
