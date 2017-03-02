@@ -5,7 +5,7 @@ import { shallow } from "enzyme";
 import sinon from "sinon";
 import "whatwg-fetch";
 
-import { SignUpForm } from "../src/SignUpForm";
+import SignUpForm from "../src/SignUpForm";
 
 describe("Sign-up form", () => {
   beforeEach(() => {
