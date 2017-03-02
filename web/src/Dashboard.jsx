@@ -34,12 +34,6 @@ export default React.createClass({
               <h2>Admin</h2>
               <div className="usa-grid-full  ca-dashboard-nav">
                 <div className="usa-width-one-third dashboard-card">
-                  <Link to="/admin/users">
-                    <h3>Users</h3>
-                    <p>Add and manage admin users</p>
-                  </Link>
-                </div>
-                <div className="usa-width-one-third dashboard-card">
                   <Link to="/admin/hazards">
                     <h3>Alerts</h3>
                     <p>Edit and publish alerts sent to the community</p>
