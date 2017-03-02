@@ -38,12 +38,6 @@ export default class HazardList extends React.Component {
         </div>
         <div className="usa-width-two-thirds">
           <div>
-            <button
-              className="usa-button usa-button-disabled"
-              disabled="disabled"
-            >
-              Filter
-            </button>
             <Link to="/admin/hazards/new" className="usa-button">
               Create an alert
             </Link>
