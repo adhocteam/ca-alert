@@ -68,7 +68,7 @@ RSpec.describe Admin::ReportsController, type: :request do
                 'access-token' => @access_token
               },
               params: {
-                days_back: 0
+                days_back: 5
               }
             )
           end
@@ -76,7 +76,7 @@ RSpec.describe Admin::ReportsController, type: :request do
           it 'returns the correct data' do
             expect(response.status).to eq(200)
             json = JSON.parse(response.body)
-            expect(json['data'][0]['count']).to eq(6)
+            expect(json['data'].map { |i| i['count'] }.sum).to eq(6)
           end
         end
       end
@@ -99,7 +99,7 @@ RSpec.describe Admin::ReportsController, type: :request do
                 'access-token' => @access_token
               },
               params: {
-                days_back: 0
+                days_back: 5
               }
             )
           end
@@ -107,7 +107,7 @@ RSpec.describe Admin::ReportsController, type: :request do
           it 'returns the correct data' do
             expect(response.status).to eq(200)
             json = JSON.parse(response.body)
-            expect(json['data'][0]['count']).to eq(5)
+            expect(json['data'].map { |i| i['count'] }.sum).to eq(5)
           end
         end
       end

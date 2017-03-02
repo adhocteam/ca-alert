@@ -31,7 +31,7 @@ RSpec.describe 'authentication', type: :request do
         expect(ActionMailer::Base.deliveries.count).to eq(1)
         mail = ActionMailer::Base.deliveries.first
         mail.body.raw_source =~ /redirect_url=([^"]*)/
-        expect(URI.unescape($1)).to eq('http://localhost:3000')
+        expect(URI.unescape($1)).to eq('http://localhost:8080/index.html#/account/signin')
       end
 
       describe 'with the account confirmed' do
