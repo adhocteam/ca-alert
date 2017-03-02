@@ -36,6 +36,15 @@ export default class Nav extends React.Component {
             <a href="#/dashboard">{user.name ? user.name : user.email}</a>
           </li>
           <li>
+            <a href="#/dashboard/places">Places</a>
+          </li>
+          <li>
+            <a href="#/account/communication">Communication preferences</a>
+          </li>
+          <li>
+            <a href="#/dashboard/alerts">Previous alerts</a>
+          </li>
+          <li>
             <a href="#/account/signout">Sign out</a>
           </li>
         </ul>
