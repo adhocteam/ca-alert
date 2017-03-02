@@ -141,16 +141,17 @@ Daily, Leanna groomed and prioritized the backlog, translated user feedback into
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-Laura - discovery and user research - adapt copy from beneficiary
+In similar projects, we speak at least five to seven people who are representative of the main user types. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings _HERE_. We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
 
-Link to user research notes
-
-- Signing in with google is something people like writing
-- People wanted multiple locations writing
+In Discovery, these themes emerged and we implemented the feedback in the wireframes and prototype:
+- Signing in with Google or other existing account 
+- People wanted to be able to receive alerts from multiple locations 
 - Phone alerts were more useful than email
-- Chat bot for low tech/low SES future feature,  writing
-- See current alerts without signing in writing
-- A way to review information in case you dismiss a notification without getting the details writing
+- A chat bot to enroll would make this more accessible for low tech/low SES residents
+- Mid-crisis, users wanted to be able to see current alerts without signing in
+- Users desired a way to review information in case you dismiss a notification without getting the details
+
+PUT SHIT IN GITHUB and Link to user research notes
 
 
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
@@ -174,13 +175,19 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
-- Steal from beneficiary reporting
-- Test with screen reader
-- Automated tests with any real project
+We tested the public facing pages to confirm they met 508 standards. Here are sample reports
+
+LINK
+
+LINK
+
+MANUAL CHECKS
+
+AUTOMATED TEST 
 
 #### h. Created or used a design style guide and/or a pattern library
 
-- LEANNA steal copy from QPP
+- Pattern library created to ensure consistent brand and UI throughout the app experience.
 
 #### i. Performed usability tests with people
 
@@ -189,9 +196,11 @@ Swagger documentation has been included in all commits affecting the API endpoin
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
 - Review of user suggestions already implemented and how to reference
+
 ##### ADMIN
 - Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe
 - Removal of lat long - this is removed from the app, ensure it’s removed from wireframes
+
 ##### RESIDENT
 - Implemented ability to personally name - ensure this in wireframes
 Review of user suggestions that we should reflect in wireframe
