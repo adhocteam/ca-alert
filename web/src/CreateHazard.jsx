@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeoLocationBtn from "./GeoLocationBtn";
+import InputElement from 'react-input-mask';
 import Button from "./Button";
 import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import "./App.scss";
@@ -181,7 +182,9 @@ export default class CreateHazard extends React.Component {
                   </div>
                   <div>
                     <label>Phone number</label>
-                    <input
+                    <InputElement
+                      name="phoneNumber"
+                      mask="(999) 999-9999"
                       name="phoneNumber"
                       value={this.state.phoneNumber}
                       onChange={e => this.handleChange(e)}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+import InputElement from 'react-input-mask';
 
 import { apiCreds } from './session';
 import { fetchAuthd, checkResponse, encodeQueryString } from './lib';
@@ -82,7 +83,8 @@ class AddPhone extends React.Component {
               <div className={errcls}>
                 <label htmlFor="phone">Phone number</label>
                 {errmsg}
-                <input name="phone"
+                <InputElement name="phone"
+                       mask="(999) 999-9999"
                        value={this.state.title}
                        onChange={e => this.handleChange(e)}
                        onBlur={() => this.handleBlur()}

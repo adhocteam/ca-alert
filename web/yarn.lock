@@ -3788,6 +3788,10 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-input-mask@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/react-input-mask/-/react-input-mask-0.7.7.tgz#729d59c271bf42928a894c2af4f61a447351817e"
+
 react-router@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-3.0.2.tgz#5a19156678810e01d81901f9c0fef63284b8a514"
