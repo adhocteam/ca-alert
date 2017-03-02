@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import GeoLocationBtn from "./GeoLocationBtn";
+import InputElement from 'react-input-mask';
 import Button from "./Button";
 import { geocode, encodeQueryString, checkResponse, fetchAuthd } from "./lib";
 import "./App.scss";
@@ -21,19 +22,21 @@ export default class CreateHazard extends React.Component {
       linkTitle: "",
       linkURL: "",
       phoneNumber: "",
-      pubDate: "",
-      pubTime: "",
-      expiryDate: "",
-      expiryTime: "",
       radius: "1000", // TODO(paulsmith): XXX
       geocode: null,
-      hazard: null
+      hazard: null,
+      emergency: false,
     };
   }
 
   handleChange(e) {
+    let value = e.target.value;
+    if (e.target.type == 'checkbox') {
+      value = e.target.checked;
+    }
+
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   }
 
@@ -59,15 +62,12 @@ export default class CreateHazard extends React.Component {
       title: this.state.title,
       message: this.state.message,
       category: this.state.category,
-      pubDate: this.state.pubDate,
-      pubTime: this.state.pubTime,
-      expiryDate: this.state.expiryDate,
-      expiryTime: this.state.expiryTime,
       linkURL: this.state.linkURL,
       linkTitle: this.state.linkTitle,
       phoneNumber: this.state.phoneNumber,
       radius: this.state.radius,
-      place: this.state.geocode
+      place: this.state.geocode,
+      is_emergency: this.state.emergency
     };
     this.setState({ hazard: hazard });
   }
@@ -77,13 +77,16 @@ export default class CreateHazard extends React.Component {
     let h = this.state.hazard;
     let qs = encodeQueryString([
       ["title", h.title],
+      ["category", h.category],
       ["message", h.message],
       ["latitude", h.place.pt.lat],
       ["longitude", h.place.pt.lng],
       ["radius_in_meters", h.radius],
       ["address", h.place.address],
+      ["link_title", h.linkTitle],
       ["link", h.linkURL],
-      ["phone_number", h.phoneNumber]
+      ["phone_number", h.phoneNumber],
+      ["is_emergency", h.is_emergency]
     ]);
     let creds = apiCreds();
     fetchAuthd(API_HOST + "/admin/hazards", {
@@ -127,62 +130,43 @@ export default class CreateHazard extends React.Component {
                       onChange={e => this.handleChange(e)}
                     />
                   </div>
-                  <Tabs>
-                    <TabList>
-                      <Tab>Lat/Lng</Tab>
-                      <Tab>Geolocate</Tab>
-                      <Tab>Address</Tab>
-                    </TabList>
-                    <TabPanel>
-                      Latitude/Longitude
-                      <label>Latitude</label>
-                      <input
-                        name="lat"
-                        value={this.state.lat}
-                        onChange={e => this.handleChange(e)}
-                      />
-                      <label>Longitude</label>
-                      <input
-                        name="lng"
-                        value={this.state.lng}
-                        onChange={e => this.handleChange(e)}
-                      />
-                      <Button>Update</Button>
-                    </TabPanel>
-                    <TabPanel>
-                      Geolocate
-                      <GeoLocationBtn />
-                    </TabPanel>
-                    <TabPanel>
-                      Address
-                      {this.state.geocode === null
-                        ? <div>
-                            <label>Street address, ZIP Code, or city</label>
-                            <input
-                              name="address"
-                              value={this.state.address}
-                              onChange={e => this.handleChange(e)}
-                            />
-                            <Button
-                              type="button"
-                              onClick={e => this.handleGeocodeClick(e)}
+
+                  <div>
+                    <input name="emergency"
+                           type="checkbox"
+                           checked={this.state.emergecy}
+                           onChange={e => this.handleChange(e)} />
+                    <label for="emergency"> This alert is an emergency</label>
+                  </div>
+
+                  <div>
+                    {this.state.geocode === null
+                      ? <div>
+                          <label>Street address, ZIP Code, or city</label>
+                          <input
+                            name="address"
+                            value={this.state.address}
+                            onChange={e => this.handleChange(e)}
+                          />
+                          <Button
+                            type="button"
+                            onClick={e => this.handleGeocodeClick(e)}
+                          >
+                            Update
+                          </Button>
+                        </div>
+                      : <div className="auto-clear">
+                          <div style={{ float: "right" }}>
+                            <a
+                              href="#"
+                              onClick={e => this.handleAddressClearClick(e)}
                             >
-                              Update
-                            </Button>
+                              Clear
+                            </a>
                           </div>
-                        : <div className="auto-clear">
-                            <div style={{ float: "right" }}>
-                              <a
-                                href="#"
-                                onClick={e => this.handleAddressClearClick(e)}
-                              >
-                                Clear
-                              </a>
-                            </div>
-                            <Location place={this.state.geocode} />
-                          </div>}
-                    </TabPanel>
-                  </Tabs>
+                          <Location place={this.state.geocode} />
+                        </div>}
+                  </div>
                   <div>
                     <label>Category</label>
                     <select
@@ -214,41 +198,11 @@ export default class CreateHazard extends React.Component {
                   </div>
                   <div>
                     <label>Phone number</label>
-                    <input
+                    <InputElement
+                      name="phoneNumber"
+                      mask="(999) 999-9999"
                       name="phoneNumber"
                       value={this.state.phoneNumber}
-                      onChange={e => this.handleChange(e)}
-                    />
-                  </div>
-                  <div>
-                    <p><b>Publish time</b></p>
-                    <label>Date</label>
-                    <input
-                      type="date"
-                      name="pubDate"
-                      value={this.state.pubDate}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <label>Time</label>
-                    <input
-                      name="pubTime"
-                      value={this.state.pubTime}
-                      onChange={e => this.handleChange(e)}
-                    />
-                  </div>
-                  <div>
-                    <p><b>Expiration (optional)</b></p>
-                    <label>Date</label>
-                    <input
-                      type="date"
-                      name="expiryDate"
-                      value={this.state.expiryDate}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <label>Time</label>
-                    <input
-                      name="expiryTime"
-                      value={this.state.expiryTime}
                       onChange={e => this.handleChange(e)}
                     />
                   </div>
@@ -282,18 +236,15 @@ function Location(props) {
 
 function Preview(props) {
   let hazard = props.hazard;
+
   return (
     <section className="usa-section usa-grid">
       <div className="usa-width-one-third">
         <h2>Preview alert</h2>
       </div>
       <div className="usa-width-two-thirds">
-        <h3>{hazard.title}</h3>
+        <h3>{(hazard.is_emergency) ? 'EMERGENCY: ' : ''}{hazard.title}</h3>
         <span className="usa-label">{hazard.category}</span>
-        <div>
-          <p><b>{hazard.pubDate} {hazard.pubTime}</b></p>
-          <p>until {hazard.expiryDate} {hazard.expiryTime}</p>
-        </div>
         <div style={{ whiteSpace: "pre-wrap" }}>
           {hazard.message}
         </div>

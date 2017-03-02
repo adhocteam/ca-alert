@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "timestamp": 1488398806327,
+  "graph": {
+    "options": {
+      "directed": true,
+      "multigraph": false,
+      "compound": false
+    },
+    "nodes": [
+      {
+        "v": "00-atoms/00-global/00-colors.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/00-global/01-fonts.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/buttons/button-primary.mustache",
+        "value": {
+          "compileState": "clean",
+          "lineagePath": "../../patterns/02-organisms-forms-sign-up-form/02-organisms-forms-sign-up-form.rendered.html",
+          "lineagePattern": "organisms-sign-up-form"
+        }
+      },
+      {
+        "v": "00-atoms/buttons/button-secondary.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/buttons/button-tertiary.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/forms/01-label.mustache",
+        "value": {
+          "compileState": "clean",
+          "lineagePath": "../../patterns/02-organisms-forms-sign-up-form/02-organisms-forms-sign-up-form.rendered.html",
+          "lineagePattern": "organisms-sign-up-form"
+        }
+      },
+      {
+        "v": "00-atoms/forms/02-input.mustache",
+        "value": {
+          "compileState": "clean",
+          "lineagePath": "../../patterns/02-organisms-forms-sign-up-form/02-organisms-forms-sign-up-form.rendered.html",
+          "lineagePattern": "organisms-sign-up-form"
+        }
+      },
+      {
+        "v": "00-atoms/forms/03-textarea.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/forms/04-checkbox.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/forms/05-radio-button.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/lists/00-unordered.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/lists/01-ordered.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/text/00-headings.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/text/01-paragraph.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/text/02-blockquote.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/text/03-inline-elements.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "00-atoms/text/06-hr.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "01-molecules/blocks/band.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "01-molecules/forms/field.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "01-molecules/forms/fieldset.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "02-organisms/forms/sign-up-form.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "02-organisms/navigation/primary-navigation.mustache",
+        "value": {
+          "compileState": "clean"
+        }
+      },
+      {
+        "v": "/Users/mel/Development/ca-alert/design/patternlab/source/_meta/_00-head.mustache",
+        "value": {
+          "compileState": null
+        }
+      },
+      {
+        "v": "/Users/mel/Development/ca-alert/design/patternlab/source/_meta/_01-foot.mustache",
+        "value": {
+          "compileState": null
+        }
+      }
+    ],
+    "edges": [
+      {
+        "v": "01-molecules/forms/field.mustache",
+        "w": "00-atoms/forms/01-label.mustache",
+        "value": {}
+      },
+      {
+        "v": "01-molecules/forms/field.mustache",
+        "w": "00-atoms/forms/02-input.mustache",
+        "value": {}
+      },
+      {
+        "v": "01-molecules/forms/fieldset.mustache",
+        "w": "00-atoms/buttons/button-primary.mustache",
+        "value": {}
+      },
+      {
+        "v": "02-organisms/forms/sign-up-form.mustache",
+        "w": "00-atoms/forms/01-label.mustache",
+        "value": {}
+      },
+      {
+        "v": "02-organisms/forms/sign-up-form.mustache",
+        "w": "00-atoms/forms/02-input.mustache",
+        "value": {}
+      },
+      {
+        "v": "02-organisms/forms/sign-up-form.mustache",
+        "w": "00-atoms/buttons/button-primary.mustache",
+        "value": {}
+      }
+    ]
+  }
+}

@@ -59,6 +59,9 @@ class Hazard < ApplicationRecord
     property :category do
       key :type, :string
     end
+    property :is_emergency do
+      key :type, :boolean
+    end
     property :creator_id do
       key :type, :integer
       key :format, :int64

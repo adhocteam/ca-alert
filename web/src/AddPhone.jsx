@@ -1,5 +1,6 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+import InputElement from 'react-input-mask';
 
 import { apiCreds } from './session';
 import { fetchAuthd, checkResponse, encodeQueryString } from './lib';
@@ -10,16 +11,20 @@ class AddPhone extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone: ''
+      phone: '',
+      error: null
     }
+  }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  handleBlur() {
+    if (!this.isPhoneValid()) {
+      this.setState({error: 'a 10 digit phone number is required'});
+    }
   }
 
   handleChange(e) {
     e.preventDefault();
-    this.setState({phone: e.target.value})
+    this.setState({phone: e.target.value, error: null})
   }
 
   handleSubmit(e) {
@@ -46,7 +51,24 @@ class AddPhone extends React.Component {
       });
   }
 
+  isPhoneValid() {
+    return this.state.phone.replace(/[^\d]/g, '').length == 10;
+  }
+
   render() {
+    const disabled = (!this.isPhoneValid()) ? 'disabled' : null;
+    let errmsg = null;
+    let errcls = null;
+
+    if (this.state.error != null) {
+      errmsg = (
+        <span className="usa-input-error-message" role="alert">
+          {this.state.error}
+        </span>
+      );
+      errcls = "usa-input-error";
+    }
+
     return (
       <section>
         <div className="usa-grid usa-section">
@@ -57,14 +79,19 @@ class AddPhone extends React.Component {
           <div className="usa-width-two-thirds">
             <p>Enter the phone number you wish to recieve alerts at</p>
 
-            <form className="usa-form" onSubmit={this.handleSubmit}>
-              <label htmlFor="phone">Phone number</label>
-              <input name="phone"
-                     value={this.state.title}
-                     onChange={this.handleChange}
-                     placeholder="Phone number" />
+            <form className="usa-form" onSubmit={e => this.handleSubmit(e)}>
+              <div className={errcls}>
+                <label htmlFor="phone">Phone number</label>
+                {errmsg}
+                <InputElement name="phone"
+                       mask="(999) 999-9999"
+                       value={this.state.title}
+                       onChange={e => this.handleChange(e)}
+                       onBlur={() => this.handleBlur()}
+                       placeholder="Phone number" />
+              </div>
 
-              <Button type="submit">Continue</Button>
+              <Button type="submit" disabled={disabled} >Continue</Button>
             </form>
           </div>
         </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301200515) do
+ActiveRecord::Schema.define(version: 20170302164810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170301200515) do
     t.integer   "user_count_at_creation",                                                            default: 0
     t.geography "alert_area",             limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
     t.string    "source",                                                                            default: "admin"
+    t.boolean   "is_emergency",                                                                    default: true
     t.index ["alert_area"], name: "index_hazards_on_alert_area", using: :gist
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end

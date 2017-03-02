@@ -1,9 +1,8 @@
 DeviseTokenAuth.setup do |config|
-  url_options = Rails.application.config.action_mailer.default_url_options
   if Rails.env.production?
-    config.default_confirm_success_url = 'https://ca-alert-prototype.s3.amazonaws.com/index.html'
+    config.default_confirm_success_url = 'https://ca-alert-prototype.s3.amazonaws.com/index.html#/account/signin'
   else
-    config.default_confirm_success_url = "http://#{url_options[:host]}:#{url_options[:port]}"
+    config.default_confirm_success_url = 'http://localhost:8080/index.html#/account/signin'
   end
 
   # By default the authorization headers will change after each request. The

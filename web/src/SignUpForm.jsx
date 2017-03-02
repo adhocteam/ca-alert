@@ -3,7 +3,7 @@ import "whatwg-fetch";
 import { MIN_PASSWORD_LEN, encodeQueryString, errClassName } from "./lib";
 import { hashHistory, Link } from "react-router";
 
-export class SignUpForm extends React.Component {
+export default class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,23 +12,19 @@ export class SignUpForm extends React.Component {
       passwordConfirm: { value: "", isValid: null },
       serverError: null
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     let state = this.state;
     switch (e.target.name) {
       case "signup-email":
-        state.email.value = e.target.value;
+        state.email = { value: e.target.value, isValid: null }
         break;
       case "signup-password":
-        state.password.value = e.target.value;
+        state.password = { value: e.target.value, isValid: null }
         break;
       case "signup-password-confirm":
-        state.passwordConfirm.value = e.target.value;
+        state.passwordConfirm = { value: e.target.value, isValid: null }
         break;
       default:
         throw new Error(`unknown element name ${e.target.name}`);
@@ -36,22 +32,38 @@ export class SignUpForm extends React.Component {
     this.setState(state);
   }
 
-  handleBlur(e) {
-    let state = this.state;
-    switch (e.target.name) {
-      case "signup-email":
-        state.email.isValid = /^.+@.+\..+$/.test(e.target.value);
-        break;
-      case "signup-password":
-        state.password.isValid = e.target.value.length >= MIN_PASSWORD_LEN;
-        break;
-      case "signup-password-confirm":
-        state.passwordConfirm.isValid = e.target.value ===
-          state.password.value &&
-          state.password.isValid;
-        break;
-    }
-    this.setState(state);
+  validEmail() {
+    return /^.+@.+\..+$/.test(this.state.email.value);
+  }
+
+  validPassword() {
+    return this.state.password.value.length >= MIN_PASSWORD_LEN;
+  }
+
+  validPasswordConfirm() {
+    return this.validPassword() &&
+      this.state.password.value === this.state.passwordConfirm.value;
+  }
+
+  validateEmail() {
+    this.setState({ email: {
+      value: this.state.email.value,
+      isValid: this.validEmail()
+    } });
+  }
+
+  validatePassword() {
+    this.setState({ password: {
+      value: this.state.password.value,
+      isValid: this.validPassword()
+    } });
+  }
+
+  validatePasswordConfirm() {
+    this.setState({ passwordConfirm: {
+      value: this.state.passwordConfirm.value,
+      isValid: this.validPasswordConfirm()
+    } });
   }
 
   handleSubmit(e) {
@@ -90,12 +102,6 @@ export class SignUpForm extends React.Component {
   }
 
   render() {
-    let button = null;
-    if (this.formIsValid()) {
-      button = <input type="submit" value="Sign up" />;
-    } else {
-      button = <input type="submit" disabled="disabled" value="Sign up" />;
-    }
     let emailErrMsg, passwordErrMsg, passwordConfirmErrMsg;
     if (
       this.state.email.isValid !== null && this.state.email.isValid === false
@@ -140,92 +146,81 @@ export class SignUpForm extends React.Component {
       );
     }
     return (
-      <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
-          <h2>Sign up with a new account and get notified of alerts.</h2>
-        </div>
-        <div className="usa-width-two-thirds">
-          <form className="usa-form" onSubmit={this.handleSubmit}>
-            <fieldset>
-              <legend className="usa-drop_text">Sign up</legend>
-              <span>
-                Have an account?{" "}
-                <Link to="/account/signin">Sign in instead</Link>
-                .
-              </span>
-              {serverError}
-              <div className={errClassName(this.state.email.isValid, "div")}>
-                {emailErrMsg}
-                <label
-                  className={errClassName(this.state.email.isValid, "label")}
-                  htmlFor="signup-email"
-                >
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  id="signup-email"
-                  name="signup-email"
-                  className={errClassName(this.state.email.isValid, "input")}
-                  placeholder="name@example.com"
-                  value={this.state.email.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                />
-              </div>
-              <div className={errClassName(this.state.password.isValid, "div")}>
-                {passwordErrMsg}
-                <label
-                  className={errClassName(this.state.password.isValid, "label")}
-                  htmlFor="signup-password"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="signup-password"
-                  name="signup-password"
-                  placeholder="minimum 8 characters"
-                  className={errClassName(this.state.password.isValid, "input")}
-                  value={this.state.password.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                />
-              </div>
-              <div
+      <div>
+        <form className="alt-signup" onSubmit={e => this.handleSubmit(e)}>
+          <fieldset>
+            {serverError}
+            <div className={errClassName(this.state.email.isValid, "div")}>
+              {emailErrMsg}
+              <label
+                className={errClassName(this.state.email.isValid, "label")}
+                htmlFor="signup-email"
+              >
+                Email address
+              </label>
+              <input
+                type="email"
+                id="signup-email"
+                name="signup-email"
+                className={errClassName(this.state.email.isValid, "input")}
+                placeholder="name@example.com"
+                value={this.state.email.value}
+                onChange={e => this.handleChange(e)}
+                onBlur={() => this.validateEmail()}
+              />
+            </div>
+            <div className={errClassName(this.state.password.isValid, "div")}>
+              {passwordErrMsg}
+              <label
+                className={errClassName(this.state.password.isValid, "label")}
+                htmlFor="signup-password"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="signup-password"
+                name="signup-password"
+                placeholder="minimum 8 characters"
+                className={errClassName(this.state.password.isValid, "input")}
+                value={this.state.password.value}
+                onChange={e => this.handleChange(e)}
+                onBlur={() => this.validatePassword()}
+              />
+            </div>
+            <div
+              className={errClassName(
+                this.state.passwordConfirm.isValid,
+                "div"
+              )}
+            >
+              {passwordConfirmErrMsg}
+              <label
                 className={errClassName(
                   this.state.passwordConfirm.isValid,
-                  "div"
+                  "label"
                 )}
+                htmlFor="signup-password-confirm"
               >
-                {passwordConfirmErrMsg}
-                <label
-                  className={errClassName(
-                    this.state.passwordConfirm.isValid,
-                    "label"
-                  )}
-                  htmlFor="signup-password-confirm"
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  id="signup-password-confirm"
-                  name="signup-password-confirm"
-                  className={errClassName(
-                    this.state.passwordConfirm.isValid,
-                    "input"
-                  )}
-                  value={this.state.passwordConfirm.value}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                />
-              </div>
-              {button}
-            </fieldset>
-          </form>
-        </div>
-      </section>
+                Confirm password
+              </label>
+              <input
+                type="password"
+                id="signup-password-confirm"
+                name="signup-password-confirm"
+                className={errClassName(
+                  this.state.passwordConfirm.isValid,
+                  "input"
+                )}
+                value={this.state.passwordConfirm.value}
+                onChange={e => this.handleChange(e)}
+                onBlur={() => this.validatePasswordConfirm()}
+              />
+            </div>
+            <input type="submit" className="usa-button usa-button-big usa-button-primary" value="Sign up" />
+          </fieldset>
+        </form>
+      </div>
     );
   }
 }

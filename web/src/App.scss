@@ -5,6 +5,8 @@ $secondary-color: #F9C642;
 $tertiary-color: #112E51;
 $white: #fff;
 $alt-background: #D6D7D9;
+$color-gray-lightest: #f1f1f1;
+$color-gray-dark: #323a45;
 
 
 .auto-clear::after {
@@ -12,6 +14,8 @@ $alt-background: #D6D7D9;
     display: block;
     clear: both;
 }
+
+// Page
 
 html {
   height: 100%;
@@ -25,26 +29,64 @@ body {
   }
 }
 
+#main-content {
+  h2 {
+    margin: 0 !important;
+  }
+}
+
 
 // Forms
 
 form.alt-signup {
   background: $alt-background !important;
   padding: 1em 1em;
-  label:first-of-type {
-    margin-top: 0;
-  }
+  
 }
 
 form.usa-form {
   max-width: 100% !important;
 }
 
-.sr-only {
-  display: inline-block;
-  text-indent: -9999em;
-  height: 1px;
-  overflow: hidden;
+fieldset {
+  legend {
+    color: $primary-color;
+    padding: 0 0 1em 0;
+  }
+}
+
+.form-section {
+  padding: 1em;
+  background: rgba($alt-background, .4);
+  margin: 1em 0 1em 0;
+  h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.search-form {
+  button {
+    line-height: 1em;
+    margin: 0 !important;
+    padding: .88em !important;
+  }
+  input {
+    margin-bottom: 1em;
+  }
+  &:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  }
+}
+
+.clearfox {
+  clear: both;
+  border: 2px solid green;
 }
 
 .usa-hero {
@@ -56,36 +98,10 @@ form.usa-form {
   }
 }
 
-.usa-logo {
-  em.usa-logo-text {
-    font-size: 4rem;
-    font-weight: normal;
-    b {font-weight: 700;}
-  }
-  span {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: normal;
-  }
-}
+// Header
 
-.usa-nav-secondary {
-  padding: 0;
-  margin: 0;
-  top: -5em !important;
-  .usa-button-outline {
-    border: 2px solid #fff !important;
-  }
-}
-
-
-.usa-button-outline {
-  background: transparent !important;
-  color: $primary-color !important;
-}
-
-.usa-hero-callout-alt {
-  color: $primary-color !important;
+.usa-navbar {
+  min-height: 8rem !important;
 }
 
 .usa-header {
@@ -97,11 +113,89 @@ form.usa-form {
   }
 }
 
+
+// Logo
+
+.usa-logo {
+  margin-top:1rem;
+  em.usa-logo-text {
+    font-size: 4rem;
+    font-weight: normal;
+    line-height: 1;
+    b {font-weight: 700;}
+  }
+  span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+}
+
+.usa-menu-btn {
+  margin-top: 2rem !important;
+}
+
+.usa-nav-secondary {
+  padding: 0;
+  margin: 0;
+  top: -5em !important;
+  height: 5rem;
+  line-height: 5rem;
+  .usa-button-outline {
+    border: 2px solid #fff !important;
+  }
+}
+
+
+
+// Buttons
+
+.usa-button-outline {
+  background: transparent !important;
+  color: $primary-color !important;
+}
+
+.usa-button.usa-button-small {
+  padding: .3em .5em !important;
+}
+
+// Hero
+
+.usa-hero-callout-alt {
+  color: $primary-color !important;
+}
+
+// Modal overrides
+
+.modal-content {
+  h3 {
+    margin: 0 !important;
+    display: inline-block;
+  }
+}
+
+// Screen reader only
+
+.usa-sr-only {
+  display: inline-block;
+  height: 1px;
+  text-indent: -9999em;
+}
+
+
+// Section overrides
+
+
+
+// Grid overrides
+
 .usa-grid {
   h2, h3 {
     color: $primary-color !important;
   }
 }
+
+// Footer
 
 footer .usa-footer-secondary_section {
 
@@ -110,8 +204,30 @@ footer .usa-footer-secondary_section {
   }
 
   background: $tertiary-color !important;
-  h1, h2, h3, h4, h5, h6, a {
+  h1, h2, h3, h4, h5, h6, a, p {
     color: $white !important;
   }
   padding-top: 0!important;
+}
+
+// Dashboard
+
+.ca-dashboard-nav {
+  padding: 0;
+  .dashboard-card {
+    background: $color-gray-lightest;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-height:14.2rem;
+    a {
+      text-decoration: none;
+    }
+    h3 {
+      margin: 0;
+    }
+    p {
+      color: $color-gray-dark;
+      margin: 0;
+    }
+  }
 }

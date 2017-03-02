@@ -50,25 +50,34 @@ RSpec.describe Hazard do
   end
 
   describe 'creating alerts' do
-    let!(:hazard) { create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140) }
-
     it 'creates alerts when the hazard covers a place' do
+      create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140)
       expect(Alert.count).to eq(1)
     end
 
     it 'sends an email to the user about the alert' do
+      create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140, is_emergency: false)
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       mail = ActionMailer::Base.deliveries[0]
       expect(mail.subject).to eq('New Alert From CAlerts!')
       expect(mail.to).to eq([user.email])
     end
 
+    it 'changes the email a little bit for emergencies' do
+      create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140, is_emergency: true)
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      mail = ActionMailer::Base.deliveries[0]
+      expect(mail.subject).to eq('New EMERGENCY Alert From CAlerts!')
+      expect(mail.to).to eq([user.email])
+    end
+
     it 'sends an SMS to the user about the alert' do
+      create(:hazard, longitude: -82.548984, latitude: 35.611965, radius_in_meters: 1140)
       expect(FakeTwilio.messages.count).to eq(2)
       msg = FakeTwilio.messages.last
       expect(msg.to).to eq(phone_number.phone_number)
       expect(msg.from).to eq(PhoneNumber::SMS_FROM_NUMBER)
-      expect(msg.body).to match(/New Alert from CAlerts/)
+      expect(msg.body).to match(/New EMERGENCY Alert from CAlerts/)
     end
   end
 

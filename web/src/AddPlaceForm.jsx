@@ -36,11 +36,7 @@ export default class AddPlaceForm extends React.Component {
     this.state.geocodeResult = null;
     this.setState(this.state);
     let req = {
-      address: this.state.address.value,
-      componentRestrictions: {
-        country: "US",
-        administrativeArea: "California"
-      }
+      address: this.state.address.value
     };
     let geocoder = new google.maps.Geocoder();
     geocoder.geocode(req, (results, status) => {
@@ -147,11 +143,11 @@ export default class AddPlaceForm extends React.Component {
             />
           </div>
           <p>OR</p>
-          <div>
+          <div className="search-form">
             <label>
               Street address or ZIP Code
             </label>
-            <input
+            <input className="usa-width-two-thirds "
               name="address"
               value={this.state.address.value}
               onChange={this.handleChange}
@@ -177,20 +173,22 @@ export default class AddPlaceForm extends React.Component {
     return (
       <section className="usa-grid usa-section">
         <div className="usa-width-one-whole">
-          <h2>Add a place</h2>
           {this.state.error ? <ErrorAlert error={this.state.error} /> : null}
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">
-                Choose a location you want to receive alerts about
+                Add a place
               </legend>
-              {locationForm}
-              {geocodeResult}
-              {map}
-              {continueBtn}
-              {namePlace}
+              <div className="form-section">
+                {locationForm}
+                <div className="clearfix">
+                {map}
+                </div>
+                {continueBtn}
+                {namePlace}
+              </div>
             </fieldset>
-            <Link to="/dashboard/places">Cancel</Link>
+            <Link to="/dashboard/places" className="usa-button usa-button-outline usa-button-gray">Cancel</Link>
           </form>
         </div>
       </section>

@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import HazardView from '../src/HazardView';
+import AlertView from '../src/AlertView';
 
 describe('Hazard View', () => {
   const hazard = {
@@ -14,7 +15,8 @@ describe('Hazard View', () => {
     created_at: '2017-01-02T03:04:05', // don't specify a tz in test
     phone: '111-222-3456',
     sms_notifications_sent: 2,
-    email_notifications_sent: 3
+    email_notifications_sent: 3,
+    user_count_at_creation: 5
   };
 
   it('Should fetch on mount', (done) => {
@@ -28,10 +30,8 @@ describe('Hazard View', () => {
   });
 
   it('Should display the hazard title', () => {
-    const el = shallow(<HazardView params={{ id: 2 }} />);
-    el.setState({hazard: hazard});
+    const el = shallow(<AlertView hazard={hazard} />);
 
-    expect(el.text()).to.contain('View Alert');
     expect(el.text()).to.contain('title');
     expect(el.find('.usa-label-big').text()).to.contain('Earthquake');
     expect(el.find('.start-date').text()).to.equal('Jan 2, 2017 3:04 AM');
@@ -46,5 +46,6 @@ describe('Hazard View', () => {
 
     expect(el.text()).to.contain('SMS: 2');
     expect(el.text()).to.contain('Email: 3');
+    expect(el.text()).to.contain('Active users: 5');
   });
 });

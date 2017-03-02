@@ -1,0 +1,11 @@
+# Directories to ignore
+node_modules/
+build/
+logs/
+
+# Files to ignore
+._*
+.cache
+.DS_Store
+npm-debug.log
+*.log

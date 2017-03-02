@@ -1,9 +1,10 @@
 import { login } from "./spec_helper";
 
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import Nav from "../src/Nav";
+import { newLoginSession, logout } from "../src/session";
 
 describe("Nav Component", () => {
   it("Should show a non-logged in version by default", () => {
@@ -25,5 +26,25 @@ describe("Nav Component", () => {
     const signout = el.find({ href: "#/account/signout" });
     expect(signout.length).to.equal(1);
     expect(signout.text()).to.contain("Sign out");
+  });
+
+  it("Should update on login/out", () => {
+    const el = mount(<Nav />);
+
+    // Signed out by default
+    expect(el.find({href: "#/account/signin" })).to.have.length(1);
+    expect(el.find({href: "#/account/signout" })).to.have.length(0);
+
+    newLoginSession('x', 'y', 'z', 'a', 'b');
+
+    // Should now be signed in
+    expect(el.find({href: "#/account/signin" })).to.have.length(0);
+    expect(el.find({href: "#/account/signout" })).to.have.length(1);
+
+    logout();
+
+    // and signed back out
+    expect(el.find({href: "#/account/signin" })).to.have.length(1);
+    expect(el.find({href: "#/account/signout" })).to.have.length(0);
   });
 });
