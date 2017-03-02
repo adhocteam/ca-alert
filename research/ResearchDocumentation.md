@@ -56,8 +56,137 @@ Speak to 3-5 Californians who might be affected by emergencies in their areas to
 
 ### Findings
 
+- What makes emergency messages helpful
+ - People wanted multiple locations, such as their home and office, and their current location
+ - Users want messages if “something in my life is affected by it”
+ - Is there an action they need to take, like move their car or evacuate?
+ - Messages that "cut through the clutter" of other notifications are good for emergency situations
+ - There are levels of importance that call for different types of messages and notifications: warnings vs emergencies, something they need to react to vs notice of something in a loved one's region, etc.
+- Accessing messages
+ - Phone alerts were more useful than email 
+ - Signing in with google is something people like
+ - Users want to be able to review information in case they dismiss a notification without getting the details
+ - It would be helpful to see current alerts near a user's location without signing in
+- Idea: a chat bot for low tech/low SES could be a good future feature
+
 #### Next Steps
 
-#### Make these updates to current designs
+- Implement ability for user to name locations instead of choosing from a drop-down
+- Explore the difference between emergency and non-emergency messages
+- Allow sign-in through Google accounts
+- Allow seeing nearby alerts without signing in
+- Create a way to see past alerts that the user may have dismissed
 
-#### Follow up questions for stakeholders
+
+## Round Two Research Goal and Plan: Usability testing our wireframe-based prototype
+
+**Goal**
+Speak to 2-3 Californians who might be affected by emergencies in their areas to learn whether our prototype meets their needs, and 2-3 Government employees who share or send information to the public to learn whether the admin portion of our prototype meets their needs.
+
+**Research Questions**
+
+- Resident users
+ - How well does our design succeed at meeting user needs?
+ - How might it be improved?
+- Government admin users
+ - How well does our admin design succeed at meeting Government employee needs?
+ - How might it be improved?
+
+### Research Participant Recruitment
+
+- Add details about screener survey and tool
+
+### User Research Conversation Guide - California resident
+
+#### Introduction
+
+- Thank you for taking the time to speak with me today. Our goal of this conversation is to learn about how you find out about things going on in your area, especially emergency situations.
+- I have a bunch of questions for you, but there are no right or wrong answers - we just want to learn from your experiences.
+- My colleague (name) is on the call taking notes, and we'd like to record our voices in case we miss something. Is that okay with you?
+
+#### Questions
+
+- Can you tell me a little bit about your life in California?
+- Have you heard about emergency situations in your area in the past six months?
+ - What were they?
+ - How did you hear about them?
+ - Have you signed up for any ways to get information about emergencies in your area?
+ - Are there any ways you automatically get information about emergencies in your area?
+ - What did you do when you heard?
+ - Are there ways you tried to get more information? How?
+- Are there any ways that finding out about emergencies hasn’t quite worked for you?
+ - How could those go better?
+ - If you could wave a magic wand and change it, what would your ideal way to get this kind of information be?
+ - What kind of things would it tell you?
+ - What places would it tell you about things? (Where you are? Where loved ones are?)
+- (Begin screen-share and show prototype)
+ - General questions for different parts of the prototype:
+   - What can you see and do on this screen?
+   - What would you do next? Did that do what you expected?
+   - Are there ways we could make this better?
+ - Show sign-up, focused on SMS: did that do what you expected?
+ - Add places, set communication preferences
+ - Get an alert
+   - View alert details
+   - What do you think of seeing this information?
+   - Is there anything that’s missing here?
+ - Non-signed in version - nearby alerts
+   - If you were not signed in, and saw something like this, what are your impressions of this?
+ - Wrap-up, general questions
+   - How did that work for you?
+   - Is there a way that could be better for you?
+
+####Closing
+
+- Thank you so much for your time and feedback.
+- Are there any other things we should consider to make this easier?
+
+
+### User Research Conversation Guide - Government employee
+
+#### Introduction
+
+- Thank you for taking the time to speak with me today. Our goal of this conversation is to learn about how you share or send information to people in your area as a Government employee, especially emergency situations.
+- I have a bunch of questions for you, but there are no right or wrong answers - we just want to learn from your experiences.
+- My colleague (name) is on the call taking notes, and we'd like to record our voices in case we miss something. Is that okay with you?
+
+#### Questions
+
+- Can you tell me about your role in government? 
+ - How do you send or share things to residents in your area?
+ - Are there things that could be better in the ways you do that?
+ - Are there any ways that your work needs to be approved before it goes to the public? How does that work? Are there ways it could be easier?
+- Ok, let’s pretend your role involved sending alerts to residents - I'm going to show you an in-progress system that could help you do that, walk me through etc (share screen, show prototype)
+ - Add admin user
+   - What can you see and do here? How did that work for you?
+ - Create an alert
+ - Preview & send alert
+   - What can you see and do here? How did that work for you?
+- Wrap-up, general questions
+ - Overall, how easy or difficult was that to use?
+ - Are there ways it could be better to send alerts to residents?
+
+####Closing
+
+- Thank you so much for your time and feedback.
+- Are there any other things we should consider to make this easier?
+
+### Findings
+
+- For Government employee
+ - Clarify difference between alerts and hazards
+ - Remove lat/long location entry
+ - Differentiate between active and expired alerts
+ - It would be helpful to allow admin users to have message templates and see character limits for different types of messages
+ - Government employees may want to see how many residents a message might go to
+- For California resident
+ - Zip codes can be unexpected areas that don't meet users' needs; consider other ways to work with radius and area
+ - Residents think of different locations as different levels of importance, so it would be helpful for them to be able to choose to receive all alerts or just emergency alerts for each of their places
+
+
+
+#### Next Steps
+- Completed
+ - 
+- Future work and features
+ - 
