@@ -24,13 +24,19 @@ export default class CreateHazard extends React.Component {
       phoneNumber: "",
       radius: "1000", // TODO(paulsmith): XXX
       geocode: null,
-      hazard: null
+      hazard: null,
+      emergency: false,
     };
   }
 
   handleChange(e) {
+    let value = e.target.value;
+    if (e.target.type == 'checkbox') {
+      value = e.target.checked;
+    }
+
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   }
 
@@ -60,7 +66,8 @@ export default class CreateHazard extends React.Component {
       linkTitle: this.state.linkTitle,
       phoneNumber: this.state.phoneNumber,
       radius: this.state.radius,
-      place: this.state.geocode
+      place: this.state.geocode,
+      is_emergency: this.state.emergency
     };
     this.setState({ hazard: hazard });
   }
@@ -78,7 +85,8 @@ export default class CreateHazard extends React.Component {
       ["address", h.place.address],
       ["link_title", h.linkTitle],
       ["link", h.linkURL],
-      ["phone_number", h.phoneNumber]
+      ["phone_number", h.phoneNumber],
+      ["is_emergency", h.is_emergency]
     ]);
     let creds = apiCreds();
     fetchAuthd(API_HOST + "/admin/hazards", {
@@ -122,8 +130,16 @@ export default class CreateHazard extends React.Component {
                       onChange={e => this.handleChange(e)}
                     />
                   </div>
+
                   <div>
-                    Address
+                    <input name="emergency"
+                           type="checkbox"
+                           checked={this.state.emergecy}
+                           onChange={e => this.handleChange(e)} />
+                    <label for="emergency"> This alert is an emergency</label>
+                  </div>
+
+                  <div>
                     {this.state.geocode === null
                       ? <div>
                           <label>Street address, ZIP Code, or city</label>
@@ -220,13 +236,14 @@ function Location(props) {
 
 function Preview(props) {
   let hazard = props.hazard;
+
   return (
     <section className="usa-section usa-grid">
       <div className="usa-width-one-third">
         <h2>Preview alert</h2>
       </div>
       <div className="usa-width-two-thirds">
-        <h3>{hazard.title}</h3>
+        <h3>{(hazard.is_emergency) ? 'EMERGENCY: ' : ''}{hazard.title}</h3>
         <span className="usa-label">{hazard.category}</span>
         <div style={{ whiteSpace: "pre-wrap" }}>
           {hazard.message}
