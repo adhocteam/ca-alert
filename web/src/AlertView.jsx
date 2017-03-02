@@ -10,7 +10,7 @@ export default function AlertView(props) {
     const start = moment(props.hazard.created_at);
     return (
       <section>
-        <h2>{props.hazard.title}</h2>
+        <h2>{(props.hazard.is_emergency) ? 'EMERGENCY: ' : ''}{props.hazard.title}</h2>
 
         <div className="usa-width-one-third">
           <span className="usa-label-big">{props.hazard.category}</span>

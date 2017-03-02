@@ -4,8 +4,9 @@ https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 * [Overview](#overview)
 * [Technical Approach](#technical-approach)
-* [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
+* [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
+
 
 
 ##Overview
@@ -123,36 +124,34 @@ END TECHNICAL APPROACH
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-Leanna Miller SHarkey
-Role in company
-Role in project
-Shtraight up
-Leanna will be fired
+Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has blah blah. As the product manager, Leanna worked with the delivery manager to translate of the prototype requiremtns into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask. 
+
+Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked closely with the technical architect to weigh the technical implications of product decisions. 
+
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
-1. Product Owner/Manager: Leanna Miller
-2. Technical Architect/Backend Developer: Aubrey Holland
+1. Product Manager: Leanna Miller
+2. Technical Architect: Aubrey Holland
 3. User Researcher/Usability Tester: Laura Ellena
-4. Visual Designer: Danny Chapman
-5. Frontend Web Developer/Backend Web Developer: Paul Smith
-6. Frontend Web Developer: Graham Smith
+4. Visual Designer: Danny Chapman, Mel Woodard
+5. Frontend Web Developers: Graham Smith, Paul Smith
+6. Backend Web Developer: Aubrey Holland, Paul Smith
 7. Delivery Manager: Wryen Meek
-
-List by category not by human
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-Laura - discovery and user research - adapt copy from beneficiary
+In similar projects, we speak at least five to seven people who are representative of the main user types. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings _HERE_. We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
 
-Link to user research notes
-
-- Signing in with google is something people like writing
-- People wanted multiple locations writing
+In Discovery, these themes emerged and we implemented the feedback in the wireframes and prototype:
+- Signing in with Google or other existing account 
+- People wanted to be able to receive alerts from multiple locations 
 - Phone alerts were more useful than email
-- Chat bot for low tech/low SES future feature,  writing
-- See current alerts without signing in writing
-- A way to review information in case you dismiss a notification without getting the details writing
+- A chat bot to enroll would make this more accessible for low tech/low SES residents
+- Mid-crisis, users wanted to be able to see current alerts without signing in
+- Users desired a way to review information in case you dismiss a notification without getting the details
+
+PUT SHIT IN GITHUB and Link to user research notes
 
 
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
@@ -176,13 +175,19 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
-- Steal from beneficiary reporting
-- Test with screen reader
-- Automated tests with any real project
+We tested the public facing pages to confirm they met 508 standards. Here are sample reports
+
+LINK
+
+LINK
+
+MANUAL CHECKS
+
+AUTOMATED TEST 
 
 #### h. Created or used a design style guide and/or a pattern library
 
-- LEANNA steal copy from QPP
+- Pattern library created to ensure consistent brand and UI throughout the app experience.
 
 #### i. Performed usability tests with people
 
@@ -191,9 +196,11 @@ Swagger documentation has been included in all commits affecting the API endpoin
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
 - Review of user suggestions already implemented and how to reference
+
 ##### ADMIN
 - Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe
 - Removal of lat long - this is removed from the app, ensure it’s removed from wireframes
+
 ##### RESIDENT
 - Implemented ability to personally name - ensure this in wireframes
 Review of user suggestions that we should reflect in wireframe

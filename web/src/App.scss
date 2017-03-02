@@ -5,6 +5,8 @@ $secondary-color: #F9C642;
 $tertiary-color: #112E51;
 $white: #fff;
 $alt-background: #D6D7D9;
+$color-gray-lightest: #f1f1f1;
+$color-gray-dark: #323a45;
 
 
 .auto-clear::after {
@@ -12,6 +14,8 @@ $alt-background: #D6D7D9;
     display: block;
     clear: both;
 }
+
+// Page
 
 html {
   height: 100%;
@@ -22,6 +26,12 @@ html {
 body {
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Source Sans Pro', helvetica, sans-serif;
+  }
+}
+
+#main-content {
+  h2 {
+    margin: 0 !important;
   }
 }
 
@@ -40,11 +50,45 @@ form.usa-form {
   max-width: 100% !important;
 }
 
-.sr-only {
-  display: inline-block;
-  text-indent: -9999em;
-  height: 1px;
-  overflow: hidden;
+fieldset {
+  legend {
+    color: $primary-color;
+    padding: 0 0 1em 0;
+  }
+}
+
+.form-section {
+  padding: 1em;
+  background: rgba($alt-background, .4);
+  margin: 1em 0 1em 0;
+  h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.search-form {
+  button {
+    line-height: 1em;
+    margin: 0 !important;
+    padding: .88em !important;
+  }
+  input {
+    margin-bottom: 1em;
+  }
+  &:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  }
+}
+
+.clearfox {
+  clear: both;
+  border: 2px solid green;
 }
 
 .usa-hero {
@@ -56,9 +100,23 @@ form.usa-form {
   }
 }
 
+// Header
+
 .usa-navbar {
   min-height: 8rem !important;
 }
+
+.usa-header {
+  background: $primary-color;
+  color: $white;
+  border-bottom: 2px solid $secondary-color !important;
+  h1, h2, h3, h4, h5, h6, a {
+    color: $white !important;
+  }
+}
+
+
+// Logo
 
 .usa-logo {
   margin-top:1rem;
@@ -91,29 +149,55 @@ form.usa-form {
 }
 
 
+
+// Buttons
+
 .usa-button-outline {
   background: transparent !important;
   color: $primary-color !important;
 }
 
+.usa-button.usa-button-small {
+  padding: .3em .5em !important;
+}
+
+// Hero
+
 .usa-hero-callout-alt {
   color: $primary-color !important;
 }
 
-.usa-header {
-  background: $primary-color;
-  color: $white;
-  border-bottom: 2px solid $secondary-color !important;
-  h1, h2, h3, h4, h5, h6, a {
-    color: $white !important;
+// Modal overrides
+
+.modal-content {
+  h3 {
+    margin: 0 !important;
+    display: inline-block;
   }
 }
+
+// Screen reader only
+
+.usa-sr-only {
+  display: inline-block;
+  height: 1px;
+  text-indent: -9999em;
+}
+
+
+// Section overrides
+
+
+
+// Grid overrides
 
 .usa-grid {
   h2, h3 {
     color: $primary-color !important;
   }
 }
+
+// Footer
 
 footer .usa-footer-secondary_section {
 
@@ -126,4 +210,26 @@ footer .usa-footer-secondary_section {
     color: $white !important;
   }
   padding-top: 0!important;
+}
+
+// Dashboard
+
+.ca-dashboard-nav {
+  padding: 0;
+  .dashboard-card {
+    background: $color-gray-lightest;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-height:14.2rem;
+    a {
+      text-decoration: none;
+    }
+    h3 {
+      margin: 0;
+    }
+    p {
+      color: $color-gray-dark;
+      margin: 0;
+    }
+  }
 }
