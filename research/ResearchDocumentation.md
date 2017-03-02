@@ -18,7 +18,11 @@ Speak to 3-5 Californians who might be affected by emergencies in their areas to
 
 ### Research Participant Recruitment
 
-- Add details about screener survey and tool
+For this design exercise, we used our Cohorts community to recruit from friends and family. Cohorts allows us to survey and recruit participants who are the best fit for the project. In this sample exercise, we asked two quantitative questions:
+- How have you found out about emergencies in your area in the last six months?
+- What is most important to you when learning about emergencies?
+
+In similar projects, we speak to five to seven people who are representative of the main user types. In this case, we would speak with residents of California, and Government employees who communicate with the public about warnings and emergencies. We would seek to recruit people from a range of areas from urban to rural, and whose communication styles and uses of technology vary. 
 
 ### User Research Conversation Guide
 
@@ -91,10 +95,6 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
 - Government admin users
  - How well does our admin design succeed at meeting Government employee needs?
  - How might it be improved?
-
-### Research Participant Recruitment
-
-- Add details about screener survey and tool
 
 ### User Research Conversation Guide - California resident
 
@@ -186,7 +186,5 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
 
 
 #### Next Steps
-- Completed
- - 
-- Future work and features
- - 
+Future work and features are in the backlog to be groomed and prioritized.
+
