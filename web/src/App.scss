@@ -56,10 +56,16 @@ form.usa-form {
   }
 }
 
+.usa-navbar {
+  min-height: 8rem !important;
+}
+
 .usa-logo {
+  margin-top:1rem;
   em.usa-logo-text {
     font-size: 4rem;
     font-weight: normal;
+    line-height: 1;
     b {font-weight: 700;}
   }
   span {
