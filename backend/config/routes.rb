@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :places, only: [:index, :show, :create, :update, :destroy]
+  resources :hazards, only: [:index]
 
   namespace :admin do
     resources :users, only: [] do
