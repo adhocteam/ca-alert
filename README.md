@@ -1,6 +1,6 @@
 # CAlerts
 
-* [Overview 
+* [Overview
 * [Technical Approach](#technical-approach)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
@@ -57,9 +57,8 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components.
+We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-*AUBREY - sentences missing* 
 *Automated 508 testing*
 
 ### The server-side Rails API
@@ -84,7 +83,7 @@ ActiveRecord has a set of tools for serializing models into JSON that are applie
 
 #### Twilio integration
 
-To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log. 
+To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
 
 
 #### Swagger documentation
@@ -124,9 +123,9 @@ END TECHNICAL APPROACH
 
 Leanna Miller SHarkey
 Role in company
-Role in project 
-Shtraight up 
-Leanna will be fired 
+Role in project
+Shtraight up
+Leanna will be fired
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
@@ -138,17 +137,17 @@ Leanna will be fired
 6. Frontend Web Developer: Graham Smith
 7. Delivery Manager: Wryen Meek
 
-List by category not by human 
+List by category not by human
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-Laura - discovery and user research - adapt copy from beneficiary 
+Laura - discovery and user research - adapt copy from beneficiary
 
-Link to user research notes 
+Link to user research notes
 
 - Signing in with google is something people like writing
 - People wanted multiple locations writing
-- Phone alerts were more useful than email 
+- Phone alerts were more useful than email
 - Chat bot for low tech/low SES future feature,  writing
 - See current alerts without signing in writing
 - A way to review information in case you dismiss a notification without getting the details writing
@@ -158,16 +157,16 @@ Link to user research notes
 
 - qualitative interviews in discovery
 - surveys about needs
-- built to user need based on discovery 
-- user testing of wireframes 
-- built user types to inform design and functionality 
+- built to user need based on discovery
+- user testing of wireframes
+- built user types to inform design and functionality
 - CALL OUT FIRST THREE PLAYS IN USDS
 - made it simple, usds web design standards
-- tested extensively with wireframes 
+- tested extensively with wireframes
 
 #### e. Used GitHub to document code commits
 
-All of the code we've written has been stored in a [GitHub repo](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, [code reviews](https://github.com/adhocteam/ca-alert/pulls) have been performed there for all commits before merging them into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues).
+All of the code we've written has been stored in a [GitHub repo](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, we used GitHub's pull request features for [code reviews](https://github.com/adhocteam/ca-alert/pulls) of each commit before merging it into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues), and we have used the [projects feature as a board](https://github.com/adhocteam/ca-alert/projects/1) for project management.
 
 #### f. Used Swagger to document the RESTful API, and provided a link to the Swagger API
 
@@ -175,9 +174,9 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
-- Steal from beneficiary reporting 
-- Test with screen reader 
-- Automated tests with any real project 
+- Steal from beneficiary reporting
+- Test with screen reader
+- Automated tests with any real project
 
 #### h. Created or used a design style guide and/or a pattern library
 
@@ -185,30 +184,30 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### i. Performed usability tests with people
 
-- LAURA summary of what we did copy from QPP and adapt and provide links to full details 
+- LAURA summary of what we did copy from QPP and adapt and provide links to full details
 
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
 - Review of user suggestions already implemented and how to reference
 ##### ADMIN
-- Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe 
-- Removal of lat long - this is removed from the app, ensure it’s removed from wireframes 
+- Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe
+- Removal of lat long - this is removed from the app, ensure it’s removed from wireframes
 ##### RESIDENT
 - Implemented ability to personally name - ensure this in wireframes
-Review of user suggestions that we should reflect in wireframe 
+Review of user suggestions that we should reflect in wireframe
 ADMIN
 Wireframe: I would wonder why an old alert is still active. How long does it take to expire. - some way of differentiating between active and expired alerts
 TEMPLATES for admins - future feature - leanna will create a card
 Future feature how many potential people this message would reach
 Character count - wireframe and future feature
-Different formats - future feature 
+Different formats - future feature
 RESIDENT
-What about wonkiness of zip codes? Copy change and radius - future feature 
+What about wonkiness of zip codes? Copy change and radius - future feature
 
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
-- yes 
-- leanna look for copy from QPP 
+- yes
+- leanna look for copy from QPP
 
 #### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
 
@@ -225,7 +224,7 @@ The app has been built with entirely open-source technologies, and the versions 
 The app is deployed in two places:
 
 * The API is deployed on [Heroku](https://heroku.com), a PaaS service that makes it easy to deploy, configure, and provision web applications. The root of the deployed API can be found [here](ca-alert.herokuapp.com).
-* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the [root URL for our application](https://ca-alert-prototype.s3.amazonaws.com/index.html).
+* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the [root URL for our application](https://ca-alert-prototype.s3.amazonaws.com/index.html). S3 is an Iaas service.
 
 #### n. Developed automated unit tests for their code
 
@@ -260,7 +259,7 @@ This is the case for all of the tools required to run the app except for the Twi
 
 ------------------------------
 
-For more detail on how we used the USDS Playbook, please read below. 
+For more detail on how we used the USDS Playbook, please read below.
 
 ##US Digital Services Playbook Checklist
 
@@ -329,7 +328,7 @@ WRYEN
 
 #### Notes
 
-This is not applicable to this project. 
+This is not applicable to this project.
 
 ### Assign one leader and hold that person accountable
 - [x] A product owner has been identified
@@ -354,7 +353,7 @@ LEANNA
 
 #### Notes
 
-AUBREY
+We chose the technical team for this project from the most senior members of the company. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
 
 ### Choose a modern technology stack
 - [x] Choose software frameworks that are commonly used by private-sector companies creating similar services
@@ -391,7 +390,7 @@ Most of these requirements are met through the use of Heroku as a PaaS provider.
 Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
 
 ### Manage security and privacy through reusable processes
-- [ ] Contact the appropriate privacy or legal officer of the department or agency to determine whether a System of Records Notice (SORN), Privacy Impact Assessment, or other review should be conducted 
+- [ ] Contact the appropriate privacy or legal officer of the department or agency to determine whether a System of Records Notice (SORN), Privacy Impact Assessment, or other review should be conducted
 - [ ] Determine, in consultation with a records officer, what data is collected and why, how it is used or shared, how it is stored and secured, and how long it is kept
 - [ ] Determine, in consultation with a privacy specialist, whether and how users are notified about how personal information is collected and used, including whether a privacy policy is needed and where it should appear, and how users will be notified in the event of a security breach
 - [ ] Consider whether the user should be able to access, delete, or remove their information from the service
