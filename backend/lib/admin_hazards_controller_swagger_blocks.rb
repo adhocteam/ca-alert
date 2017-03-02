@@ -102,6 +102,15 @@ class AdminHazardsControllerSwaggerBlocks
         end
       end
       parameter do
+        key :name, :is_emergency
+        key :in, :body
+        key :description, 'Does it count as an emergency?'
+        key :required, true
+        schema do
+          key :type, :boolean
+        end
+      end
+      parameter do
         key :name, :uid
         key :in, :header
         key :description, 'UID of the user'
