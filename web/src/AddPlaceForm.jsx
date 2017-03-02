@@ -177,19 +177,20 @@ export default class AddPlaceForm extends React.Component {
     return (
       <section className="usa-grid usa-section">
         <div className="usa-width-one-whole">
-          <h2>Add a place</h2>
           {this.state.error ? <ErrorAlert error={this.state.error} /> : null}
           <form className="usa-form" onSubmit={this.handleSubmit}>
             <fieldset>
               <legend className="usa-drop_text">
-                Choose a location you want to receive alerts about
+                Add a place
               </legend>
-              {locationForm}
-              {map}
-              {continueBtn}
-              {namePlace}
+              <div className="form-section">
+                {locationForm}
+                {map}
+                {continueBtn}
+                {namePlace}
+              </div>
             </fieldset>
-            <Link to="/dashboard/places">Cancel</Link>
+            <Link to="/dashboard/places" className="usa-button usa-button-outline">Cancel</Link>
           </form>
         </div>
       </section>

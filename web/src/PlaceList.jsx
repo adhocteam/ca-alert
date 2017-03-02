@@ -68,13 +68,13 @@ export default class PlaceList extends React.Component {
         return (
           <tr key={"place-" + i}>
             <td>
-              {place.name}
+              <b>{place.name}</b>
             </td>
             <td>
-              <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
+              <Link className="usa-button usa-button-gray usa-button-small" to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
             </td>
             <td>
-              <a
+              <a role="button" className="usa-button usa-button-secondary usa-button-small"
                 href="#"
                 onClick={e => this.handleRemoveClick(e, i)}
                 title="Remove this place"
@@ -108,7 +108,7 @@ export default class PlaceList extends React.Component {
             >
               Yes, remove it
             </button>
-            <a href="#" onClick={e => this.handleRemoveCancel(e)}>
+            <a className="usa-button usa-button-gray" href="#" onClick={e => this.handleRemoveCancel(e)}>
               No, let’s keep it
             </a>
           </div>
@@ -116,15 +116,19 @@ export default class PlaceList extends React.Component {
         <h2>Your places</h2>
         <table className="usa-table-borderless">
           <thead>
-            <tr><th>Place</th><th /><th /></tr>
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">Edit</th>
+              <th scope="col" >Remove</th>
+              </tr>
           </thead>
           <tbody>
             {rows}
           </tbody>
         </table>
         <div>
-          <Link to="/dashboard/places/new" className="usa-button">
-            Add another place
+          <Link to="/dashboard/places/new" role="button" className="usa-button">
+            <span aria-hidden="true">+ </span>Add another place
           </Link>
         </div>
       </section>
