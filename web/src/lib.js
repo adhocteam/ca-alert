@@ -51,11 +51,7 @@ function checkResponse(response) {
 
 function geocode(address, callback) {
   let req = {
-    address: address,
-    componentRestrictions: {
-      country: "US",
-      administrativeArea: "California"
-    }
+    address: address
   };
   let geocoder = new google.maps.Geocoder();
   geocoder.geocode(req, (results, status) => {
