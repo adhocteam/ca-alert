@@ -50,7 +50,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-!!!!GRAHAM TO FILL THIS IN!!!!
+Tests for the front-end are run via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components.
 
 ### The server-side Rails API
 
