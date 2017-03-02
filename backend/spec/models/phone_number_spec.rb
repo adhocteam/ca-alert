@@ -52,9 +52,15 @@ RSpec.describe PhoneNumber do
       FakeTwilio.messages = []
       phone_number.alert_user(alert)
       expect(FakeTwilio.messages.count).to eq(1)
-      expect(FakeTwilio.messages.first.body).to eq(
-        "New Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
-      )
+      expect(FakeTwilio.messages.first.body).to eq(<<-EOM)
+New Alert from CAlerts!
+Title: #{alert.hazard.title}
+Message: #{alert.hazard.message}
+Address: #{alert.hazard.address}
+Category: #{alert.hazard.category}
+Link: #{alert.hazard.link}
+Phone: #{alert.hazard.phone_number}
+EOM
     end
 
     it 'has a different message for emergencies' do
@@ -62,9 +68,15 @@ RSpec.describe PhoneNumber do
       FakeTwilio.messages = []
       phone_number.alert_user(alert)
       expect(FakeTwilio.messages.count).to eq(1)
-      expect(FakeTwilio.messages.first.body).to eq(
-        "New EMERGENCY Alert from CAlerts! Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
-      )
+      expect(FakeTwilio.messages.first.body).to eq(<<-EOM)
+New EMERGENCY Alert from CAlerts!
+Title: #{alert.hazard.title}
+Message: #{alert.hazard.message}
+Address: #{alert.hazard.address}
+Category: #{alert.hazard.category}
+Link: #{alert.hazard.link}
+Phone: #{alert.hazard.phone_number}
+EOM
     end
   end
 end
