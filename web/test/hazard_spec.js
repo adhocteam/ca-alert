@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import HazardView from '../src/HazardView';
+import AlertView from '../src/AlertView';
 
 describe('Hazard View', () => {
   const hazard = {
@@ -29,10 +30,8 @@ describe('Hazard View', () => {
   });
 
   it('Should display the hazard title', () => {
-    const el = shallow(<HazardView params={{ id: 2 }} />);
-    el.setState({hazard: hazard});
+    const el = shallow(<AlertView hazard={hazard} />);
 
-    expect(el.text()).to.contain('View Alert');
     expect(el.text()).to.contain('title');
     expect(el.find('.usa-label-big').text()).to.contain('Earthquake');
     expect(el.find('.start-date').text()).to.equal('Jan 2, 2017 3:04 AM');
