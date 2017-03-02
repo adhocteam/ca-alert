@@ -60,24 +60,20 @@ export default class PlaceList extends React.Component {
   }
 
   render() {
-    let listItems = null;
+    let rows = null;
     if (this.state.places === null) {
-      listItems = <div>Loading …</div>;
+      rows = <tr><td colSpan="3">Loading …</td></tr>;
     } else {
-
-    table = (
-      <table className="usa-table-borderless">
-
-      listItems = this.state.places.map((place, i) => {
+      rows = this.state.places.map((place, i) => {
         return (
-          <tr className="ca-place-list-item" key={"place-" + i}>
-            <td className="ca-place-list-item-name">
+          <tr key={"place-" + i}>
+            <td>
               {place.name}
             </td>
-            <td className="ca-place-list-item-link">
+            <td>
               <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
             </td>
-            <td className="ca-place-list-item-link">
+            <td>
               <a
                 href="#"
                 onClick={e => this.handleRemoveClick(e, i)}
@@ -87,11 +83,8 @@ export default class PlaceList extends React.Component {
               </a>
             </td>
           </tr>
-
         );
       });
-      }
-
     }
     const placeToRemove = this.state.placeToRemove !== null
       ? this.state.placeToRemove.name
@@ -121,9 +114,14 @@ export default class PlaceList extends React.Component {
           </div>
         </Modal>
         <h2>Your places</h2>
-        <ul className="ca-place-list">
-          {listItems}
-        </ul>
+        <table className="usa-table-borderless">
+          <thead>
+            <tr><th>Place</th><th /><th /></tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
         <div>
           <Link to="/dashboard/places/new" className="usa-button">
             Add another place
