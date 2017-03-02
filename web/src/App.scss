@@ -56,10 +56,16 @@ form.usa-form {
   }
 }
 
+.usa-navbar {
+  min-height: 8rem !important;
+}
+
 .usa-logo {
+  margin-top:1rem;
   em.usa-logo-text {
     font-size: 4rem;
     font-weight: normal;
+    line-height: 1;
     b {font-weight: 700;}
   }
   span {
@@ -69,10 +75,16 @@ form.usa-form {
   }
 }
 
+.usa-menu-btn {
+  margin-top: 2rem !important;
+}
+
 .usa-nav-secondary {
   padding: 0;
   margin: 0;
   top: -5em !important;
+  height: 5rem;
+  line-height: 5rem;
   .usa-button-outline {
     border: 2px solid #fff !important;
   }
