@@ -121,62 +121,35 @@ export default class CreateHazard extends React.Component {
                       onChange={e => this.handleChange(e)}
                     />
                   </div>
-                  <Tabs>
-                    <TabList>
-                      <Tab>Lat/Lng</Tab>
-                      <Tab>Geolocate</Tab>
-                      <Tab>Address</Tab>
-                    </TabList>
-                    <TabPanel>
-                      Latitude/Longitude
-                      <label>Latitude</label>
-                      <input
-                        name="lat"
-                        value={this.state.lat}
-                        onChange={e => this.handleChange(e)}
-                      />
-                      <label>Longitude</label>
-                      <input
-                        name="lng"
-                        value={this.state.lng}
-                        onChange={e => this.handleChange(e)}
-                      />
-                      <Button>Update</Button>
-                    </TabPanel>
-                    <TabPanel>
-                      Geolocate
-                      <GeoLocationBtn />
-                    </TabPanel>
-                    <TabPanel>
-                      Address
-                      {this.state.geocode === null
-                        ? <div>
-                            <label>Street address, ZIP Code, or city</label>
-                            <input
-                              name="address"
-                              value={this.state.address}
-                              onChange={e => this.handleChange(e)}
-                            />
-                            <Button
-                              type="button"
-                              onClick={e => this.handleGeocodeClick(e)}
+                  <div>
+                    Address
+                    {this.state.geocode === null
+                      ? <div>
+                          <label>Street address, ZIP Code, or city</label>
+                          <input
+                            name="address"
+                            value={this.state.address}
+                            onChange={e => this.handleChange(e)}
+                          />
+                          <Button
+                            type="button"
+                            onClick={e => this.handleGeocodeClick(e)}
+                          >
+                            Update
+                          </Button>
+                        </div>
+                      : <div className="auto-clear">
+                          <div style={{ float: "right" }}>
+                            <a
+                              href="#"
+                              onClick={e => this.handleAddressClearClick(e)}
                             >
-                              Update
-                            </Button>
+                              Clear
+                            </a>
                           </div>
-                        : <div className="auto-clear">
-                            <div style={{ float: "right" }}>
-                              <a
-                                href="#"
-                                onClick={e => this.handleAddressClearClick(e)}
-                              >
-                                Clear
-                              </a>
-                            </div>
-                            <Location place={this.state.geocode} />
-                          </div>}
-                    </TabPanel>
-                  </Tabs>
+                          <Location place={this.state.geocode} />
+                        </div>}
+                  </div>
                   <div>
                     <label>Category</label>
                     <select
