@@ -1,39 +1,38 @@
 import React from 'react';
+import moment from 'moment';
 
-import { fetchAuthd, checkResponse } from './lib';
-import AlertComponent from './AlertComponent';
+import Map from './Map';
 
-class AlertView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {hazard: null};
-  }
-
-  componentDidMount() {
-    fetchAuthd(`${API_HOST}/alerts`)
-      .then(checkResponse)
-      .then(response => response.json())
-      .then(resp => {
-        let hazard = null;
-        resp.data.forEach(d => {
-          if (d.hazard.id == this.props.params.id) {
-            hazard = d.hazard;
-          }
-        });
-
-        this.setState({hazard: hazard});
-      });
-  }
-
-  render() {
+export default function AlertView(props) {
+  if (props.hazard == null) {
+    return <span>loading...</span>;
+  } else {
+    const start = moment(props.hazard.created_at);
     return (
-      <section className="usa-grid usa-section">
-        <h2>View Alert</h2>
+      <section>
+        <h2>{props.hazard.title}</h2>
 
-        <AlertComponent hazard={this.state.hazard} />
+        <div className="usa-width-one-third">
+          <span className="usa-label-big">{props.hazard.category}</span>
+        </div>
+
+        <div className="usa-width-two-thirds">
+          <span className="start-date">{start.format("lll")}</span>
+        </div>
+
+        <div className="usa-width-one-whole">
+          <p>{props.hazard.message}</p>
+        </div>
+
+        <div className="usa-width-one-whole more-details">
+          <a href={`tel:${props.hazard.phone}`}>{props.hazard.phone}</a>
+        </div>
+
+        <div className="usa-width-one-whole">
+          <h3>Location</h3>
+          <Map lat={props.hazard.latitude} lng={props.hazard.longitude} />
+        </div>
       </section>
     );
   }
 }
-
-export default AlertView;

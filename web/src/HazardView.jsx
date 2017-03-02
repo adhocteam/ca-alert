@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import { fetchAuthd, checkResponse } from "./lib";
-import AlertComponent from './AlertComponent';
+import AlertView from './AlertView';
 
 class HazardView extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class HazardView extends React.Component {
         <section className="usa-grid usa-section">
           <h2>View Alert</h2>
 
-          <AlertComponent hazard={hazard} />
+          <AlertView hazard={hazard} />
 
           <div className="usa-width-one-whole">
             <h3>Sent Notifications</h3>
