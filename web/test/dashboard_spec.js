@@ -9,8 +9,7 @@ describe('Dashboard view', () => {
     const both = [
       '/dashboard/places',
       '/account/communication',
-      '/dashboard/alerts',
-      '/account/signout'
+      '/dashboard/alerts'
     ];
 
     const admin = [
