@@ -23,6 +23,7 @@ export default React.createClass({
               <ul>
                 <li><Link to="/admin/users">Users</Link></li>
                 <li><Link to="/admin/hazards">Alerts</Link></li>
+                <li><Link to="/admin/analytics">Analytics</Link></li>
               </ul>
             </div>}
         </div>
