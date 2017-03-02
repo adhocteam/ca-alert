@@ -1,10 +1,16 @@
 # CAlerts
 
+* [Overview 
 * [Technical Approach](#technical-approach)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 
-##Technical Approach
+
+##Overview
+
+add narrative here? If not, we can put it further down. 
+
+##Technical Approach (2,000 words)
 
 "Documentation must show code flow from client UI, to JavaScript library, to REST service to database, pointing to code in the GitHub repository."
 
@@ -12,7 +18,6 @@
 
 CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards are generated manually as well as automatically generated based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
 
-Can we add narrative here? If not, we can put it further down. 
 
 ### Overview
 
