@@ -44,7 +44,7 @@ describe('Alert View', () => {
       const el = shallow(<AlertRow alert={alertObject} />);
       const text = el.text();
 
-      expect(text).to.contain('a hazard title');
+      expect(el.find({ to: '/dashboard/alerts/2' })).to.have.length(1);
       expect(text).to.contain('Home');
       expect(text).to.contain('Jan 2nd');
     });

@@ -30,7 +30,7 @@ describe('Add Phone Control', () => {
 
   it('Should display a validation message', () => {
     const el = shallow(<AddPhone />);
-    el.find('input[name="phone"]').simulate('change', {
+    el.find('InputElement[name="phone"]').simulate('change', {
       preventDefault: () => {},
       target: { name: 'phone', value: '1234' }
     });
@@ -40,7 +40,7 @@ describe('Add Phone Control', () => {
     // We should only show a validation message after blur
     expect(el.find('div.usa-input-error')).to.have.length(0);
 
-    el.find('input[name="phone"]').simulate('blur');
+    el.find('InputElement[name="phone"]').simulate('blur');
 
     expect(el.find('div.usa-input-error')).to.have.length(1);
     expect(el.contains(
@@ -49,7 +49,7 @@ describe('Add Phone Control', () => {
         </span>
     )).to.be.true;
 
-    el.find('input[name="phone"]').simulate('change', {
+    el.find('InputElement[name="phone"]').simulate('change', {
       preventDefault: () => {},
       target: { name: 'phone', value: '222-333-1234' }
     });
