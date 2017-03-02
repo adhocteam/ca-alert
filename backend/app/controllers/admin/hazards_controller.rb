@@ -49,7 +49,7 @@ class Admin::HazardsController < ApplicationController
   def hazard_params
     params.permit(
       :title, :message, :longitude, :latitude, :radius_in_meters,
-      :address, :link, :phone_number, :category, :link_title
+      :address, :link, :phone_number, :category, :link_title, :is_emergency
     )
   end
 end
