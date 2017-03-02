@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, hashHistory } from "react-router";
 import { isLoggedIn, loggedInUser, apiCreds } from "./session";
 
 export default React.createClass({
@@ -29,6 +29,8 @@ export default React.createClass({
         </div>
       );
     } else {
+      // Logo links here, so if we're not logged in, bounce to home
+      hashHistory.push('');
       return (
         <div className="usa-grid usa-section">
           <p>Please <Link to="/accounts/signin">sign in</Link>.</p>
