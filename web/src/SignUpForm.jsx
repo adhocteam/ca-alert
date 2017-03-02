@@ -102,12 +102,6 @@ export default class SignUpForm extends React.Component {
   }
 
   render() {
-    let button = null;
-    if (this.validEmail() && this.validPassword() && this.validPasswordConfirm()) {
-      button = <input type="submit" className="usa-button usa-button-big usa-button-primary" value="Sign up" />;
-    } else {
-      button = <input type="submit" className="usa-button usa-button-big usa-button-primary" disabled="disabled" value="Sign up" />;
-    }
     let emailErrMsg, passwordErrMsg, passwordConfirmErrMsg;
     if (
       this.state.email.isValid !== null && this.state.email.isValid === false
@@ -223,7 +217,7 @@ export default class SignUpForm extends React.Component {
                 onBlur={() => this.validatePasswordConfirm()}
               />
             </div>
-            {button}
+            <input type="submit" className="usa-button usa-button-big usa-button-primary" value="Sign up" />
           </fieldset>
         </form>
       </div>

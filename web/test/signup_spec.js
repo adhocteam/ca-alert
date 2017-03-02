@@ -16,13 +16,6 @@ describe("Sign-up form", () => {
     global.fetch.restore();
   });
 
-  it("initially should be invalid", () => {
-    const wrapper = shallow(<SignUpForm />);
-    expect(wrapper.find('input[type="submit"]').props().disabled).to.equal(
-      "disabled"
-    );
-  });
-
   it("should be valid with valid input", () => {
     const wrapper = shallow(<SignUpForm />);
     const input = [
