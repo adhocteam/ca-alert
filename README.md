@@ -12,6 +12,8 @@
 
 CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards are generated manually as well as automatically generated based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
 
+Can we add narrative here? If not, we can put it further down. 
+
 ### Overview
 
 Our standard set of tools for building web applications includes [Ruby on Rails](http://rubyonrails.org/) for server-side development and [React](https://facebook.github.io/react/) for creating single-page client-side applications. For this small prototype, we considered creating a monolithic Rails application with no Javascript framework for expediency, but the requirements indicated that the backend should be an API and a framework should be used. Therefore, the prototype consists of two separate apps: the [backend](https://github.com/adhocteam/ca-alert/tree/master/backend) Rails application and the client-side [React app](https://github.com/adhocteam/ca-alert/tree/master/web). The directories for these apps contain instructions for configuring and running them locally.
@@ -93,6 +95,150 @@ Tests [have been written](https://github.com/adhocteam/ca-alert/tree/master/back
 ### Conclusion?
 
 !!!! NOT SURE IF WE NEED A CONCLUSION HERE OR IF THERE IS MORE TO COVER !!!!
+-NATIVE APP
+-DIVERSITY OF AUDIENCE
+-USER TYPES
+-FITTING WITH EXISTING SYSTEMS - TWITTER, NATIVE APPS
+
+
+
+##Responses to the prompts in Section 2 of the RFI
+
+#### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
+
+LEANNA
+
+#### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
+
+1. Product Owner: Leanna Miller
+2. Technical Architect: Aubrey Holland
+3. User Researcher/Usability Tester: Laura Ellena
+4. Visual Designer: Danny Chapman
+5. Front End Web Developer: Paul Smith
+6. Backend Web Developer: Aubrey Holland
+7. Delivery Manager: Wryen Meek
+
+#### c. Understood what people needed, by including people in the prototype development and design process
+
+Laura - discovery and user research - adapt copy from beneficiary 
+
+Link to user research notes 
+
+- Signing in with google is something people like writing
+- People wanted multiple locations writing
+- Phone alerts were more useful than email 
+- Chat bot for low tech/low SES future feature,  writing
+- See current alerts without signing in writing
+- A way to review information in case you dismiss a notification without getting the details writing
+
+
+#### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
+
+- qualitative interviews in discovery
+- surveys about needs
+- built to user need based on discovery 
+- user testing of wireframes 
+- built user types to inform design and functionality 
+- CALL OUT FIRST THREE PLAYS IN USDS
+- made it simple, usds web design standards
+- tested extensively with wireframes 
+
+#### e. Used GitHub to document code commits
+
+All of the code we've written has been stored in a [GitHub repo](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, [code reviews](https://github.com/adhocteam/ca-alert/pulls) have been performed there for all commits before merging them into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues).
+
+#### f. Used Swagger to document the RESTful API, and provided a link to the Swagger API
+
+Swagger documentation has been included in all commits affecting the API endpoints since the beginning of our work. An example commit containing Swagger documentation can be found [here](https://github.com/adhocteam/ca-alert/commit/fccc9b6dda5385c9027fdad2de2ff70c4c27e347). The Swagger JSON documentation is served [by the API](https://ca-alert.herokuapp.com/apidocs). To view the documentation, open Swagger UI or visit [their demo site](http://petstore.swagger.io/) and enter the URL for the documentation (https://ca-alert.herokuapp.com/apidocs).
+
+#### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
+
+- Steal from beneficiary reporting 
+- Test with screen reader 
+- Automated tests with any real project 
+
+#### h. Created or used a design style guide and/or a pattern library
+
+- LEANNA steal copy from QPP
+
+#### i. Performed usability tests with people
+
+- LAURA summary of what we did copy from QPP and adapt and provide links to full details 
+
+#### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
+
+- Review of user suggestions already implemented and how to reference
+##### ADMIN
+- Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe 
+- Removal of lat long - this is removed from the app, ensure it’s removed from wireframes 
+##### RESIDENT
+- Implemented ability to personally name - ensure this in wireframes
+Review of user suggestions that we should reflect in wireframe 
+ADMIN
+Wireframe: I would wonder why an old alert is still active. How long does it take to expire. - some way of differentiating between active and expired alerts
+TEMPLATES for admins - future feature - leanna will create a card
+Future feature how many potential people this message would reach
+Character count - wireframe and future feature
+Different formats - future feature 
+RESIDENT
+What about wonkiness of zip codes? Copy change and radius - future feature 
+
+#### k. Created a prototype that works on multiple devices, and presents a responsive design
+
+- yes 
+- leanna look for copy from QPP 
+
+#### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
+
+The app has been built with entirely open-source technologies, and the versions we're using have been released within the past five years. Some examples include:
+
+* [Ruby on Rails](http://rubyonrails.org/) 5.0.1, released 12/2016
+* [React](https://facebook.github.io/react/) 15.4.2, released 1/2017
+* [PostgreSQL](https://www.postgresql.org/) 9.6, released 9/2016
+* [RSpec](http://rspec.info/) 3.5.4, released 10/2016
+* [WebPack](https://webpack.github.io/) 2.2.1, released 1/2017
+
+#### m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used
+
+The app is deployed in two places:
+
+* The API is deployed on [Heroku](https://heroku.com), a PaaS service that makes it easy to deploy, configure, and provision web applications. The root of the deployed API can be found [here](ca-alert.herokuapp.com).
+* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the [root URL for our application](https://ca-alert-prototype.s3.amazonaws.com/index.html).
+
+#### n. Developed automated unit tests for their code
+
+Automated tests exist for both the API and the client-side app:
+
+* The API uses [RSpec](http://rspec.info/) for testing and [rcov](https://github.com/relevance/rcov) for code coverage analysis. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/backend/spec). Rcov is configured to block any builds in which the code coverage falls below 95%, and in practice it has remained above 99% during development. The tests can be run using `rake` fron the root directory of the backend project.
+* The Front-end code uses [Mocha](https://mochajs.org/) for testing and [Enzyme](https://github.com/airbnb/enzyme) for individual component testing. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/web/test). The tests can be run using `make test` from the root directory of the front-end project.
+
+#### o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider
+
+We used [CodeShip](https://codeship.com/) as our continuous integration provider. It was configured to run checks against each push to any branch of the repository, and pull requests were not allowed to be merged unless those checks passed. Pushes to master included a deployment step that automatically deployed to Heroku and pushed to the S3 bucket. The GitHub wiki for the project [includes a document](https://github.com/adhocteam/ca-alert/wiki/Code-review,-continuous-integration,-and-deployment-processes) that describes our testing and deployment process in more depth.
+
+#### p. Setup or used configuration management
+
+Because we used Heroku for deployment, there was no need for a system like Ansible of Chef to be used for configuration management. Heroku allows us to [provision resources](https://devcenter.heroku.com/articles/managing-add-ons) within its UI, API, or command-line tools. It also manages [configuration and environment changes](https://devcenter.heroku.com/articles/config-vars) in the same manner.
+
+#### q. Setup or used continuous monitoring
+
+[Pingdom](https://www.pingdom.com/) was used for continuous monitoring, with a simple check against an API endpoint to verify that the app is still running. The GitHub wiki for the project [contains a document](https://github.com/adhocteam/ca-alert/wiki/Continuous-Monitoring) describing our continuous monitoring setup in more detail.
+
+#### r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization)
+
+By using Heroku, we weren't required to manage containers manually, but Heroku's dynos do [run within virtualized Unix containers](https://devcenter.heroku.com/articles/how-heroku-works#running-applications-on-dynos).
+
+#### s. Provided sufficient documentation to install and run their prototype on another machine
+
+Because we have a split between the server-side and client-side apps, a developer will need to run each of them in order to view the app locally. We have provided README files in both the [backend directory](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) and [web directory](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) that give instructions for running the apps. These instructions assume the user is a developer familiar with installing tools in Unix-like systems.
+
+#### t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge
+
+This is the case for all of the tools required to run the app except for the Twilio API integrations. To ensure that we can meet this requirement, we have made the app handle the case where no Twilio credentials are supplied by stubbing out the Twilio client and logging the SMS messages.
+
+------------------------------
+
+For more detail on how we used the USDS Playbook, please read below. 
 
 ##US Digital Services Playbook Checklist
 
@@ -262,103 +408,3 @@ Heroku provides a number of these tools to us automatically, but we chose not to
 #### Notes
 
 Many of the concepts here do not apply to the development of a prototype, but we have done our development under a public GitHub repository that includes all of the code commits, issues filed, and documents created. Also, we developed the API so access is publicly available.
-
-##Responses to the prompts in Section 2 of the RFI
-
-#### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
-
-LEANNA
-
-#### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
-
-1. Product Owner: Leanna Miller
-2. Technical Architect: Aubrey Holland
-3. User Researcher/Usability Tester: Laura Ellena
-4. Visual Designer: Danny Chapman
-5. Front End Web Developer: Paul Smith
-6. Backend Web Developer: Aubrey Holland
-7. Delivery Manager: Wryen Meek
-
-#### c. Understood what people needed, by including people in the prototype development and design process
-
-Link to research and Moqups?
-
-#### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
-
-LAURA AND DANNY
-
-#### e. Used GitHub to document code commits
-
-All of the code we've written has been stored in a [GitHub repo](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, [code reviews](https://github.com/adhocteam/ca-alert/pulls) have been performed there for all commits before merging them into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues).
-
-#### f. Used Swagger to document the RESTful API, and provided a link to the Swagger API
-
-Swagger documentation has been included in all commits affecting the API endpoints since the beginning of our work. An example commit containing Swagger documentation can be found [here](https://github.com/adhocteam/ca-alert/commit/fccc9b6dda5385c9027fdad2de2ff70c4c27e347). The Swagger JSON documentation is served [by the API](https://ca-alert.herokuapp.com/apidocs). To view the documentation, open Swagger UI or visit [their demo site](http://petstore.swagger.io/) and enter the URL for the documentation (https://ca-alert.herokuapp.com/apidocs).
-
-#### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
-
-DANNY
-
-#### h. Created or used a design style guide and/or a pattern library
-
-DANNY
-
-#### i. Performed usability tests with people
-
-LAURA
-
-#### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
-
-LEANNA
-
-#### k. Created a prototype that works on multiple devices, and presents a responsive design
-
-DANNY
-
-#### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
-
-The app has been built with entirely open-source technologies, and the versions we're using have been released within the past five years. Some examples include:
-
-* [Ruby on Rails](http://rubyonrails.org/) 5.0.1, released 12/2016
-* [React](https://facebook.github.io/react/) 15.4.2, released 1/2017
-* [PostgreSQL](https://www.postgresql.org/) 9.6, released 9/2016
-* [RSpec](http://rspec.info/) 3.5.4, released 10/2016
-* [WebPack](https://webpack.github.io/) 2.2.1, released 1/2017
-
-#### m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used
-
-The app is deployed in two places:
-
-* The API is deployed on [Heroku](https://heroku.com), a PaaS service that makes it easy to deploy, configure, and provision web applications. The root of the deployed API can be found [here](ca-alert.herokuapp.com).
-* The client-side code is built with [WebPack](https://webpack.github.io/) and deployed as static assets to an [S3](https://aws.amazon.com/s3/) bucket on [AWS](https://aws.amazon.com/). That bucket has been configured to serve up the assets publicly over HTTP and serves as the [root URL for our application](https://ca-alert-prototype.s3.amazonaws.com/index.html).
-
-#### n. Developed automated unit tests for their code
-
-Automated tests exist for both the API and the client-side app:
-
-* The API uses [RSpec](http://rspec.info/) for testing and [rcov](https://github.com/relevance/rcov) for code coverage analysis. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/backend/spec). Rcov is configured to block any builds in which the code coverage falls below 95%, and in practice it has remained above 99% during development. The tests can be run using `rake` fron the root directory of the backend project.
-* The Front-end code uses [Mocha](https://mochajs.org/) for testing and [Enzyme](https://github.com/airbnb/enzyme) for individual component testing. The root directory for the tests can be found [here](https://github.com/adhocteam/ca-alert/tree/master/web/test). The tests can be run using `make test` from the root directory of the front-end project.
-
-#### o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider
-
-We used [CodeShip](https://codeship.com/) as our continuous integration provider. It was configured to run checks against each push to any branch of the repository, and pull requests were not allowed to be merged unless those checks passed. Pushes to master included a deployment step that automatically deployed to Heroku and pushed to the S3 bucket. The GitHub wiki for the project [includes a document](https://github.com/adhocteam/ca-alert/wiki/Code-review,-continuous-integration,-and-deployment-processes) that describes our testing and deployment process in more depth.
-
-#### p. Setup or used configuration management
-
-Because we used Heroku for deployment, there was no need for a system like Ansible of Chef to be used for configuration management. Heroku allows us to [provision resources](https://devcenter.heroku.com/articles/managing-add-ons) within its UI, API, or command-line tools. It also manages [configuration and environment changes](https://devcenter.heroku.com/articles/config-vars) in the same manner.
-
-#### q. Setup or used continuous monitoring
-
-[Pingdom](https://www.pingdom.com/) was used for continuous monitoring, with a simple check against an API endpoint to verify that the app is still running. The GitHub wiki for the project [contains a document](https://github.com/adhocteam/ca-alert/wiki/Continuous-Monitoring) describing our continuous monitoring setup in more detail.
-
-#### r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization)
-
-By using Heroku, we weren't required to manage containers manually, but Heroku's dynos do [run within virtualized Unix containers](https://devcenter.heroku.com/articles/how-heroku-works#running-applications-on-dynos).
-
-#### s. Provided sufficient documentation to install and run their prototype on another machine
-
-Because we have a split between the server-side and client-side apps, a developer will need to run each of them in order to view the app locally. We have provided README files in both the [backend directory](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) and [web directory](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) that give instructions for running the apps. These instructions assume the user is a developer familiar with installing tools in Unix-like systems.
-
-#### t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge
-
-This is the case for all of the tools required to run the app except for the Twilio API integrations. To ensure that we can meet this requirement, we have made the app handle the case where no Twilio credentials are supplied by stubbing out the Twilio client and logging the SMS messages.
