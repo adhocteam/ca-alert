@@ -60,29 +60,29 @@ export default class PlaceList extends React.Component {
   }
 
   render() {
-    let listItems = null;
+    let rows = null;
     if (this.state.places === null) {
-      listItems = <div>Loading …</div>;
+      rows = <tr><td colSpan="3">Loading …</td></tr>;
     } else {
-      listItems = this.state.places.map((place, i) => {
+      rows = this.state.places.map((place, i) => {
         return (
-          <li className="ca-place-list-item" key={"place-" + i}>
-            <div className="ca-place-list-item-name">
-              {place.name}
-            </div>
-            <div className="ca-place-list-item-link">
-              <Link to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
-            </div>
-            <div className="ca-place-list-item-link">
-              <a
+          <tr key={"place-" + i}>
+            <td>
+              <b>{place.name}</b>
+            </td>
+            <td>
+              <Link className="usa-button usa-button-gray usa-button-small" to={`/dashboard/places/${place.id}/edit`}>Edit</Link>
+            </td>
+            <td>
+              <a role="button" className="usa-button usa-button-secondary usa-button-small"
                 href="#"
                 onClick={e => this.handleRemoveClick(e, i)}
                 title="Remove this place"
               >
                 Remove
               </a>
-            </div>
-          </li>
+            </td>
+          </tr>
         );
       });
     }
@@ -108,18 +108,27 @@ export default class PlaceList extends React.Component {
             >
               Yes, remove it
             </button>
-            <a href="#" onClick={e => this.handleRemoveCancel(e)}>
+            <a className="usa-button usa-button-gray" href="#" onClick={e => this.handleRemoveCancel(e)}>
               No, let’s keep it
             </a>
           </div>
         </Modal>
         <h2>Your places</h2>
-        <ul className="ca-place-list">
-          {listItems}
-        </ul>
+        <table className="usa-table-borderless">
+          <thead className="usa-sr-only">
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">Edit</th>
+              <th scope="col" >Remove</th>
+              </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
         <div>
-          <Link to="/dashboard/places/new" className="usa-button">
-            Add another place
+          <Link to="/dashboard/places/new" role="button" className="usa-button">
+            <span aria-hidden="true">+ </span>Add a place
           </Link>
         </div>
       </section>
