@@ -18,11 +18,12 @@ class PhoneNumber < ApplicationRecord
 
   def alert_user(alert)
     if notifications_enabled? && !is_555?
+      intro = "New #{alert.hazard.is_emergency? ? 'EMERGENCY ' : ''}Alert from CAlerts!"
       TWILIO_CLIENT.messages.create(
         from: SMS_FROM_NUMBER,
         to: phone_number,
         body: <<-EOM
-New Alert from CAlerts!
+#{intro}
 Title: #{alert.hazard.title}
 Message: #{alert.hazard.message}
 Address: #{alert.hazard.address}
