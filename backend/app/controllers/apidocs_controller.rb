@@ -4,6 +4,7 @@ require 'admin_users_controller_swagger_blocks'
 require 'alerts_controller_swagger_blocks'
 require 'base_swagger_blocks'
 require 'devise_swagger_blocks'
+require 'hazards_controller_swagger_blocks'
 require 'phone_numbers_controller_swagger_blocks'
 require 'places_controller_swagger_blocks'
 
@@ -50,6 +51,10 @@ class ApidocsController < ActionController::Base
       key :description, 'Actions for authentication'
     end
     tag do
+      key :name, 'hazards'
+      key :description, 'Public hazard actions'
+    end
+    tag do
       key :name, 'phone_numbers'
       key :description, 'Actions for managing phone numbers'
     end
@@ -77,6 +82,7 @@ class ApidocsController < ActionController::Base
     BaseSwaggerBlocks,
     DeviseSwaggerBlocks,
     Hazard,
+    HazardsControllerSwaggerBlocks,
     PhoneNumber,
     PingController,
     Place,
