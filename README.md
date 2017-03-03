@@ -3,39 +3,38 @@
 https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 * [Project Overview](#project-overview)
-* [Demo Accounts](#demo-accounts)
+* [Accessing the Prototype](#accessing-the-prototype)
 * [Technical Approach](#technical-approach)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 
 ##Project Overview
 
-Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are working on other government projects and who thoughtfully and aggressively built this prototype.
+Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to building the best government digital services. The most important factor of success in any project is the team, so we brought together a lean team of talented people who have experience working on other government projects.
 
 We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/).
 
-We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These mockups reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
+We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These [mockups](https://github.com/adhocteam/ca-alert/tree/master/design/mockup) reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
 
 This prototype is our Minimum Viable Product, along with one week of iterations based on user feedback.
 
+## Accessing the prototype
 
-## Demo Accounts
+The prototype is deployed at: [https://ca-alert-prototype.s3.amazonaws.com/index.html](https://ca-alert-prototype.s3.amazonaws.com/index.html)
 
-For testing the application, we have created two accounts:
+In order to log in as an administrator to create new hazards, see existing ones, and view reporting dashboards, [log in](https://ca-alert-prototype.s3.amazonaws.com/index.html#/account/signin) with email: `admin@calerts.ca.gov` and password: `abcd-1234`.
 
-* A resident, who has a number of places being monitored for alerts: `resident@calerts.ca.gov`
-* An admin, who can both create and receive alerts: `admin@calerts.ca.gov`
+To log in as a resident, [create an account](https://ca-alert-prototype.s3.amazonaws.com/index.html#/), verify it, and then you will have access to manage your list of places and notification methods.
 
-The password for each of these users is `abcd-1234`.
+For demo purposes, we have created a resident account with email: `resident@calerts.ca.gov` and password: `abcd-1234`.
 
 ##Technical Approach
 
-1,934 words
+1,931 words
 
 ### Introduction
 
 CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards manually as well as automatically based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
-
 
 ### Technical Overview
 
@@ -81,7 +80,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests.
+We performed 508 compliance testing using aXe and have included images [showing their status as passing](https://github.com/adhocteam/ca-alert/tree/master/design/accessibility).
 
 ### The server-side Rails API
 
@@ -153,14 +152,13 @@ user place that is spatially within the defined radius of the hazard's centroid.
 
 We wrote [tests](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. We also wrote unit tests [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
 
-END TECHNICAL APPROACH
-
+END TECHNICAL APPROACH 1,931 words
 
 ##Responses to the prompts in Section 2 of the RFI
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals.
+We assigned Leanna Miller Sharkey as the product manager for this project. As the Product Manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals.
 
 Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions.
 
@@ -232,8 +230,9 @@ Research documentation: Details of research plan, participant recruitment, conve
 [Process map:](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) Flow diagram used to understand the process and potential paths a resident or user might follow.
 [User type (PDF):](https://github.com/adhocteam/ca-alert/blob/master/design/user-type/user-types.pdf) An archetype of likely users, used to help define user stories.
 [Usability testing prototype:](https://ca-alert-prototype.s3.amazonaws.com/index.html#/) Live prototype used to get feedback from California residents on our work thus far.
-Usability testing video (LINK): Video showing some of the most compelling anecdotes from our usability research.
-=======
+
+We have included a [video](https://www.youtube.com/watch?v=uyf4SjbWDOY) showing some of the most compelling anecdotes from our usability research.
+
 We completed two rounds of research during this project:
 - One round of qualitative individual interviews with the goal of discovering user needs at the beginning of the project to inform product and design decisions
 - One round of interface testing with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
@@ -330,13 +329,11 @@ We assigned a team that conducted research, discovery, and prototyping activitie
 
 ### Assign one leader and hold that person accountable
 
-We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program, where we have a strong relationship with the contracting officer, and has led teams to many successful product launches. The development team worked smoothly, with constant communication and daily standups that allowed her to lead the program.
-
+We assigned Leanna Miller Sharkey as the Product Manager for this project. The development team worked smoothly, with constant communication and daily standups that allowed her to lead the product.
 
 ### Bring in experienced teams
 
-We chose the technical team for this project from the most senior members of the company. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
-
+We chose the technical team for this project from people who have experience building both consumer products and government digital services. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
 
 ### Choose a modern technology stack
 
@@ -348,15 +345,15 @@ Most of these requirements are met through the use of Heroku as a PaaS provider.
 
 ### Automate testing and deployments
 
-Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
+Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process.
 
 ### Manage security and privacy through reusable processes
 
-See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections.
+See [Technical Approach](#technical-approach) document for security details. Ad Hoc is adept at following industry best practices in security and privacy.
 
 ### Use data to drive decisions
 
-Heroku provides a number of these tools to us automatically, but we chose not to expand upon them because they were not required for the prototype. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
+Heroku provides a number of analytics tools to us automatically and we used them to track performance during development. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Google Analytics](https://www.google.com/analytics/#?modal_active=none), [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
 
 ### Default to open
 
