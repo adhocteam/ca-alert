@@ -134,7 +134,7 @@ export default class CreateHazard extends React.Component {
                            type="checkbox"
                            checked={this.state.emergecy}
                            onChange={e => this.handleChange(e)} />
-                    <label for="emergency"> This alert is an emergency</label>
+                    <label htmlFor="emergency"> This alert is an emergency</label>
                   </div>
 
                   <div>
