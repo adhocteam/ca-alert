@@ -328,8 +328,7 @@ DANNY
 - [x] Use code reviews to ensure quality
 
 #### Notes
-
-WRYEN
+Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
 
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities
