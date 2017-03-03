@@ -67,7 +67,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub. 
 
-We performed manual 508 compliance testing. For an actual product, we also write automated tests. 
+We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests. 
 
 ### The server-side Rails API
 
@@ -114,24 +114,14 @@ FLAT TECHNICAL CONCLUSION RE REQUIREMENTS FROM AUBREY
 
 END TECHNICAL APPROACH
 
-----------------
-
-
-### NOTE: PRODUCT CONSIDERATIONS LEANNA THINK ABOUT THIS:
-- NATIVE APP
-- DIVERSITY OF AUDIENCE
-- USER TYPES
-- FITTING WITH EXISTING SYSTEMS - TWITTER, OTHER NATIVE APPS
-
-
 
 ##Responses to the prompts in Section 2 of the RFI
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
+We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
 
-Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked closely with the technical architect to weigh the technical implications of product decisions. 
+Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions. 
 
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
@@ -167,7 +157,7 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
 
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
 
- We used the following user-centric design techniques and tools
+ We used the following user-centric design techniques and tools:
 
 - Early and often contact with potential users
 - Tested prototypes of solutions with real people
@@ -181,7 +171,7 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
 
 #### e. Used GitHub to document code commits
 
-All of the code we've written has been stored in a [GitHub repo](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, we used GitHub's pull request features for [code reviews](https://github.com/adhocteam/ca-alert/pulls) of each commit before merging it into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues), and we have used the [projects feature as a board](https://github.com/adhocteam/ca-alert/projects/1) for project management.
+All of the code we've written has been stored in a [GitHub repository](https://github.com/adhocteam/ca-alert), with all commits listed [here](https://github.com/adhocteam/ca-alert/commits/master). In addition, we used GitHub's pull request features for [code reviews](https://github.com/adhocteam/ca-alert/pulls) of each commit before merging it into master. GitHub has also been used as our [issue tracking system](https://github.com/adhocteam/ca-alert/issues), and we have used the [projects feature as a board](https://github.com/adhocteam/ca-alert/projects/1) for project management.
 
 #### f. Used Swagger to document the RESTful API, and provided a link to the Swagger API
 
@@ -189,11 +179,7 @@ Swagger documentation has been included in all commits affecting the API endpoin
 
 #### g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0
 
-We tested the public facing pages to confirm they met 508 standards. Here are sample reports
-
-LINK
-
-LINK
+We tested the public facing pages to confirm they met 508 standards.
 
 
 #### h. Created or used a design style guide and/or a pattern library
