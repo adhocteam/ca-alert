@@ -2,11 +2,22 @@
 
 ## Design process
 
-- [Design process](design-process/design-process.pdf) (PDF): Sample design process
+Sample design process.
+
+- [Design process](design-process/design-process.pdf) (PDF)
 
 ## User types
 
+Proto-personnas, or user types used to guide process map and high-level UX decisions.
+
+- [User types](user-type/user-types.pdf) (PDF)
+
 ## Process map
+
+Logic and high-level application flow
+
+- [Process Map](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) (Moqups.com)
+- [Process Map](process-map/process-map.pdf) (PDF)
 
 ## Discovery & user research
 
@@ -18,14 +29,21 @@
 
 Clickable, low fidelity wireframes used to create UX, initial usability testing for the application.
 
-- [Interactive wireframes](Moqups)
-- [Downloadable wireframes](PDF)
+- [Interactive wireframes](https://app.moqups.com/greg@adhocteam.us/Q6n01o8AuC/view) (Moqups.com)
+- [Downloadable wireframes](wireframes/wireframes.pdf) (PDF)
 
-## Design
+## Style tiles
 
 Design reference document, used to drive in-browser UI development.
 
 - [Style tile](style-tile/style-tile.pdf) (PDF): The style tile is intended to express the essence of the brand without committing too early to specific implementations.
+
+## Design mockups
+
+High-fidelity design prototypes for both mobile and desktop.
+
+- [Design mockup - mobile](mockup/iterations/Mobile-2.png) (PNG)
+- [Design mockup - desktop](mockup/iterations/Desktop-2.png) (PNG)
 
 ### Accessibility / 508 Reporting
 
