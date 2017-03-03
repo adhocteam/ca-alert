@@ -17,7 +17,7 @@ add non-technical narrative here
 
 ### Introduction
 
-CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards are generated manually as well as automatically generated based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
+CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards manually as well as automatically based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
 
 
 ### Technical Overview
@@ -50,7 +50,7 @@ We used the [Google Maps Javascript API](https://developers.google.com/maps/docu
 
 #### Site navigation
 
-We used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when they each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
+We used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
 
 #### Communication with the API
 
@@ -60,9 +60,9 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
+We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub. 
 
-*Automated 508 testing*
+We performed manual 508 compliance testing. For an actual product, we also write automated tests. 
 
 ### The server-side Rails API
 
@@ -124,7 +124,7 @@ END TECHNICAL APPROACH
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has blah blah. As the product manager, Leanna worked with the delivery manager to translate of the prototype requiremtns into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask. 
+Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
 
 Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked closely with the technical architect to weigh the technical implications of product decisions. 
 
@@ -141,29 +141,38 @@ Daily, Leanna groomed and prioritized the backlog, translated user feedback into
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-In similar projects, we speak at least five to seven people who are representative of the main user types. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings _HERE_. We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
+In similar projects, we speak at least five to seven people who are representative of each main user type. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings [here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md). We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
 
 In Discovery, these themes emerged and we implemented the feedback in the wireframes and prototype:
-- Signing in with Google or other existing account 
-- People wanted to be able to receive alerts from multiple locations 
-- Phone alerts were more useful than email
-- A chat bot to enroll would make this more accessible for low tech/low SES residents
-- Mid-crisis, users wanted to be able to see current alerts without signing in
-- Users desired a way to review information in case you dismiss a notification without getting the details
+- What makes emergency messages helpful
+ - People wanted multiple locations, such as their home and office, and their current location
+ - Users want messages if “something in my life is affected by it.”
+ - Is there an action they need to take, like move their car or evacuate?
+ - Messages that "cut through the clutter" of other notifications are good for emergency situations
+ - There are levels of importance that call for different types of messages and notifications: warnings vs. emergencies, something they need to react to vs. notice of something in a loved one's region, etc.
+- Accessing messages
+ - Phone alerts were more useful than email 
+ - Signing in with Google is something people like
+ - Users want to be able to review information in case they dismiss a notification without getting the details
+ - Mid-crisis, users wanted to be able to see current alerts without signing in
+ - A chat bot to enroll would make this more accessible for low tech/low SES residents
 
-PUT SHIT IN GITHUB and Link to user research notes
+[Complete user research plan, process, and findings are available here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md)
 
 
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
 
-- qualitative interviews in discovery
-- surveys about needs
-- built to user need based on discovery
-- user testing of wireframes
-- built user types to inform design and functionality
-- CALL OUT FIRST THREE PLAYS IN USDS
-- made it simple, usds web design standards
-- tested extensively with wireframes
+ We used the following user-centric design techniques and tools
+
+- Early and often contact with potential users
+- Tested prototypes of solutions with real people
+- Documented and presented findings to product owner, who sat in interviews and user tests
+- Qualitative interviews 
+- Surveys 
+- Built to user needs based on feedback
+- User testing of wireframes
+- Built user types to inform design and functionality
+- Designed intuitive, simple interface and followed US web design standards
 
 #### e. Used GitHub to document code commits
 
@@ -181,9 +190,6 @@ LINK
 
 LINK
 
-MANUAL CHECKS
-
-AUTOMATED TEST 
 
 #### h. Created or used a design style guide and/or a pattern library
 
@@ -191,27 +197,27 @@ AUTOMATED TEST
 
 #### i. Performed usability tests with people
 
-- LAURA summary of what we did copy from QPP and adapt and provide links to full details
+FIX THIS 
+Research documentation: Details of research plan, participant recruitment, conversation guide, findings, design decisions, and next steps.
+Process map (PDF): Flow diagram used to understand the process and potential paths a clinician or group might take through QPP.
+User type (PDF): An archetype of a likely user, used to help define the focus of our work and particular pain points to focus on.
+Usability testing prototype: Live prototype used to get feedback from medical professionals on our work thus far.
+Usability testing video (QPP FE reference material) (YouTube): Video showing some of the most compelling anecdotes from our usability research.
+=======
+We completed two rounds of research during this project:
+- One round of qualitative individual interviews with the goal of discovering user needs at the beginning of the project to inform product and design decisions
+- One round of interface testing with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
+[Complete user research plan, process, findings, and how we implemented what we learned are available here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md)
 
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
-- Review of user suggestions already implemented and how to reference
+User feedback was key to our design and development of this product. The product owner listened to user feedback sessions, translated ideas into user stories, and prioritized them in the backlog. Many of them remain to be developed, and user feedback informed a number of added features, including:
 
-##### ADMIN
-- Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe
-- Removal of lat long - this is removed from the app, ensure it’s removed from wireframes
+- Ability to sign in with an existing account, like Facebook or Google
+- Ability to add multiple locations to monitor
+- Ability to see current alerts in one's area without signing in
+- Ability to review past alerts for more information
 
-##### RESIDENT
-- Implemented ability to personally name - ensure this in wireframes
-Review of user suggestions that we should reflect in wireframe
-ADMIN
-Wireframe: I would wonder why an old alert is still active. How long does it take to expire. - some way of differentiating between active and expired alerts
-TEMPLATES for admins - future feature - leanna will create a card
-Future feature how many potential people this message would reach
-Character count - wireframe and future feature
-Different formats - future feature
-RESIDENT
-What about wonkiness of zip codes? Copy change and radius - future feature
 
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
@@ -283,7 +289,10 @@ For more detail on how we used the USDS Playbook, please read below.
 
 #### Notes
 
-LAURA
+We completed two rounds of research during this project:
+- One round of qualitative individual interviews with realistic potential users with the goal of discovering user needs at the beginning of the project to inform product and design decisions
+- One round of interface testing with both realistic users and realistic administrators with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
+[Complete user research plan, process, findings, and how we implemented what we learned are available here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md)
 
 ### Address the whole experience, from start to finish
 
