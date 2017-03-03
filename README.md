@@ -12,7 +12,7 @@ https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are working on other government projects and who thoughtfully and aggressively built this prototype.
 
-We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/). 
+We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/).
 
 We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These mockups reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
 
@@ -30,7 +30,7 @@ The password for each of these users is `abcd-1234`.
 
 ##Technical Approach
 
-(WORD COUNT)
+1,934 words
 
 ### Introduction
 
@@ -81,7 +81,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests. 
+We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests.
 
 ### The server-side Rails API
 
@@ -160,9 +160,9 @@ END TECHNICAL APPROACH
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
+We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals.
 
-Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions. 
+Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions.
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
@@ -321,7 +321,7 @@ We used the the U.S. Web Design Standards as the baseline for our product. The s
 
 ### Build the service using agile and iterative practices
 
-Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
+Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production.
 
 ### Structure budgets and contracts to support delivery - N/A
 
@@ -352,7 +352,7 @@ Automated testing and deployment have been a part of our development since the b
 
 ### Manage security and privacy through reusable processes
 
-See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections. 
+See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections.
 
 ### Use data to drive decisions
 
