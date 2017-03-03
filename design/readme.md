@@ -13,12 +13,6 @@ Logic and high-level application flow
 - [Process Map](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) (Moqups.com)
 - [Process Map](process-map/process-map.pdf) (PDF)
 
-## Discovery & user research
-
-- Emergency Information Sources
-- Learning About Emergencies
-- Research Documentation
-
 ## Wireframes
 
 Clickable, low fidelity wireframes used to create UX, initial usability testing for the application.
