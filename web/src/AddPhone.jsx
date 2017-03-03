@@ -72,11 +72,9 @@ class AddPhone extends React.Component {
     return (
       <section>
         <div className="usa-grid usa-section">
-          <div className="usa-width-one-third">
-            <h2>Add phone number</h2>
-          </div>
 
-          <div className="usa-width-two-thirds">
+          <div className="usa-width-one-whole">
+            <h2>Add phone number</h2>
             <p>Enter the phone number you wish to recieve alerts at</p>
 
             <form className="usa-form" onSubmit={e => this.handleSubmit(e)}>

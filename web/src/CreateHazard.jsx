@@ -134,7 +134,7 @@ export default class CreateHazard extends React.Component {
                            type="checkbox"
                            checked={this.state.emergecy}
                            onChange={e => this.handleChange(e)} />
-                    <label for="emergency"> This alert is an emergency</label>
+                    <label htmlFor="emergency"> This alert is an emergency</label>
                   </div>
 
                   <div>
@@ -263,7 +263,7 @@ function Preview(props) {
           <Location place={hazard.place} />
           </div>
           <div>
-            <p>Residents within 1km will be alerted</p>
+            <p>Locations within 1km will be alerted</p>
             <Button type="button" onClick={props.onSendClick}>
               Publish alert
             </Button>
