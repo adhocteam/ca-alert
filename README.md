@@ -59,10 +59,13 @@ Displaying data is done in a similar way, with React components like the [PlaceL
 
 For collecting and displaying data, React's virtual DOM allows us to seamlessly update the page without worrying about what individual parts of the markup have changed. We have also taken advantage of the reusability of React components by creating multi-use tools like [buttons](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx) and [error messages](https://github.com/adhocteam/ca-alert/blob/master/web/src/Error.jsx).
 
-#### Usage of Google Maps and Geocoder
+#### Handling geographic requirements
 
-We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
+We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, we used Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) [for converting addresses to coordinates](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52). For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
+We used [HTML5's geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
+geolocate the user when they are creating or editing a place to track, or when
+an admin is manually creating a hazard for an alert.
 
 #### Site navigation
 
@@ -134,31 +137,18 @@ We referred to the Prototype B Resources PDF appendix of the RFI for sources of
 public data to be used as hazard data. We reviewed each endpoint, which were all
 ArcGIS REST API endpoints, and from there determined a single layer for each to
 represent that data type, for example, earthquakes, high winds, and
-wildfires. Then we used a [tool](https://github.com/tannerjt/AGStoShapefile) to
-retrieve all features of each layer and convert them to GeoJSON as an
-intermediate step. Having GeoJSON enabled us to use `ogr2ogr`, of
+wildfires.
+
+For importing the available data sources described in the RFI, we used a [tool](https://github.com/tannerjt/AGStoShapefile) to
+retrieve all features of each layer and convert them to GeoJSON. Having GeoJSON enabled us to use `ogr2ogr`, of
 the [GDAL](http://www.gdal.org/) suite, to import the hazard feature data into
 the PostGIS database, mapping each data type to a table. From there, we used
 a [Rake](https://github.com/ruby/rake) task to normalize each data type -- for
 example, determining which field of the feature contains the name to use in
-alerts -- and create a hazard model in the Rails app for each feature. The Rails
-application
-is
-[set up](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L98) set
-up to automatically create and send an alert after the hazard is created to each
+alerts -- and create a hazard model in the Rails app for each feature. The Rails application is
+[set up](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L98)
+to automatically create and send an alert after the hazard is created to each
 user place that is spatially within the defined radius of the hazard's centroid.
-
-At the frontend web UI layer, the React app uses
-the
-[Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) for
-geocoding and rendering of maps, and
-the
-[HTML5 geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
-geolocate the user when they are creating or editing a place to track, or when
-an admin is manually creating a hazard for an alert. The user can type in an
-address, which the UI will geocode to a point, or they can click a button to
-geolocate their current position. The UI then displays the point centered on a
-map for confirmation.
 
 #### Testing
 
