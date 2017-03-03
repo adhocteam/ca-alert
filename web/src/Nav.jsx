@@ -23,8 +23,8 @@ export default class Nav extends React.Component {
   render() {
     if (this.state.user === null) {
       return (
-        <a className="usa-button usa-button-outline" href="#/account/signin">
-          Sign in
+        <a className="usa-button usa-button-outline" href="#/">
+          Sign up
         </a>
       );
     } else {
