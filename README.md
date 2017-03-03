@@ -152,8 +152,7 @@ user place that is spatially within the defined radius of the hazard's centroid.
 
 We wrote [tests](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. We also wrote unit tests [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
 
-END TECHNICAL APPROACH
-
+END TECHNICAL APPROACH 1,931 words
 
 ##Responses to the prompts in Section 2 of the RFI
 
