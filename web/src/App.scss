@@ -109,6 +109,14 @@ fieldset {
 }
 
 .usa-header {
+  h1 {
+    font-weight: normal !important;
+    font-size: 4rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1em !important;
+    span {margin: 0; padding: 0;}
+  }
   background: $primary-color;
   color: $white;
   border-bottom: 2px solid $secondary-color !important;
@@ -129,7 +137,6 @@ fieldset {
 .usa-logo {
   margin-top:1rem;
   em.usa-logo-text {
-    font-size: 4rem;
     font-weight: normal;
     line-height: 1;
     b {font-weight: 700;}
@@ -137,6 +144,9 @@ fieldset {
   span {
     display: block;
     font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
     font-weight: normal;
   }
 }
