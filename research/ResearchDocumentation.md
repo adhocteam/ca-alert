@@ -44,7 +44,7 @@ In similar projects, we speak to five to seven people who are representative of 
  - Are there any ways you automatically get information about emergencies in your area?
  - (If not mentioned) What about Amber Alerts?
  - Do you use any services or tools you use to get emergency alerts? Which ones? How do they work for you?
- - (If no) Have you looked for services or tools to to get emergency alerts?
+ - (If no) Have you looked for services or tools to get emergency alerts?
  - Have you talked about emergency alerts with friends or family in the last few months?
 - Are there any ways that finding out about emergencies hasn’t quite worked for you?
  - How could those go better?
@@ -62,13 +62,13 @@ In similar projects, we speak to five to seven people who are representative of 
 
 - What makes emergency messages helpful
  - People wanted multiple locations, such as their home and office, and their current location
- - Users want messages if “something in my life is affected by it”
+ - Users want messages if “something in my life is affected by it.”
  - Is there an action they need to take, like move their car or evacuate?
  - Messages that "cut through the clutter" of other notifications are good for emergency situations
- - There are levels of importance that call for different types of messages and notifications: warnings vs emergencies, something they need to react to vs notice of something in a loved one's region, etc.
+ - There are levels of importance that call for different types of messages and notifications: warnings vs. emergencies, something they need to react to vs. notice of something in a loved one's region, etc.
 - Accessing messages
  - Phone alerts were more useful than email 
- - Signing in with google is something people like
+ - Signing in with Google is something people like
  - Users want to be able to review information in case they dismiss a notification without getting the details
  - It would be helpful to see current alerts near a user's location without signing in
 - Idea: a chat bot for low tech/low SES could be a good future feature
@@ -85,7 +85,7 @@ In similar projects, we speak to five to seven people who are representative of 
 ## Round Two Research Goal and Plan: Usability testing our wireframe-based prototype
 
 **Goal**
-Speak to 2-3 Californians who might be affected by emergencies in their areas to learn whether our prototype meets their needs, and 2-3 Government employees who share or send information to the public to learn whether the admin portion of our prototype meets their needs.
+Speak to 2-3 Californians who might be affected by emergencies in their areas to learn whether our prototype meets their needs and 2-3 Government employees who share or send information to the public to learn whether the admin portion of our prototype meets their needs.
 
 **Research Questions**
 
@@ -131,7 +131,7 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
    - What do you think of seeing this information?
    - Is there anything that’s missing here?
  - Non-signed in version - nearby alerts
-   - If you were not signed in, and saw something like this, what are your impressions of this?
+   - If you were not signed in and saw something like this, what are your impressions of this?
  - Wrap-up, general questions
    - How did that work for you?
    - Is there a way that could be better for you?
@@ -156,7 +156,7 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
  - How do you send or share things to residents in your area?
  - Are there things that could be better in the ways you do that?
  - Are there any ways that your work needs to be approved before it goes to the public? How does that work? Are there ways it could be easier?
-- Ok, let’s pretend your role involved sending alerts to residents - I'm going to show you an in-progress system that could help you do that, walk me through etc (share screen, show prototype)
+- Ok, let’s pretend your role involved sending alerts to residents - I'm going to show you an in-progress system that could help you do that, walk me through, etc. (share screen, show prototype)
  - Add admin user
    - What can you see and do here? How did that work for you?
  - Create an alert
