@@ -32,6 +32,13 @@ Tests are handled by [Mocha](https://mochajs.org/).
 $ make test
 ```
 
+Test coverage is handled by Istanbul's [nyc](https://github.com/istanbuljs/nyc) tool.
+
+``` shell
+$ make coverage
+```
+
+
 ### Building the app
 
 Builing the app compiles the JavaScript source into a single bundle file,
