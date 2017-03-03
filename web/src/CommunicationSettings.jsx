@@ -37,8 +37,8 @@ class PhoneRow extends React.Component {
         </td>
         <td>{phone.phone_number}</td>
         <td>
-          <a role="button" className="usa-button usa-button-secondary usa-button-small"
-              href="#"
+          <a role="button" className="remove usa-button usa-button-secondary usa-button-small"
+              href={`#${phone.id}`}
               onClick={this.remove}
               title="Remove this place"
             >
