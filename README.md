@@ -350,11 +350,11 @@ Automated testing and deployment have been a part of our development since the b
 
 ### Manage security and privacy through reusable processes
 
-See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections.
+See [Technical Approach](#technical-approach) document for security details. Ad Hoc is adept at following industry best practices in security and privacy.
 
 ### Use data to drive decisions
 
-Heroku provides a number of these tools to us automatically, but we chose not to expand upon them because they were not required for the prototype. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
+Heroku provides a number of analytics tools to us automatically and we used them to track performance during development. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Google Analytics](https://www.google.com/analytics/#?modal_active=none), [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
 
 ### Default to open
 
