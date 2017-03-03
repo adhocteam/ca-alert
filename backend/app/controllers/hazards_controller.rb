@@ -4,7 +4,7 @@ class HazardsController < ApplicationController
     render(
       json: {
         status: 'success',
-        data: Hazard.all.order(created_at: 'asc').limit(10)
+        data: Hazard.all.order(created_at: 'desc').limit(10).reverse
       },
       status: 200
     )
