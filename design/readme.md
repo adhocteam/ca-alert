@@ -1,11 +1,5 @@
 # Design assets
 
-## Design process
-
-Sample design process.
-
-- [Design process](design-process/design-process.pdf) (PDF)
-
 ## User types
 
 Proto-personnas, or user types used to guide process map and high-level UX decisions.
