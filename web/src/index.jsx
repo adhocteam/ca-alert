@@ -56,3 +56,8 @@ ReactDOM.render(
 );
 
 ReactDOM.render(<Nav />, document.getElementById("app-nav"));
+
+// Force SSL if we're on production
+if (FORCE_SSL && window.location.protocol != "https:") {
+  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+}
