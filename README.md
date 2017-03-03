@@ -51,7 +51,6 @@ For collecting and displaying data, React's virtual DOM allows us to seamlessly 
 
 We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
-*DANX LEANNA - We chose a commercially available one, better product experience, lower technical lift*
 
 #### Site navigation
 
@@ -188,12 +187,11 @@ We built a pattern library using Pattern Lab (http://patternlab.io/), a platform
 
 #### i. Performed usability tests with people
 
-FIX THIS 
 Research documentation: Details of research plan, participant recruitment, conversation guide, findings, design decisions, and next steps.
-Process map (PDF): Flow diagram used to understand the process and potential paths a clinician or group might take through QPP.
-User type (PDF): An archetype of a likely user, used to help define the focus of our work and particular pain points to focus on.
-Usability testing prototype: Live prototype used to get feedback from medical professionals on our work thus far.
-Usability testing video (QPP FE reference material) (YouTube): Video showing some of the most compelling anecdotes from our usability research.
+[Process map:](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) Flow diagram used to understand the process and potential paths a resident or user might follow.
+[User type (PDF):](https://github.com/adhocteam/ca-alert/blob/master/design/user-type/user-types.pdf) An archetype of likely users, used to help define user stories.
+[Usability testing prototype:](https://ca-alert-prototype.s3.amazonaws.com/index.html#/) Live prototype used to get feedback from California residents on our work thus far.
+Usability testing video (LINK): Video showing some of the most compelling anecdotes from our usability research.
 =======
 We completed two rounds of research during this project:
 - One round of qualitative individual interviews with the goal of discovering user needs at the beginning of the project to inform product and design decisions
@@ -268,170 +266,57 @@ For more detail on how we used the USDS Playbook, please read below.
 ##US Digital Services Playbook Checklist
 
 ### Understand what people need
-- [x] Early in the project, spend time with current and prospective users of the service
-- [x] Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent
-- [x] Test prototypes of solutions with real people, in the field if possible
-- [x] Document the findings about user goals, needs, behaviors, and preferences
-- [x] Share findings with the team and agency leadership
-- [x] Create a prioritized list of tasks the user is trying to accomplish, also known as “user stories”
-- [x] As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs
 
-#### Notes
+To understand what people need, we conducted a thorough research plan, consisting of two rounds of testing. One round consisted of qualitative individual interviews with realistic potential users with the goal of discovering user needs before we began design or development to inform product and design decisions. The second, completed after the initial build, tested the mockups and prototypes with California residents and government communications professionals. We shared findings with the entire team and modified the prototype via issues as a prioritized list. For example.- A [complete user research plan, process, findings, and how we implemented what we learned are available here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md)
 
-We completed two rounds of research during this project:
-- One round of qualitative individual interviews with realistic potential users with the goal of discovering user needs at the beginning of the project to inform product and design decisions
-- One round of interface testing with both realistic users and realistic administrators with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
-[Complete user research plan, process, findings, and how we implemented what we learned are available here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md)
 
 ### Address the whole experience, from start to finish
 
-- [x] Understand the different points at which people will interact with the service – both online and in person
-- [x] Identify pain points in the current way users interact with the service, and prioritize these according to user needs
-- [ ] Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service
-- [ ] Develop metrics that will measure how well the service is meeting user needs at each step of the service
-
-#### Notes
-
-DANNY AND GREG - link to process map, wtf offline, wtf metrics?
+The second round of testing uncovered pain points in the way users interacted with the service, and we prioritized those issues in our development plan. We focused our research on the actual service, rather than in-person and offline touchpoints. In a larger project, we would research all aspects of how people interact with the service and alerts in general— television, radio, word of mouth, and son on.
 
 ### Make it simple and intuitive
-- [x] Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards as a default
-- [x] Use the design style guide consistently for related digital services
-- [x] Give users clear information about where they are in each step of the process
-- [x] Follow accessibility best practices to ensure all people can use the service
-- [x] Provide users with a way to exit and return later to complete the process
-- [x] Use language that is familiar to the user and easy to understand
-- [x] Use language and design consistently throughout the service, including online and offline touch points
 
-#### Notes
-
-DANNY
+We used the the U.S. Web Design Standards as the baseline for our product. The system gives users clear information about where they are in each step of the process, from signup to profile management to alerts. The system passes 508 tests, we use plain language in all communication, and the design is consistent throughout the service.
 
 ### Build the service using agile and iterative practices
-- [x] Ship a functioning “minimum viable product” (MVP) that solves a core user need as soon as possible, no longer than three months from the beginning of the project, using a “beta” or “test” period if needed
-- [x] Run usability tests frequently to see how well the service works and identify improvements that should be made
-- [x] Ensure the individuals building the service communicate closely using techniques such as launch meetings, war rooms, daily standups, and team chat tools
-- [x] Keep delivery teams small and focused; limit organizational layers that separate these teams from the business owners
-- [x] Release features and improvements multiple times each month
-- [x] Create a prioritized list of features and bugs, also known as the “feature backlog” and “bug backlog”
-- [x] Use a source code version control system
-- [x] Give the entire project team access to the issue tracker and version control system
-- [x] Use code reviews to ensure quality
 
-#### Notes
 Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
 
 ### Structure budgets and contracts to support delivery - N/A
-- [ ] Budget includes research, discovery, and prototyping activities
-- [ ] Contract is structured to request frequent deliverables, not multi-month milestones
-- [ ] Contract is structured to hold vendors accountable to deliverables
-- [ ] Contract gives the government delivery team enough flexibility to adjust feature prioritization and delivery schedule as the project evolves
-- [ ] Contract ensures open source solutions are evaluated when technology choices are made
-- [ ] Contract specifies that software and data generated by third parties remains under our control, and can be reused and released to the public as appropriate and in accordance with the law
-- [ ] Contract allows us to use tools, services, and hosting from vendors with a variety of pricing models, including fixed fees and variable models like “pay-for-what-you-use” services
-- [ ] Contract specifies a warranty period where defects uncovered by the public are addressed by the vendor at no additional cost to the government
-- [ ] Contract includes a transition of services period and transition-out plan
 
-#### Notes
+We assigned a team that conducted research, discovery, and prototyping activities in lean but robust fashion. In general, we practice agile software development, which is designed for frequent deliverables. In the context of a contract, we seek to abide by all of the elements of this play. This allows for quick procurement and fast delivery at the lowest cost to government and taxpayers.
 
-This is not applicable to this project.
 
 ### Assign one leader and hold that person accountable
-- [x] A product owner has been identified
-- [x] All stakeholders agree that the product owner has the authority to assign tasks and make decisions about features and technical implementation details
-- [x] The product owner has a product management background with technical experience to assess alternatives and weigh tradeoffs
-- [ ] The product owner has a work plan that includes budget estimates and identifies funding sources *NA*
-- [ ] The product owner has a strong relationship with the contracting officer *NA*
 
-#### Notes
+We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program, where we have a strong relationship with the contracting officer, and has led teams to many successful product launches. The development team worked smoothly, with constant communication and daily standups that allowed her to lead the program.
 
-LEANNA
 
 ### Bring in experienced teams
-- [x] Member(s) of the team have experience building popular, high-traffic digital services
-- [x] Member(s) of the team have experience designing mobile and web applications
-- [x] Member(s) of the team have experience using automated testing frameworks
-- [x] Member(s) of the team have experience with modern development and operations (DevOps) techniques like continuous integration and continuous deployment
-- [x] Member(s) of the team have experience securing digital services
-- [ ] A Federal contracting officer is on the internal team if a third party will be used for development work *NA*
-- [ ] A Federal budget officer is on the internal team or is a partner *NA*
-- [ ] The appropriate privacy, civil liberties, and/or legal advisor for the department or agency is a partner *NA*
-
-#### Notes
 
 We chose the technical team for this project from the most senior members of the company. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
 
-### Choose a modern technology stack
-- [x] Choose software frameworks that are commonly used by private-sector companies creating similar services
-- [x] Whenever possible, ensure that software can be deployed on a variety of commodity hardware types
-- [x] Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects
-- [x] Consider open source software solutions at every layer of the stack
 
-#### Notes
+### Choose a modern technology stack
 
 Modern, open source tools have been used throughout our development of the prototype. We have avoided using exotic tools that are difficult to deploy, favoring software and processes that we use every day on existing projects. Documentation on [running](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) the [apps](https://github.com/adhocteam/ca-alert/blob/master/web/README.md) locally has been provided and updated throughout the development process.
 
 ### Deploy in a flexible hosting environment
-- [x] Resources are provisioned on demand
-- [x] Resources scale based on real-time user demand
-- [x] Resources are provisioned through an API
-- [x] Resources are available in multiple regions
-- [x] We only pay for resources we use
-- [ ] Static assets are served through a content delivery network
-- [x] Application is hosted on commodity hardware
-
-#### Notes
 
 Most of these requirements are met through the use of Heroku as a PaaS provider. It enables API-based provisioning of resources and allows us to scale those resources up and down easily and with no downtime. In a production system, we would seek to increase the reliability of the application by using a multi-region approach with demand-based autoscaling, and the static assets would be served up behind a CDN.
 
 ### Automate testing and deployments
-- [x] Create automated tests that verify all user-facing functionality
-- [x] Create unit and integration tests to verify modules and components
-- [x] Run tests automatically as part of the build process
-- [x] Perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques
-- [ ] Conduct load and performance tests at regular intervals, including before public launch
-
-#### Notes
 
 Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
 
 ### Manage security and privacy through reusable processes
-- [ ] Contact the appropriate privacy or legal officer of the department or agency to determine whether a System of Records Notice (SORN), Privacy Impact Assessment, or other review should be conducted
-- [ ] Determine, in consultation with a records officer, what data is collected and why, how it is used or shared, how it is stored and secured, and how long it is kept
-- [ ] Determine, in consultation with a privacy specialist, whether and how users are notified about how personal information is collected and used, including whether a privacy policy is needed and where it should appear, and how users will be notified in the event of a security breach
-- [ ] Consider whether the user should be able to access, delete, or remove their information from the service
-- [ ] “Pre-certify” the hosting infrastructure used for the project using FedRAMP
-- [x] Use deployment scripts to ensure configuration of production environment remains consistent and controllable
 
-#### Notes
-
-LEANNA
+See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections. 
 
 ### Use data to drive decisions
-- [ ] Monitor system-level resource utilization in real time
-- [x] Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)
-- [ ] Ensure monitoring can measure median, 95th percentile, and 98th percentile performance
-- [ ] Create automated alerts based on this monitoring
-- [ ] Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs
-- [ ] Publish metrics internally
-- [ ] Publish metrics externally
-- [ ] Use an experimentation tool that supports multivariate testing in production
-
-#### Notes
 
 Heroku provides a number of these tools to us automatically, but we chose not to expand upon them because they were not required for the prototype. In a production system, we would assemble a DevOps team to manage systems that track system performance data in real time and create alerts as errors occur. On existing deployments, we have used a combination of [Prometheus](https://prometheus.io/), [Sentry](https://sentry.io/welcome/), [Grafana](http://grafana.org/), and [PagerDuty](https://www.pagerduty.com/) to implement such a system.
 
 ### Default to open
-- [ ] Offer users a mechanism to report bugs and issues, and be responsive to these reports
-- [x] Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)
-- [ ] Ensure that data from the service is explicitly in the public domain, and that rights are waived globally via an international public domain dedication, such as the “Creative Commons Zero” waiver
-- [ ] Catalog data in the agency’s enterprise data inventory and add any public datasets to the agency’s public data listing
-- [ ] Ensure that we maintain the rights to all data developed by third parties in a manner that is releasable and reusable at no cost to the public
-- [ ] Ensure that we maintain contractual rights to all custom software developed by third parties in a manner that is publishable and reusable at no cost
-- [x] When appropriate, create an API for third parties and internal users to interact with the service directly
-- [x] When appropriate, publish source code of projects or components online
-- [x] When appropriate, share your development process and progress publicly
-
-#### Notes
 
 Many of the concepts here do not apply to the development of a prototype, but we have done our development under a public GitHub repository that includes all of the code commits, issues filed, and documents created. Also, we developed the API so access is publicly available.
