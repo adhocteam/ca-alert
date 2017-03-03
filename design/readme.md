@@ -36,7 +36,7 @@ Clickable, low fidelity wireframes used to create UX, initial usability testing 
 
 Design reference document, used to drive in-browser UI development.
 
-- [Style tile](style-tile/style-tile.pdf) (PDF): The style tile is intended to express the essence of the brand without committing too early to specific implementations.
+- [Style tile](style-tile/style-tile.png) (PNG): The style tile is intended to express the essence of the brand without committing too early to specific implementations.
 
 ## Design mockups
 
