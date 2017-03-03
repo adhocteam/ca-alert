@@ -44,12 +44,16 @@ module.exports = {
         })
       },
       {
-        test: /\.(svg|png|jpg|woff|woff2|eot|ttf)$/,
+        test: /\.(svg|png|jpg|woff|woff2|eot|ttf|ico)$/,
         loader: "file-loader"
       },
       {
         test: /\.html$/,
-        loader: "file-loader?name=[path][name].[ext]!extract-loader!html-loader"
+        loaders: [
+          "file-loader?name=[path][name].[ext]",
+          "extract-loader",
+          "html-loader?" + JSON.stringify({ attrs: ["img:src", "link:href"] })
+        ]
       }
     ]
   },
