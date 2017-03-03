@@ -45,7 +45,7 @@ body {
 form.alt-signup {
   background: $alt-background !important;
   padding: 1em 1em;
-  
+
 }
 
 form.usa-form {
@@ -115,6 +115,12 @@ fieldset {
   h1, h2, h3, h4, h5, h6, a {
     color: $white !important;
   }
+
+  .usa-button-outline {
+    background: $primary-color !important;
+    color: $white;
+  }
+
 }
 
 
@@ -186,6 +192,18 @@ fieldset {
   color: $primary-color !important;
 }
 
+#app-nav > .usa-button.usa-button-outline,
+#app > div > .usa-hero.calerts > .usa-grid > div:nth-of-type(2) > div > .alt-signup > fieldset > .usa-button.usa-button-big.usa-button-primary {
+  background: $primary-color !important;
+  color: $white !important;
+}
+
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p,
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p > a {
+  background: $tertiary-color !important;
+  color: $white;
+}
+
 // Modal overrides
 
 .modal-content {
@@ -219,7 +237,8 @@ fieldset {
 // Footer
 
 footer .usa-footer-secondary_section {
-
+  padding: .75em 0;
+  display: block;
   a.usa-link-facebook {
     color: $white !important;
   }
@@ -228,7 +247,6 @@ footer .usa-footer-secondary_section {
   h1, h2, h3, h4, h5, h6, a, p {
     color: $white !important;
   }
-  padding-top: 0!important;
 }
 
 // Dashboard
