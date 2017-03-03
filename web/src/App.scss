@@ -60,12 +60,18 @@ fieldset {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin: 0 0 0 0 !important;
-}  
+}
 
 .form-section {
   padding: 1em;
-  background: rgba($alt-background, .4);
+  background: rgba($alt-background, .2);
   margin: 1em 0 1em 0;
+  hr {
+   border: 0;
+   height: 0;
+   border-top: 1px solid rgba(0, 0, 0, 0.1);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
   h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;

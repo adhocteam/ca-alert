@@ -154,15 +154,20 @@ export default class CreateHazard extends React.Component {
                           </Button>
                         </div>
                       : <div className="auto-clear">
-                          <div style={{ float: "right" }}>
-                            <a
-                              href="#"
-                              onClick={e => this.handleAddressClearClick(e)}
-                            >
-                              Clear
-                            </a>
+
+
+                        <div className="form-section">
+                          <b><Location place={this.state.geocode} /></b>
+
+                          <a className="usa-button usa-button-outline"
+                            href="#"
+                            onClick={e => this.handleAddressClearClick(e)}
+                          >
+                            Clear
+                          </a>
+
                           </div>
-                          <Location place={this.state.geocode} />
+
                         </div>}
                   </div>
                   <div>
@@ -237,28 +242,31 @@ function Preview(props) {
 
   return (
     <section className="usa-section usa-grid">
-      <div className="usa-width-one-third">
+      <div className="usa-width-one-whole">
         <h2>Preview alert</h2>
-      </div>
-      <div className="usa-width-two-thirds">
-        <h3>{(hazard.is_emergency) ? 'EMERGENCY: ' : ''}{hazard.title}</h3>
-        <span className="usa-label">{hazard.category}</span>
-        <div style={{ whiteSpace: "pre-wrap" }}>
-          {hazard.message}
-        </div>
-        <h4>More details</h4>
-        <p>
-          <a href={hazard.linkURL}>{hazard.linkTitle}</a>
-        </p>
-        <p>
-          <a href={`tel:${hazard.phoneNumber}`}>{hazard.phoneNumber}</a>
-        </p>
-        <Location place={hazard.place} />
-        <div>
-          <Button type="button" onClick={props.onSendClick}>
-            Send alert
-          </Button>
-          <a href="#" onClick={props.onEditClick}>Edit</a>
+        <div className="form-section">
+          <h3>{(hazard.is_emergency) ? 'EMERGENCY: ' : ''}{hazard.title}</h3>
+          <span className="usa-label">{hazard.category}</span>
+            <hr />
+          <div style={{ whiteSpace: "pre-wrap" }}>
+            {hazard.message}
+          </div>
+          <hr />
+          <h4>More details</h4>
+          <p>
+            <a href={hazard.linkURL}>{hazard.linkTitle}</a>
+          </p>
+          <p>
+            <a href={`tel:${hazard.phoneNumber}`}>{hazard.phoneNumber}</a>
+          </p>
+          <Location place={hazard.place} />
+          </div>
+          <div>
+            <Button type="button" onClick={props.onSendClick}>
+              Publish alert
+            </Button>
+            <a className="usa-button usa-button-outline" href="#" onClick={props.onEditClick}>Edit</a>
+
         </div>
       </div>
     </section>
