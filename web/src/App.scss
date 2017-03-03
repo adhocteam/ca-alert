@@ -41,7 +41,7 @@ body {
 form.alt-signup {
   background: $alt-background !important;
   padding: 1em 1em;
-  
+
 }
 
 form.usa-form {
@@ -76,6 +76,13 @@ fieldset {
     margin: 0;
     padding: 0;
   }
+}
+
+.map-section {
+  padding: 1em 0;
+  display: block;
+  clear: both;
+  max-width: 100%;
 }
 
 .search-form {

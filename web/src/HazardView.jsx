@@ -32,8 +32,8 @@ class HazardView extends React.Component {
         <section className="usa-grid usa-section">
 
           <div className="usa-width-one-whole">
+
             <AlertView hazard={hazard} />
-            <h2>View Alert</h2>
 
             <h3>Sent Notifications</h3>
             <ul>
