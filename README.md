@@ -2,16 +2,21 @@
 
 https://ca-alert-prototype.s3.amazonaws.com/index.html
 
-* [Overview](#overview)
+* [Project Overview](#project-overview)
 * [Technical Approach](#technical-approach)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 
+##Project Overview
 
+Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are actively working on other government projects and who spent their nights and weekends thoughtfully and aggressively building this prototype.
 
-##Overview
+We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/). 
 
-add non-technical narrative here
+We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These mockups reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
+
+This prototype is our Minimum Viable Product, along with one week of iterations based on user feedback.
+
 
 ##Technical Approach (WORD COUNT)
 
