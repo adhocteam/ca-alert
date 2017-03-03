@@ -3,30 +3,30 @@
 https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 * [Project Overview](#project-overview)
-* [Demo Accounts](#demo-accounts)
+* [Accessing the Prototype](#accessing-the-prototype)
 * [Technical Approach](#technical-approach)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
 
 ##Project Overview
 
-Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are working on other government projects and who thoughtfully and aggressively built this prototype.
+Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to building the best government digital services. The most important factor of success in any project is the team, so we brought together a lean team of talented people who have experience working on other government projects.
 
 We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/).
 
-We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These mockups reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
+We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These [mockups](https://github.com/adhocteam/ca-alert/tree/master/design/mockup) reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
 
 This prototype is our Minimum Viable Product, along with one week of iterations based on user feedback.
 
+## Accessing the prototype
 
-## Demo Accounts
+The prototype is deployed at: [https://ca-alert-prototype.s3.amazonaws.com/index.html](https://ca-alert-prototype.s3.amazonaws.com/index.html)
 
-For testing the application, we have created two accounts:
+In order to log in as an administrator to create new hazards, see existing ones, and view reporting dashboards, [log in](https://ca-alert-prototype.s3.amazonaws.com/index.html#/account/signin) with email: `admin@calerts.ca.gov` and password: `abcd-1234`.
 
-* A resident, who has a number of places being monitored for alerts: `resident@calerts.ca.gov`
-* An admin, who can both create and receive alerts: `admin@calerts.ca.gov`
+To log in as a resident, [create an account](https://ca-alert-prototype.s3.amazonaws.com/index.html#/), verify it, and then you will have access to manage your list of places and notification methods.
 
-The password for each of these users is `abcd-1234`.
+For demo purposes, we have created a resident account with email: `resident@calerts.ca.gov` and password: `abcd-1234`.
 
 ##Technical Approach
 
@@ -35,7 +35,6 @@ The password for each of these users is `abcd-1234`.
 ### Introduction
 
 CAlerts is an implementation of Prototype B for the State of California's RFI #CDT–ADPQ–0117. It is a system that allows residents to sign up for notifications on hazards occurring in their area and for administrators to manage those hazards and view reports. Residents can specify any number of places to be notified about as well as a number of communication channels by which they would like to be notified. Administrators can generate hazards manually as well as automatically based on the provided real data sources. In addition to creating hazards, administrators can also view analytics about user activity and recent alerts and can also manage the list of administrators. This document describes our technical decision-making process in the creation of the prototype as well as a description of how data flows through the system.
-
 
 ### Technical Overview
 
@@ -81,7 +80,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests.
+We performed 508 compliance testing using aXe and have included images [showing their status as passing](https://github.com/adhocteam/ca-alert/tree/master/design/accessibility).
 
 ### The server-side Rails API
 
