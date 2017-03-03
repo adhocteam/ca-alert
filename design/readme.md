@@ -42,8 +42,8 @@ Design reference document, used to drive in-browser UI development.
 
 High-fidelity design prototypes for both mobile and desktop.
 
-- [Design mockup - mobile](mockup/iterations/Mobile-2.png) (PNG)
-- [Design mockup - desktop](mockup/iterations/Desktop-2.png) (PNG)
+- [Design mockup - mobile](mockup/Iterations/Mobile-2.png) (PNG)
+- [Design mockup - desktop](mockup/Iterations/Desktop-2.png) (PNG)
 
 ### Accessibility / 508 Reporting
 
