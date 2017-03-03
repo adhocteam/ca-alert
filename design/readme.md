@@ -37,6 +37,9 @@ High-fidelity design prototypes for both mobile and desktop.
 
 Sample reporting for application prototype tests showing they meet 508 standards with no errors.
 
+- [Sample manual testing screenshot - aXe](accessibility/axe-report.png) (PNG)
+- [Sample manual testing screenshot - Chrome Accessibility Dev Tools](accessibility/chrome-accessibility-report.png) (PNG)
+
 ## Pattern library
 
 Pattern library created to ensure consistent brand, UI throughout the experience, devices and platforms. Our Pattern Library uses [Pattern Lab](http://patternlab.io/)
