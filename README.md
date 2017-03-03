@@ -231,8 +231,9 @@ Research documentation: Details of research plan, participant recruitment, conve
 [Process map:](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) Flow diagram used to understand the process and potential paths a resident or user might follow.
 [User type (PDF):](https://github.com/adhocteam/ca-alert/blob/master/design/user-type/user-types.pdf) An archetype of likely users, used to help define user stories.
 [Usability testing prototype:](https://ca-alert-prototype.s3.amazonaws.com/index.html#/) Live prototype used to get feedback from California residents on our work thus far.
-Usability testing video (LINK): Video showing some of the most compelling anecdotes from our usability research.
-=======
+
+We have included a [video](https://www.youtube.com/watch?v=uyf4SjbWDOY) showing some of the most compelling anecdotes from our usability research.
+
 We completed two rounds of research during this project:
 - One round of qualitative individual interviews with the goal of discovering user needs at the beginning of the project to inform product and design decisions
 - One round of interface testing with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
