@@ -62,7 +62,8 @@ module.exports = {
     new webpack.DefinePlugin({
       API_HOST: JSON.stringify(
         process.env.NODE_ENV === "production" ? PROD_API_HOST : DEV_API_HOST
-      )
+      ),
+      FORCE_SSL: (process.env.NODE_ENV === "production") ? true : false
     }),
     extractPlugin
   ]
