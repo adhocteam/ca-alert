@@ -18,11 +18,16 @@ Speak to 3-5 Californians who might be affected by emergencies in their areas to
 
 ### Research Participant Recruitment
 
-For this design exercise, we used our Cohorts community to recruit from friends and family. Cohorts allows us to survey and recruit participants who are the best fit for the project. In this sample exercise, we asked two quantitative questions:
-- How have you found out about emergencies in your area in the last six months?
-- What is most important to you when learning about emergencies?
+For this design exercise, we used our Cohorts community to recruit feedback participants. Cohorts allows us to survey and recruit participants who are the best fit for the project. In this sample exercise, we asked two quantitative questions:
 
-In similar projects, we speak to five to seven people who are representative of the main user types. In this case, we would speak with residents of California, and Government employees who communicate with the public about warnings and emergencies. We would seek to recruit people from a range of areas from urban to rural, and whose communication styles and uses of technology vary. 
+- How have you found out about emergencies in your area in the last six months?
+![Respondents find out about emergencies via SMS alerts, social media, and word of mouth](https://github.com/adhocteam/ca-alert/blob/master/research/EmergencyInfoSources.png)
+
+- What is most important to you when learning about emergencies?
+![Respondents want to trust the source of emergency information and get notifications on their phone](https://github.com/adhocteam/ca-alert/blob/master/research/LearningAboutEmergencies.png)
+
+
+In similar projects, we speak to five to seven people who are representative of each main user type. In this case, we would speak with residents of California, and Government employees who communicate with the public about warnings and emergencies. We would seek to recruit people from a range of areas from urban to rural, and whose communication styles and uses of technology vary. 
 
 ### User Research Conversation Guide
 
@@ -70,8 +75,8 @@ In similar projects, we speak to five to seven people who are representative of 
  - Phone alerts were more useful than email 
  - Signing in with Google is something people like
  - Users want to be able to review information in case they dismiss a notification without getting the details
- - It would be helpful to see current alerts near a user's location without signing in
-- Idea: a chat bot for low tech/low SES could be a good future feature
+ - Mid-crisis, users wanted to be able to see current alerts without signing in
+ - A chat bot to enroll would make this more accessible for low tech/low SES residents
 
 #### Next Steps
 
