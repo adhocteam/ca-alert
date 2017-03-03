@@ -8,6 +8,10 @@ $alt-background: #D6D7D9;
 $color-gray-lightest: #f1f1f1;
 $color-gray-dark: #323a45;
 
+// Breakpoint variables
+
+$nav-width: 950px;
+
 
 .auto-clear::after {
     content: "";
@@ -143,6 +147,17 @@ fieldset {
   line-height: 5rem;
   .usa-button-outline {
     border: 2px solid #fff !important;
+  }
+}
+
+.usa-nav-secondary-links {
+  @media only screen and (max-width: $nav-width) {
+    li {
+      padding: 1rem 0;
+    }
+    a {
+      color: $primary-color !important;
+    }
   }
 }
 
