@@ -334,7 +334,7 @@ We assigned Leanna Miller Sharkey as the Product Manager for this project. The d
 
 ### Bring in experienced teams
 
-We chose the technical team for this project from the most senior members of the company. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
+We chose the technical team for this project from people who have experience building both consumer products and government digital services. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
 
 ### Choose a modern technology stack
 
@@ -346,7 +346,7 @@ Most of these requirements are met through the use of Heroku as a PaaS provider.
 
 ### Automate testing and deployments
 
-Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process. Load and performance testing were deemed unnecessary for the implementation of a prototype.
+Automated testing and deployment have been a part of our development since the beginning of the process. As documented above, both the web app and the API have extensive testing, and we have used CodeShip to provide continuous integration and automatic deploys throughout the process.
 
 ### Manage security and privacy through reusable processes
 
