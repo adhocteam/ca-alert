@@ -60,9 +60,9 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
+We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub. 
 
-*Automated 508 testing*
+We performed manual 508 compliance testing. For an actual product, we also write automated tests. 
 
 ### The server-side Rails API
 
@@ -162,14 +162,17 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
 
 #### d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools
 
-- qualitative interviews in discovery
-- quantitative surveys about needs
-- built to user need based on discovery
-- user testing of wireframes
-- built user types to inform design and functionality
-- CALL OUT FIRST THREE PLAYS IN USDS
-- made it simple, usds web design standards
-- tested extensively with wireframes
+ We used the following user-centric design techniques and tools
+
+- Early and often contact with potential users
+- Tested prototypes of solutions with real people
+- Documented and presented findings to product owner, who sat in interviews and user tests
+- Qualitative interviews 
+- Surveys 
+- Built to user needs based on feedback
+- User testing of wireframes
+- Built user types to inform design and functionality
+- Designed intuitive, simple interface and followed US web design standards
 
 #### e. Used GitHub to document code commits
 
@@ -187,9 +190,6 @@ LINK
 
 LINK
 
-MANUAL CHECKS
-
-AUTOMATED TEST 
 
 #### h. Created or used a design style guide and/or a pattern library
 
@@ -197,6 +197,13 @@ AUTOMATED TEST
 
 #### i. Performed usability tests with people
 
+FIX THIS 
+Research documentation: Details of research plan, participant recruitment, conversation guide, findings, design decisions, and next steps.
+Process map (PDF): Flow diagram used to understand the process and potential paths a clinician or group might take through QPP.
+User type (PDF): An archetype of a likely user, used to help define the focus of our work and particular pain points to focus on.
+Usability testing prototype: Live prototype used to get feedback from medical professionals on our work thus far.
+Usability testing video (QPP FE reference material) (YouTube): Video showing some of the most compelling anecdotes from our usability research.
+=======
 We completed two rounds of research during this project:
 - One round of qualitative individual interviews with the goal of discovering user needs at the beginning of the project to inform product and design decisions
 - One round of interface testing with the goal of assessing our design's success at meeting user needs to inform improvements to the product and design
@@ -204,23 +211,13 @@ We completed two rounds of research during this project:
 
 #### j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype
 
-- Review of user suggestions already implemented and how to reference
+User feedback was key to our design and development of this product. The product owner listened to user feedback sessions, translated ideas into user stories, and prioritized them in the backlog. Many of them remain to be developed, and user feedback informed a number of added features, including:
 
-##### ADMIN
-- Clarified difference between alerts and hazards - ensure this cleanup is complete wireframe
-- Removal of lat long - this is removed from the app, ensure it’s removed from wireframes
+- Ability to sign in with an existing account, like Facebook or Google
+- Ability to add multiple locations to monitor
+- Ability to see current alerts in one's area without signing in
+- Ability to review past alerts for more information
 
-##### RESIDENT
-- Implemented ability to personally name - ensure this in wireframes
-Review of user suggestions that we should reflect in wireframe
-ADMIN
-Wireframe: I would wonder why an old alert is still active. How long does it take to expire. - some way of differentiating between active and expired alerts
-TEMPLATES for admins - future feature - leanna will create a card
-Future feature how many potential people this message would reach
-Character count - wireframe and future feature
-Different formats - future feature
-RESIDENT
-What about wonkiness of zip codes? Copy change and radius - future feature
 
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
