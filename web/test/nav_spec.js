@@ -12,7 +12,7 @@ describe("Nav Component", () => {
 
     const signin = el.find('a');
     expect(signin.length).to.equal(1);
-    expect(signin.text()).to.contain("Sign up");
+    expect(signin.text()).to.contain("Sign in");
   });
 
   it("Should show a logged in version w/ a valid session", () => {
@@ -32,19 +32,19 @@ describe("Nav Component", () => {
     const el = mount(<Nav />);
 
     // Signed out by default
-    expect(el.find({href: "#/" })).to.have.length(1);
+    expect(el.find({href: "#/account/signin" })).to.have.length(1);
     expect(el.find({href: "#/account/signout" })).to.have.length(0);
 
     newLoginSession('x', 'y', 'z', 'a', 'b');
 
     // Should now be signed in
-    expect(el.find({href: "#/" })).to.have.length(0);
+    expect(el.find({href: "#/account/signin" })).to.have.length(0);
     expect(el.find({href: "#/account/signout" })).to.have.length(1);
 
     logout();
 
     // and signed back out
-    expect(el.find({href: "#/" })).to.have.length(1);
+    expect(el.find({href: "#/account/signin" })).to.have.length(1);
     expect(el.find({href: "#/account/signout" })).to.have.length(0);
   });
 });
