@@ -330,13 +330,11 @@ We assigned a team that conducted research, discovery, and prototyping activitie
 
 ### Assign one leader and hold that person accountable
 
-We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program, where we have a strong relationship with the contracting officer, and has led teams to many successful product launches. The development team worked smoothly, with constant communication and daily standups that allowed her to lead the program.
-
+We assigned Leanna Miller Sharkey as the Product Manager for this project. The development team worked smoothly, with constant communication and daily standups that allowed her to lead the product.
 
 ### Bring in experienced teams
 
 We chose the technical team for this project from the most senior members of the company. While the team was small, we have a wide range of experience with building web and mobile applications, deploying them, and maintaining them in production. Because we were not working with a government agency, government officers were not solicited for the project.
-
 
 ### Choose a modern technology stack
 
