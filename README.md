@@ -12,7 +12,7 @@ https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are working on other government projects and who thoughtfully and aggressively built this prototype.
 
-We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/). 
+We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/).
 
 We began by talking directly to residents of California to discover their needs for emergency and non-emergency alerts. We developed a detailed process map from which we designed screen-by-screen mockups. These mockups reflect our best thinking about the future state of this product if we were to build it in the real world. From these, we pulled out the features that allow us to meet the requirements of the assignment while meeting our standards of product quality.
 
@@ -30,7 +30,7 @@ The password for each of these users is `abcd-1234`.
 
 ##Technical Approach
 
-(WORD COUNT)
+1,934 words
 
 ### Introduction
 
@@ -49,11 +49,11 @@ The client-side React app includes the visual interface for the prototype, tools
 
 #### Visual interface design
 
-We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/index.html#L13) to set the basic page layout, as well as other components like [buttons](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/Button.jsx#L7) and [form controls](https://github.com/adhocteam/ca-alert/blob/tech_approach/web/src/EditPlaceForm.jsx#L93). Most of the HTML for the app is defined in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) code included in React components like [this one](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx). The page is bootstrapped and assets are loaded in through a static [index.html](https://github.com/adhocteam/ca-alert/blob/master/web/index.html) page.
+We have based our design on the [USDS web standards](https://standards.usa.gov/), using [their NPM package](https://github.com/18F/web-design-standards) to pull in the assets required. We have used their [grid system](https://github.com/adhocteam/ca-alert/blob/master/web/src/SignInForm.jsx#L148) to set the basic page layout, as well as other components like [buttons](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx#L7) and [form controls](https://github.com/adhocteam/ca-alert/blob/master/web/src/EditPlaceForm.jsx#L93). Most of the HTML for the app is defined in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) code included in React components like [this one](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx). The page is bootstrapped and assets are loaded in through a static [index.html](https://github.com/adhocteam/ca-alert/blob/master/web/index.html) page.
 
 #### Collecting and displaying input
 
-Forms are implemented as React components, using JSX to describe the markup. The [form for adding places](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx) is an example of this pattern. Form components [store their state](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L12) as Javascript Objects that are updated as the data in the form changes. The submission of the form [is bound to](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L184) a [handleSubmit function](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L62) which takes the current state of the form, encodes it into query parameters, and sends the appropriate request to the API for storing the data.
+Forms are implemented as React components, using JSX to describe the markup. The [form for adding places](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx) is an example of this pattern. Form components [store their state](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L12) as Javascript Objects that are updated as the data in the form changes. The submission of the form [is bound to](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L177) a [handleSubmit function](https://github.com/adhocteam/ca-alert/blob/master/web/src/AddPlaceForm.jsx#L58) which takes the current state of the form, encodes it into query parameters, and sends the appropriate request to the API for storing the data.
 
 Displaying data is done in a similar way, with React components like the [PlaceList](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx) using the API to [fetch the appropriate data](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L16), storing that data [in the state](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L21), and using JSX to [render the appropriate markup](https://github.com/adhocteam/ca-alert/blob/master/web/src/PlaceList.jsx#L62).
 
@@ -61,7 +61,7 @@ For collecting and displaying data, React's virtual DOM allows us to seamlessly 
 
 #### Handling geographic requirements
 
-We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, we used Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) [for converting addresses to coordinates](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52). For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
+We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/master/web/src/Map.jsx) to make it easily reusable. In addition, we used Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) [for converting addresses to coordinates](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L52). For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
 We used [HTML5's geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
 geolocate the user when they are creating or editing a place to track, or when
@@ -69,19 +69,19 @@ an admin is manually creating a hazard for an alert.
 
 #### Site navigation
 
-We used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L28) and to specify which component should be rendered when each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/afc6cbe05d54287095397aaa745e91069194e8ba/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
+We used [react-router](https://github.com/ReactTraining/react-router) to handle rendering of the appropriate React components based on the current URL and for updating the URL based on user actions. It allows us to [define a set of routes](https://github.com/adhocteam/ca-alert/blob/master/web/src/index.jsx#L33) and to specify which component should be rendered when each is visited. When a user action requires a change to the path, we [update the hashHistory](https://github.com/adhocteam/ca-alert/blob/master/web/src/ConfirmPhone.jsx#L58), which automatically changes the URL and renders the appropriate components based on the change.
 
 #### Communication with the API
 
-Calls to the API are made through the use of the Javascript [fetch function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Because this is [not available on all browsers](http://caniuse.com/#feat=fetch), we have [included a polyfill](https://www.npmjs.com/package/whatwg-fetch) to make it universally available. [Calls to fetch](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L87) return a [promise](https://developers.google.com/web/fundamentals/getting-started/primers/promises), which allows us to handle the API responses [asynchronously](https://github.com/adhocteam/ca-alert/blob/master/web/src/HazardList.jsx#L14).
+Calls to the API are made through the use of the Javascript [fetch function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Because this is [not available on all browsers](http://caniuse.com/#feat=fetch), we have [included a polyfill](https://www.npmjs.com/package/whatwg-fetch) to make it universally available. [Calls to fetch](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L72) return a [promise](https://developers.google.com/web/fundamentals/getting-started/primers/promises), which allows us to handle the API responses [asynchronously](https://github.com/adhocteam/ca-alert/blob/master/web/src/HazardList.jsx#L14).
 
-Authentication with the API is handled by passing `uid`, `access-token`, and `client` [headers with each request](https://github.com/adhocteam/ca-alert/blob/master/web/src/HazardList.jsx#L14). Because this is universally required, we have a [library function](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L76) that adds the headers automatically. The authentication headers are [collected when the user logs in](https://github.com/adhocteam/ca-alert/blob/cc9fbda8eadda1fb51853776f0b60b12f86d4761/web/src/SignInForm.jsx#L94) and [stored in local storage](https://github.com/adhocteam/ca-alert/blob/master/web/src/session.js#L5) to make them available across browser windows.
+Authentication with the API is handled by passing `uid`, `access-token`, and `client` [headers with each request](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L77). Because this is universally required, we have a [library function](https://github.com/adhocteam/ca-alert/blob/master/web/src/lib.js#L72) that adds the headers automatically. The authentication headers are [collected when the user logs in](https://github.com/adhocteam/ca-alert/blob/master/web/src/SignInForm.jsx#L94) and [stored in local storage](https://github.com/adhocteam/ca-alert/blob/master/web/src/session.js#L41) to make them available across browser windows.
 
 #### Testing
 
 We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests. 
+We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests.
 
 ### The server-side Rails API
 
@@ -89,24 +89,23 @@ We implemented the REST API for this project as an [API-only](http://edgeguides.
 
 #### Request handling
 
-The [routes.rb configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/routes.rb) in the app defines the set of actions the API responds to. Each line in that file corresponds to one or more controller actions, and the controllers take the request parameters and transform them into a JSON response. The [places controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb) is an example that implements the full set of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) actions, allowing clients to manage the set of places for which users would like to receive alerts. The [create action](https://github.com/lynndylanhurley/devise_token_auth), for example, uses a set of allowable parameters to create a new place tied to the user account and returns a JSON document containing the new place on success. Error conditions [also return a JSON document](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L36) that includes information about the individual errors that occurred.
+The [routes.rb configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/routes.rb) in the app defines the set of actions the API responds to. Each line in that file corresponds to one or more controller actions, and the controllers take the request parameters and transform them into a JSON response. The [places controller](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb) is an example that implements the full set of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) actions, allowing clients to manage the set of places for which users would like to receive alerts. The [create action](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L25), for example, uses a set of allowable parameters to create a new place tied to the user account and returns a JSON document containing the new place on success. Error conditions [also return a JSON document](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L36) that includes information about the individual errors that occurred.
 
 #### Authentication and authorization
 
-User authentication is handled through the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), which adds endpoints under the `/auth` namespace for handling account creation, login, and updating. It also contains an `authenticate_user!` helper method that [controllers can use](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) to ensure there is a valid user before processing a request. If authentication headers do not validate correctly for a user, the controller [will automatically render a 401 status code](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) with a message indicating that authentication has failed.
+User authentication is handled through the [devise_token_auth gem](https://github.com/lynndylanhurley/devise_token_auth), which adds endpoints under the `/auth` namespace for handling account creation, login, and updating. It also contains an `authenticate_user!` helper method that [controllers can use](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/places_controller.rb#L2) to ensure there is a valid user before processing a request. If authentication headers do not validate correctly for a user, the controller will automatically render a 401 status code with a message indicating that authentication has failed.
 
 Authorization is implemented using the [rolify](https://github.com/RolifyCommunity/rolify) gem, which makes it easy to add, remove, and verify roles for users. We [have an action](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/users_controller.rb#L15) for making a user an admin by id that adds the role. Then, actions requiring admin permissions for access can use the [require_admin](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/application_controller.rb#L8) helper to [ensure the user](https://github.com/adhocteam/ca-alert/blob/master/backend/app/controllers/admin/hazards_controller.rb#L3) is allowed access.
 
 #### Data storage and serialization
 
-Data is stored in a PostgreSQL database using the PostGIS extensions for geographic data. PostGIS allows us to [store geometry](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb#L136) in the database and also to [perform intersections](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/place.rb#L11) directly via a SQL query. [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) handles the connection to the database with [a simple configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/database.yml) and allows us to express queries using Ruby in most cases. The schema for the database is defined in the [schema.rb](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb) file.
+[ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) handles the connection to the database with [a simple configuration file](https://github.com/adhocteam/ca-alert/blob/master/backend/config/database.yml) and allows us to express queries using Ruby in most cases. The schema for the database is defined in the [schema.rb](https://github.com/adhocteam/ca-alert/blob/master/backend/db/schema.rb) file.
 
 ActiveRecord has a set of tools for serializing models into JSON that are applied automatically, but there are [some cases](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L15) where we need to customize the fields in order to add data that isn't represented by a column in the database.
 
 #### Twilio integration
 
-To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
-
+To support delivery of SMS messages, the app uses the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem. The app [must be configured](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md#twilio-configuration-for-sms-delivery) with a set of Twilio credentials in order to deliver messages but will also work fine without them, instead logging the SMS messages to the Rails log.
 
 #### Swagger documentation
 
@@ -154,10 +153,6 @@ user place that is spatially within the defined radius of the hazard's centroid.
 
 We wrote [tests](https://github.com/adhocteam/ca-alert/tree/master/backend/spec) using Rspec along with Rcov for code coverage calculations. In general, our focus was on [controller specs](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/controllers), which are the equivalent of integration tests for an API-based application. We also wrote unit tests [for models](https://github.com/adhocteam/ca-alert/tree/master/backend/spec/models) in cases where specific conditions needed to be covered. Code coverage has remained > 99% for the duration of the development process. See [the backend README file](https://github.com/adhocteam/ca-alert/blob/master/backend/README.md) for instructions on configuring the app and running the tests locally.
 
-### Conclusion?
-
-FLAT TECHNICAL CONCLUSION RE REQUIREMENTS FROM AUBREY
-
 END TECHNICAL APPROACH
 
 
@@ -165,9 +160,9 @@ END TECHNICAL APPROACH
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
+We assigned Leanna Miller Sharkey as the product manager for this project. She is a technical project manager for our vets.gov program and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals.
 
-Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions. 
+Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions.
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
@@ -326,7 +321,7 @@ We used the the U.S. Web Design Standards as the baseline for our product. The s
 
 ### Build the service using agile and iterative practices
 
-Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
+Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production.
 
 ### Structure budgets and contracts to support delivery - N/A
 
@@ -357,7 +352,7 @@ Automated testing and deployment have been a part of our development since the b
 
 ### Manage security and privacy through reusable processes
 
-See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections. 
+See Technical Approach document for security details. Ad Hoc is adept at following industry best practices in security and privacy. All of our projects, including vets.gov and healthcare.gov, require stringent protections.
 
 ### Use data to drive decisions
 
