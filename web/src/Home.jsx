@@ -17,11 +17,12 @@ export default React.createClass({
                 {" "}
               </h2>
               <p className="secondary-message">Keep track of emergencies where you and your loved ones live, work and play. </p>
-
-              <h3>What’s happening right now?</h3>
-              <Link to="/alerts">
-                <Button>See current alerts</Button>
-              </Link>
+              <div className="feature">
+                <h3>What’s happening right now?</h3>
+                <Link to="/alerts">
+                  <Button>See current alerts</Button>
+                </Link>
+              </div>
 
             </div>
 
