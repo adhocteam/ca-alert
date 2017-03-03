@@ -5,15 +5,19 @@ RSpec.describe Place do
   let!(:home) { create(:place, longitude: -82.548984, latitude: 35.611965) }
   let!(:burritos) { create(:place, longitude: -82.555123, latitude: 35.620708) }
 
-  describe 'the within_radius_of scope' do
-    it 'returns the places within the radius' do
-      places = Place.within_radius_of(-82.548984, 35.611965, 1120)
+  describe 'the interects scope' do
+    it 'returns the places that intersect the area' do
+      factory = ::RGeo::Geographic.spherical_factory(:srid => 4326)
+      area = factory.point(-82.548984, 35.611965).buffer(1120)
+      places = Place.intersects(area)
       expect(places.count).to eq(2)
       expect(places.map(&:name).sort).to eq([home, burritos].map(&:name).sort)
     end
 
     it 'skips places outside the radius' do
-      places = Place.within_radius_of(-82.548984, 35.611965, 1110)
+      factory = ::RGeo::Geographic.spherical_factory(:srid => 4326)
+      area = factory.point(-82.548984, 35.611965).buffer(1110)
+      places = Place.intersects(area)
       expect(places.count).to eq(1)
       expect(places.map(&:name).sort).to eq([home].map(&:name))
     end

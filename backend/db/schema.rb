@@ -99,13 +99,16 @@ ActiveRecord::Schema.define(version: 20170302164810) do
     t.string    "link"
     t.string    "phone_number"
     t.integer   "creator_id"
-    t.geography "coord",                  limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "centroid",               limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.datetime  "created_at"
     t.datetime  "updated_at"
     t.string    "category"
     t.string    "link_title"
-    t.integer   "user_count_at_creation",                                                          default: 0
+    t.integer   "user_count_at_creation",                                                            default: 0
+    t.geography "alert_area",             limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
+    t.string    "source",                                                                            default: "admin"
     t.boolean   "is_emergency",                                                                    default: true
+    t.index ["alert_area"], name: "index_hazards_on_alert_area", using: :gist
     t.index ["creator_id"], name: "index_hazards_on_creator_id", using: :btree
   end
 

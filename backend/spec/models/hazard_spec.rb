@@ -14,6 +14,28 @@ RSpec.describe Hazard do
     end
   end
 
+  describe 'saving with lat/lng and radius' do
+    it 'creates an alert area buffer' do
+      pt = [-87.9, 41.9]
+      radius = 1000
+      factory = ::RGeo::Geographic.spherical_factory(:srid => 4326)
+      poly = factory.point(*pt).buffer(radius)
+      h = create(:hazard, longitude: pt[0], latitude: pt[1], radius_in_meters: radius)
+      expect(geogs_equal(h.alert_area, poly)).to eq(true)
+    end
+  end
+
+  describe 'saving with lat/lng, radius, and alert area' do
+    it "doesn't overwrite existing alert area" do
+      pt = [-87.9, 41.9]
+      radius = 1000
+      factory = ::RGeo::Geographic.spherical_factory(:srid => 4326)
+      alert_area = factory.point(-88, 42).buffer(1500)
+      h = create(:hazard, longitude: pt[0], latitude: pt[1], radius_in_meters: radius, alert_area: alert_area)
+      expect(geogs_equal(h.alert_area, alert_area)).to eq(true)
+    end
+  end
+
   describe 'serializing to json' do
     it 'does not include the coord' do
       json = gas_leak.as_json
@@ -80,4 +102,11 @@ RSpec.describe Hazard do
       expect(FakeTwilio.messages.count).to eq(0)
     end
   end
+end
+
+def geogs_equal(a, b)
+  # equality testing on RGeo geographic objects yields `[]' instead of `true'
+  # for some reason (possible bug? it doesn't do this for geometry objects), so
+  # !! to coerce it into right bool
+  !!(a == b)
 end

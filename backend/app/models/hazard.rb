@@ -11,6 +11,7 @@ class Hazard < ApplicationRecord
 
   after_create :store_current_user_count
   after_create :create_alerts
+  before_save :buffer_centroid
 
   def as_json(options = {})
     h = super(options)
@@ -96,11 +97,17 @@ class Hazard < ApplicationRecord
   end
 
   def create_alerts
-    Place.within_radius_of(coord.lon, coord.lat, radius_in_meters).each do |place|
+    Place.intersects(alert_area).each do |place|
       # This is here to support seeding the database, where creation times are not right now
       if place.created_at <= created_at
         Alert.create(place: place, hazard: self)
       end
+    end
+  end
+
+  def buffer_centroid
+    if alert_area.nil? && coord.lon.present? && coord.lat.present? && radius_in_meters.present?
+      self.alert_area = coord.buffer(radius_in_meters)
     end
   end
 end
