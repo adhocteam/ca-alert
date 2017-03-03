@@ -263,7 +263,7 @@ function Preview(props) {
           <Location place={hazard.place} />
           </div>
           <div>
-            <p>Residents within 1km will be alerted</p>
+            <p>Locations within 1km will be alerted</p>
             <Button type="button" onClick={props.onSendClick}>
               Publish alert
             </Button>
