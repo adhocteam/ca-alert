@@ -4,6 +4,10 @@
 
 - [Design process](design-process/design-process.pdf) (PDF): Sample design process
 
+## User types
+
+## Process map
+
 ## Discovery & user research
 
 - Emergency Information Sources
