@@ -38,7 +38,7 @@ High-fidelity design prototypes for both mobile and desktop.
 Sample reporting for application prototype tests showing they meet 508 standards with no errors.
 
 - [Sample manual testing screenshot - aXe](accessibility/axe-report.png) (PNG)
-- [Sample manual testing screenshot - Chrome Accessibility Dev Tools](accessibility/chrome-accessibility.png) (PNG)
+- [Sample manual testing screenshot - Chrome Accessibility Dev Tools](accessibility/chrome-accessibility-report.png) (PNG)
 
 ## Pattern library
 
