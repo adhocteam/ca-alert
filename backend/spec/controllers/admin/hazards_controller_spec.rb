@@ -116,7 +116,7 @@ RSpec.describe Admin::HazardsController, type: :request do
         it 'lists the hazards' do
           expect(response.status).to eq(200)
           json = JSON.parse(response.body)
-          expect(json['data'].map { |i| i['id'] }).to eq([killer_clowns.id, coffee_shortage.id])
+          expect(json['data'].map { |i| i['id'] }).to eq([coffee_shortage.id, killer_clowns.id])
         end
 
         it 'includes the alert counts' do
