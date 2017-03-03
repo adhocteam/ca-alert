@@ -22,7 +22,15 @@ class PhoneNumber < ApplicationRecord
       TWILIO_CLIENT.messages.create(
         from: SMS_FROM_NUMBER,
         to: phone_number,
-        body: "#{intro} Title: #{alert.hazard.title} Message: #{alert.hazard.message}"
+        body: <<-EOM
+#{intro}
+Title: #{alert.hazard.title}
+Message: #{alert.hazard.message}
+Address: #{alert.hazard.address}
+Category: #{alert.hazard.category}
+Link: #{alert.hazard.link}
+Phone: #{alert.hazard.phone_number}
+EOM
       )
     end
   end

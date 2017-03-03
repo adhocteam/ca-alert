@@ -8,6 +8,15 @@ export default function AlertView(props) {
     return <span>loading...</span>;
   } else {
     const start = moment(props.hazard.created_at);
+
+    let linkPart = null;
+
+    if (props.hazard.link != null) {
+      linkPart = <div className="usa-width-one-whole more-details">
+          <a href={props.hazard.link}>{props.hazard.link_title || props.hazard.link}</a>
+        </div>;
+    }
+
     return (
       <section>
         <h2>{(props.hazard.is_emergency) ? 'EMERGENCY: ' : ''}{props.hazard.title}</h2>
@@ -25,8 +34,10 @@ export default function AlertView(props) {
         </div>
 
         <div className="usa-width-one-whole more-details">
-          <a href={`tel:${props.hazard.phone}`}>{props.hazard.phone}</a>
+          <a href={`tel:${props.hazard.phone_number}`}>{props.hazard.phone_number}</a>
         </div>
+
+        {linkPart}
 
         <div className="usa-width-one-whole">
           <h3>Location</h3>

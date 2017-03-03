@@ -13,7 +13,7 @@ describe('Hazard View', () => {
     message: 'message',
     category: 'Earthquake',
     created_at: '2017-01-02T03:04:05', // don't specify a tz in test
-    phone: '111-222-3456',
+    phone_number: '111-222-3456',
     sms_notifications_sent: 2,
     email_notifications_sent: 3,
     user_count_at_creation: 5
