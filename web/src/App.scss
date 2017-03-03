@@ -98,6 +98,26 @@ fieldset {
   }
 }
 
+// Tables 
+
+.table-section {
+  margin-bottom: 4rem;
+  h3 {
+    margin-bottom: 0;
+  }
+}
+
+.usa-table-borderless {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  td {
+    padding: 1.5rem 1rem;
+    label, a {
+      margin: 0;
+    }
+  }
+}
+
 // Header
 
 .usa-navbar {
