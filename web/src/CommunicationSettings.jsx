@@ -135,7 +135,14 @@ class CommunicationSettings extends React.Component {
 
       table = (
         <table className="usa-table-borderless">
-           <tbody>
+           <thead className="usa-sr-only">
+-            <tr>
+-              <th>Active</th>
+-              <th>Phone Number</th>
+-              <th></th>
+-            </tr>
+-          </thead>
+          <tbody>
             {items}
           </tbody>
         </table>
@@ -152,7 +159,13 @@ class CommunicationSettings extends React.Component {
             <div className="table-section">
               <h3>Email</h3>
               <table className="usa-table-borderless">
-                 <tbody>
+                 <thead className="usa-sr-only">
+ -                <tr>
+ -                  <th>Active</th>
+ -                  <th>Email Address</th>
+ -                </tr>
+ -              </thead>
+                <tbody>
                   <tr>
                     <td>
                       <input type="checkbox"
