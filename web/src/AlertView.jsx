@@ -19,29 +19,25 @@ export default function AlertView(props) {
 
     return (
       <section>
+        <div className="form-section">
         <h2>{(props.hazard.is_emergency) ? 'EMERGENCY: ' : ''}{props.hazard.title}</h2>
 
-        <div className="usa-width-one-third">
           <span className="usa-label-big">{props.hazard.category}</span>
-        </div>
 
-        <div className="usa-width-two-thirds">
           <span className="start-date">{start.format("lll")}</span>
-        </div>
 
-        <div className="usa-width-one-whole">
           <p>{props.hazard.message}</p>
-        </div>
 
-        <div className="usa-width-one-whole more-details">
+        <div className="more-details">
           <a href={`tel:${props.hazard.phone_number}`}>{props.hazard.phone_number}</a>
         </div>
 
         {linkPart}
 
-        <div className="usa-width-one-whole">
-          <h3>Location</h3>
-          <Map lat={props.hazard.latitude} lng={props.hazard.longitude} />
+        <div className="map-section">
+        <h3>Location</h3>
+        <Map lat={props.hazard.latitude} lng={props.hazard.longitude} />
+        </div>
         </div>
       </section>
     );

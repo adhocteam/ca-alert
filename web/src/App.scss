@@ -8,6 +8,10 @@ $alt-background: #D6D7D9;
 $color-gray-lightest: #f1f1f1;
 $color-gray-dark: #323a45;
 
+// Breakpoint variables
+
+$nav-width: 950px;
+
 
 .auto-clear::after {
     content: "";
@@ -41,7 +45,7 @@ body {
 form.alt-signup {
   background: $alt-background !important;
   padding: 1em 1em;
-  
+
 }
 
 form.usa-form {
@@ -55,14 +59,34 @@ fieldset {
   }
 }
 
+.search-button {
+  padding: .48em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0 0 0 0 !important;
+}
+
 .form-section {
   padding: 1em;
-  background: rgba($alt-background, .4);
+  background: rgba($alt-background, .2);
   margin: 1em 0 1em 0;
+  hr {
+   border: 0;
+   height: 0;
+   border-top: 1px solid rgba(0, 0, 0, 0.1);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
   h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
   }
+}
+
+.map-section {
+  padding: 1em 0;
+  display: block;
+  clear: both;
+  max-width: 100%;
 }
 
 .search-form {
@@ -98,6 +122,26 @@ fieldset {
   }
 }
 
+// Tables 
+
+.table-section {
+  margin-bottom: 4rem;
+  h3 {
+    margin-bottom: 0;
+  }
+}
+
+.usa-table-borderless {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  td {
+    padding: 1.5rem 1rem;
+    label, a {
+      margin: 0;
+    }
+  }
+}
+
 // Header
 
 .usa-navbar {
@@ -105,12 +149,26 @@ fieldset {
 }
 
 .usa-header {
+  h1 {
+    font-weight: normal !important;
+    font-size: 4rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1em !important;
+    span {margin: 0; padding: 0;}
+  }
   background: $primary-color;
   color: $white;
   border-bottom: 2px solid $secondary-color !important;
   h1, h2, h3, h4, h5, h6, a {
     color: $white !important;
   }
+
+  .usa-button-outline {
+    background: $primary-color !important;
+    color: $white;
+  }
+
 }
 
 
@@ -119,7 +177,6 @@ fieldset {
 .usa-logo {
   margin-top:1rem;
   em.usa-logo-text {
-    font-size: 4rem;
     font-weight: normal;
     line-height: 1;
     b {font-weight: 700;}
@@ -127,6 +184,9 @@ fieldset {
   span {
     display: block;
     font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
     font-weight: normal;
   }
 }
@@ -146,6 +206,23 @@ fieldset {
   }
 }
 
+.usa-nav-secondary-links {
+  @media screen and (max-width: 950px) {
+    li {
+      padding: 1rem 0;
+    }
+    a {
+      color: $primary-color !important;
+    }
+  }
+  @media screen and (min-width: 951px) {
+    li.mobile-only {
+      display: none;
+    }
+  }
+}
+
+
 
 
 // Buttons
@@ -163,6 +240,18 @@ fieldset {
 
 .usa-hero-callout-alt {
   color: $primary-color !important;
+}
+
+#app-nav > .usa-button.usa-button-outline,
+#app > div > .usa-hero.calerts > .usa-grid > div:nth-of-type(2) > div > .alt-signup > fieldset > .usa-button.usa-button-big.usa-button-primary {
+  background: $primary-color !important;
+  color: $white !important;
+}
+
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p,
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p > a {
+  background: $tertiary-color !important;
+  color: $white;
 }
 
 // Modal overrides
@@ -198,7 +287,8 @@ fieldset {
 // Footer
 
 footer .usa-footer-secondary_section {
-
+  padding: .75em 0;
+  display: block;
   a.usa-link-facebook {
     color: $white !important;
   }
@@ -207,7 +297,6 @@ footer .usa-footer-secondary_section {
   h1, h2, h3, h4, h5, h6, a, p {
     color: $white !important;
   }
-  padding-top: 0!important;
 }
 
 // Dashboard
