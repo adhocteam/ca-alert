@@ -33,10 +33,9 @@ export default class HazardList extends React.Component {
     });
     return (
       <section className="usa-grid usa-section">
-        <div className="usa-width-one-third">
+
+        <div className="usa-width-one-whole">
           <h2>Alerts</h2>
-        </div>
-        <div className="usa-width-two-thirds">
           <div>
             <Link to="/admin/hazards/new" className="usa-button">
               Create an alert
