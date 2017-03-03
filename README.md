@@ -30,7 +30,7 @@ For demo purposes, we have created a resident account with email: `resident@cale
 
 ##Technical Approach
 
-1,934 words
+1,931 words
 
 ### Introduction
 
