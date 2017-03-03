@@ -259,9 +259,11 @@ function Preview(props) {
           <p>
             <a href={`tel:${hazard.phoneNumber}`}>{hazard.phoneNumber}</a>
           </p>
+
           <Location place={hazard.place} />
           </div>
           <div>
+            <p>Locations within 1km will be alerted</p>
             <Button type="button" onClick={props.onSendClick}>
               Publish alert
             </Button>
