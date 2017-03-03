@@ -193,7 +193,7 @@ LINK
 
 #### h. Created or used a design style guide and/or a pattern library
 
-- Pattern library created to ensure consistent brand and UI throughout the app experience.
+We built a pattern library using Pattern Lab (http://patternlab.io/), a platform to help us scale design and UX patterns. This pattern library serves as an internal reference for the design and development teams and as an external resource for other development teams to use. 
 
 #### i. Performed usability tests with people
 
@@ -218,11 +218,9 @@ User feedback was key to our design and development of this product. The product
 - Ability to see current alerts in one's area without signing in
 - Ability to review past alerts for more information
 
-
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
-- yes
-- leanna look for copy from QPP
+We used the USDS web design standards and designed mobile first to provide a responsive design that works for all devices. In addition, to truly practice mobile-first thinking, all wireframes and user feedback were based on mobile wireframes. 
 
 #### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
 
