@@ -151,7 +151,7 @@ fieldset {
 }
 
 .usa-nav-secondary-links {
-  @media only screen and (max-width: $nav-width) {
+  @media screen and (max-width: 950px) {
     li {
       padding: 1rem 0;
     }
@@ -159,7 +159,13 @@ fieldset {
       color: $primary-color !important;
     }
   }
+  @media screen and (min-width: 951px) {
+    li.mobile-only {
+      display: none;
+    }
+  }
 }
+
 
 
 

@@ -35,13 +35,13 @@ export default class Nav extends React.Component {
           <li>
             <a href="#/dashboard">{user.name ? user.name : user.email}</a>
           </li>
-          <li>
+          <li className="mobile-only">
             <a href="#/dashboard/places">Places</a>
           </li>
-          <li>
+          <li className="mobile-only">
             <a href="#/account/communication">Communication preferences</a>
           </li>
-          <li>
+          <li className="mobile-only">
             <a href="#/dashboard/alerts">Previous alerts</a>
           </li>
           <li>
