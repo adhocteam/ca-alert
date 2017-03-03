@@ -5,6 +5,7 @@
   <li>Title: <%= @alert.hazard.title %></li>
   <li>Message: <%= @alert.hazard.message %></li>
   <li>Address: <%= @alert.hazard.address %></li>
-  <li>Link: <%= @alert.hazard.link %></li>
+  <li>Category: <%= @alert.hazard.category %></li>
+  <li>Link: <a href="<%= @alert.hazard.link %>"><%= @alert.hazard.link_title || @alert.hazard.link %></a></li>
   <li>Phone Number:<%= @alert.hazard.phone_number %></li>
 </ul>
