@@ -149,6 +149,7 @@ export default class SignUpForm extends React.Component {
       <div>
         <form className="alt-signup" onSubmit={e => this.handleSubmit(e)}>
           <fieldset>
+            <legend className="usa-sr-only"><abbr>CA</abbr>lerts sign up form.</legend>
             {serverError}
             <div className={errClassName(this.state.email.isValid, "div")}>
               {emailErrMsg}

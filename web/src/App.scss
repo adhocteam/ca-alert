@@ -149,12 +149,26 @@ fieldset {
 }
 
 .usa-header {
+  h1 {
+    font-weight: normal !important;
+    font-size: 4rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1em !important;
+    span {margin: 0; padding: 0;}
+  }
   background: $primary-color;
   color: $white;
   border-bottom: 2px solid $secondary-color !important;
   h1, h2, h3, h4, h5, h6, a {
     color: $white !important;
   }
+
+  .usa-button-outline {
+    background: $primary-color !important;
+    color: $white;
+  }
+
 }
 
 
@@ -163,7 +177,6 @@ fieldset {
 .usa-logo {
   margin-top:1rem;
   em.usa-logo-text {
-    font-size: 4rem;
     font-weight: normal;
     line-height: 1;
     b {font-weight: 700;}
@@ -171,6 +184,9 @@ fieldset {
   span {
     display: block;
     font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
     font-weight: normal;
   }
 }
@@ -226,6 +242,18 @@ fieldset {
   color: $primary-color !important;
 }
 
+#app-nav > .usa-button.usa-button-outline,
+#app > div > .usa-hero.calerts > .usa-grid > div:nth-of-type(2) > div > .alt-signup > fieldset > .usa-button.usa-button-big.usa-button-primary {
+  background: $primary-color !important;
+  color: $white !important;
+}
+
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p,
+body > .usa-footer.usa-footer-medium > .usa-footer-secondary_section > .usa-grid > .usa-footer-logo.usa-width-one-whole > p > a {
+  background: $tertiary-color !important;
+  color: $white;
+}
+
 // Modal overrides
 
 .modal-content {
@@ -259,7 +287,8 @@ fieldset {
 // Footer
 
 footer .usa-footer-secondary_section {
-
+  padding: .75em 0;
+  display: block;
   a.usa-link-facebook {
     color: $white !important;
   }
@@ -268,7 +297,6 @@ footer .usa-footer-secondary_section {
   h1, h2, h3, h4, h5, h6, a, p {
     color: $white !important;
   }
-  padding-top: 0!important;
 }
 
 // Dashboard
