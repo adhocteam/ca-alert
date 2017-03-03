@@ -10,7 +10,7 @@ https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 ##Project Overview
 
-Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are actively working on other government projects and who spent their nights and weekends thoughtfully and aggressively building this prototype.
+Ad Hoc chose to compete for a spot in the _Pre-Qualified Vendor Pool for Digital Services – Agile Development_ because we are experienced in and committed to to building the best software for people at the lowest possible cost to government. We know that the most important factor of success in any project is the team, so we brought together a lean team of talented people who are working on other government projects and who thoughtfully and aggressively built this prototype.
 
 We chose prototype B because it was focused on directly meeting the needs of the people of California. This is central to our core values as a [company](https://adhocteam.us/about/). 
 
