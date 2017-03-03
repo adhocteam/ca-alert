@@ -6,10 +6,10 @@ Our goal is two rounds of research during this project:
 
 ## Round One Research Goal and Plan: Discovery of User Needs
 
-**Goal**
+**Goal**  
 Speak to 3-5 Californians who might be affected by emergencies in their areas to learn about their current means of learning about emergencies, what doesn't work well about those for them, and what might work better to inform them.
 
-**Research Questions**
+**Research Questions**  
 
 - How do people currently get information about emergencies?
 - Are there ways that notifications and messages could be changed to better inform them?
@@ -22,9 +22,12 @@ For this design exercise, we used our Cohorts community to recruit feedback part
 
 - How have you found out about emergencies in your area in the last six months?  
 
+
 ![Respondents find out about emergencies via SMS alerts, social media, and word of mouth](https://github.com/adhocteam/ca-alert/blob/master/research/EmergencyInfoSources.png)
 
+
 - What is most important to you when learning about emergencies?  
+
 
 ![Respondents want to trust the source of emergency information and get notifications on their phone](https://github.com/adhocteam/ca-alert/blob/master/research/LearningAboutEmergencies.png)
 
@@ -90,10 +93,10 @@ In similar projects, we speak to five to seven people who are representative of 
 
 ## Round Two Research Goal and Plan: Usability testing our wireframe-based prototype
 
-**Goal**
+**Goal**  
 Speak to 2-3 Californians who might be affected by emergencies in their areas to learn whether our prototype meets their needs and 2-3 Government employees who share or send information to the public to learn whether the admin portion of our prototype meets their needs.
 
-**Research Questions**
+**Research Questions**  
 
 - Resident users
  - How well does our design succeed at meeting user needs?
@@ -142,7 +145,7 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
    - How did that work for you?
    - Is there a way that could be better for you?
 
-####Closing
+#### Closing
 
 - Thank you so much for your time and feedback.
 - Are there any other things we should consider to make this easier?
@@ -172,7 +175,7 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
  - Overall, how easy or difficult was that to use?
  - Are there ways it could be better to send alerts to residents?
 
-####Closing
+#### Closing
 
 - Thank you so much for your time and feedback.
 - Are there any other things we should consider to make this easier?
