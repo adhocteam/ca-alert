@@ -20,6 +20,8 @@ import ConfirmPhone from "./ConfirmPhone";
 import AlertList from './AlertList';
 import Analytics from './Analytics';
 import AlertComponent from './AlertComponent';
+import GeoAlertList from './GeoAlertList';
+import GeoAlertView from './GeoAlertView';
 
 require("../node_modules/uswds/dist/css/uswds.min.css");
 require("../node_modules/uswds/dist/js/uswds.min.js");
@@ -30,6 +32,8 @@ import "./App.scss";
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Home} />
+    <Route path="/alerts" component={GeoAlertList} />
+    <Route path="/alerts/:id" component={GeoAlertView} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/alerts" component={AlertList} />
     <Route path="/dashboard/alerts/:id" component={AlertComponent} />
@@ -52,3 +56,8 @@ ReactDOM.render(
 );
 
 ReactDOM.render(<Nav />, document.getElementById("app-nav"));
+
+// Force SSL if we're on production
+if (FORCE_SSL && window.location.protocol != "https:") {
+  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+}

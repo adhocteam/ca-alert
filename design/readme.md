@@ -1,35 +1,44 @@
 # Design assets
 
-## Design process
-
-- [Design process](design-process/design-process.pdf) (PDF): Sample design process
-
 ## User types
+
+Proto-personnas, or user types used to guide process map and high-level UX decisions.
+
+- [User types](user-type/user-types.pdf) (PDF)
 
 ## Process map
 
-## Discovery & user research
+Logic and high-level application flow
 
-- Emergency Information Sources
-- Learning About Emergencies
-- Research Documentation
+- [Process Map](https://app.moqups.com/greg@adhocteam.us/l73eNlBLo3/view) (Moqups.com)
+- [Process Map](process-map/process-map.pdf) (PDF)
 
 ## Wireframes
 
 Clickable, low fidelity wireframes used to create UX, initial usability testing for the application.
 
-- [Interactive wireframes](Moqups)
-- [Downloadable wireframes](PDF)
+- [Interactive wireframes](https://app.moqups.com/greg@adhocteam.us/Q6n01o8AuC/view) (Moqups.com)
+- [Downloadable wireframes](wireframes/wireframes.pdf) (PDF)
 
-## Design
+## Style tiles
 
 Design reference document, used to drive in-browser UI development.
 
-- [Style tile](style-tile/style-tile.pdf) (PDF): The style tile is intended to express the essence of the brand without committing too early to specific implementations.
+- [Style tile](style-tile/style-tile.png) (PNG): The style tile is intended to express the essence of the brand without committing too early to specific implementations.
+
+## Design mockups
+
+High-fidelity design prototypes for both mobile and desktop.
+
+- [Design mockup - mobile](mockup/Iterations/Mobile-2.png) (PNG)
+- [Design mockup - desktop](mockup/Iterations/Desktop-2.png) (PNG)
 
 ### Accessibility / 508 Reporting
 
 Sample reporting for application prototype tests showing they meet 508 standards with no errors.
+
+- [Sample manual testing screenshot - aXe](accessibility/axe-report.png) (PNG)
+- [Sample manual testing screenshot - Chrome Accessibility Dev Tools](accessibility/chrome-accessibility-report.png) (PNG)
 
 ## Pattern library
 

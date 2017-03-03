@@ -6,7 +6,7 @@ class Admin::HazardsController < ApplicationController
     render(
       json: {
         status: 'success',
-        data: Hazard.all.order(created_at: 'asc')
+        data: Hazard.all.order(created_at: 'desc').limit(50).reverse
       },
       status: 200
     )

@@ -23,8 +23,8 @@ export default class Nav extends React.Component {
   render() {
     if (this.state.user === null) {
       return (
-        <a className="usa-button usa-button-outline" href="#/account/signin">
-          Sign in
+        <a className="usa-button usa-button-outline" href="#/">
+          Sign up
         </a>
       );
     } else {
@@ -34,6 +34,15 @@ export default class Nav extends React.Component {
 
           <li>
             <a href="#/dashboard">{user.name ? user.name : user.email}</a>
+          </li>
+          <li className="mobile-only">
+            <a href="#/dashboard/places">Places</a>
+          </li>
+          <li className="mobile-only">
+            <a href="#/account/communication">Communication preferences</a>
+          </li>
+          <li className="mobile-only">
+            <a href="#/dashboard/alerts">Previous alerts</a>
           </li>
           <li>
             <a href="#/account/signout">Sign out</a>

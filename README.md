@@ -97,7 +97,52 @@ The documentation is served up from the [apidocs controller](https://github.com/
 
 #### Handling geographic data
 
-!!!!PAUL TO FILL THIS IN!!!!
+The app uses multiple sources of geographic and spatial data, as well as spatial
+libraries, databases, tools, and browser capabilities to import spatial data,
+perform geolocation, geocode addresses, render maps, and compute intersections
+of hazards and tracked places to generate relevant alerts.
+
+At the database layer, the app uses PostgreSQL with
+the [PostGIS](http://postgis.net/) extension, which enables the database to
+store spatial data and perform analysis and manipulation of same. Hazard and
+place locations are stored in the database.
+
+At the application later, the Rails app uses the [RGeo](https://github.com/rgeo)
+library, which provides spatial data functions in Ruby, as well as related
+adapters for connecting to the PostGIS database and extend ActiveRecord models
+with spatial data types. For example, when a new alert is created, the
+application computes the intersection of the hazard's alert area and all stored
+places that users have tracked to determine which users to notify.
+
+We referred to the Prototype B Resources PDF appendix of the RFI for sources of
+public data to be used as hazard data. We reviewed each endpoint, which were all
+ArcGIS REST API endpoints, and from there determined a single layer for each to
+represent that data type, for example, earthquakes, high winds, and
+wildfires. Then we used a [tool](https://github.com/tannerjt/AGStoShapefile) to
+retrieve all features of each layer and convert them to GeoJSON as an
+intermediate step. Having GeoJSON enabled us to use `ogr2ogr`, of
+the [GDAL](http://www.gdal.org/) suite, to import the hazard feature data into
+the PostGIS database, mapping each data type to a table. From there, we used
+a [Rake](https://github.com/ruby/rake) task to normalize each data type -- for
+example, determining which field of the feature contains the name to use in
+alerts -- and create a hazard model in the Rails app for each feature. The Rails
+application
+is
+[set up](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L98) set
+up to automatically create and send an alert after the hazard is created to each
+user place that is spatially within the defined radius of the hazard's centroid.
+
+At the frontend web UI layer, the React app uses
+the
+[Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) for
+geocoding and rendering of maps, and
+the
+[HTML5 geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
+geolocate the user when they are creating or editing a place to track, or when
+an admin is manually creating a hazard for an alert. The user can type in an
+address, which the UI will geocode to a point, or they can click a button to
+geolocate their current position. The UI then displays the point centered on a
+map for confirmation.
 
 #### Testing
 
@@ -328,8 +373,7 @@ DANNY
 - [x] Use code reviews to ensure quality
 
 #### Notes
-
-WRYEN
+Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
 
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities

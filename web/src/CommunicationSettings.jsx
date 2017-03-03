@@ -37,7 +37,13 @@ class PhoneRow extends React.Component {
         </td>
         <td>{phone.phone_number}</td>
         <td>
-          <a href={`#${phone.id}`} className="remove" onClick={this.remove}>Remove</a>
+          <a role="button" className="remove usa-button usa-button-secondary usa-button-small"
+              href={`#${phone.id}`}
+              onClick={this.remove}
+              title="Remove this place"
+            >
+              Remove
+            </a>
         </td>
       </tr>
     );
@@ -129,13 +135,13 @@ class CommunicationSettings extends React.Component {
 
       table = (
         <table className="usa-table-borderless">
-          <thead>
-            <tr>
-              <th>Active</th>
-              <th>Phone Number</th>
-              <th></th>
-            </tr>
-          </thead>
+           <thead className="usa-sr-only">
+-            <tr>
+-              <th>Active</th>
+-              <th>Phone Number</th>
+-              <th></th>
+-            </tr>
+-          </thead>
           <tbody>
             {items}
           </tbody>
@@ -150,28 +156,30 @@ class CommunicationSettings extends React.Component {
 
           <div className="usa-width-one-whole">
             <h2>Communication settings</h2>
-            <h3>Email</h3>
-            <table className="usa-table-borderless">
-              <thead>
-                <tr>
-                  <th>Active</th>
-                  <th>Email Address</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <input type="checkbox"
-                           checked={this.state.user.email_notifications_enabled}
-                           onChange={this.toggleEmailNotifs} />
-                    <label></label>
-                  </td>
-                  <td>
-                    {this.state.user.email}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="table-section">
+              <h3>Email</h3>
+              <table className="usa-table-borderless">
+                 <thead className="usa-sr-only">
+ -                <tr>
+ -                  <th>Active</th>
+ -                  <th>Email Address</th>
+ -                </tr>
+ -              </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input type="checkbox"
+                             checked={this.state.user.email_notifications_enabled}
+                             onChange={this.toggleEmailNotifs} />
+                      <label></label>
+                    </td>
+                    <td>
+                      {this.state.user.email}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <h3>Text message (SMS)</h3>
 

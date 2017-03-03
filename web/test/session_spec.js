@@ -1,6 +1,6 @@
 import './spec_helper';
 
-import { newLoginSession, logout } from '../src/session';
+import { newLoginSession, logout, getCurrentLocation } from '../src/session';
 import SessionStore from '../src/session';
 
 describe('Session Store', () => {
@@ -16,5 +16,27 @@ describe('Session Store', () => {
   it('Should update on logout', done => {
     SessionStore.addListener('test', () => { done(); });
     logout();
+  });
+});
+
+describe('getCurrentLocation', () => {
+  it('Should return a promise for the current browser location', (done) => {
+    global.navigator.geolocation = {
+      getCurrentPosition: (fn) => {
+        fn({
+          coords: {
+            latitude: 100,
+            longitude: -100
+          }
+        });
+      }
+    };
+
+    getCurrentLocation()
+      .then(loc => {
+        expect(loc.latitude).to.equal(100);
+        expect(loc.longitude).to.equal(-100);
+        done();
+      });
   });
 });
