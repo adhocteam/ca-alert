@@ -20,10 +20,12 @@ Speak to 3-5 Californians who might be affected by emergencies in their areas to
 
 For this design exercise, we used our Cohorts community to recruit feedback participants. Cohorts allows us to survey and recruit participants who are the best fit for the project. In this sample exercise, we asked two quantitative questions:
 
-- How have you found out about emergencies in your area in the last six months?
+- How have you found out about emergencies in your area in the last six months?  
+
 ![Respondents find out about emergencies via SMS alerts, social media, and word of mouth](https://github.com/adhocteam/ca-alert/blob/master/research/EmergencyInfoSources.png)
 
-- What is most important to you when learning about emergencies?
+- What is most important to you when learning about emergencies?  
+
 ![Respondents want to trust the source of emergency information and get notifications on their phone](https://github.com/adhocteam/ca-alert/blob/master/research/LearningAboutEmergencies.png)
 
 
@@ -80,12 +82,11 @@ In similar projects, we speak to five to seven people who are representative of 
 
 #### Next Steps
 
-- Implement ability for user to name locations instead of choosing from a drop-down
-- Explore the difference between emergency and non-emergency messages
-- Allow sign-in through Google accounts
-- Allow seeing nearby alerts without signing in
-- Create a way to see past alerts that the user may have dismissed
-
+- [Implement ability for user to name locations instead of choosing from a drop-down](https://github.com/adhocteam/ca-alert/issues/38)  
+- [Explore the difference between emergency and non-emergency messages](https://github.com/adhocteam/ca-alert/issues/208)  
+- [Allow sign-in through Google accounts](https://github.com/adhocteam/ca-alert/issues/239)  
+- [Allow seeing nearby alerts without signing in](https://github.com/adhocteam/ca-alert/issues/212)  
+- [Create a way to see past alerts that the user may have dismissed](https://github.com/adhocteam/ca-alert/issues/161)  
 
 ## Round Two Research Goal and Plan: Usability testing our wireframe-based prototype
 
@@ -180,10 +181,10 @@ Speak to 2-3 Californians who might be affected by emergencies in their areas to
 
 - For Government employee
  - Clarify difference between alerts and hazards
- - Remove lat/long location entry
+ - [Remove lat/long location entry](https://github.com/adhocteam/ca-alert/issues/7)  
  - Differentiate between active and expired alerts
  - It would be helpful to allow admin users to have message templates and see character limits for different types of messages
- - Government employees may want to see how many residents a message might go to
+[Government employees may want to see how many residents a message might go to](https://github.com/adhocteam/ca-alert/issues/132)    
 - For California resident
  - Zip codes can be unexpected areas that don't meet users' needs; consider other ways to work with radius and area
  - Residents think of different locations as different levels of importance, so it would be helpful for them to be able to choose to receive all alerts or just emergency alerts for each of their places
