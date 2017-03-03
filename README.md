@@ -3,6 +3,7 @@
 https://ca-alert-prototype.s3.amazonaws.com/index.html
 
 * [Project Overview](#project-overview)
+* [Demo Accounts](#demo-accounts)
 * [Technical Approach](#technical-approach)
 * [Responses to the prompts in Section 2 of the RFI](#responses-to-the-prompts-in-section-2-of-the-rfi)
 * [US Digital Services Playbook Checklist](#us-digital-services-playbook-checklist)
@@ -18,7 +19,18 @@ We began by talking directly to residents of California to discover their needs 
 This prototype is our Minimum Viable Product, along with one week of iterations based on user feedback.
 
 
-##Technical Approach (WORD COUNT)
+## Demo Accounts
+
+For testing the application, we have created two accounts:
+
+* A resident, who has a number of places being monitored for alerts: `resident@calerts.ca.gov`
+* An admin, who can both create and receive alerts: `admin@calerts.ca.gov`
+
+The password for each of these users is `abcd-1234`.
+
+##Technical Approach
+
+(WORD COUNT)
 
 ### Introduction
 
@@ -64,7 +76,7 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub. 
+We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
 We performed manual 508 compliance testing. See [Design README](https://github.com/adhocteam/ca-alert/tree/master/design). For an actual product, we would also write automated tests. 
 
@@ -167,7 +179,6 @@ We assigned Leanna Miller Sharkey as the product manager for this project. She i
 
 Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked in concert with the technical architect to weigh the technical implications of product decisions. 
 
-
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
 
 1. Product Manager: Leanna Miller
@@ -180,7 +191,7 @@ Daily, Leanna groomed and prioritized the backlog, translated user feedback into
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-In similar projects, we speak at least five to seven people who are representative of each main user type. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings [here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md). We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
+In similar projects, we speak at least five to seven people who are representative of each main user type. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings [here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md). We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product.
 
 In Discovery, these themes emerged and we implemented the feedback in the wireframes and prototype:
 - What makes emergency messages helpful
@@ -190,7 +201,7 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
  - Messages that "cut through the clutter" of other notifications are good for emergency situations
  - There are levels of importance that call for different types of messages and notifications: warnings vs. emergencies, something they need to react to vs. notice of something in a loved one's region, etc.
 - Accessing messages
- - Phone alerts were more useful than email 
+ - Phone alerts were more useful than email
  - Signing in with Google is something people like
  - Users want to be able to review information in case they dismiss a notification without getting the details
  - Mid-crisis, users wanted to be able to see current alerts without signing in
@@ -206,8 +217,8 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
 - Early and often contact with potential users
 - Tested prototypes of solutions with real people
 - Documented and presented findings to product owner, who sat in interviews and user tests
-- Qualitative interviews 
-- Surveys 
+- Qualitative interviews
+- Surveys
 - Built to user needs based on feedback
 - User testing of wireframes
 - Built user types to inform design and functionality
@@ -228,7 +239,7 @@ We tested the public facing pages to confirm they met 508 standards.
 
 #### h. Created or used a design style guide and/or a pattern library
 
-We built a pattern library using Pattern Lab (http://patternlab.io/), a platform to help us scale design and UX patterns. This pattern library serves as an internal reference for the design and development teams and as an external resource for other development teams to use. 
+We built a pattern library using Pattern Lab (http://patternlab.io/), a platform to help us scale design and UX patterns. This pattern library serves as an internal reference for the design and development teams and as an external resource for other development teams to use.
 
 #### i. Performed usability tests with people
 
@@ -254,7 +265,7 @@ User feedback was key to our design and development of this product. The product
 
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
-We used the USDS web design standards and designed mobile first to provide a responsive design that works for all devices. In addition, to truly practice mobile-first thinking, all wireframes and user feedback were based on mobile wireframes. 
+We used the USDS web design standards and designed mobile first to provide a responsive design that works for all devices. In addition, to truly practice mobile-first thinking, all wireframes and user feedback were based on mobile wireframes.
 
 #### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
 
