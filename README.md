@@ -42,11 +42,13 @@ Displaying data is done in a similar way, with React components like the [PlaceL
 
 For collecting and displaying data, React's virtual DOM allows us to seamlessly update the page without worrying about what individual parts of the markup have changed. We have also taken advantage of the reusability of React components by creating multi-use tools like [buttons](https://github.com/adhocteam/ca-alert/blob/master/web/src/Button.jsx) and [error messages](https://github.com/adhocteam/ca-alert/blob/master/web/src/Error.jsx).
 
-#### Usage of Google Maps and Geocoder
+#### Handling geographic requirements
 
-We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) has [been used](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52) for converting addresses to lat/lon positions. For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
+We used the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/) for rendering location data throughout the app, with a [custom React component](https://github.com/adhocteam/ca-alert/blob/4619c26e87143d8697ae1d8bcea46540ede98ea7/web/src/Map.jsx) to make it easily reusable. In addition, we used Google's [Geocoder API](https://developers.google.com/maps/documentation/geocoding/start) [for converting addresses to coordinates](https://github.com/adhocteam/ca-alert/blob/b25bf273d59ce3e14fb386eab7b662c4afa86fc5/web/src/lib.js#L52). For the prototype, we are storing the results of the geocoder, which is against Google's terms of service. In a production app we would look either to move to a less restrictive geocoding tool like [Mapzen's](https://mapzen.com/products/search/) or [MapBox's](https://www.mapbox.com/geocoding/) or consider implementing our own geocoder based on open-source tools.
 
-*DANX LEANNA - We chose a commercially available one, better product experience, lower technical lift*
+We used [HTML5's geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
+geolocate the user when they are creating or editing a place to track, or when
+an admin is manually creating a hazard for an alert.
 
 #### Site navigation
 
@@ -60,9 +62,9 @@ Authentication with the API is handled by passing `uid`, `access-token`, and `cl
 
 #### Testing
 
-We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub. 
+We run tests for the front-end via [Mocha](https://mochajs.org/) as a test runner and Istanbul's [NYC](https://github.com/istanbuljs/nyc) tool for code coverage. Both can be triggered from the [Makefile](https://github.com/adhocteam/ca-alert/blob/master/web/Makefile) with `make test` and `make coverage`, for testing and code coverage, respectively. Front-end testing makes heavy use of Airbnb's [Enzyme](https://github.com/airbnb/enzyme) library to isolate and test individual React components. Using Enzyme, components can be [mounted](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L9), their [state altered](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L10), and then the [virtual DOM can be inspected](https://github.com/adhocteam/ca-alert/blob/master/web/test/signin_spec.js#L20) to make sure it meets the test conditions. Tests were developed alongside the features they verify and were run automatically by CodeShip on each push to GitHub.
 
-We performed manual 508 compliance testing. For an actual product, we also write automated tests. 
+We performed manual 508 compliance testing. For an actual product, we also write automated tests.
 
 ### The server-side Rails API
 
@@ -118,31 +120,18 @@ We referred to the Prototype B Resources PDF appendix of the RFI for sources of
 public data to be used as hazard data. We reviewed each endpoint, which were all
 ArcGIS REST API endpoints, and from there determined a single layer for each to
 represent that data type, for example, earthquakes, high winds, and
-wildfires. Then we used a [tool](https://github.com/tannerjt/AGStoShapefile) to
-retrieve all features of each layer and convert them to GeoJSON as an
-intermediate step. Having GeoJSON enabled us to use `ogr2ogr`, of
+wildfires.
+
+For importing the available data sources described in the RFI, we used a [tool](https://github.com/tannerjt/AGStoShapefile) to
+retrieve all features of each layer and convert them to GeoJSON. Having GeoJSON enabled us to use `ogr2ogr`, of
 the [GDAL](http://www.gdal.org/) suite, to import the hazard feature data into
 the PostGIS database, mapping each data type to a table. From there, we used
 a [Rake](https://github.com/ruby/rake) task to normalize each data type -- for
 example, determining which field of the feature contains the name to use in
-alerts -- and create a hazard model in the Rails app for each feature. The Rails
-application
-is
-[set up](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L98) set
-up to automatically create and send an alert after the hazard is created to each
+alerts -- and create a hazard model in the Rails app for each feature. The Rails application is
+[set up](https://github.com/adhocteam/ca-alert/blob/master/backend/app/models/hazard.rb#L98)
+to automatically create and send an alert after the hazard is created to each
 user place that is spatially within the defined radius of the hazard's centroid.
-
-At the frontend web UI layer, the React app uses
-the
-[Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) for
-geocoding and rendering of maps, and
-the
-[HTML5 geolocation browser capability](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation) to
-geolocate the user when they are creating or editing a place to track, or when
-an admin is manually creating a hazard for an alert. The user can type in an
-address, which the UI will geocode to a point, or they can click a button to
-geolocate their current position. The UI then displays the point centered on a
-map for confirmation.
 
 #### Testing
 
@@ -169,9 +158,9 @@ END TECHNICAL APPROACH
 
 #### a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted
 
-Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals. 
+Leanna Miller Sharkey is the product manager for this project. She is a technical project manager at vets.gov and has led teams to many successful product launches. As the product manager, Leanna worked with the delivery manager to translate of the prototype requirements into a prioritized product backlog. Next, she worked closely with user research to define the research strategy, recruitment of participants, and the specific questions to ask to meet the goals.
 
-Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked closely with the technical architect to weigh the technical implications of product decisions. 
+Daily, Leanna groomed and prioritized the backlog, translated user feedback into specific user stories, and approved completed stories. She worked closely with design to define and iterate on the process map and wireframes. She worked closely with the technical architect to weigh the technical implications of product decisions.
 
 
 #### b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions
@@ -186,7 +175,7 @@ Daily, Leanna groomed and prioritized the backlog, translated user feedback into
 
 #### c. Understood what people needed, by including people in the prototype development and design process
 
-In similar projects, we speak at least five to seven people who are representative of each main user type. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings [here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md). We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product. 
+In similar projects, we speak at least five to seven people who are representative of each main user type. In this case, before we designed or developed anything, we conducted quantitative and qualitative discovery with residents of California of varying ages and technical abilities. We documented these findings [here](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md). We did a second round of interviews with residents and government employees to test our wireframes and collect feedback for iterating on this product.
 
 In Discovery, these themes emerged and we implemented the feedback in the wireframes and prototype:
 - What makes emergency messages helpful
@@ -196,7 +185,7 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
  - Messages that "cut through the clutter" of other notifications are good for emergency situations
  - There are levels of importance that call for different types of messages and notifications: warnings vs. emergencies, something they need to react to vs. notice of something in a loved one's region, etc.
 - Accessing messages
- - Phone alerts were more useful than email 
+ - Phone alerts were more useful than email
  - Signing in with Google is something people like
  - Users want to be able to review information in case they dismiss a notification without getting the details
  - Mid-crisis, users wanted to be able to see current alerts without signing in
@@ -212,8 +201,8 @@ In Discovery, these themes emerged and we implemented the feedback in the wirefr
 - Early and often contact with potential users
 - Tested prototypes of solutions with real people
 - Documented and presented findings to product owner, who sat in interviews and user tests
-- Qualitative interviews 
-- Surveys 
+- Qualitative interviews
+- Surveys
 - Built to user needs based on feedback
 - User testing of wireframes
 - Built user types to inform design and functionality
@@ -238,11 +227,11 @@ LINK
 
 #### h. Created or used a design style guide and/or a pattern library
 
-We built a pattern library using Pattern Lab (http://patternlab.io/), a platform to help us scale design and UX patterns. This pattern library serves as an internal reference for the design and development teams and as an external resource for other development teams to use. 
+We built a pattern library using Pattern Lab (http://patternlab.io/), a platform to help us scale design and UX patterns. This pattern library serves as an internal reference for the design and development teams and as an external resource for other development teams to use.
 
 #### i. Performed usability tests with people
 
-FIX THIS 
+FIX THIS
 Research documentation: Details of research plan, participant recruitment, conversation guide, findings, design decisions, and next steps.
 Process map (PDF): Flow diagram used to understand the process and potential paths a clinician or group might take through QPP.
 User type (PDF): An archetype of a likely user, used to help define the focus of our work and particular pain points to focus on.
@@ -265,7 +254,7 @@ User feedback was key to our design and development of this product. The product
 
 #### k. Created a prototype that works on multiple devices, and presents a responsive design
 
-We used the USDS web design standards and designed mobile first to provide a responsive design that works for all devices. In addition, to truly practice mobile-first thinking, all wireframes and user feedback were based on mobile wireframes. 
+We used the USDS web design standards and designed mobile first to provide a responsive design that works for all devices. In addition, to truly practice mobile-first thinking, all wireframes and user feedback were based on mobile wireframes.
 
 #### l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.)
 
@@ -373,7 +362,7 @@ DANNY
 - [x] Use code reviews to ensure quality
 
 #### Notes
-Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production. 
+Our [Team]() launched the project on 2/15/17 with a [project kickoff](https://github.com/adhocteam/ca-alert/wiki/Kickoff-Call-Agenda-&-Meeting-Notes) meeting to establish team goals & roles. We launched the project by defining a minimum viable product from the project  requirements to be informed by [user research](https://github.com/adhocteam/ca-alert/blob/master/research/ResearchDocumentation.md) as the project progressed. We used 3-4 workday sprint cycles to keep our prioritization in line with what we were learning with user research and engineering development. [Daily Standups](https://github.com/adhocteam/ca-alert/wiki/Standup-Notes) kept the team on the same page and constant slack communication kept collaboration levels high for all team members throughout the project. As end user features were completed they were peer reviewed and validated in our production application every evening. Bugs discovered in testing were prioritized by the team every evening in our standups during the final week of production.
 
 ### Structure budgets and contracts to support delivery - N/A
 - [ ] Budget includes research, discovery, and prototyping activities
